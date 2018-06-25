@@ -6,10 +6,13 @@
 #    By: xamartin <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/06/19 13:41:44 by xamartin     #+#   ##    ##    #+#        #
-#    Updated: 2018/06/19 13:47:39 by xamartin    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/06/25 14:32:34 by tduverge    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
+
+.PHONY = all, clean, fclean, re
+
 
 #COMPILATION
 
@@ -37,6 +40,8 @@ CW_SRCS_PATH = ./srcs_cw/
 CW_OBJS_PATH = ./srcs_cw/
 
 CW_FILES = main_cw.c\
+		   init_champ.c\
+		   access_reg.c\
 
 
 CW_SRCS = $(addprefix $(CW_SRCS_PATH), $(CW_FILES))
@@ -50,29 +55,27 @@ all: $(ASM) $(CW)
 
 
 $(ASM): $(ASM_OBJS)
-	@make -C $(LIBFT)
-	@$(CC) $(CFLAGS) $(INC) -o $@ $(ASM_OBJS) -L $(LIBFT) -lft
+	make -C $(LIBFT)
+	$(CC) $(CFLAGS) $(INC) -o $@ $(ASM_OBJS) -L $(LIBFT) -lft
 
 $(CW): $(CW_OBJS)
-	@make -C $(LIBFT)
-	@$(CC) $(CFLAGS) $(INC) -o $@ $(CW_OBJS) -L $(LIBFT) -lft
+	make -C $(LIBFT)
+	$(CC) $(CFLAGS) $(INC) -o $@ $(CW_OBJS) -L $(LIBFT) -lft
 
 
 $(CW_OBJS_PATH)%.o: $(CW_SRCS_PATH)%.c
-	@$(CC) $(CFLAGS) $(INC) -o $@ -c $< 
+	$(CC) $(CFLAGS) $(INC) -o $@ -c $<
 
 $(ASM_OBJS_PATH)%.o: $(ASM_SRCS_PATH)%.c
-	@$(CC) $(CFLAGS) $(INC) -o $@ -c $< 
-
+	$(CC) $(CFLAGS) $(INC) -o $@ -c $<
 
 clean:
-	@make -C libft clean
-	@rm -rf $(CW_OBJS)
-	@rm -f $(ASM_OBJS)
+	make -C libft clean
+	rm -f $(CW_OBJS)
+	rm -f $(ASM_OBJS)
 
 fclean: clean
-	@make -C libft fclean
-	@rm -f $(CW) $(ASM)
+	rm -f libft/libft.a
+	rm -f $(CW) $(ASM)
 
 re: fclean all
-	@make -C libft re
