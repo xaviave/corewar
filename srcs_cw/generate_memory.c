@@ -6,7 +6,7 @@
 /*   By: xamartin <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/26 13:13:29 by xamartin     #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/26 17:40:47 by xamartin    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/26 17:59:44 by xamartin    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -61,14 +61,14 @@ char		*generate_memory(t_champ **list)
 	i = 0;
 	while (i < MEM_SIZE)
 	{
-		if (i % 2 == 0 && i != 0)
+		if (i != 0)
 		{
 			if (i % 64 == 0)
-				ft_printf("\n");
+				ft_printf(RED"\n");
 			else
 				ft_printf(" ");
 		}
-		ft_printf("%02x", memory[i]);
+		ft_printf("%02x"RESET, memory[i]);
 		i++;
 	}
 	return ((char *)memory);

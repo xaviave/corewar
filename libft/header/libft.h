@@ -6,7 +6,7 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/28 18:12:07 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/25 13:42:07 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/26 17:59:05 by xamartin    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -170,5 +170,17 @@ int						pf_applyflags_str(char **str, t_flags *flags);
 int						pf_applyflags_x(char **str, t_flags *flags);
 int						pf_applyflags_o(char **str, t_flags *flags);
 char					*pf_unicode(unsigned int i);
+
+# define GRN			"\e[32m"
+# define MAG			"\e[35m"
+# define CYN			"\e[36m"
+# define GREY			"\e[90m"
+# define ORANGE			"\e[38;5;208m"
+# define RED			"\e[38;5;196m"
+# define YEL			"\e[38;5;11m"
+# define BLUE			"\e[38;5;4m"
+# define DBLUE			"\e[38;5;21m"
+# define PINK			"\e[38;5;13m"
+# define RESET			"\e[0m"
 
 #endif
