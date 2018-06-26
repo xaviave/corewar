@@ -6,7 +6,7 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/20 17:30:33 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/25 18:47:12 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/26 12:57:06 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,38 +24,16 @@ void		add_champ(t_champ **start, t_champ *to_add)
 	*start = to_add;
 }
 
-void		add_number(t_arg *args, t_champ **list, t_champ **champ)
-{
-	int		nb;
-
-	nb = 0;
-
-	if (!*list && args->champ_number[0] != -1)
-		write_reg(champ, 1, args->champ_number[0]);
-	else if (!*list && args->champ_number[1] == -1)
-		write_reg(champ, 1, 0);
-	else if (!*list && args->champ_number[1] != -1)
-		write_reg(champ, 1, args->champ_number[1] + 1);
-	else if (*list && args->champ_number[1] != -1)
-		write_reg(champ, 1, args->champ_number[1]);
-	else if (*list && args->champ_number[0] == -1)
-		write_reg(champ, 1, 1);
-	else if (*list && args->champ_number[0] != -1)
-		write_reg(champ, 1, args->champ_number[0] + 1);
-}
-
-t_champ		*create_champ(char *name, char *com, t_arg *args, t_champ **list)
+t_champ		*create_champ(char *file, int prog_size, t_champ **list)
 {
 	t_champ		*champ;
 
 	champ = ft_memalloc(sizeof(t_champ));
-	ft_memcpy(champ->name, name, PROG_NAME_LENGTH + 1);
-	ft_memcpy(champ->comment, com, COMMENT_LENGTH + 1);
+	ft_memcpy(champ->name, file + 4, PROG_NAME_LENGTH + 1);
+	ft_memcpy(champ->comment, file + 140, COMMENT_LENGTH + 1);
+	ft_memcpy(champ->prog, file + 2192, prog_size + 1);
 	champ->reg = ft_memalloc(REG_SIZE * REG_NUMBER);
-	champ->pc = NULL;
 	champ->carry = 1;
-	champ->next = NULL;
-	add_number(args, list, &champ);
 	add_champ(list, champ);
 	return (*list);
 }
@@ -73,7 +51,7 @@ char		*recup_file(char *path, int i)
 	while ((ret = read(fd, &line, 50)) > 0)
 	{
 		tmp = file;
-		file = ft_memalloc(i + ret);
+		file = ft_memalloc(i + ret + 1);
 		if (tmp)
 			ft_memcpy(file, tmp, i);
 		ft_memcpy(file + i, line, ret);
@@ -121,35 +99,54 @@ int			check_prog_size(char *file)
 		i++;
 	}
 	if (real_prog_size <= CHAMP_MAX_SIZE)
-		return (1);
+		return (real_prog_size);
 	return (0);
+}
+
+void		error(char *file, t_champ **list)
+{
+	t_champ		*champ;
+	t_champ		*tmp;
+
+	if (!(file))
+		ft_putstr("FILE INVALID\n");
+	else if (!check_magic(file))
+		ft_putstr("MAGIC INVALID\n");
+	else if (!check_prog_size(file))
+		ft_putstr("CHAMP TO BIG\n");
+	free(file);
+	champ = *list;
+	while (champ)
+	{
+		tmp = champ;
+		champ = champ->next;
+		free(tmp->reg);
+		free(tmp);
+	}
 }
 
 void		init_champ(t_champ **list, t_arg *args)
 {
 	int		i;
 	char	*file;
+	int		prog_size;
 
 	i = -1;
-	while (++i < MAX_PLAYERS)
+	while (++i < args->nb_players)
 	{
 		file = recup_file(args->champ_path[i], 0);
-		if (!(file))
-		{
-			ft_putstr("FILE INVALID\n");
-			return ;
-		}
-		if (!check_magic(file))
-		{
-			ft_putstr("MAGIC INVALID\n");
-			return ;
-		}
-		if (!check_prog_size(file))
-		{
-			ft_putstr("CHAMP TO BIG\n");
-			return ;
-		}
-		*list = create_champ(file + 4, file + 140, args, list);
+		if (!file || !check_magic(file) || !(prog_size = check_prog_size(file)))
+			return (error(file, list));
+		*list = create_champ(file, prog_size, list);
+		(*list)->number = i + 1;
+		write_reg(*list, 1, (*list)->number);
 		ft_strdel(&file);
+	}
+	t_champ *test;
+	test = *list;
+	while (test)
+	{
+		ft_printf("name = %s | comment = %s | number = %d\n", test->name, test->comment, test->number);
+		test = test->next;
 	}
 }

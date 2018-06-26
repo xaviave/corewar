@@ -6,7 +6,7 @@
 #    By: xamartin <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/06/19 13:41:44 by xamartin     #+#   ##    ##    #+#        #
-#    Updated: 2018/06/25 14:32:34 by tduverge    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/06/26 12:10:57 by tduverge    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -20,7 +20,7 @@ CC = gcc
 LIBFT = libft/
 ASM = asm
 CW = corewar
-INC = -I includes/corewar.h
+INC = includes/corewar.h includes/op.h includes/asm.h
 CFLAGS = -Wall -Werror -Wextra -g
 
 
@@ -56,18 +56,18 @@ all: $(ASM) $(CW)
 
 $(ASM): $(ASM_OBJS)
 	make -C $(LIBFT)
-	$(CC) $(CFLAGS) $(INC) -o $@ $(ASM_OBJS) -L $(LIBFT) -lft
+	$(CC) $(CFLAGS) -o $@ $(ASM_OBJS) -L $(LIBFT) -lft
 
 $(CW): $(CW_OBJS)
 	make -C $(LIBFT)
-	$(CC) $(CFLAGS) $(INC) -o $@ $(CW_OBJS) -L $(LIBFT) -lft
+	$(CC) $(CFLAGS) -o $@ $(CW_OBJS) -L $(LIBFT) -lft
 
 
-$(CW_OBJS_PATH)%.o: $(CW_SRCS_PATH)%.c
-	$(CC) $(CFLAGS) $(INC) -o $@ -c $<
+$(CW_OBJS_PATH)%.o: $(CW_SRCS_PATH)%.c $(INC)
+	$(CC) $(CFLAGS) -o $@ -c $<
 
-$(ASM_OBJS_PATH)%.o: $(ASM_SRCS_PATH)%.c
-	$(CC) $(CFLAGS) $(INC) -o $@ -c $<
+$(ASM_OBJS_PATH)%.o: $(ASM_SRCS_PATH)%.c $(INC)
+	$(CC) $(CFLAGS) -o $@ -c $<
 
 clean:
 	make -C libft clean

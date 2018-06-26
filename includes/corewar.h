@@ -6,7 +6,7 @@
 /*   By: xamartin <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/19 13:50:45 by xamartin     #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/25 17:43:57 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/26 12:08:09 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,6 +22,7 @@ typedef struct		s_champ
 {
 	char			name[PROG_NAME_LENGTH + 1];
 	char			comment[COMMENT_LENGTH + 1];
+	char			prog[CHAMP_MAX_SIZE + 1];
 	int				number;
 	void			*reg;
 	void			*pc;
@@ -33,8 +34,8 @@ typedef struct		s_arg
 {
 	char			*champ_path[MAX_PLAYERS];
 	int				champ_number[MAX_PLAYERS];
+	int				nb_players;
 	int				dump;
-	int				cor;
 }					t_arg;
 
 void				init_champ(t_champ **champ, t_arg *args);
