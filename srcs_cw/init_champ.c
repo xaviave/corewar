@@ -6,7 +6,7 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/20 17:30:33 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/26 12:57:06 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/26 13:13:16 by xamartin    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,8 +31,9 @@ t_champ		*create_champ(char *file, int prog_size, t_champ **list)
 	champ = ft_memalloc(sizeof(t_champ));
 	ft_memcpy(champ->name, file + 4, PROG_NAME_LENGTH + 1);
 	ft_memcpy(champ->comment, file + 140, COMMENT_LENGTH + 1);
-	ft_memcpy(champ->prog, file + 2192, prog_size + 1);
+	ft_memcpy(champ->prog, file + 2192, prog_size);
 	champ->reg = ft_memalloc(REG_SIZE * REG_NUMBER);
+	champ->prog_size = prog_size;
 	champ->carry = 1;
 	add_champ(list, champ);
 	return (*list);

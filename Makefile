@@ -6,7 +6,7 @@
 #    By: xamartin <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/06/19 13:41:44 by xamartin     #+#   ##    ##    #+#        #
-#    Updated: 2018/06/26 12:10:57 by tduverge    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/06/26 13:48:31 by xamartin    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -42,6 +42,7 @@ CW_OBJS_PATH = ./srcs_cw/
 CW_FILES = main_cw.c\
 		   init_champ.c\
 		   access_reg.c\
+		   generate_memory.c\
 
 
 CW_SRCS = $(addprefix $(CW_SRCS_PATH), $(CW_FILES))
