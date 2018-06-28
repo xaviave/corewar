@@ -6,8 +6,14 @@
 /*   By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/20 17:53:02 by xmoreau      #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/20 18:00:57 by xmoreau     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/28 13:18:49 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
+#ifndef ASM_H
+# define ASM_H
+
+# include "../libft/header/libft.h"
+
+#endif
