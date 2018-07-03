@@ -6,12 +6,14 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/25 12:04:14 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/28 13:41:20 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/03 16:54:35 by xamartin    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-int		main(int argc, char **argv)
+int		main(int ac, char **av)
 {
+	(void)ac;
+	(void)av;
 	return (0);
 }
