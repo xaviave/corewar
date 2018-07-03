@@ -6,17 +6,17 @@
 /*   By: xamartin <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/26 13:13:29 by xamartin     #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/26 17:59:44 by xamartin    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/03 16:55:09 by xamartin    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
 
-int			list_len(t_champ *list)
+int					list_len(t_champ *list)
 {
-	int		i;
-	t_champ	*tmp;
+	int				i;
+	t_champ			*tmp;
 
 	i = 0;
 	tmp = list;
@@ -28,11 +28,11 @@ int			list_len(t_champ *list)
 	return (i);
 }
 
-void		put_champ_mem(t_champ *list, int player, int nb_player, unsigned char **memory)
+void				put_champ_mem(t_champ *list, int player, int nb_player, unsigned char **memory)
 {
-	int		i;
-	int		j;
-	t_champ	*tmp;
+	int				i;
+	int				j;
+	t_champ			*tmp;
 
 	j = 0;
 	i = MEM_SIZE * (player - 1) / nb_player;
@@ -47,10 +47,39 @@ void		put_champ_mem(t_champ *list, int player, int nb_player, unsigned char **me
 	}
 }
 
-char		*generate_memory(t_champ **list)
+void				init_aff(t_mem *aff, t_champ **list, int nb_player)
 {
-	int		i;
-	int		nb_player;
+	int				i;
+	int				champ;
+	t_champ			*tmp;
+
+	i = 0;
+	champ = 1;
+	aff->map = ft_memalloc(sizeof(char *) * MEM_SIZE);
+	while (i < MEM_SIZE)
+	{
+		tmp = *list;
+		while (tmp)
+		{
+			if (champ == tmp->number)
+				break ;
+			tmp = tmp->next;
+		}
+		while (i < tmp->prog_size + MEM_SIZE * (champ - 1) / nb_player && i < MEM_SIZE)
+		{
+			aff->map[i] = (unsigned char)champ;
+			i++;
+		}
+		while (i < MEM_SIZE * champ / nb_player)
+			i++;
+		champ++;
+	}
+}
+
+void				generate_memory(t_champ **list, t_mem *aff)
+{
+	int				i;
+	int				nb_player;
 	unsigned char	*memory;
 
 	memory = ft_memalloc(sizeof(char *) * MEM_SIZE);
@@ -58,18 +87,6 @@ char		*generate_memory(t_champ **list)
 	i = 0;
 	while (++i <= nb_player)
 		put_champ_mem(*list, i, nb_player, &memory);
-	i = 0;
-	while (i < MEM_SIZE)
-	{
-		if (i != 0)
-		{
-			if (i % 64 == 0)
-				ft_printf(RED"\n");
-			else
-				ft_printf(" ");
-		}
-		ft_printf("%02x"RESET, memory[i]);
-		i++;
-	}
-	return ((char *)memory);
+	aff->memory = memory;
+	init_aff(aff, list, nb_player);
 }

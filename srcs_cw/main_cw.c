@@ -6,7 +6,7 @@
 /*   By: xamartin <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/19 14:58:22 by xamartin     #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/26 13:49:48 by xamartin    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/03 16:50:55 by xamartin    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -91,7 +91,7 @@ int		main(int ac, char **av)
 {
 	t_champ	*list;
 	t_arg	args;
-	char	*memory;
+	t_mem	aff;
 
 	list = NULL;
 	ft_bzero(args.champ_number, MAX_PLAYERS * sizeof(int));
@@ -99,5 +99,5 @@ int		main(int ac, char **av)
 			args.nb_players > MAX_PLAYERS || !parse_arg(ac, av, &args))
 		return (ft_printf("./corewar [-dump nbr_cycles] [[-n number] champion1.cor]\n"));
 	init_champ(&list, &args);
-	memory = generate_memory(&list);
+	generate_memory(&list, &aff);
 }
