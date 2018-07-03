@@ -16,4 +16,10 @@
 
 # include "../libft/header/libft.h"
 
+# define _USAGE "[-a] <sourcefile.s>\n    -a : Instead of creating a .cor \
+file, outputs a stripped and annotated version of the code to the standard \
+output\n"
+
+int			ft_first(int argc, char **argv);
+
 #endif

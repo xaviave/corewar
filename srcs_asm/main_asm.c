@@ -11,7 +11,10 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
+#include "../includes/asm.h"
+
 int		main(int argc, char **argv)
 {
+	ft_first(argc, argv);
 	return (0);
 }
