@@ -52,8 +52,6 @@ Mkfile.old
 dkms.conf
 
 #Ressources
-src_asm
-src_corewar
 champs
 
 

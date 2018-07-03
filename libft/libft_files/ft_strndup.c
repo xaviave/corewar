@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   main_asm.c                                       .::    .:/ .      .::   */
+/*   ft_strndup.c                                     .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/06/25 12:04:14 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/03 16:54:35 by xamartin    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/04/26 11:28:32 by tduverge     #+#   ##    ##    #+#       */
+/*   Updated: 2018/04/26 11:28:32 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "../header/libft.h"
 
-int		main(int argc, char **argv)
+char	*ft_strndup(char *s1, int len)
 {
-	char	*file;
+	char	*s2;
 
-	file = NULL;
-	ft_first(argc, argv, &file);
-	/* si le fichier est valide */
-	ft_third(/* parametres apres parsing */argv, argc);
-	return (0);
+	if (!(s2 = (char *)malloc(sizeof(char) * (len + 1))))
+		return (NULL);
+	s2 = ft_strncpy(s2, s1, len);
+	return (s2);
 }
