@@ -11,17 +11,13 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
-<<<<<<< HEAD
 #include "../includes/asm.h"
 
 int		main(int argc, char **argv)
 {
-	ft_first(argc, argv);
-=======
-int		main(int ac, char **av)
-{
-	(void)ac;
-	(void)av;
->>>>>>> a3cb22905382c640d65b9172ce35a011c5ed8420
+	char	*file;
+
+	file = NULL;
+	ft_first(argc, argv, &file);
 	return (0);
 }

@@ -20,6 +20,6 @@
 file, outputs a stripped and annotated version of the code to the standard \
 output\n"
 
-int			ft_first(int argc, char **argv);
+int				ft_first(int argc, char **argv, char **file);
 
 #endif
