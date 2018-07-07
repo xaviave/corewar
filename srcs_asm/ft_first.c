@@ -13,8 +13,8 @@ int				ft_read_file(int argc, char **argv, char **file)
 	char	*tmp;
 	int		fd;
 
-	if ((fd = open(argv[argc - 1], O_RDONLY)) == -1)
-		return (ft_printf("Can't read source file %s\n", argv[argc - 1]));
+	if ((fd = open(_ARG, O_RDONLY)) == -1)
+		return (ft_printf("Can't read source file %s\n", _ARG));
 	*file = ft_memalloc(0);
 	while (get_next_line(fd, &tmp))
 	{

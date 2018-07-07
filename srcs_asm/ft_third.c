@@ -8,42 +8,43 @@ void			ft_errase(int *fd, char **name)
 	write(*fd, "a", 1);
 }
 
-static void		ft_exit_third(char **name, int *fd)
+static void		ft_exit_third(char **file, char **tmp)
 {
-	free(*name);
-	close(*fd);
+	if (*file)
+		free(*file);
+	if (*tmp)
+		free(*tmp);
 	exit(1);
 }
 
-void			ft_name_file(int argc, char **argv, int *fd)
+char			*ft_name_file(int argc, char **argv)
 {
-	char	*name;
+	int		fd;
+	char	*file;
 	char	*tmp;
 
-	if (!(name = ft_strdup(argv[argc - 1])))
-		exit(1);
-	if (!ft_strcmp((name + ft_strlen(name) - 2), ".s"))
+	if (!ft_strcmp((_ARG + ft_strlen(_ARG) - 2), ".s"))
 	{
-		name = realloc(name, ft_strlen(name) - 2);
-		tmp = name;
-		ft_printf("%s\n", name);
-		name = ft_strjoin(name, ".cor");
+		file = ft_memalloc(ft_strlen(_ARG) - 2);
+		file = ft_strncpy(file, _ARG, ft_strlen(_ARG) - 2);
+		tmp = file;
+		if (!(file = ft_strjoin(file, ".cor")))
+			ft_exit_third(&file, &tmp);
 		free(tmp);
-		ft_printf("%s\n", name);
-		if ((*fd = open(name, O_RDWR | O_CREAT, S_IRUSR + S_IWUSR) == -1))
-			ft_exit_third(&name, fd);
+		if ((fd = open(file, O_RDWR | O_CREAT, S_IRUSR + S_IWUSR) == -1))
+			ft_exit_third(&file, &tmp);
 	}
 	else
-		if ((*fd = open(".cor", O_RDWR | O_CREAT, S_IRUSR + S_IWUSR) == -1))
-			ft_exit_third(&name, fd);
-	ft_printf("name = %s\n/", name);
+		if ((fd = open(".cor", O_RDWR | O_CREAT, S_IRUSR + S_IWUSR) == -1))
+			ft_exit_third(&file, &tmp);
+	close(fd);
+	return (file ? file : ".cor");
 }
 
 int				ft_third(char **argv, int argc)
 {
-	int		fd;
+	char	*file;
 
-	ft_name_file(argc, argv, &fd);
-	close(fd);
+	file = ft_name_file(argc, argv);
 	return (0);
 }

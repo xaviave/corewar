@@ -16,6 +16,7 @@
 
 # include "../libft/header/libft.h"
 
+# define _ARG argv[argc - 1]
 # define _USAGE "[-a] <sourcefile.s>\n    -a : Instead of creating a .cor \
 file, outputs a stripped and annotated version of the code to the standard \
 output\n"
