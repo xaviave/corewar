@@ -19,6 +19,7 @@ int		main(int argc, char **argv)
 
 	file = NULL;
 	ft_first(argc, argv, &file);
+	ft_parsing();
 	/* si le fichier est valide */
 	ft_third(/* parametres apres parsing */argv, argc);
 	return (0);

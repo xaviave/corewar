@@ -22,6 +22,7 @@ file, outputs a stripped and annotated version of the code to the standard \
 output\n"
 
 int				ft_first(int argc, char **argv, char **file);
+int				ft_parsing(char *file);
 int				ft_third(char **argv, int argc);
 
 #endif
