@@ -14,3 +14,4 @@ si strlen de .comment est superieur a 2048 afficher message d'erreur
 
 placer le fichier .cor dans le bon dossier
 effacer le contenu si deja existant
+.spc"nl,
