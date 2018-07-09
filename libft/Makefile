@@ -24,7 +24,7 @@ SRC =\
 	ft_strrev ft_strsplit ft_strstr ft_strsub ft_strtolower ft_strtoupper\
 	ft_strtrim ft_swap ft_tolower ft_toupper ft_lstpush ft_lstlen ft_del\
 	ft_bubble_sort ft_merge_sort ft_strnjoin ft_lstprint_nb\
-	get_next_line ft_atol ft_pow ft_strisdigit
+	get_next_line ft_atol ft_pow ft_strisdigit ft_strndup
 
 SRC_PRINTF =\
 		   ft_printf flags\
