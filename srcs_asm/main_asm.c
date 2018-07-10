@@ -16,10 +16,11 @@
 int		main(int argc, char **argv)
 {
 	char	*file;
+	char	**split;
 
-	file = NULL;
-	ft_first(argc, argv, &file);
-	ft_parsing(file);
+	file = ft_first(argc, argv);
+	split = ft_parsing(file);
+	free(file);
 	/* si le fichier est valide */
 	ft_third(/* parametres apres parsing */argv, argc);
 	return (0);

@@ -49,7 +49,7 @@ char		*ft_lexer(char *file)
 	return (ctn.buf);
 }
 
-int			ft_parsing(char *file)
+char		**ft_parsing(char *file)
 {
 	char	*buf;
 	char	**split;
@@ -60,6 +60,9 @@ int			ft_parsing(char *file)
 		exit(1);
 	}
 	split = ft_strsplit(buf, '|');
+	int i = 0;
+	while (split[i])
+		ft_printf("%s\n", split[i++]);
 	free(buf);
-	return (0);
+	return (split);
 }
