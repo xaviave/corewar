@@ -2,56 +2,64 @@
 
 int			ft_char(char let)
 {
-	if (let == '.' || let == ' ' || let == '"' || let == '\n' || let == ','
-		|| let == '\t')
-		return (0);
-	else
-		return (1);
+	return ((let == '.' || let == ' ' || let == '"' || let == '\n' || let == ','
+				|| let == '\t') ? 0 : 1);
 }
 
-t_tkn		*ft_lexer(char *file)
+int			ft_fill_buf(char **buf, char **tkn)
 {
-	char	*tkn;
-	char	glu[2];
-	char	*fre;
-	t_tkn	*list;
-	t_tkn	*tmp;
+	char	*tmp;
 
-	glu[1] = '\0';
-	list = NULL;
+	tmp = *buf;
+	*buf = ft_strjoin(*buf, *tkn);
+	free(tmp);
+	tmp = *buf;
+	*buf = ft_strjoin(*buf, "|");
+	free(tmp);
+	free(*tkn);
+	return (1);
+}
+
+char		*ft_lexer(char *file)
+{
+	t_contain	ctn;
+
+	ctn.buf = ft_strdup("|");
 	while (*file)
 	{
-		tkn = ft_strdup("token=");
+		ctn.tkn = ft_strdup("|");
 		while (ft_char(*file))
 		{
-			glu[0] = *file++;
-			fre = tkn;
-			tkn = ft_strjoin(tkn, glu);
-			free(fre);
+			ctn.glu[0] = *file++;
+			ctn.fre = ctn.tkn;
+			if (!(ctn.tkn = ft_strjoin(ctn.tkn, ctn.glu)))
+				return (NULL);
+			free(ctn.fre);
 		}
-		if (!ft_strcmp(tkn, "token="))
+		if (!ft_strcmp(ctn.tkn, "|"))
 		{
-			fre = tkn;
-			glu[0] = *file++;
-			tkn = ft_strjoin(tkn, glu);
-			free(fre);
+			ctn.fre = ctn.tkn;
+			ctn.glu[0] = *file++;
+			if (!(ctn.tkn = ft_strjoin(ctn.tkn, ctn.glu)))
+				return (NULL);
+			free(ctn.fre);
 		}
-		if (!(tmp = ft_tknnew(tkn)))
-			return (NULL);
-		ft_tknpush(&list, tmp);
-		free(tkn);
+		ft_fill_buf(&ctn.buf, &ctn.tkn);
 	}
-	return (list);
+	return (ctn.buf);
 }
 
 int			ft_parsing(char *file)
 {
-	t_tkn		*list;
+	char	*buf;
+	char	**split;
 
-	if (!(list = ft_lexer(file)))
+	if (!(buf = ft_lexer(file)))
 	{
 		free(file);
 		exit(1);
 	}
+	split = ft_strsplit(buf, '|');
+	free(buf);
 	return (0);
 }

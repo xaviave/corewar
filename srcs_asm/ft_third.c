@@ -32,7 +32,7 @@ char			*ft_name_file(int argc, char **argv)
 		if ((fd = open(".cor", O_RDWR | O_CREAT, S_IRUSR + S_IWUSR) == -1))
 			ft_exit_third(&file, &tmp);
 	close(fd);
-	return (file ? file : ".cor");
+	return (file ? file : ft_strdup(".cor"));
 }
 
 int				ft_header(char **file)
@@ -45,8 +45,6 @@ int				ft_header(char **file)
 		exit(1);
 	}
 	lseek(fd, 0, SEEK_SET);
-	ft_printf("%02x", 15369203);
-	ft_printf("%02x", 2054124139);
 	close(fd);
 	return (0);
 }

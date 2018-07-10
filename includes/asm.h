@@ -21,17 +21,16 @@
 file, outputs a stripped and annotated version of the code to the standard \
 output\n"
 
-typedef struct		s_tkn
+typedef struct		s_contain
 {
-	char			*nm;
-	struct s_tkn	*next;
-}					t_tkn;
+	char			*tkn;
+	char			glu[2];
+	char			*fre;
+	char			*buf;
+}					t_contain;
 
 int					ft_first(int argc, char **argv, char **file);
 int					ft_parsing(char *file);
 int					ft_third(char **argv, int argc);
-t_tkn				*ft_tknnew(char *nm);
-void				ft_tknadd(t_tkn **tkn, t_tkn *nw);
-void				ft_tknpush(t_tkn **tkn, t_tkn *nw);
 
 #endif
