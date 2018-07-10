@@ -28,8 +28,9 @@ char			*ft_name_file(int argc, char **argv)
 		if ((fd = open(file, O_RDWR | O_CREAT, S_IRUSR + S_IWUSR) == -1))
 			ft_exit_third(&file, &tmp);
 	}
-	else if ((fd = open(".cor", O_RDWR | O_CREAT, S_IRUSR + S_IWUSR) == -1))
-		ft_exit_third(&file, &tmp);
+	else
+		if ((fd = open(".cor", O_RDWR | O_CREAT, S_IRUSR + S_IWUSR) == -1))
+			ft_exit_third(&file, &tmp);
 	close(fd);
 	return (file ? file : ".cor");
 }

@@ -9,13 +9,13 @@ int			ft_char(char let)
 		return (1);
 }
 
-t_list		*ft_lexer(char *file)
+t_tkn		*ft_lexer(char *file)
 {
 	char	*tkn;
 	char	glu[2];
 	char	*fre;
-	t_list	*list;
-	t_list	*tmp;
+	t_tkn	*list;
+	t_tkn	*tmp;
 
 	glu[1] = '\0';
 	list = NULL;
@@ -36,11 +36,9 @@ t_list		*ft_lexer(char *file)
 			tkn = ft_strjoin(tkn, glu);
 			free(fre);
 		}
-		if (!(tmp = ft_lstnew(tkn, sizeof(ft_strlen(tkn)))))
+		if (!(tmp = ft_tknnew(tkn)))
 			return (NULL);
-		ft_printf("list = %s\n", tkn);
-		ft_lstadd(&list, tmp);
-		free(tmp);
+		ft_tknpush(&list, tmp);
 		free(tkn);
 	}
 	return (list);
@@ -48,7 +46,7 @@ t_list		*ft_lexer(char *file)
 
 int			ft_parsing(char *file)
 {
-	t_list		*list;
+	t_tkn		*list;
 
 	if (!(list = ft_lexer(file)))
 	{

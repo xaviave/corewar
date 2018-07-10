@@ -21,8 +21,17 @@
 file, outputs a stripped and annotated version of the code to the standard \
 output\n"
 
-int				ft_first(int argc, char **argv, char **file);
-int				ft_parsing(char *file);
-int				ft_third(char **argv, int argc);
+typedef struct		s_tkn
+{
+	char			*nm;
+	struct s_tkn	*next;
+}					t_tkn;
+
+int					ft_first(int argc, char **argv, char **file);
+int					ft_parsing(char *file);
+int					ft_third(char **argv, int argc);
+t_tkn				*ft_tknnew(char *nm);
+void				ft_tknadd(t_tkn **tkn, t_tkn *nw);
+void				ft_tknpush(t_tkn **tkn, t_tkn *nw);
 
 #endif
