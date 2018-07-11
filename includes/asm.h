@@ -29,7 +29,7 @@ typedef struct		s_contain
 }					t_contain;
 
 char				*ft_first(int argc, char **argv);
-char				**ft_parsing(char *file);
+char				**ft_parsing(char **file);
 int					ft_third(char **argv, int argc);
 
 #endif
