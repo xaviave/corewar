@@ -20,6 +20,15 @@ int			ft_fill_buf(char **buf, char **tkn)
 	return (1);
 }
 
+char		*ft_separator(char **file, char **tkn)
+{
+	char	glu[2];
+
+	glu[0] = *(*file)++;
+	glu[1] = '\0';
+	return ((!(*tkn = ft_strjoin(*tkn, glu))) ? NULL : *tkn);
+}
+
 char		*ft_lexer(char *file)
 {
 	t_contain	ctn;
@@ -30,17 +39,15 @@ char		*ft_lexer(char *file)
 		ctn.tkn = ft_strdup("|");
 		while (ft_char(*file))
 		{
-			ctn.glu[0] = *file++;
 			ctn.fre = ctn.tkn;
-			if (!(ctn.tkn = ft_strjoin(ctn.tkn, ctn.glu)))
+			if (!(ctn.tkn = ft_separator(&file, &ctn.tkn)))
 				return (NULL);
 			free(ctn.fre);
 		}
 		if (!ft_strcmp(ctn.tkn, "|"))
 		{
 			ctn.fre = ctn.tkn;
-			ctn.glu[0] = *file++;
-			if (!(ctn.tkn = ft_strjoin(ctn.tkn, ctn.glu)))
+			if (!(ctn.tkn = ft_separator(&file, &ctn.tkn)))
 				return (NULL);
 			free(ctn.fre);
 		}
@@ -60,9 +67,6 @@ char		**ft_parsing(char *file)
 		exit(1);
 	}
 	split = ft_strsplit(buf, '|');
-	int i = 0;
-	while (split[i])
-		ft_printf("%s\n", split[i++]);
 	free(buf);
 	return (split);
 }

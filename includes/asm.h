@@ -24,7 +24,6 @@ output\n"
 typedef struct		s_contain
 {
 	char			*tkn;
-	char			glu[2];
 	char			*fre;
 	char			*buf;
 }					t_contain;
