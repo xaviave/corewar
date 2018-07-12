@@ -6,7 +6,7 @@
 #    By: xamartin <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/06/19 13:41:44 by xamartin     #+#   ##    ##    #+#        #
-#    Updated: 2018/06/26 13:48:31 by xamartin    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/07/09 17:07:34 by tduverge    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -43,6 +43,8 @@ CW_FILES = main_cw.c\
 		   init_champ.c\
 		   access_reg.c\
 		   generate_memory.c\
+		   lets_go.c\
+		   lets_dump.c\
 
 
 CW_SRCS = $(addprefix $(CW_SRCS_PATH), $(CW_FILES))

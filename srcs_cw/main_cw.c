@@ -6,7 +6,7 @@
 /*   By: xamartin <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/19 14:58:22 by xamartin     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/03 16:50:55 by xamartin    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/09 17:06:35 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -52,7 +52,7 @@ int		parse_player(int ac, char **av, t_arg *args, int i)
 	return (1);
 }
 
-int		parse_arg(int ac, char **av, t_arg *args)
+int		parse_arg(int ac, char **av, t_arg *args, t_mem *aff)
 {
 	int		i;
 
@@ -61,9 +61,11 @@ int		parse_arg(int ac, char **av, t_arg *args)
 	{
 		if (i + 1 == ac || !ft_strisdigit(av[i + 1]))
 			return (0);
-		args->dump = ft_atoi(av[i + 1]);
+		aff->dump = ft_atoi(av[i + 1]);
 		i += 2;
 	}
+	else
+		aff->dump = -1;
 	ft_bzero(args->champ_path, MAX_PLAYERS * sizeof(char*));
 	ft_bzero(args->champ_number, MAX_PLAYERS * sizeof(int));
 	return (parse_player(ac, av, args, i));
@@ -96,8 +98,9 @@ int		main(int ac, char **av)
 	list = NULL;
 	ft_bzero(args.champ_number, MAX_PLAYERS * sizeof(int));
 	if (ac < 3 || (args.nb_players = check_cor(ac, av)) < 2 ||
-			args.nb_players > MAX_PLAYERS || !parse_arg(ac, av, &args))
+			args.nb_players > MAX_PLAYERS || !parse_arg(ac, av, &args, &aff))
 		return (ft_printf("./corewar [-dump nbr_cycles] [[-n number] champion1.cor]\n"));
 	init_champ(&list, &args);
 	generate_memory(&list, &aff);
+	aff.dump == -1 ? lets_go(&list, &aff, &args) : lets_dump(&list, &aff, &args);
 }

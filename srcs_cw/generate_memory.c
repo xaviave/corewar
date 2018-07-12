@@ -6,7 +6,7 @@
 /*   By: xamartin <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/26 13:13:29 by xamartin     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/03 16:55:09 by xamartin    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/09 11:34:18 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -39,6 +39,7 @@ void				put_champ_mem(t_champ *list, int player, int nb_player, unsigned char **
 	tmp = list;
 	while (tmp && tmp->number != player)
 		tmp = tmp->next;
+	tmp->pc = i;
 	while (j < tmp->prog_size)
 	{
 		(*memory)[i] = (unsigned char)tmp->prog[j];
