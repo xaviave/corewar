@@ -6,7 +6,7 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/20 17:30:33 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/03 15:06:58 by xamartin    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/12 14:49:30 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,6 +35,9 @@ t_champ		*create_champ(char *file, int prog_size, t_champ **list)
 	champ->reg = ft_memalloc(REG_SIZE * REG_NUMBER);
 	champ->prog_size = prog_size;
 	champ->carry = 1;
+	champ->live = 0;
+	champ->cycle = 1;
+	champ->next_instru[0] = -1;
 	add_champ(list, champ);
 	return (*list);
 }
@@ -140,6 +143,7 @@ void		init_champ(t_champ **list, t_arg *args)
 			return (error(file, list));
 		*list = create_champ(file, prog_size, list);
 		(*list)->number = i + 1;
+		ft_memcpy(args->name[i],(*list)->name, PROG_NAME_LENGTH + 1);
 		write_reg(*list, 1, (*list)->number);
 		ft_strdel(&file);
 	}

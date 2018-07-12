@@ -6,7 +6,7 @@
 /*   By: xamartin <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/19 13:50:45 by xamartin     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/03 16:50:46 by xamartin    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/12 14:48:55 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,8 +18,6 @@
 # include "fcntl.h"
 # include "../libft/header/libft.h"
 
-static char			color[4][12] = {GRN, RED, BLUE, PINK};
-
 typedef struct		s_champ
 {
 	char			name[PROG_NAME_LENGTH + 1];
@@ -28,28 +26,55 @@ typedef struct		s_champ
 	int				prog_size;
 	int				number;
 	void			*reg;
-	void			*pc;
-	char			carry;
+	unsigned		carry:1;
+	int				live;
+	int				cycle;
+	int				pc;
+	char			next_instru[10];
 	struct s_champ	*next;
 }					t_champ;
 
 typedef struct		s_arg
 {
+	char			name[MAX_PLAYERS][PROG_NAME_LENGTH + 1];
 	char			*champ_path[MAX_PLAYERS];
 	int				champ_number[MAX_PLAYERS];
 	int				nb_players;
-	int				dump;
 }					t_arg;
 
 typedef struct		s_mem
 {
 	unsigned char	*memory;
 	unsigned char	*map;
+	int				dump;
+	int				last_live;
 }					t_mem;
+
+int		ft_live(t_champ *tmp, t_mem *mem, t_arg *arg);
+int		ft_ld(t_champ *tmp, t_mem *mem, t_arg *arg);
+int		ft_st(t_champ *tmp, t_mem *mem, t_arg *arg);
+int		ft_add(t_champ *tmp, t_mem *mem, t_arg *arg);
+int		ft_sub(t_champ *tmp, t_mem *mem, t_arg *arg);
+int		ft_and(t_champ *tmp, t_mem *mem, t_arg *arg);
+int		ft_or(t_champ *tmp, t_mem *mem, t_arg *arg);
+int		ft_xor(t_champ *tmp, t_mem *mem, t_arg *arg);
+int		ft_zjump(t_champ *tmp, t_mem *mem, t_arg *arg);
+int		ft_ldi(t_champ *tmp, t_mem *mem, t_arg *arg);
+int		ft_sti(t_champ *tmp, t_mem *mem, t_arg *arg);
+int		ft_fork(t_champ *tmp, t_mem *mem, t_arg *arg);
+int		ft_lld(t_champ *tmp, t_mem *mem, t_arg *arg);
+int		ft_lldi(t_champ *tmp, t_mem *mem, t_arg *arg);
+int		ft_lfork(t_champ *tmp, t_mem *mem, t_arg *arg);
+int		ft_aff(t_champ *tmp, t_mem *mem, t_arg *arg);
+
+static char			color[4][12] = {GRN, RED, BLUE, PINK};
 
 void				init_champ(t_champ **champ, t_arg *args);
 void				write_reg(t_champ *champ, int nb_of_reg, int nb_to_write);
 int					give_reg(t_champ *champ, int number);
 void				generate_memory(t_champ **list, t_mem *aff);
+int					lets_go(t_champ **l, t_mem *m, t_arg *a);
+int					lets_dump(t_champ **l, t_mem *m, t_arg *a);
+int					list_len(t_champ *list);
 
 #endif
