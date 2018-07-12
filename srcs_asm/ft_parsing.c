@@ -56,15 +56,30 @@ char		*ft_lexer(char *file)
 	return (ctn.buf);
 }
 
-char		**ft_parsing(char **file)
+int			ft_parsing(char **file)
 {
 	char	*buf;
 	char	**split;
+	int		i;
 
+	i = 0;
 	if (!(buf = ft_lexer(*file)))
+	{
+		free(*file);
 		exit(1);
-	free(*file);
-	split = ft_strsplit(buf, '|');
+	}
+	if (!(split = ft_strsplit(buf, '|')))
+	{
+		free(*file);
+		free(buf);
+		exit(1);
+	}
 	free(buf);
-	return (split);
+	if (!(ft_suite_parsing(file, split)))
+	{
+		ft_free_things(*file, split);
+		exit(1);
+	}
+	ft_free_things(*file, split);
+	return (1);
 }
