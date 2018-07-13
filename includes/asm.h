@@ -28,8 +28,17 @@ typedef struct		s_contain
 	char			*buf;
 }					t_contain;
 
+typedef struct		s_base
+{
+	char			*name;
+	char			*comment;
+	char			**label;
+}					t_base;
+
 char				*ft_first(int argc, char **argv);
-char				**ft_parsing(char **file);
+int					ft_parsing(char **file);
+int					ft_suite_parsing(char **file, char **split);
 int					ft_third(char **argv, int argc);
+int					ft_free_things(char *s1, char **s2);
 
 #endif

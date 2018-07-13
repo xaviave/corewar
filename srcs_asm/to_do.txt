@@ -1,9 +1,3 @@
-usage si argc < 2
-message d'erreur si open fail
-open le dernier argument
-creer un ".cor" si l'argument n'a pas de suffixe ".s"
-
-
 ajouter le COREWAR_EXEC_MAGIC au debut du fichier .cor "00ea83f3"
 ajouter le .name apres le COREWAR_EXEC_MAGIC en hexadecimal
 si strlen de .name est superieur a 128 afficher message d'erreur
@@ -11,7 +5,10 @@ garder 8 octets pour ecrire la taille du programme apres le .name
 ajouter le .comment apres la taille
 si strlen de .comment est superieur a 2048 afficher message d'erreur
 
-
-placer le fichier .cor dans le bon dossier
 effacer le contenu si deja existant
-.spc"nl,
+
+
+_______________
+
+faire tout la traduction du parsing
+finir parsing a partir dutilisation de token, et utiliser le name et comment deja stock
