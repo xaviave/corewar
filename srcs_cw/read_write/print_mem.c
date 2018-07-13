@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   access_reg.c                                     .::    .:/ .      .::   */
+/*   print_mem.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/06/20 17:56:17 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/26 11:20:18 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/07/13 16:24:08 by tduverge     #+#   ##    ##    #+#       */
+/*   Updated: 2018/07/13 16:26:53 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../includes/corewar.h"
+#include "../../includes/corewar.h"
 
-int		give_reg(t_champ *champ, int number)
+void	print_mem(t_mem *mem)
 {
-	int		ret;
+	int	i;
 
-	ret = 0;
-	ft_memcpy(&ret, champ->reg + REG_SIZE * (number - 1), REG_SIZE);
-	return (ret);
-}
-
-void	write_reg(t_champ *champ, int nb_of_reg, int nb_to_write)
-{
-	ft_memcpy(champ->reg + REG_SIZE * (nb_of_reg - 1), &nb_to_write, REG_SIZE);
+	i = -1;
+	while (++i < MEM_SIZE)
+	{
+		if (i)
+		{
+			if (i % 64 == 0)
+				ft_printf("\n");
+		}
+		if (mem->map[i] == 1)
+			ft_printf(RED"");
+		if (mem->map[i] == 2)
+			ft_printf(BLUE"");
+		ft_printf("%02x "RESET, mem->memory[i]);
+	}
+	ft_printf("\n");
 }

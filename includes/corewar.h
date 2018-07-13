@@ -6,7 +6,7 @@
 /*   By: xamartin <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/19 13:50:45 by xamartin     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/12 14:48:55 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/13 16:26:28 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,6 +17,10 @@
 # include "op.h"
 # include "fcntl.h"
 # include "../libft/header/libft.h"
+
+/*
+ * STRUCTURES
+ */
 
 typedef struct		s_champ
 {
@@ -30,7 +34,7 @@ typedef struct		s_champ
 	int				live;
 	int				cycle;
 	int				pc;
-	char			next_instru[10];
+	char			next_instru;
 	struct s_champ	*next;
 }					t_champ;
 
@@ -50,6 +54,56 @@ typedef struct		s_mem
 	int				last_live;
 }					t_mem;
 
+/*
+ * STATIC COULEUR
+ */
+
+static char			color[4][12] = {GRN, RED, BLUE, PINK};
+
+/*
+ * FONCTIONS INITIALISATION
+ */
+
+void				init_champ(t_champ **champ, t_arg *args);
+void				generate_memory(t_champ **list, t_mem *aff);
+int					check_cor(int ac, char **av);
+int					parse_arg(int ac, char **av, t_arg *args, t_mem *aff);
+int					check_cor(int ac, char **av);
+
+/*
+ * FONCTIONS LECTURE ET ECRITURE
+ */
+
+void				print_mem(t_mem *mem);
+void				write_reg(t_champ *champ, int nb_of_reg, int nb_to_write);
+int					give_reg(t_champ *champ, int number);
+unsigned int		recup_indirect4x(t_mem *mem, t_champ *champ, 
+		unsigned int start);
+unsigned int		recup_indirect2x(t_mem *mem, t_champ *champ, 
+		unsigned int start);
+unsigned int		recup_indirect4(t_mem *mem, t_champ *champ, 
+		unsigned int start);
+unsigned int		recup_indirect2(t_mem *mem, t_champ *champ, 
+		unsigned int start);
+unsigned int		recup_direct4(t_mem *mem, t_champ *champ, 
+		unsigned int start);
+unsigned int		recup_direct2(t_mem *mem, t_champ *champ, 
+		unsigned int start);
+unsigned char		recup_octet(t_mem *mem, t_champ *champ, 
+		unsigned int n);
+
+/*
+ * FONCTIONS VRAC
+ */
+
+int					lets_go(t_champ **l, t_mem *m, t_arg *a);
+int					lets_dump(t_champ **l, t_mem *m, t_arg *a);
+int					list_len(t_champ *list);
+
+/*
+ * FONCTIONS UPCODE
+ */
+
 int		ft_live(t_champ *tmp, t_mem *mem, t_arg *arg);
 int		ft_ld(t_champ *tmp, t_mem *mem, t_arg *arg);
 int		ft_st(t_champ *tmp, t_mem *mem, t_arg *arg);
@@ -66,15 +120,5 @@ int		ft_lld(t_champ *tmp, t_mem *mem, t_arg *arg);
 int		ft_lldi(t_champ *tmp, t_mem *mem, t_arg *arg);
 int		ft_lfork(t_champ *tmp, t_mem *mem, t_arg *arg);
 int		ft_aff(t_champ *tmp, t_mem *mem, t_arg *arg);
-
-static char			color[4][12] = {GRN, RED, BLUE, PINK};
-
-void				init_champ(t_champ **champ, t_arg *args);
-void				write_reg(t_champ *champ, int nb_of_reg, int nb_to_write);
-int					give_reg(t_champ *champ, int number);
-void				generate_memory(t_champ **list, t_mem *aff);
-int					lets_go(t_champ **l, t_mem *m, t_arg *a);
-int					lets_dump(t_champ **l, t_mem *m, t_arg *a);
-int					list_len(t_champ *list);
 
 #endif
