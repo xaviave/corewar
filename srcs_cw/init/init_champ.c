@@ -6,12 +6,12 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/20 17:30:33 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/12 14:49:30 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/13 16:15:45 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../includes/corewar.h"
+#include "../../includes/corewar.h"
 
 void		add_champ(t_champ **start, t_champ *to_add)
 {
@@ -36,8 +36,8 @@ t_champ		*create_champ(char *file, int prog_size, t_champ **list)
 	champ->prog_size = prog_size;
 	champ->carry = 1;
 	champ->live = 0;
-	champ->cycle = 1;
-	champ->next_instru[0] = -1;
+	champ->cycle = 0;
+	champ->next_instru = -1;
 	add_champ(list, champ);
 	return (*list);
 }

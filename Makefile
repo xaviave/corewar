@@ -6,7 +6,7 @@
 #    By: xamartin <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/06/19 13:41:44 by xamartin     #+#   ##    ##    #+#        #
-#    Updated: 2018/07/09 17:07:34 by tduverge    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/07/13 16:26:42 by tduverge    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -40,11 +40,16 @@ CW_SRCS_PATH = ./srcs_cw/
 CW_OBJS_PATH = ./srcs_cw/
 
 CW_FILES = main_cw.c\
-		   init_champ.c\
-		   access_reg.c\
-		   generate_memory.c\
 		   lets_go.c\
 		   lets_dump.c\
+		   init/parsing.c\
+		   init/init_champ.c\
+		   init/generate_memory.c\
+		   read_write/access_reg.c\
+		   read_write/recup_args.c\
+		   read_write/print_mem.c\
+		   ft_upcode/ft_live.c\
+		   ft_upcode/ft_ld.c\
 
 
 CW_SRCS = $(addprefix $(CW_SRCS_PATH), $(CW_FILES))

@@ -6,18 +6,20 @@
 /*   By: xamartin <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/26 13:13:29 by xamartin     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/09 11:34:18 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/13 16:43:23 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../includes/corewar.h"
+#include "../../includes/corewar.h"
 
 int					list_len(t_champ *list)
 {
 	int				i;
 	t_champ			*tmp;
 
+	if (!list)
+		return (0);
 	i = 0;
 	tmp = list;
 	while (tmp)
