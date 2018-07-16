@@ -8,15 +8,16 @@ char		*ft_extract_comment(char *line)
 	int		j;
 
 	i = 0;
-	while (line[i - 1] != '\"')
+	while (line[i] != '\"')
 		i++;
-	new = ft_strdup(ft_strchr(line, '\"'));
-	tmp = ft_memalloc(ft_strlen(new) - 2);
+	i++;
+	if (!(new = ft_strdup(ft_strchr(line, '\"'))))
+		return (0);
+	tmp = ft_strnew(ft_strlen(new) - 2);
 	i = 1;
 	j = 0;
 	while (new[i] != '\"')
 		tmp[j++] = new[i++];
-	tmp[j] = '\0';
 	free(new);
 	return (tmp);
 }

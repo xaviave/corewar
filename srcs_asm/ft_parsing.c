@@ -56,14 +56,13 @@ char		*ft_lexer(char *file)
 	return (ctn.buf);
 }
 
-int			ft_parsing(char **file)
+int			ft_parsing(char **file, t_all *a)
 {
 	char	*buf;
 	char	**split;
 	int		i;
 
-	i = 0;
-	if (!(buf = ft_lexer(*file)))
+	if (!(i = 0) && !(buf = ft_lexer(*file)))
 	{
 		free(*file);
 		exit(1);
@@ -75,7 +74,7 @@ int			ft_parsing(char **file)
 		exit(1);
 	}
 	free(buf);
-	if (!(ft_suite_parsing(file, split)))
+	if (!(a->base = ft_suite_parsing(file, split)))
 	{
 		ft_free_things(*file, split);
 		exit(1);

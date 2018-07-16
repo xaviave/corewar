@@ -35,10 +35,16 @@ typedef struct		s_base
 	char			**label;
 }					t_base;
 
+typedef struct		s_all
+{
+	t_base			*base;
+	char			*file_name;
+}					t_all;
+
 char				*ft_first(int argc, char **argv);
-int					ft_parsing(char **file);
-int					ft_suite_parsing(char **file, char **split);
-int					ft_third(char **argv, int argc);
+int					ft_parsing(char **file, t_all *a);
+t_base				*ft_suite_parsing(char **file, char **split);
+int					ft_third(char **argv, int argc, t_all *a);
 int					ft_free_things(char *s1, char **s2);
 int					ft_free_base(t_base *base);
 char				*ft_extract_comment(char *line);

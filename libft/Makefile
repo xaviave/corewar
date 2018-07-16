@@ -26,7 +26,7 @@ SRC =\
 	ft_bubble_sort ft_merge_sort ft_strnjoin ft_lstprint_nb\
 	get_next_line ft_atol ft_pow ft_strisdigit ft_strndup
 
-SRC_PRINTF =\
+SRC_PRINTF = fd_printf\
 		   ft_printf flags\
 		   pf_litoa_base pf_luitoa_base\
 		   pf_applyflags_nb pf_applyflags_str pf_applyflags_x\

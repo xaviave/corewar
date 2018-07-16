@@ -55,16 +55,20 @@ int			ft_create_base(char **sp, t_base *base, char **split)
 		i++;
 	if (!(base->name = ft_extract_comment(sp[i])))
 		return (0);
+	if (ft_strlen(base->name) > 128)
+		return (0);
 	while (!ft_strstr(sp[i], ".comment") || sp[i][0] != '.')
 		i++;
 	if (!(base->comment = ft_extract_comment(sp[i])))
+		return (0);
+	if (ft_strlen(base->comment) > 2048)
 		return (0);
 	if (!(base->label = ft_extract_label(split)))
 		return (0);
 	return (1);
 }
 
-int			ft_start_base(char *file, char **split, t_base *base)
+int			ft_start_base(char *file, char **split, t_base **base)
 {
 	char	**ch;
 	int		i;
@@ -76,20 +80,21 @@ int			ft_start_base(char *file, char **split, t_base *base)
 		return (ft_free_things(NULL, ch));
 	if (!(ft_check_base(ch)))
 		return (ft_free_things(NULL, ch));
-	if (!(ft_create_base(ch, base, split)))
+	if (!(ft_create_base(ch, *base, split)))
 	{
-		ft_free_base(base);
+		ft_free_base(*base);
 		return (ft_free_things(NULL, ch));
 	}
 	ft_free_things(NULL, ch);
 	return (1);
 }
 
-int			ft_suite_parsing(char **file, char **split)
+t_base		*ft_suite_parsing(char **file, char **split)
 {
-	t_base		base;
+	t_base		*base;
 
+	base = ft_memalloc(0);
 	if (!(ft_start_base(*file, split, &base)))
-		return (0);
-	return (1);
+		return (NULL);
+	return (base);
 }

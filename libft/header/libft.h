@@ -146,6 +146,7 @@ typedef struct			s_flags
 }						t_flags;
 
 int						ft_printf(const char *format, ...);
+int						fd_printf(const char *format, ...);
 int						pf_str(char **format, char **str, int len);
 int						pf_special(char **format, va_list ap, char **str,
 		int len);

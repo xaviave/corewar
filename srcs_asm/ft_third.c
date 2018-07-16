@@ -35,7 +35,19 @@ char			*ft_name_file(int argc, char **argv)
 	return (file ? file : ft_strdup(".cor"));
 }
 
-int				ft_header(char **file)
+void			ft_print_zero(int fd, int i)
+{
+	int		j;
+
+	j = 0;
+	while (j < i)
+	{
+		fd_printf("%c", fd, 0);
+		j++;
+	}
+}
+
+int				ft_header(char **file, t_all a)
 {
 	int		fd;
 
@@ -45,17 +57,21 @@ int				ft_header(char **file)
 		exit(1);
 	}
 	lseek(fd, 0, SEEK_SET);
+	ft_print_zero(fd, 1);
+	fd_printf("%c%c%c%s", fd, 0b11101010, 0b10000011, 0b11110011, a.base->name);
+	ft_print_zero(fd, 128 - ft_strlen(a.base->name));
+	/* file size */ ft_print_zero(fd, 8);
+	fd_printf("%s", fd, a.base->comment);
+	ft_print_zero(fd, 2048 - ft_strlen(a.base->comment));
 	close(fd);
 	return (0);
 }
 
-int				ft_third(char **argv, int argc)
+int				ft_third(char **argv, int argc, t_all *a)
 {
-	char	*file;
 
-	file = ft_name_file(argc, argv);
-	ft_header(&file);
-	ft_printf("Writing output program to %s\n", file);
-	free(file);
+	a->file_name = ft_name_file(argc, argv);
+	ft_header(&a->file_name, *a);
+	ft_printf("Writing output program to %s\n", a->file_name);
 	return (0);
 }
