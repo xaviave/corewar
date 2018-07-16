@@ -40,5 +40,8 @@ int					ft_parsing(char **file);
 int					ft_suite_parsing(char **file, char **split);
 int					ft_third(char **argv, int argc);
 int					ft_free_things(char *s1, char **s2);
+int					ft_free_base(t_base *base);
+char				*ft_extract_comment(char *line);
+char				**ft_extract_label(char **split);
 
 #endif
