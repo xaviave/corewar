@@ -1,33 +1,22 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_live.c                                        .::    .:/ .      .::   */
+/*   access_pc.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/07/13 16:02:23 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/16 16:55:13 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/07/14 14:42:54 by tduverge     #+#   ##    ##    #+#       */
+/*   Updated: 2018/07/16 11:44:28 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/corewar.h"
 
-int			ft_live(t_champ *tmp, t_champ *list, t_mem *mem, t_arg *args)
+int		mod_pc(t_champ *tmp, t_champ *list, t_mem *mem, int nu)
 {
-	int		name;
-
-	name = -(recup_direct4(mem, tmp, 1));
-	tmp->pc = mod_pc(tmp, list, mem, 5);
-	//tmp->pc = (5 + tmp->pc) % MEM_SIZE;
-	if (name > args->nb_players || name <= 0)
-		return (-1);
-	mem->last_live = name;
-	ft_putstr(YEL"un processus dit que le joueur ");
-	ft_putnbr(name);
-	ft_putchar('(');
-	ft_putstr(args->name[name - 1]);
-	ft_putstr(") est en vie\n"RESET);
-	tmp->live++;
-	return (-1);
+	return ((tmp->pc + nu) % MEM_SIZE);
+	list = (t_champ *)list;
+	mem = (t_mem *)mem;
+//	print_mem(mem, list);
 }

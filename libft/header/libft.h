@@ -6,7 +6,7 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/28 18:12:07 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/26 17:59:05 by xamartin    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/14 15:17:34 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -176,7 +176,7 @@ char					*pf_unicode(unsigned int i);
 # define GRN			"\e[32m"
 # define MAG			"\e[35m"
 # define CYN			"\e[36m"
-# define GREY			"\e[90m"
+# define GREY			"\e[38;5;246m"
 # define ORANGE			"\e[38;5;208m"
 # define RED			"\e[38;5;196m"
 # define YEL			"\e[38;5;11m"

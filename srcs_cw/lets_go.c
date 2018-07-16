@@ -6,15 +6,16 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/09 16:14:43 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/13 16:49:31 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/16 19:22:27 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
 
-static int			(*instru[2])(t_champ *tmp, t_mem *mem, t_arg *args) = {
-	&ft_live, &ft_ld};
+static int			(*instru[9])(t_champ *tmp, t_champ *list, t_mem *mem, t_arg *args) = {
+	&ft_live, &ft_ld, &ft_st, &ft_add, &ft_sub, &ft_and, &ft_or, &ft_xor,
+	&ft_zjmp};
 
 static	int		times[16] = {10, 5, 5, 10, 10, 6, 6, 6, 20, 25, 25, 800, 10,
 	50, 1000, 2};
@@ -24,11 +25,12 @@ static	int		times[16] = {10, 5, 5, 10, 10, 6, 6, 6, 20, 25, 25, 800, 10,
 	&ft_zjump, &ft_ldi, &ft_sti, &ft_fork, &ft_lld, &ft_lldi, &ft_lfork,
 	&ft_aff};*/
 
-void	save_instru(t_mem *mem, t_champ *tmp)
+void	save_instru(t_mem *mem, t_champ *tmp, t_champ *list)
 {
 	if (*(mem->memory + tmp->pc) > 16 || *(mem->memory + tmp->pc) == 0)
 	{
-		tmp->pc = (tmp->pc + 1) % MEM_SIZE;
+		tmp->pc = mod_pc(tmp, list, mem, 1);
+		//tmp->pc = (tmp->pc + 1) % MEM_SIZE;
 		tmp->cycle++;
 		return ;
 	}
@@ -46,51 +48,66 @@ void	check_cycle(t_champ *list, t_mem *mem, int c, t_arg *args)
 	{
 		if (tmp->cycle == c && tmp->next_instru != -1)
 		{
-			carry = instru[tmp->next_instru - 1](tmp, mem, args);
+			carry = instru[tmp->next_instru - 1](tmp, list, mem, args);
 			tmp->next_instru = -1;
 			tmp->cycle++;
 			if (carry >= 0)
 				tmp->carry = carry;
 		}
 		else if (tmp->cycle == c && tmp->next_instru == -1)
-			save_instru(mem, tmp);
+			save_instru(mem, tmp, list);
 		tmp = tmp->next;
 	}
 }
 
-int		check_live(t_champ **list)
+void	del_maillon(t_champ **list, int n)
 {
-	int			live;
 	t_champ		*tmp;
 	t_champ		*before;
 
+	tmp = *list;
+	if (n == 0)
+		*list = (*list)->next;
+	else
+	{
+		while (n)
+		{
+			before = tmp;
+			tmp = tmp->next;
+			n--;
+		}
+		before->next = tmp->next;
+	}
+	free(tmp->reg);
+	free(tmp);
+}
+
+int		check_live(t_champ **list)
+{
+	t_champ		*tmp;
+	int			live;
+	int			i;
+
 	live = 0;
 	tmp = *list;
-	before = NULL;
+	i = 0;
 	while (tmp)
 	{
 		if (!tmp->live)
 		{
-			if (tmp == *list)
-				*list = tmp->next;
-			else
-				before->next = tmp->next;
-			free(tmp->reg);
-			free(tmp);
+			del_maillon(list, i);
+			i--;
 		}
 		else
 		{
-			before = tmp;
 			if (tmp->live > NBR_LIVE)
 				live = -1;
 			if (live != -1)
 				live = 1;
 			tmp->live = 0;
 		}
-		if (before)
-			tmp = before->next;
-		else
-			tmp = *list;
+		tmp = tmp->next;
+		i++;
 	}
 	return (live);
 }
@@ -104,9 +121,10 @@ int		lets_go(t_champ **list, t_mem *mem, t_arg *args)
 	int		very_less;
 
 	c = 0;
+	very_less = 0;
 	c_todie = CYCLE_TO_DIE;
 	tmp = c_todie;
-	print_mem(mem);
+	print_mem(mem, *list);
 	while (1)
 	{
 		check_cycle(*list, mem, c, args);
@@ -129,5 +147,6 @@ int		lets_go(t_champ **list, t_mem *mem, t_arg *args)
 		}
 		c++;
 	}
+	print_mem(mem, *list);
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: xamartin <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/06/19 13:41:44 by xamartin     #+#   ##    ##    #+#        #
-#    Updated: 2018/07/13 16:26:42 by tduverge    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/07/16 19:21:20 by tduverge    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -46,10 +46,18 @@ CW_FILES = main_cw.c\
 		   init/init_champ.c\
 		   init/generate_memory.c\
 		   read_write/access_reg.c\
+		   read_write/access_pc.c\
 		   read_write/recup_args.c\
 		   read_write/print_mem.c\
 		   ft_upcode/ft_live.c\
 		   ft_upcode/ft_ld.c\
+		   ft_upcode/ft_st.c\
+		   ft_upcode/ft_add.c\
+		   ft_upcode/ft_sub.c\
+		   ft_upcode/ft_and.c\
+		   ft_upcode/ft_or.c\
+		   ft_upcode/ft_xor.c\
+		   ft_upcode/ft_zjmp.c\
 
 
 CW_SRCS = $(addprefix $(CW_SRCS_PATH), $(CW_FILES))
