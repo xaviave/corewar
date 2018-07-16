@@ -6,7 +6,7 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/16 19:39:03 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/16 20:33:04 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/17 00:04:18 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -51,13 +51,13 @@ int		ft_sti(t_champ *tmp, t_champ *list, t_mem *mem, t_arg *args)
 	}
 	else if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b110000) >> 4 == 2)
 	{
-		value[1] = recup_direct4(mem, tmp, i);;
-		i += DIR_SIZE;
+		value[1] = recup_direct2(mem, tmp, i);;
+		i += 2;
 	}
 	else if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b110000) >> 4 == 3)
 	{
-		value[1] = recup_indirect4x(mem, tmp, i);
-		i += IND_SIZE;
+		value[1] = recup_indirect2x(mem, tmp, i);
+		i += 2;
 	}
 	else
 	{
@@ -77,19 +77,19 @@ int		ft_sti(t_champ *tmp, t_champ *list, t_mem *mem, t_arg *args)
 	}
 	else if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b110000) >> 4 == 2)
 	{
-		value[2] = recup_direct4(mem, tmp, i);;
-		i += DIR_SIZE;
+		value[2] = recup_direct2(mem, tmp, i);;
+		i += 2;
 	}
 	else
 	{
 		tmp->pc = mod_pc(tmp, list, mem, 7);
 		return (-1);
 	}
-	add = value[1] + value[2];
-	mem->memory[(tmp->pc + add) % MEM_SIZE] = (unsigned int)(value[2] & 0xFF000000) >> 24;
-	mem->memory[(tmp->pc + add + 1) % MEM_SIZE] = (unsigned int)(value[2] & 0xFF0000) >> 16;
-	mem->memory[(tmp->pc + add + 2) % MEM_SIZE] = (unsigned int)(value[2] & 0xFF00) >> 8;
-	mem->memory[(tmp->pc + add + 3) % MEM_SIZE] = (unsigned int)(value[2] & 0xFF);
+	add = (value[1] + value[2]) % IDX_MOD;
+	mem->memory[(tmp->pc + add) % MEM_SIZE] = (unsigned int)(value[0] & 0xFF000000) >> 24;
+	mem->memory[(tmp->pc + add + 1) % MEM_SIZE] = (unsigned int)(value[0] & 0xFF0000) >> 16;
+	mem->memory[(tmp->pc + add + 2) % MEM_SIZE] = (unsigned int)(value[0] & 0xFF00) >> 8;
+	mem->memory[(tmp->pc + add + 3) % MEM_SIZE] = (unsigned int)(value[0] & 0xFF);
 	tmp->pc = mod_pc(tmp, list, mem, i);
 	return (-1);
 }

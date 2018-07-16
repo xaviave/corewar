@@ -6,7 +6,7 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/16 19:07:57 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/16 20:12:14 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/16 23:24:27 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,12 +35,12 @@ int		ft_or(t_champ *tmp, t_champ *list, t_mem *mem, t_arg *args)
 	else if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b11000000) >> 6 == 2)
 	{
 		value[0] = recup_direct4(mem, tmp, i);;
-		i += DIR_SIZE;
+		i += 4;
 	}
 	else if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b11000000) >> 6 == 3)
 	{
 		value[0] = recup_indirect4x(mem, tmp, i);
-		i += IND_SIZE;
+		i += 2;
 	}
 	else
 	{
@@ -61,12 +61,12 @@ int		ft_or(t_champ *tmp, t_champ *list, t_mem *mem, t_arg *args)
 	else if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b110000) >> 4 == 2)
 	{
 		value[1] = recup_direct4(mem, tmp, i);;
-		i += DIR_SIZE;
+		i += 4;
 	}
 	else if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b110000) >> 4 == 3)
 	{
 		value[1] = recup_indirect4x(mem, tmp, i);
-		i += IND_SIZE;
+		i += 2;
 	}
 	else
 	{

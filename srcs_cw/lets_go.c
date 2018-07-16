@@ -6,24 +6,20 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/09 16:14:43 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/16 19:22:27 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/16 23:39:44 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
 
-static int			(*instru[9])(t_champ *tmp, t_champ *list, t_mem *mem, t_arg *args) = {
+static int			(*instru[16])(t_champ *tmp, t_champ *list, t_mem *mem, t_arg *args) = {
 	&ft_live, &ft_ld, &ft_st, &ft_add, &ft_sub, &ft_and, &ft_or, &ft_xor,
-	&ft_zjmp};
+	&ft_zjmp, &ft_ldi, &ft_sti, &ft_fork, &ft_lld, &ft_lldi, &ft_lfork,
+	&ft_aff};
 
 static	int		times[16] = {10, 5, 5, 10, 10, 6, 6, 6, 20, 25, 25, 800, 10,
 	50, 1000, 2};
-
-/*static int			(*instru[16])(t_champ *tmp, t_mem *mem, t_arg *args) = {
-	&ft_live, &ft_ld, &ft_st, &ft_add, &ft_sub, &ft_and, &ft_or, &ft_xor,
-	&ft_zjump, &ft_ldi, &ft_sti, &ft_fork, &ft_lld, &ft_lldi, &ft_lfork,
-	&ft_aff};*/
 
 void	save_instru(t_mem *mem, t_champ *tmp, t_champ *list)
 {

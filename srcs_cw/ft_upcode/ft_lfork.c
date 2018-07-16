@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_zjmp.c                                        .::    .:/ .      .::   */
+/*   ft_lfork.c                                       .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/07/16 19:14:48 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/16 23:51:50 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/07/16 21:47:21 by tduverge     #+#   ##    ##    #+#       */
+/*   Updated: 2018/07/16 23:32:10 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/corewar.h"
 
-int		ft_zjmp(t_champ *tmp, t_champ *list, t_mem *mem, t_arg *args)
+int		ft_lfork(t_champ *tmp, t_champ *list, t_mem *mem, t_arg *args)
 {
-	int		value;
+	t_champ		*fork;
+	t_champ		*last;
 
-	value = recup_direct2(mem, tmp, 1);
-	if (value & 0x8000)
-		value = value % IDX_MOD - 512;
-	else
-		value = value % IDX_MOD;
-	args = (t_arg *)args;
-	if (tmp->carry == 0 || value == 0)
-	{
-		tmp->pc = mod_pc(tmp, list, mem, 4);
-		return (-1);
-	}
-	tmp->pc = mod_pc(tmp, list, mem, value);
+	args = (void*)args;
+	fork = ft_memalloc(sizeof(t_champ));
+	ft_memcpy(fork, tmp, sizeof(t_champ));
+	fork->reg = ft_memalloc(REG_SIZE * REG_NUMBER);
+	ft_memcpy(fork->reg, tmp->reg, REG_SIZE * REG_NUMBER);
+	fork->next = NULL;
+	fork->pc = fork->pc + recup_direct2(mem, tmp, 1) % MEM_SIZE;
+	fork->next_instru = -1;
+	fork->cycle++;
+	last = list;
+	while (last->next)
+		last = last->next;
+	last->next = fork;
+	tmp->pc = mod_pc(tmp, list, mem, 3);
 	return (-1);
 }

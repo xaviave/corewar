@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_ld.c                                          .::    .:/ .      .::   */
+/*   ft_lld.c                                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/07/13 16:02:36 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/16 23:16:39 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/07/16 21:52:27 by tduverge     #+#   ##    ##    #+#       */
+/*   Updated: 2018/07/16 23:30:09 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/corewar.h"
 
-int		ft_ld(t_champ *tmp, t_champ *list, t_mem *mem, t_arg *args)
+int		ft_lld(t_champ *tmp, t_champ *list, t_mem *mem, t_arg *args)
 {
 	int		value;
 	int		reg;
@@ -32,7 +32,7 @@ int		ft_ld(t_champ *tmp, t_champ *list, t_mem *mem, t_arg *args)
 	}
 	else if (mem->memory[(tmp->pc + 1) % MEM_SIZE] == 208)
 	{
-		value = recup_indirect4x(mem, tmp, 2);
+		value = recup_indirect4(mem, tmp, 2);
 		reg = (int)mem->memory[(tmp->pc + 4) % MEM_SIZE];
 		tmp->pc = mod_pc(tmp, list, mem, 5);
 		//tmp->pc = (5 + tmp->pc) % MEM_SIZE;
@@ -41,7 +41,7 @@ int		ft_ld(t_champ *tmp, t_champ *list, t_mem *mem, t_arg *args)
 		write_reg(tmp, reg, value);
 		return (value == 0 ? 1 : 0);
 	}
-	tmp->pc = mod_pc(tmp, list, mem, 5);
+	tmp->pc = mod_pc(tmp, list, mem, 4);
 	//tmp->pc = (4 + tmp->pc) % MEM_SIZE;
 	return (0);
 }

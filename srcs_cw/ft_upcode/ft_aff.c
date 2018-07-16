@@ -1,42 +1,32 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   print_mem.c                                      .::    .:/ .      .::   */
+/*   ft_aff.c                                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/07/13 16:24:08 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/16 22:09:59 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/07/16 21:53:51 by tduverge     #+#   ##    ##    #+#       */
+/*   Updated: 2018/07/16 23:32:37 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/corewar.h"
 
-#include "stdio.h"
-
-void	print_mem(t_mem *mem, t_champ *list)
+int		ft_aff(t_champ *tmp, t_champ *list, t_mem *mem, t_arg *args)
 {
-	int	i;
+	char			c;
+	unsigned int	reg;
 
-	i = -1;
-	//return ;
-				printf("\n\n\n");
-	while (++i < MEM_SIZE)
+	args = (void*)args;
+	if (mem->memory[(tmp->pc + 1) % MEM_SIZE] == 64)
 	{
-		if (i)
-		{
-			if (i % 64 == 0)
-				printf("\n");
-		}
-		if (mem->map[i] == 1)
-			printf(YEL"");
-		if (mem->map[i] == 2)
-			printf(BLUE"");
-		else
-			printf(GREY"");
-		printf("%02x "RESET, mem->memory[i]);
+		reg = mem->memory[(tmp->pc + 2) % MEM_SIZE];
+		if (!reg || reg > 16)
+			return (-1);
+		c = give_reg(tmp, reg) % 256;
+		ft_putchar(c);
+		tmp->pc = mod_pc(tmp, list, mem, 3);
 	}
-	printf("\n");
-	list = (t_champ *)list;
+	return (-1);
 }

@@ -6,7 +6,7 @@
 #    By: xamartin <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/06/19 13:41:44 by xamartin     #+#   ##    ##    #+#        #
-#    Updated: 2018/07/16 19:21:20 by tduverge    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/07/16 22:03:14 by tduverge    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -58,6 +58,13 @@ CW_FILES = main_cw.c\
 		   ft_upcode/ft_or.c\
 		   ft_upcode/ft_xor.c\
 		   ft_upcode/ft_zjmp.c\
+		   ft_upcode/ft_ldi.c\
+		   ft_upcode/ft_sti.c\
+		   ft_upcode/ft_fork.c\
+		   ft_upcode/ft_lld.c\
+		   ft_upcode/ft_lldi.c\
+		   ft_upcode/ft_lfork.c\
+		   ft_upcode/ft_aff.c\
 
 
 CW_SRCS = $(addprefix $(CW_SRCS_PATH), $(CW_FILES))

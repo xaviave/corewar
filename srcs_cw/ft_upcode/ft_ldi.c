@@ -5,8 +5,8 @@
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/07/16 19:33:47 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/16 20:30:00 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/07/16 21:51:14 by tduverge     #+#   ##    ##    #+#       */
+/*   Updated: 2018/07/16 23:26:05 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -34,13 +34,13 @@ int		ft_ldi(t_champ *tmp, t_champ *list, t_mem *mem, t_arg *args)
 	}
 	else if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b11000000) >> 6 == 2)
 	{
-		value[0] = recup_direct4(mem, tmp, i);;
-		i += DIR_SIZE;
+		value[0] = recup_direct2(mem, tmp, i);;
+		i += 2;
 	}
 	else if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b11000000) >> 6 == 3)
 	{
-		value[0] = recup_indirect4x(mem, tmp, i);
-		i += IND_SIZE;
+		value[0] = recup_indirect2x(mem, tmp, i);
+		i += 2;
 	}
 	else
 	{
@@ -60,8 +60,8 @@ int		ft_ldi(t_champ *tmp, t_champ *list, t_mem *mem, t_arg *args)
 	}
 	else if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b110000) >> 4 == 2)
 	{
-		value[1] = recup_direct4(mem, tmp, i);;
-		i += DIR_SIZE;
+		value[1] = recup_direct2(mem, tmp, i);;
+		i += 2;
 	}
 	else
 	{
@@ -72,7 +72,7 @@ int		ft_ldi(t_champ *tmp, t_champ *list, t_mem *mem, t_arg *args)
 	if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b1100) >> 2 == 1 && reg &&
 			reg < 17 && !(mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b11) )
 	{
-		value[2] = recup_direct4(mem, tmp, value[0] + value[1]);
+		value[2] = recup_direct4(mem, tmp, (value[0] + value[1]) % IDX_MOD);
 		write_reg(tmp, mem->memory[(tmp->pc + i) % MEM_SIZE], value[2]);
 		tmp->pc = mod_pc(tmp, list, mem, i + 1);
 		return (value[2] == 0 ? 1 : 0);
