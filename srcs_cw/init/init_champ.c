@@ -6,7 +6,7 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/20 17:30:33 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/13 16:15:45 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/16 16:52:25 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -38,6 +38,7 @@ t_champ		*create_champ(char *file, int prog_size, t_champ **list)
 	champ->live = 0;
 	champ->cycle = 0;
 	champ->next_instru = -1;
+	champ->next = NULL;
 	add_champ(list, champ);
 	return (*list);
 }
@@ -55,7 +56,7 @@ char		*recup_file(char *path, int i)
 	while ((ret = read(fd, &line, 50)) > 0)
 	{
 		tmp = file;
-		file = ft_memalloc(i + ret + 1);
+		file = ft_memalloc(i + ret);
 		if (tmp)
 			ft_memcpy(file, tmp, i);
 		ft_memcpy(file + i, line, ret);

@@ -6,14 +6,14 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/13 16:02:36 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/13 16:02:45 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/16 17:49:08 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/corewar.h"
 
-int		ft_ld(t_champ *tmp, t_mem *mem, t_arg *args)
+int		ft_ld(t_champ *tmp, t_champ *list, t_mem *mem, t_arg *args)
 {
 	int		value;
 	int		reg;
@@ -22,9 +22,10 @@ int		ft_ld(t_champ *tmp, t_mem *mem, t_arg *args)
 	if (mem->memory[(tmp->pc + 1) % MEM_SIZE] == 144)
 	{
 		value = recup_direct4(mem, tmp, 2);
-		reg = (int)mem->memory[(tmp->pc + 5) % MEM_SIZE];
-		tmp->pc = (7 + tmp->pc) % MEM_SIZE;
-		if (!(reg > 0 && reg >= 16))
+		reg = (int)mem->memory[(tmp->pc + 6) % MEM_SIZE];
+		tmp->pc = mod_pc(tmp, list, mem, 7);
+		//tmp->pc = (7 + tmp->pc) % MEM_SIZE;
+		if (reg <= 0 || reg >= 16)
 			return (0);
 		write_reg(tmp, reg, value);
 		return (value == 0 ? 1 : 0);
@@ -33,12 +34,14 @@ int		ft_ld(t_champ *tmp, t_mem *mem, t_arg *args)
 	{
 		value = recup_indirect4x(mem, tmp, 2);
 		reg = (int)mem->memory[(tmp->pc + 4) % MEM_SIZE];
-		tmp->pc = (5 + tmp->pc) % MEM_SIZE;
-		if (!(reg > 0 && reg >= 16))
+		tmp->pc = mod_pc(tmp, list, mem, 5);
+		//tmp->pc = (5 + tmp->pc) % MEM_SIZE;
+		if (reg <= 0 || reg >= 16)
 			return (0);
 		write_reg(tmp, reg, value);
 		return (value == 0 ? 1 : 0);
 	}
-	tmp->pc = (4 + tmp->pc) % MEM_SIZE;
+	tmp->pc = mod_pc(tmp, list, mem, 4);
+	//tmp->pc = (4 + tmp->pc) % MEM_SIZE;
 	return (0);
 }
