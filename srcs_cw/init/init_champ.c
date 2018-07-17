@@ -6,7 +6,7 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/20 17:30:33 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/16 16:52:25 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/17 13:38:25 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -145,7 +145,7 @@ void		init_champ(t_champ **list, t_arg *args)
 		*list = create_champ(file, prog_size, list);
 		(*list)->number = i + 1;
 		ft_memcpy(args->name[i],(*list)->name, PROG_NAME_LENGTH + 1);
-		write_reg(*list, 1, (*list)->number);
+		write_reg(*list, 1, -((*list)->number));
 		ft_strdel(&file);
 	}
 	t_champ *test;

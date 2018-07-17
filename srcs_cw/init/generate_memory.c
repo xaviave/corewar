@@ -6,7 +6,7 @@
 /*   By: xamartin <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/26 13:13:29 by xamartin     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/16 14:59:29 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/17 14:11:57 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -91,5 +91,6 @@ void				generate_memory(t_champ **list, t_mem *aff)
 	while (++i <= nb_player)
 		put_champ_mem(*list, i, nb_player, &memory);
 	aff->memory = memory;
+	aff->call_live = 0;
 	init_aff(aff, list, nb_player);
 }

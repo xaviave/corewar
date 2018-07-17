@@ -6,7 +6,7 @@
 #    By: xamartin <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/06/19 13:41:44 by xamartin     #+#   ##    ##    #+#        #
-#    Updated: 2018/07/16 22:03:14 by tduverge    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/07/17 20:53:06 by tduverge    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -42,6 +42,7 @@ CW_OBJS_PATH = ./srcs_cw/
 CW_FILES = main_cw.c\
 		   lets_go.c\
 		   lets_dump.c\
+		   ft_error.c\
 		   init/parsing.c\
 		   init/init_champ.c\
 		   init/generate_memory.c\

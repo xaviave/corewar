@@ -6,7 +6,7 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/09 16:14:43 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/16 23:39:44 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/17 20:12:26 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -123,13 +123,11 @@ int		lets_go(t_champ **list, t_mem *mem, t_arg *args)
 	print_mem(mem, *list);
 	while (1)
 	{
-		check_cycle(*list, mem, c, args);
-		c_todie--;
-		if (c_todie == 0)
+		if (c_todie ==  0)
 		{
 			if (!(less = check_live(list)))
 				break;
-			if (less == -1 || very_less == MAX_CHECKS)
+			if (mem->call_live >= NBR_LIVE || very_less == MAX_CHECKS - 1)
 			{
 				c_todie = tmp - CYCLE_DELTA;
 				tmp = c_todie;
@@ -140,9 +138,16 @@ int		lets_go(t_champ **list, t_mem *mem, t_arg *args)
 				very_less++;
 				c_todie = tmp;
 			}
+			mem->call_live = 0;
+			if (c_todie < 0)
+				break;
 		}
+		check_cycle(*list, mem, c, args);
+		c_todie--;
+		ft_printf("cycle : % 10d --- c_todie : % 10d --- processus : % 10d\n", c, c_todie, list_len(*list));
 		c++;
 	}
 	print_mem(mem, *list);
+		ft_printf("END =cycle : % 10d --- c_todie : % 10d --- processus : % 10d\n", c, c_todie, list_len(*list));
 	return (0);
 }

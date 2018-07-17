@@ -1,33 +1,38 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_zjmp.c                                        .::    .:/ .      .::   */
+/*   ft_error.c                                       .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/07/16 19:14:48 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/17 15:25:56 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/07/17 20:33:21 by tduverge     #+#   ##    ##    #+#       */
+/*   Updated: 2018/07/17 20:47:30 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../../includes/corewar.h"
+#include "../includes/corewar.h"
 
-int		ft_zjmp(t_champ *tmp, t_champ *list, t_mem *mem, t_arg *args)
+int		ft_error(char code, t_champ *tmp, int ret)
 {
-	int		value;
+	int	i;
+	int	pc;
 
-	value = recup_direct2(mem, tmp, 1);
-	if (value & 0x8000)
-		value = value % IDX_MOD - 512;
-	else
-		value = value % IDX_MOD;
-	args = (t_arg *)args;
-	if (tmp->carry == 0 || value == 0)
+	i = -1;
+	pc = 2;
+	while (++i < 2)
 	{
-		tmp->pc = mod_pc(tmp, list, mem, 3);
-		return (-1);
+		if (!i)
+			code = (code >> 6) & 0b00000011;
+		else
+			code = (code >> 4) & 0b00000011;
+		if (code == REG_CODE)
+			pc += 1;
+		else if (code == DIR_CODE)
+			pc += 4;
+		else if (code == IND_CODE)
+			pc += 2;
 	}
-	tmp->pc = mod_pc(tmp, list, mem, value);
-	return (-1);
+	tmp->pc = (tmp->pc + pc) % MEM_SIZE;
+	return (ret);
 }

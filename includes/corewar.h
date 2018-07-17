@@ -6,7 +6,7 @@
 /*   By: xamartin <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/19 13:50:45 by xamartin     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/16 19:22:13 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/17 20:51:28 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -61,6 +61,7 @@ typedef struct		s_mem
 	int				dump;
 	int				last_live;
 	t_graph			*img;
+	int				call_live;
 }					t_mem;
 
 /*
@@ -109,6 +110,7 @@ int					mod_pc(t_champ *tmp, t_champ *list, t_mem *mem, int nu);
 int					lets_go(t_champ **l, t_mem *m, t_arg *a);
 int					lets_dump(t_champ **l, t_mem *m, t_arg *a);
 int					list_len(t_champ *list);
+int					ft_error(char code, t_champ *tmp, int ret);
 
 /*
  * FONCTIONS UPCODE

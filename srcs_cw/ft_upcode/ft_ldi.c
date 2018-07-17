@@ -6,7 +6,7 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/16 21:51:14 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/16 23:26:05 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/17 20:58:14 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -78,8 +78,5 @@ int		ft_ldi(t_champ *tmp, t_champ *list, t_mem *mem, t_arg *args)
 		return (value[2] == 0 ? 1 : 0);
 	}
 	else
-	{
-		tmp->pc = mod_pc(tmp, list, mem, 7);
-		return (0);
-	}
+		return (ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 0));
 }
