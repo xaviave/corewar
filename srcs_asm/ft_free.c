@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   ft_free.c                                        .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2018/07/21 17:18:19 by lotoussa     #+#   ##    ##    #+#       */
+/*   Updated: 2018/07/21 18:03:16 by lotoussa    ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
+
 #include "../includes/asm.h"
 
 int			ft_free_things(char *s1, char **s2)
@@ -22,7 +35,5 @@ int			ft_free_base(t_base *base)
 		free(base->name);
 	if (base->comment)
 		free(base->comment);
-	if (base->label)
-		ft_free_things(NULL, base->label);
 	return (0);
 }

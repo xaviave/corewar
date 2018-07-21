@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   ft_suite_parsing.c                               .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2018/07/21 17:19:03 by lotoussa     #+#   ##    ##    #+#       */
+/*   Updated: 2018/07/21 19:13:26 by lotoussa    ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
+
 #include "../includes/asm.h"
 
 int			ft_check_base(char **ch)
@@ -47,10 +60,8 @@ int			ft_count_base(char **ch)
 int			ft_create_base(char **sp, t_base *base, char **split)
 {
 	int		i;
-	int		j;
 
 	i = 0;
-	j = 0;
 	while (!ft_strstr(sp[i], ".name") || sp[i][0] != '.')
 		i++;
 	if (!(base->name = ft_extract_comment(sp[i])))
@@ -63,38 +74,26 @@ int			ft_create_base(char **sp, t_base *base, char **split)
 		return (0);
 	if (ft_strlen(base->comment) > 2048)
 		return (0);
-	if (!(base->label = ft_extract_label(split)))
-		return (0);
 	return (1);
 }
 
-int			ft_start_base(char *file, char **split, t_base **base)
+int			ft_suite_parsing(char **file, char **split, t_all *a)
 {
+	t_base	base;
 	char	**ch;
-	int		i;
 
-	if (!(ch = ft_strsplit(file, '\n')))
+	if (!(ch = ft_strsplit(*file, '\n')))
 		return (0);
-	i = 0;
 	if (!(ft_count_base(ch)))
 		return (ft_free_things(NULL, ch));
 	if (!(ft_check_base(ch)))
 		return (ft_free_things(NULL, ch));
-	if (!(ft_create_base(ch, *base, split)))
+	if (!(ft_create_base(ch, &base, split)))
 	{
-		ft_free_base(*base);
+		ft_free_base(&base);
 		return (ft_free_things(NULL, ch));
 	}
 	ft_free_things(NULL, ch);
+	a->base = base;
 	return (1);
-}
-
-t_base		*ft_suite_parsing(char **file, char **split)
-{
-	t_base		*base;
-
-	base = ft_memalloc(0);
-	if (!(ft_start_base(*file, split, &base)))
-		return (NULL);
-	return (base);
 }

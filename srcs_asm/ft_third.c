@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   ft_third.c                                       .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2018/07/21 17:19:06 by lotoussa     #+#   ##    ##    #+#       */
+/*   Updated: 2018/07/21 19:23:48 by lotoussa    ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
+
 #include "../includes/asm.h"
 #include <fcntl.h>
 
@@ -29,8 +42,10 @@ char			*ft_name_file(int argc, char **argv)
 			ft_exit_third(&file, &tmp);
 	}
 	else
+	{
 		if ((fd = open(".cor", O_RDWR | O_CREAT, S_IRUSR + S_IWUSR) == -1))
 			ft_exit_third(&file, &tmp);
+	}
 	close(fd);
 	return (file ? file : ft_strdup(".cor"));
 }
@@ -58,18 +73,17 @@ int				ft_header(char **file, t_all a)
 	}
 	lseek(fd, 0, SEEK_SET);
 	ft_print_zero(fd, 1);
-	fd_printf("%c%c%c%s", fd, 0b11101010, 0b10000011, 0b11110011, a.base->name);
-	ft_print_zero(fd, 128 - ft_strlen(a.base->name));
+	fd_printf("%c%c%c%s", fd, 0b11101010, 0b10000011, 0b11110011, a.base.name);
+	ft_print_zero(fd, 128 - ft_strlen(a.base.name));
 	/* file size */ ft_print_zero(fd, 8);
-	fd_printf("%s", fd, a.base->comment);
-	ft_print_zero(fd, 2048 - ft_strlen(a.base->comment));
+	fd_printf("%s", fd, a.base.comment);
+	ft_print_zero(fd, 2048 - ft_strlen(a.base.comment));
 	close(fd);
 	return (0);
 }
 
 int				ft_third(char **argv, int argc, t_all *a)
 {
-
 	a->file_name = ft_name_file(argc, argv);
 	ft_header(&a->file_name, *a);
 	ft_printf("Writing output program to %s\n", a->file_name);
