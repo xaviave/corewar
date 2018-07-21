@@ -6,7 +6,7 @@
 /*   By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/20 17:53:02 by xmoreau      #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/21 18:27:11 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/21 19:38:36 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -32,11 +32,13 @@ typedef struct		s_base
 {
 	char			*name;
 	char			*comment;
+	char			**tkn;
 }					t_base;
 
 typedef struct		s_all
 {
 	t_base			base;
+	int				file_size;
 	char			*file_name;
 }					t_all;
 

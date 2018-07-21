@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/21 16:42:25 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/21 19:12:17 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/21 19:38:38 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -113,6 +113,7 @@ t_all		ft_parsing(char **file)
 		ft_free_things(*file, split);
 		exit(1);
 	}
-	ft_free_things(*file, split);
+	free(*file);
+	a.base.tkn = split;
 	return (a);
 }
