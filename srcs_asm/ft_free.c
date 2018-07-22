@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/21 17:18:19 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/21 18:03:16 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/22 20:24:23 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,12 +19,13 @@ int			ft_free_things(char *s1, char **s2)
 
 	i = 0;
 	if (s1)
-		free(s1);
+		ft_strdel(&s1);
 	if (s2)
 	{
 		while (s2[i])
-			free(s2[i++]);
+			ft_strdel(&s2[i++]);
 		free(s2);
+		s2 = NULL;
 	}
 	return (0);
 }
@@ -32,8 +33,8 @@ int			ft_free_things(char *s1, char **s2)
 int			ft_free_base(t_base *base)
 {
 	if (base->name)
-		free(base->name);
+		ft_strdel(&base->name);
 	if (base->comment)
-		free(base->comment);
+		ft_strdel(&base->comment);
 	return (0);
 }

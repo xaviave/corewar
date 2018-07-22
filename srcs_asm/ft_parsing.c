@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/21 16:42:25 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/21 19:38:38 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/22 18:42:43 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,7 +16,7 @@
 int			ft_char(char let)
 {
 	return ((let == '.' || let == ' ' || let == '"' || let == '\n' || let == ','
-				|| let == '\t') ? 0 : 1);
+				|| let == '\t' || let == '#') ? 0 : 1);
 }
 
 int			ft_fill_buf(char **buf, char **tkn)

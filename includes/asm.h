@@ -6,7 +6,7 @@
 /*   By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/20 17:53:02 by xmoreau      #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/21 19:38:36 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/22 20:49:00 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -40,6 +40,7 @@ typedef struct		s_all
 	t_base			base;
 	int				file_size;
 	char			*file_name;
+	t_list			*t;
 }					t_all;
 
 char				*ft_first(int argc, char **argv);
@@ -49,5 +50,6 @@ int					ft_third(char **argv, int argc, t_all *a);
 int					ft_free_things(char *s1, char **s2);
 int					ft_free_base(t_base *base);
 char				*ft_extract_comment(char *line);
+int					ft_check(t_all *a);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/21 17:19:06 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/21 19:23:48 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/22 16:31:19 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,11 +25,10 @@ static void		ft_exit_third(char **file, char **tmp)
 
 char			*ft_name_file(int argc, char **argv)
 {
-	int		fd;
+	int		f;
 	char	*file;
 	char	*tmp;
 
-	file = NULL;
 	if (!ft_strcmp((_ARG + ft_strlen(_ARG) - 2), ".s"))
 	{
 		file = ft_memalloc(ft_strlen(_ARG) - 2);
@@ -38,15 +37,17 @@ char			*ft_name_file(int argc, char **argv)
 		if (!(file = ft_strjoin(file, ".cor")))
 			ft_exit_third(&file, &tmp);
 		free(tmp);
-		if ((fd = open(file, O_RDWR | O_CREAT, S_IRUSR + S_IWUSR) == -1))
+		if ((f = open(file, O_RDWR | O_CREAT | O_TRUNC,
+						S_IRUSR | S_IWUSR) == -1))
 			ft_exit_third(&file, &tmp);
 	}
 	else
 	{
-		if ((fd = open(".cor", O_RDWR | O_CREAT, S_IRUSR + S_IWUSR) == -1))
+		if ((f = open(".cor", O_RDWR | O_CREAT | O_TRUNC,
+						S_IRUSR | S_IWUSR) == -1))
 			ft_exit_third(&file, &tmp);
 	}
-	close(fd);
+	close(f);
 	return (file ? file : ft_strdup(".cor"));
 }
 
