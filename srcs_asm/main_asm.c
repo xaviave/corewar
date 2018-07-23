@@ -6,7 +6,7 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/25 12:04:14 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/03 16:54:35 by xamartin    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/22 17:18:35 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,8 +19,8 @@ int		main(int argc, char **argv)
 	t_all	a;
 
 	file = ft_first(argc, argv);
-	ft_parsing(&file, &a);
-	/* si le fichier est valide */
-	ft_third(/* parametres apres parsing */argv, argc, &a);
+	a = ft_parsing(&file);
+	ft_check(&a);
+	ft_third(argv, argc, &a);
 	return (0);
 }

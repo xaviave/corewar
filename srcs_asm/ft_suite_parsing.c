@@ -1,4 +1,39 @@
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   ft_suite_parsing.c                               .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2018/07/21 17:19:03 by lotoussa     #+#   ##    ##    #+#       */
+/*   Updated: 2018/07/22 19:16:17 by lotoussa    ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
+
 #include "../includes/asm.h"
+
+int			ft_is_valid_line_base(char *line)
+{
+	int		i;
+	int		c;
+
+	i = 0;
+	c = 0;
+	while (line[i] && c < 2)
+	{
+		if (line[i] == '\"')
+			c++;
+		i++;
+	}
+	if (line[i] != '\0')
+	{
+		ft_printf(ft_strstr(line, ".name") ?
+				"Error at [.name] line\n" : "Error at [.comment] line\n");
+		return (0);
+	}
+	return (1);
+}
 
 int			ft_check_base(char **ch)
 {
@@ -22,6 +57,8 @@ int			ft_check_base(char **ch)
 				g[0] = (ch[i][0] == '.' && g[0] == 0 && g[2] == 2 ? 1 : 13);
 			else
 				g[1] = (ch[i][0] == '.' && g[1] == 0 && g[2] == 2 ? 1 : 13);
+			if (!ft_is_valid_line_base(ch[i]))
+				return (0);
 		}
 	}
 	return (g[0] == 1 && g[1] == 1 ? 1 : 0);
@@ -41,60 +78,50 @@ int			ft_count_base(char **ch)
 			co++;
 		i++;
 	}
+	if (co != 2)
+		ft_printf("[.name] or [.comment] have a duplicate line\n");
 	return (co == 2 ? 1 : 0);
 }
 
 int			ft_create_base(char **sp, t_base *base, char **split)
 {
 	int		i;
-	int		j;
 
 	i = 0;
-	j = 0;
 	while (!ft_strstr(sp[i], ".name") || sp[i][0] != '.')
 		i++;
 	if (!(base->name = ft_extract_comment(sp[i])))
 		return (0);
 	if (ft_strlen(base->name) > 128)
-		return (0);
+		return (ft_printf("Champion name too long (Max length 128)\n"));
 	while (!ft_strstr(sp[i], ".comment") || sp[i][0] != '.')
 		i++;
 	if (!(base->comment = ft_extract_comment(sp[i])))
 		return (0);
 	if (ft_strlen(base->comment) > 2048)
-		return (0);
-	if (!(base->label = ft_extract_label(split)))
-		return (0);
+		return (ft_printf("Champion comment too long (Max length 2048)\n"));
 	return (1);
 }
 
-int			ft_start_base(char *file, char **split, t_base **base)
+int			ft_suite_parsing(char **file, char **split, t_all *a)
 {
+	t_base	base;
 	char	**ch;
-	int		i;
 
-	if (!(ch = ft_strsplit(file, '\n')))
+	base.name = NULL;
+	base.comment = NULL;
+	if (!(ch = ft_strsplit(*file, '\n')))
 		return (0);
-	i = 0;
 	if (!(ft_count_base(ch)))
 		return (ft_free_things(NULL, ch));
 	if (!(ft_check_base(ch)))
 		return (ft_free_things(NULL, ch));
-	if (!(ft_create_base(ch, *base, split)))
+	if ((ft_create_base(ch, &base, split) != 1))
 	{
-		ft_free_base(*base);
+		ft_free_base(&base);
 		return (ft_free_things(NULL, ch));
 	}
 	ft_free_things(NULL, ch);
+	a->base = base;
 	return (1);
-}
-
-t_base		*ft_suite_parsing(char **file, char **split)
-{
-	t_base		*base;
-
-	base = ft_memalloc(0);
-	if (!(ft_start_base(*file, split, &base)))
-		return (NULL);
-	return (base);
 }

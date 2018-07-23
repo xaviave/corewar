@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   ft_third.c                                       .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2018/07/21 17:19:06 by lotoussa     #+#   ##    ##    #+#       */
+/*   Updated: 2018/07/22 16:31:19 by lotoussa    ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
+
 #include "../includes/asm.h"
 #include <fcntl.h>
 
@@ -12,11 +25,10 @@ static void		ft_exit_third(char **file, char **tmp)
 
 char			*ft_name_file(int argc, char **argv)
 {
-	int		fd;
+	int		f;
 	char	*file;
 	char	*tmp;
 
-	file = NULL;
 	if (!ft_strcmp((_ARG + ft_strlen(_ARG) - 2), ".s"))
 	{
 		file = ft_memalloc(ft_strlen(_ARG) - 2);
@@ -25,13 +37,17 @@ char			*ft_name_file(int argc, char **argv)
 		if (!(file = ft_strjoin(file, ".cor")))
 			ft_exit_third(&file, &tmp);
 		free(tmp);
-		if ((fd = open(file, O_RDWR | O_CREAT, S_IRUSR + S_IWUSR) == -1))
+		if ((f = open(file, O_RDWR | O_CREAT | O_TRUNC,
+						S_IRUSR | S_IWUSR) == -1))
 			ft_exit_third(&file, &tmp);
 	}
 	else
-		if ((fd = open(".cor", O_RDWR | O_CREAT, S_IRUSR + S_IWUSR) == -1))
+	{
+		if ((f = open(".cor", O_RDWR | O_CREAT | O_TRUNC,
+						S_IRUSR | S_IWUSR) == -1))
 			ft_exit_third(&file, &tmp);
-	close(fd);
+	}
+	close(f);
 	return (file ? file : ft_strdup(".cor"));
 }
 
@@ -58,18 +74,17 @@ int				ft_header(char **file, t_all a)
 	}
 	lseek(fd, 0, SEEK_SET);
 	ft_print_zero(fd, 1);
-	fd_printf("%c%c%c%s", fd, 0b11101010, 0b10000011, 0b11110011, a.base->name);
-	ft_print_zero(fd, 128 - ft_strlen(a.base->name));
+	fd_printf("%c%c%c%s", fd, 0b11101010, 0b10000011, 0b11110011, a.base.name);
+	ft_print_zero(fd, 128 - ft_strlen(a.base.name));
 	/* file size */ ft_print_zero(fd, 8);
-	fd_printf("%s", fd, a.base->comment);
-	ft_print_zero(fd, 2048 - ft_strlen(a.base->comment));
+	fd_printf("%s", fd, a.base.comment);
+	ft_print_zero(fd, 2048 - ft_strlen(a.base.comment));
 	close(fd);
 	return (0);
 }
 
 int				ft_third(char **argv, int argc, t_all *a)
 {
-
 	a->file_name = ft_name_file(argc, argv);
 	ft_header(&a->file_name, *a);
 	ft_printf("Writing output program to %s\n", a->file_name);
