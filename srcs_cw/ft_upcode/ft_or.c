@@ -6,14 +6,14 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/16 19:07:57 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/17 21:01:07 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/19 18:27:55 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/corewar.h"
 
-int		ft_or(t_champ *tmp, t_champ *list, t_mem *mem, t_arg *args)
+int		ft_or(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 {
 	unsigned int		i;
 	unsigned int		value[2];
@@ -25,10 +25,7 @@ int		ft_or(t_champ *tmp, t_champ *list, t_mem *mem, t_arg *args)
 	{
 		reg = mem->memory[(tmp->pc + i) % MEM_SIZE];
 		if (!reg || reg > 16)
-		{
-			tmp->pc = mod_pc(tmp, list, mem, 7);
-			return (0);
-		}
+			return (ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 0));
 		value[0] = give_reg(tmp, mem->memory[(tmp->pc + i) % MEM_SIZE]);
 		i++;
 	}
@@ -43,18 +40,12 @@ int		ft_or(t_champ *tmp, t_champ *list, t_mem *mem, t_arg *args)
 		i += 2;
 	}
 	else
-	{
-		tmp->pc = mod_pc(tmp, list, mem, 7);
-		return (0);
-	}
+		return (ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 0));
 	if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b110000) >> 4 == 1)
 	{
 		reg = mem->memory[(tmp->pc + i) % MEM_SIZE];
 		if (!reg || reg > 16)
-		{
-			tmp->pc = mod_pc(tmp, list, mem, 7);
-			return (0);
-		}
+			return (ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 0));
 		value[1] = give_reg(tmp, reg);
 		i++;
 	}
@@ -69,16 +60,13 @@ int		ft_or(t_champ *tmp, t_champ *list, t_mem *mem, t_arg *args)
 		i += 2;
 	}
 	else
-	{
-		tmp->pc = mod_pc(tmp, list, mem, 7);
-		return (0);
-	}
+		return (ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 0));
 	reg = mem->memory[(tmp->pc + i) % MEM_SIZE];
 	if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b1100) >> 2 == 1 && reg &&
 			reg < 17 && !(mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b11))
 	{
 		write_reg(tmp, reg, value[0] | value[1]);
-		tmp->pc = mod_pc(tmp, list, mem, i + 1);
+		tmp->pc = mod_pc(tmp, *list, mem, i + 1);
 		return ((value[0] | value[1]) == 0 ? 1 : 0);
 	}
 	else
