@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/22 17:18:49 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/22 20:49:01 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/22 21:09:05 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -59,9 +59,22 @@ t_list		*ft_organise_list(char **tkn)
 		}
 		if (!ft_strcmp(tkn[i], " ") || !ft_strcmp(tkn[i], "\t"))
 			i++;
-		ft_add_elem(&list, tkn[i++]);
+		if (!(ft_add_elem(&list, tkn[i++])))
+			return (NULL);
 	}
 	return (list);
+}
+
+int			ft_detail_ligne(t_list *list)
+{
+	int		type;
+
+
+	while (list)
+	{
+
+	}
+	return (1);
 }
 
 int			ft_first_verif(t_all *a, char **tkn)
@@ -75,6 +88,8 @@ int			ft_first_verif(t_all *a, char **tkn)
 		ft_strdel(&a->base.tkn[i]);
 	free(a->base.tkn);
 	a->base.tkn = NULL;
+	if (!(ft_detail_ligne(a->t)))
+		return (0);
 	return (1);
 }
 
