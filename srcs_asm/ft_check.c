@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/22 17:18:49 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/23 15:53:07 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/23 20:31:46 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -33,6 +33,8 @@ int			ft_add_elem(t_list **list, char *tkn, int l)
 	if (!(cpl.tkn = ft_strdup(tkn)))
 		return (0);
 	cpl.line = l;
+	cpl.type = 0;
+	cpl.par_type = 0;
 	if (!(new = ft_lstnew(&cpl, sizeof(cpl))))
 		return (0);
 	ft_lstpush(list, new);
@@ -48,9 +50,11 @@ t_list		*ft_organise_list(char **tkn)
 	i = 0;
 	l = 1;
 	list = NULL;
-	while (tkn[i] && (!ft_strcmp(tkn[i], "#") || !ft_strcmp(tkn[i], ".")))
+	while (tkn[i] && (!ft_strcmp(tkn[i], "#") || !ft_strcmp(tkn[i], ".")
+				|| !ft_strcmp(tkn[i], "\n")))
 	{
-		l += ((!ft_strcmp(tkn[i], "\n")) ? 1 : 0);
+		l += ((!ft_strcmp(tkn[i], "\n") && i > 0
+					&& ft_strcmp(tkn[i - 1], "\n")) ? 1 : 0);
 		i = ft_increment_tkn(tkn, i, &l);
 	}
 	while (tkn[i])
@@ -66,11 +70,11 @@ t_list		*ft_organise_list(char **tkn)
 
 int			ft_detail_ligne(t_list *list)
 {
-	int		type;
-
+	if (!(ft_check_detail(&list)))
+		return (0);
 	while (list)
 	{
-		ft_printf("%d -> %s\n", ((t_compl*)list->content)->line, ((t_compl*)list->content)->tkn);
+//		ft_printf("%d -> %d [%d] |%s\n", ((t_compl*)list->content)->line, ((t_compl*)list->content)->type, ((t_compl*)list->content)->par_type, ((t_compl*)list->content)->tkn);
 		list = list->next;
 	}
 	return (1);
