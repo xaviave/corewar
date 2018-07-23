@@ -6,19 +6,19 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/12 18:24:29 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/17 13:29:20 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/17 23:09:49 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/corewar.h"
 
-unsigned char		recup_octet(t_mem *mem, t_champ *champ, unsigned int n)
+unsigned char		recup_octet(t_mem *mem, t_champ *champ, int n)
 {
-	return (mem->memory[(champ->pc + n) % MEM_SIZE]);
+	return (mem->memory[(champ->pc + n + MEM_SIZE) % MEM_SIZE]);
 }
 
-unsigned int		recup_direct2(t_mem *mem, t_champ *champ, unsigned int start)
+unsigned int		recup_direct2(t_mem *mem, t_champ *champ, int start)
 {
 	unsigned int	ret;
 
@@ -28,7 +28,7 @@ unsigned int		recup_direct2(t_mem *mem, t_champ *champ, unsigned int start)
 	return (ret);
 }
 
-unsigned int		recup_direct4(t_mem *mem, t_champ *champ, unsigned int start)
+unsigned int		recup_direct4(t_mem *mem, t_champ *champ, int start)
 {
 	unsigned int	ret;
 
@@ -40,7 +40,7 @@ unsigned int		recup_direct4(t_mem *mem, t_champ *champ, unsigned int start)
 	return (ret);
 }
 
-unsigned int		recup_indirect2(t_mem *mem, t_champ *champ, unsigned int start)
+unsigned int		recup_indirect2(t_mem *mem, t_champ *champ, int start)
 {
 	unsigned int	add;
 
@@ -48,7 +48,7 @@ unsigned int		recup_indirect2(t_mem *mem, t_champ *champ, unsigned int start)
 	return (recup_direct2(mem, champ, add));
 }
 
-unsigned int		recup_indirect4(t_mem *mem, t_champ *champ, unsigned int start)
+unsigned int		recup_indirect4(t_mem *mem, t_champ *champ, int start)
 {
 	int		add;
 
@@ -56,7 +56,7 @@ unsigned int		recup_indirect4(t_mem *mem, t_champ *champ, unsigned int start)
 	return (recup_direct4(mem, champ, add));
 }
 
-unsigned int		recup_indirect2x(t_mem *mem, t_champ *champ, unsigned int start)
+unsigned int		recup_indirect2x(t_mem *mem, t_champ *champ, int start)
 {
 	unsigned int	add;
 
@@ -68,7 +68,7 @@ unsigned int		recup_indirect2x(t_mem *mem, t_champ *champ, unsigned int start)
 	return (recup_direct2(mem, champ, add));
 }
 
-unsigned int		recup_indirect4x(t_mem *mem, t_champ *champ, unsigned int start)
+unsigned int		recup_indirect4x(t_mem *mem, t_champ *champ, int start)
 {
 	unsigned int	add;
 

@@ -6,14 +6,14 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/09 16:14:43 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/17 20:12:26 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/19 22:35:36 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
 
-static int			(*instru[16])(t_champ *tmp, t_champ *list, t_mem *mem, t_arg *args) = {
+static int			(*instru[16])(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args) = {
 	&ft_live, &ft_ld, &ft_st, &ft_add, &ft_sub, &ft_and, &ft_or, &ft_xor,
 	&ft_zjmp, &ft_ldi, &ft_sti, &ft_fork, &ft_lld, &ft_lldi, &ft_lfork,
 	&ft_aff};
@@ -34,12 +34,12 @@ void	save_instru(t_mem *mem, t_champ *tmp, t_champ *list)
 	tmp->cycle += times[tmp->next_instru - 1] - 1;
 }
 
-void	check_cycle(t_champ *list, t_mem *mem, int c, t_arg *args)
+void	check_cycle(t_champ **list, t_mem *mem, int c, t_arg *args)
 {
 	t_champ		*tmp;
 	int			carry;
 
-	tmp = list;
+	tmp = *list;
 	while (tmp)
 	{
 		if (tmp->cycle == c && tmp->next_instru != -1)
@@ -51,7 +51,7 @@ void	check_cycle(t_champ *list, t_mem *mem, int c, t_arg *args)
 				tmp->carry = carry;
 		}
 		else if (tmp->cycle == c && tmp->next_instru == -1)
-			save_instru(mem, tmp, list);
+			save_instru(mem, tmp, *list);
 		tmp = tmp->next;
 	}
 }
@@ -110,44 +110,43 @@ int		check_live(t_champ **list)
 
 int		lets_go(t_champ **list, t_mem *mem, t_arg *args)
 {
-	int		c;
-	int		c_todie;
 	int		tmp;
 	int		less;
 	int		very_less;
 
-	c = 0;
+	mem->c = 0;
 	very_less = 0;
-	c_todie = CYCLE_TO_DIE;
-	tmp = c_todie;
-	print_mem(mem, *list);
+	mem->c_todie = CYCLE_TO_DIE;
+	tmp = mem->c_todie;
+	init_window(mem, *list);
 	while (1)
 	{
-		if (c_todie ==  0)
+		if (mem->c_todie ==  0)
 		{
 			if (!(less = check_live(list)))
 				break;
 			if (mem->call_live >= NBR_LIVE || very_less == MAX_CHECKS - 1)
 			{
-				c_todie = tmp - CYCLE_DELTA;
-				tmp = c_todie;
+				mem->c_todie = tmp - CYCLE_DELTA;
+				tmp = mem->c_todie;
 				very_less = 0;
 			}
 			else
 			{
 				very_less++;
-				c_todie = tmp;
+				mem->c_todie = tmp;
 			}
 			mem->call_live = 0;
-			if (c_todie < 0)
+			if (mem->c_todie < 0)
 				break;
 		}
-		check_cycle(*list, mem, c, args);
-		c_todie--;
-		ft_printf("cycle : % 10d --- c_todie : % 10d --- processus : % 10d\n", c, c_todie, list_len(*list));
-		c++;
+		check_cycle(list, mem, mem->c, args);
+		mem->c_todie--;
+		mem->c++;
+		print_mem(mem, *list);
 	}
 	print_mem(mem, *list);
-		ft_printf("END =cycle : % 10d --- c_todie : % 10d --- processus : % 10d\n", c, c_todie, list_len(*list));
+	getch();
+	endwin();
 	return (0);
 }
