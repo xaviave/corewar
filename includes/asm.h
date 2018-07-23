@@ -3,18 +3,10 @@
 /*                                                              /             */
 /*   asm.h                                            .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+     */
+/*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/06/20 17:53:02 by xmoreau      #+#   ##    ##    #+#       */
-<<<<<<< HEAD
-/*   Updated: 2018/07/22 21:09:25 by lotoussa    ###    #+. /#+    ###.fr     */
-=======
-<<<<<<< HEAD
-/*   Updated: 2018/07/20 15:45:35 by tduverge    ###    #+. /#+    ###.fr     */
-=======
-/*   Updated: 2018/07/22 20:49:00 by lotoussa    ###    #+. /#+    ###.fr     */
->>>>>>> f2bee9febe0f3d3618c45295a311fa9b8bf7ca00
->>>>>>> 8e5019c0dc54b6ebe9f8526bbd325b8641f3c036
+/*   Created: 2018/07/23 14:22:31 by lotoussa     #+#   ##    ##    #+#       */
+/*   Updated: 2018/07/23 15:15:42 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -51,6 +43,12 @@ typedef struct		s_all
 	t_list			*t;
 }					t_all;
 
+typedef struct		s_compl
+{
+	char			*tkn;
+	int				line;
+}					t_compl;
+
 char				*ft_first(int argc, char **argv);
 t_all				ft_parsing(char **file);
 int					ft_suite_parsing(char **file, char **split, t_all *a);
@@ -59,5 +57,6 @@ int					ft_free_things(char *s1, char **s2);
 int					ft_free_base(t_base *base);
 char				*ft_extract_comment(char *line);
 int					ft_check(t_all *a);
+int					ft_increment_tkn(char **tkn, int i, int *l);
 
 #endif

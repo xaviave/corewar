@@ -1,3 +1,4 @@
+#live %0
 .name "zork"
 ##.comment "ok"
 .comment "I'M ALIIIIVE"

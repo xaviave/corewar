@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/21 17:19:03 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/22 19:16:17 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/23 14:57:57 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -68,11 +68,15 @@ int			ft_count_base(char **ch)
 {
 	int		co;
 	int		i;
+	int		l;
 
 	co = 0;
 	i = 0;
+	l = -1;
 	while (ch[i])
 	{
+		if (co < 2 && ch[i][0] != '#' && ch[i][0] != '.')
+			l = i;
 		if (ch[i][0] == '.' && (ch[i][1] == 'n' || ch[i][1] == 'c') &&
 				(ft_strstr(ch[i], ".name") || ft_strstr(ch[i], ".comment")))
 			co++;
@@ -80,7 +84,9 @@ int			ft_count_base(char **ch)
 	}
 	if (co != 2)
 		ft_printf("[.name] or [.comment] have a duplicate line\n");
-	return (co == 2 ? 1 : 0);
+	else if (l != -1)
+		ft_printf("Error at line %d\n", l + 1);
+	return (co == 2 && l == -1 ? 1 : 0);
 }
 
 int			ft_create_base(char **sp, t_base *base, char **split)
