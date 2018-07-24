@@ -130,5 +130,6 @@ int			ft_suite_parsing(char **file, char **split, t_all *a)
 	}
 	ft_free_things(NULL, ch);
 	a->base = base;
+	a->file_name = NULL;
 	return (1);
 }

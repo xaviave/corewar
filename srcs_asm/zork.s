@@ -6,7 +6,8 @@ live %0
 #ok
 
 l2:		sti r1, %:live, %1
-		ld 478372, r3
+		ld 478372, r1
+		live %0
 		and r1, %0, r1
 #		and r1, %0, r1
 

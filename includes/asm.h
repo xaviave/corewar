@@ -73,5 +73,6 @@ int					ft_check_label_char(char *tkn, t_list *tmp);
 int					ft_check_par_alone(char *tkn, t_list *tmp, t_list **list);
 int					ft_while_digit(char *s);
 char				*ft_name_file(int argc, char **argv);
+int					ft_check_nb_ins_line(t_list *tmp, t_list **list);
 
 #endif

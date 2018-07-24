@@ -56,6 +56,21 @@ int			ft_is_par(t_list *tmp)
 	return (1);
 }
 
+int			ft_check_ins_alone(t_list **list)
+{
+	t_list		*tmp;
+
+	tmp = *list;
+	while (tmp)
+	{
+		if (((t_compl*)tmp->content)->type == _INS)
+			if (!(ft_check_nb_ins_line(tmp, list)))
+				return (0);
+		tmp = tmp->next;
+	}
+	return (1);
+}
+
 int			ft_every_detail(t_list **list)
 {
 	t_list		*tmp;
@@ -77,6 +92,8 @@ int			ft_every_detail(t_list **list)
 				((t_compl*)tmp->content)->tkn, ((t_compl*)tmp->content)->line));
 		tmp = tmp->next;
 	}
+	if (!ft_check_ins_alone(list))
+		return (0);
 	return (768368);
 }
 
