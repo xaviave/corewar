@@ -6,7 +6,7 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/16 19:39:03 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/19 21:44:58 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/23 15:19:33 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,7 +16,7 @@
 int		ft_sti(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 {
 	unsigned int		i;
-	unsigned int		value[3];
+	int					value[3];
 	int					add;
 	unsigned int		reg;
 
@@ -47,7 +47,7 @@ int		ft_sti(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	}
 	else if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b110000) >> 4 == 3)
 	{
-		value[1] = recup_indirect2(mem, tmp, i);
+		value[1] = recup_indirect2x(mem, tmp, i);
 		i += 2;
 	}
 	else
@@ -62,7 +62,7 @@ int		ft_sti(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	}
 	else if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b1100) >> 2 == 2)
 	{
-		value[2] = recup_direct2(mem, tmp, i);;
+		value[2] = recup_direct2(mem, tmp, i);
 		i += 2;
 	}
 	else
@@ -75,15 +75,16 @@ int		ft_sti(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 		value[2] = value[2] % IDX_MOD - 512;
 	else
 		value[2] = value[2] % IDX_MOD;
-	add = (value[1] + value[2] + tmp->pc + MEM_SIZE) % MEM_SIZE;
+	add = (value[1] + value[2]) % IDX_MOD;
+	add = (add + tmp->pc + MEM_SIZE) % MEM_SIZE;
 	mem->memory[add] = (unsigned int)(value[0] & 0xFF000000) >> 24;
 	mem->memory[(add + 1) % MEM_SIZE] = (unsigned int)(value[0] & 0xFF0000) >> 16;
 	mem->memory[(add + 2) % MEM_SIZE] = (unsigned int)(value[0] & 0xFF00) >> 8;
 	mem->memory[(add + 3) % MEM_SIZE] = (unsigned int)(value[0] & 0xFF);
-	mem->map[add] = tmp->number;
-	mem->map[(add + 1) % MEM_SIZE] = tmp->number;
-	mem->map[(add + 2) % MEM_SIZE] = tmp->number;
-	mem->map[(add + 3) % MEM_SIZE] = tmp->number;
+	mem->map[add] = mem->map[tmp->pc];
+	mem->map[(add + 1) % MEM_SIZE] = mem->map[tmp->pc];
+	mem->map[(add + 2) % MEM_SIZE] = mem->map[tmp->pc];
+	mem->map[(add + 3) % MEM_SIZE] = mem->map[tmp->pc];
 	tmp->pc = mod_pc(tmp, *list, mem, i);
 	return (-1);
 }

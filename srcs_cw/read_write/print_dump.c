@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_zjmp.c                                        .::    .:/ .      .::   */
+/*   print_dump.c                                     .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/07/16 19:14:48 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/23 15:26:26 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/07/23 17:08:31 by tduverge     #+#   ##    ##    #+#       */
+/*   Updated: 2018/07/23 17:52:54 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/corewar.h"
 
-int		ft_zjmp(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
+void	print_dump(t_mem *mem, t_champ *list)
 {
-	int		value;
+	int	i;
+	int	enter;
 
-	args = (t_arg *)args;
-	value = recup_direct2(mem, tmp, 1);
-	if (value & 0x8000)
-		value = value % IDX_MOD - 512;
-	else
-		value = value % IDX_MOD;
-	if (tmp->carry == 0 || value == 0)
+	i = 0;
+	enter = 1;
+	while (i < MEM_SIZE)
 	{
-		tmp->pc = mod_pc(tmp, *list, mem, 3);
-		return (-1);
+		ft_printf("0x%04x : ", i);
+		while (enter || i % 64)
+		{
+			ft_printf("%02x ", mem->memory[i]);
+			enter = 0;
+			i++;
+		}
+		ft_printf("\n");
+		enter = 1;
 	}
-	tmp->pc = mod_pc(tmp, *list, mem, value);
-	return (-1);
 }

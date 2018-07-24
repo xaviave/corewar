@@ -6,7 +6,7 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/16 21:51:14 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/19 19:59:22 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/23 15:00:06 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -62,7 +62,7 @@ int		ft_ldi(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	if (value[1] & 0x8000)
 		value[1] = value[1] | 0xffff0000;
 	if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b1100) >> 2 == 1 && reg &&
-			reg < 17 && !(mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b11) )
+			reg < 17 && !(mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b11))
 	{
 		value[2] = recup_direct4(mem, tmp, (value[0] + value[1]) % IDX_MOD);
 		write_reg(tmp, mem->memory[(tmp->pc + i) % MEM_SIZE], value[2]);

@@ -6,7 +6,7 @@
 #    By: xamartin <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/06/19 13:41:44 by xamartin     #+#   ##    ##    #+#        #
-#    Updated: 2018/07/18 13:31:15 by tduverge    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/07/23 17:19:25 by tduverge    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -50,6 +50,7 @@ CW_FILES = main_cw.c\
 		   read_write/access_pc.c\
 		   read_write/recup_args.c\
 		   read_write/print_mem.c\
+		   read_write/print_dump.c\
 		   read_write/init_window.c\
 		   ft_upcode/ft_live.c\
 		   ft_upcode/ft_ld.c\
