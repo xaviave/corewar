@@ -6,7 +6,7 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/16 21:47:21 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/19 18:33:41 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/23 19:15:52 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -32,5 +32,11 @@ int		ft_lfork(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	fork->cycle++;
 	*list = fork;
 	tmp->pc = mod_pc(tmp, *list, mem, 3);
+
+
+	fork->id = mem->id;
+	mem->id++;
+
+
 	return (-1);
 }

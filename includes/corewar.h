@@ -6,7 +6,7 @@
 /*   By: xamartin <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/19 13:50:45 by xamartin     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/23 11:09:50 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/23 19:16:27 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -33,6 +33,7 @@ typedef struct		s_graph
 
 typedef struct		s_champ
 {
+	int				id;
 	char			name[PROG_NAME_LENGTH + 1];
 	char			comment[COMMENT_LENGTH + 1];
 	char			prog[CHAMP_MAX_SIZE];
@@ -57,6 +58,7 @@ typedef struct		s_arg
 
 typedef struct		s_mem
 {
+	int				id;
 	unsigned char	*memory;
 	unsigned char	*map;
 	int				dump;
@@ -91,6 +93,7 @@ int					check_cor(int ac, char **av);
  */
 
 void				print_mem(t_mem *mem, t_champ *list);
+void				print_dump(t_mem *mem, t_champ *list);
 void				write_reg(t_champ *champ, int nb_of_reg, int nb_to_write);
 int					give_reg(t_champ *champ, int number);
 unsigned int		recup_indirect4x(t_mem *mem, t_champ *champ, int start);
@@ -110,6 +113,8 @@ int					lets_go(t_champ **l, t_mem *m, t_arg *a);
 int					lets_dump(t_champ **l, t_mem *m, t_arg *a);
 int					list_len(t_champ *list);
 int					ft_error(char code, t_champ *tmp, int ret);
+void				check_cycle(t_champ **list, t_mem *mem, int c, t_arg *args);
+int					check_live(t_champ **list);
 
 /*
  * FONCTIONS UPCODE

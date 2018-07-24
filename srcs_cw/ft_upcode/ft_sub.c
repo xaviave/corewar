@@ -6,7 +6,7 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/16 18:22:54 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/19 18:28:37 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/23 15:21:27 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,7 +30,7 @@ int		ft_sub(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 		value2 = give_reg(tmp, reg[1]);
 		write_reg(tmp, reg[2], value1 - value2);
 		tmp->pc = mod_pc(tmp, *list, mem, 5);
-		return (value1 + value2 == 0 ? 1 : 0);
+		return (value1 - value2 == 0 ? 1 : 0);
 	}
 		return (ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 0));
 }

@@ -6,7 +6,7 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/20 17:30:33 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/17 13:38:25 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/23 18:07:34 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,16 +15,20 @@
 
 void		add_champ(t_champ **start, t_champ *to_add)
 {
+	t_champ	*tmp;
+
 	if (*start == NULL)
 	{
 		*start = to_add;
 		return ;
 	}
-	to_add->next = *start;
-	*start = to_add;
+	tmp = *start;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = to_add;
 }
 
-t_champ		*create_champ(char *file, int prog_size, t_champ **list)
+t_champ		*create_champ(char *file, int prog_size, t_champ **list, int number)
 {
 	t_champ		*champ;
 
@@ -37,8 +41,10 @@ t_champ		*create_champ(char *file, int prog_size, t_champ **list)
 	champ->carry = 1;
 	champ->live = 0;
 	champ->cycle = 0;
+	champ->number = number;
 	champ->next_instru = -1;
 	champ->next = NULL;
+	write_reg(champ, 1, -champ->number);
 	add_champ(list, champ);
 	return (*list);
 }
@@ -142,17 +148,16 @@ void		init_champ(t_champ **list, t_arg *args)
 		file = recup_file(args->champ_path[i], 0);
 		if (!file || !check_magic(file) || !(prog_size = check_prog_size(file)))
 			return (error(file, list));
-		*list = create_champ(file, prog_size, list);
-		(*list)->number = i + 1;
+		*list = create_champ(file, prog_size, list, i + 1);
 		ft_memcpy(args->name[i],(*list)->name, PROG_NAME_LENGTH + 1);
-		write_reg(*list, 1, -((*list)->number));
 		ft_strdel(&file);
 	}
 	t_champ *test;
 	test = *list;
+	ft_printf("Introducing contestants...\n");
 	while (test)
 	{
-		ft_printf("name = %s | comment = %s | number = %d\n", test->name, test->comment, test->number);
+		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n", test->number, test->prog_size, test->name, test->comment);
 		test = test->next;
 	}
 }
