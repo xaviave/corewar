@@ -73,6 +73,7 @@ int			ft_count_base(char **ch)
 	co = 0;
 	i = 0;
 	l = -1;
+	i = 0;
 	while (ch[i])
 	{
 		if (co < 2 && ch[i][0] != '#' && ch[i][0] != '.')

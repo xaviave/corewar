@@ -96,6 +96,7 @@ t_all		ft_parsing(char **file)
 	char	**split;
 	t_all	a;
 
+	split = NULL;
 	if (!(buf = ft_lexer(*file)))
 	{
 		free(*file);

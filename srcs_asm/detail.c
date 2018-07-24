@@ -45,9 +45,13 @@ int			ft_is_par(t_list *tmp)
 		((t_compl*)tmp->content)->par_type = _REG;
 		return (1);
 	}
-	while (s[i])
-		if (!ft_isdigit(s[i++]))
-			return (0);
+	if (s[0] == ':')
+	{
+		((t_compl*)tmp->content)->par_type = _IND;
+		return (1);
+	}
+	if (!(ft_while_digit(s)))
+		return (0);
 	((t_compl*)tmp->content)->par_type = _IND;
 	return (1);
 }
@@ -65,19 +69,15 @@ int			ft_every_detail(t_list **list)
 		tmp = tmp->next;
 	}
 	tmp = *list;
-	/* modifie le file name ? */
 	while (tmp)
 	{
 		if (((t_compl*)tmp->content)->type == _PAR)
 			if (!ft_check_par_alone(((t_compl*)tmp->content)->tkn, tmp, list))
-			{
-				ft_printf("Error at PARAMETER [%s] line %d\n", ((t_compl*)tmp->\
-							content)->tkn, ((t_compl*)tmp->content)->line);
-				return (0);
-			}
+				return (ft_printf("Error at PARAMETER \"%s\" line %d\n",
+				((t_compl*)tmp->content)->tkn, ((t_compl*)tmp->content)->line));
 		tmp = tmp->next;
 	}
-	return (1);
+	return (768368);
 }
 
 int			ft_check_detail(t_list **list)
@@ -98,7 +98,7 @@ int			ft_check_detail(t_list **list)
 			((t_compl*)tmp->content)->type = _SEP;
 		tmp = tmp->next;
 	}
-	if (!ft_every_detail(list))
+	if (ft_every_detail(list) != 768368)
 		return (0);
 	return (1);
 }
