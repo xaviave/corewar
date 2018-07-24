@@ -39,6 +39,32 @@ int			ft_dir_label(char *tkn, t_list **list)
 	return (c ? 1 : 0);
 }
 
+int			ft_ind_label(char *tkn, t_list **list)
+{
+	t_list		*tmp;
+	char		*dup;
+	char		*fre;
+	int			c;
+
+	tmp = *list;
+	dup = ft_strdup(tkn + 1);
+	fre = dup;
+	dup = ft_strjoin(dup, ":");
+	free(fre);
+	c = 0;
+	while (tmp && c == 0)
+	{
+		if (((t_compl*)tmp->content)->type == _LAB)
+		{
+			if (!ft_strcmp(dup, ((t_compl*)tmp->content)->tkn))
+				c = 1;
+		}
+		tmp = tmp->next;
+	}
+	free(dup);
+	return (c ? 1 : 0);
+}
+
 int			ft_check_par_alone(char *t, t_list *tmp, t_list **list)
 {
 	if (((t_compl*)tmp->content)->par_type == _DIR)
@@ -46,9 +72,9 @@ int			ft_check_par_alone(char *t, t_list *tmp, t_list **list)
 				|| (t[1] != ':' && !ft_while_digit(t + 1)))
 			return (0);
 	if (((t_compl*)tmp->content)->par_type == _IND)
-	{
-		/* faire les indirect */
-	}
+		if (t[0] == ':')
+			if (!(ft_ind_label(t, list)))
+				return (0);
 	if (((t_compl*)tmp->content)->par_type == _REG)
 		if (!(ft_while_digit(t + 1)) || ft_strlen(t) > 3)
 			return (0);
@@ -64,8 +90,8 @@ int			ft_check_label_char(char *tkn, t_list *tmp)
 
 	i = 0;
 	c = 0;
-	check = ft_strdup(LABEL_CHARS);
-	while (tkn[i] && tkn[i] != ':')
+	check = ft_strdup(":abcdefghijklmnopqrstuvwxyz_0123456789");
+	while (tkn[i])
 	{
 		c = 0;
 		j = 0;
@@ -75,9 +101,9 @@ int			ft_check_label_char(char *tkn, t_list *tmp)
 			break ;
 		i++;
 	}
-	free(check);
-	if (c == 0)
+	ft_strdel(&check);
+	if (c == 0 || i < ft_strlen(tkn))
 		ft_printf("Error at LABEL \"%s\" line %d\n",
 				tkn, ((t_compl*)tmp->content)->line);
-	return (c == 1 ? 1 : 0);
+	return (c == 1 && i == ft_strlen(tkn) ? 1 : 0);
 }

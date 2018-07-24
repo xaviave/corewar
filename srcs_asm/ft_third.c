@@ -25,30 +25,31 @@ static void		ft_exit_third(char **file, char **tmp)
 
 char			*ft_name_file(int argc, char **argv)
 {
-	int		f;
-	char	*file;
-	char	*tmp;
+	int			f;
+	t_contain	c;
 
+	c.tkn = NULL;
 	if (!ft_strcmp((_ARG + ft_strlen(_ARG) - 2), ".s"))
 	{
-		file = ft_memalloc(ft_strlen(_ARG) - 2);
-		file = ft_strncpy(file, _ARG, ft_strlen(_ARG) - 2);
-		tmp = file;
-		if (!(file = ft_strjoin(file, ".cor")))
-			ft_exit_third(&file, &tmp);
-		free(tmp);
-		if ((f = open(file, O_RDWR | O_CREAT | O_TRUNC,
+		c.buf = ft_strdup(_ARG);
+		c.tkn = ft_strndup(c.buf, ft_strlen(c.buf) - 2);
+		ft_strdel(&c.buf);
+		c.fre = c.tkn;
+		if (!(c.tkn = ft_strjoin(c.tkn, ".cor")))
+			ft_exit_third(&c.tkn, &c.fre);
+		ft_strdel(&c.fre);
+		if ((f = open(c.tkn, O_RDWR | O_CREAT | O_TRUNC,
 						S_IRUSR | S_IWUSR) == -1))
-			ft_exit_third(&file, &tmp);
+			ft_exit_third(&c.tkn, &c.fre);
 	}
 	else
 	{
 		if ((f = open(".cor", O_RDWR | O_CREAT | O_TRUNC,
 						S_IRUSR | S_IWUSR) == -1))
-			ft_exit_third(&file, &tmp);
+			ft_exit_third(&c.tkn, &c.fre);
 	}
 	close(f);
-	return (file ? file : ft_strdup(".cor"));
+	return (c.tkn ? c.tkn : ft_strdup(".cor"));
 }
 
 void			ft_print_zero(int fd, int i)
