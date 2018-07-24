@@ -6,16 +6,17 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/22 17:18:49 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/22 20:49:01 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/23 20:31:46 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
-int			ft_add_elem(t_list **list, char *tkn)
+int			ft_add_elem(t_list **list, char *tkn, int l)
 {
 	t_list		*new;
+	t_compl		cpl;
 	int			i;
 	int			c;
 
@@ -25,12 +26,16 @@ int			ft_add_elem(t_list **list, char *tkn)
 	if (tkn[i] == '\t')
 	{
 		while (tkn[i])
-			if (tkn[i++] != '\t')
-				c = 1;
+			c = (tkn[i++] != '\t') ? 1 : c;
 		if (c == 0)
 			return (1);
 	}
-	if (!(new = ft_lstnew(tkn, sizeof(tkn))))
+	if (!(cpl.tkn = ft_strdup(tkn)))
+		return (0);
+	cpl.line = l;
+	cpl.type = 0;
+	cpl.par_type = 0;
+	if (!(new = ft_lstnew(&cpl, sizeof(cpl))))
 		return (0);
 	ft_lstpush(list, new);
 	return (1);
@@ -40,28 +45,39 @@ t_list		*ft_organise_list(char **tkn)
 {
 	t_list		*list;
 	int			i;
+	int			l;
 
 	i = 0;
+	l = 1;
 	list = NULL;
-	while (tkn[i] && (!ft_strcmp(tkn[i], "#") || !ft_strcmp(tkn[i], ".")))
+	while (tkn[i] && (!ft_strcmp(tkn[i], "#") || !ft_strcmp(tkn[i], ".")
+				|| !ft_strcmp(tkn[i], "\n")))
 	{
-		while (tkn[i] && ft_strcmp(tkn[i], "\n"))
-			i++;
-		i++;
+		l += ((!ft_strcmp(tkn[i], "\n") && i > 0
+					&& ft_strcmp(tkn[i - 1], "\n")) ? 1 : 0);
+		i = ft_increment_tkn(tkn, i, &l);
 	}
 	while (tkn[i])
 	{
-		if (!ft_strcmp(tkn[i], "#"))
-		{
-			while (tkn[i] && ft_strcmp(tkn[i], "\n"))
-				i++;
-			i++;
-		}
-		if (!ft_strcmp(tkn[i], " ") || !ft_strcmp(tkn[i], "\t"))
-			i++;
-		ft_add_elem(&list, tkn[i++]);
+		i = (!ft_strcmp(tkn[i], "#")) ? ft_increment_tkn(tkn, i, &l) : i;
+		i += ((!ft_strcmp(tkn[i], " ") || !ft_strcmp(tkn[i], "\t")) ? 1 : 0);
+		l += ((!ft_strcmp(tkn[i], "\n")) ? 1 : 0);
+		if (!(ft_add_elem(&list, tkn[i++], l)))
+			return (NULL);
 	}
 	return (list);
+}
+
+int			ft_detail_ligne(t_list *list)
+{
+	if (!(ft_check_detail(&list)))
+		return (0);
+	while (list)
+	{
+//		ft_printf("%d -> %d [%d] |%s\n", ((t_compl*)list->content)->line, ((t_compl*)list->content)->type, ((t_compl*)list->content)->par_type, ((t_compl*)list->content)->tkn);
+		list = list->next;
+	}
+	return (1);
 }
 
 int			ft_first_verif(t_all *a, char **tkn)
@@ -75,6 +91,8 @@ int			ft_first_verif(t_all *a, char **tkn)
 		ft_strdel(&a->base.tkn[i]);
 	free(a->base.tkn);
 	a->base.tkn = NULL;
+	if (!(ft_detail_ligne(a->t)))
+		return (0);
 	return (1);
 }
 
