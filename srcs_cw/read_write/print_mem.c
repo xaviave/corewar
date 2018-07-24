@@ -6,7 +6,7 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/13 16:24:08 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/23 18:09:30 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/24 21:12:35 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -68,8 +68,10 @@ void	print_mem(t_mem *mem, t_champ *list)
 	printw("cycle : %d | cycle to die : %d | processus : %d			", mem->c, mem->c_todie, list_len(list));
 	attroff(COLOR_PAIR(2));
 	refresh();
+	/*
 	if (mem->c < 10540)
 		return ;
+		*/
 	if (mem->speed == 30000)
 		getch();
 	else if (mem->speed)

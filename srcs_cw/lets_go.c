@@ -6,7 +6,7 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/09 16:14:43 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/23 19:44:03 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/24 21:12:03 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -118,7 +118,7 @@ int		lets_go(t_champ **list, t_mem *mem, t_arg *args)
 	very_less = 0;
 	mem->c_todie = CYCLE_TO_DIE;
 	tmp = mem->c_todie;
-//	init_window(mem, *list);
+	init_window(mem, *list);
 	while (1)
 	{
 		if (mem->c_todie ==  0)
@@ -143,9 +143,9 @@ int		lets_go(t_champ **list, t_mem *mem, t_arg *args)
 		check_cycle(list, mem, mem->c, args);
 		mem->c_todie--;
 		mem->c++;
-	//	print_mem(mem, *list);
+		print_mem(mem, *list);
 	}
-//	print_mem(mem, *list);
+	print_mem(mem, *list);
 	getch();
 	endwin();
 	return (0);

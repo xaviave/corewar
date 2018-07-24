@@ -6,7 +6,7 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/16 19:39:03 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/23 15:19:33 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/24 21:07:45 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,17 +26,17 @@ int		ft_sti(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	{
 		reg = mem->memory[(tmp->pc + i) % MEM_SIZE];
 		if (!reg || reg > 16)
-			return (ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1));
+			return (ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1, 3));
 		value[0] = give_reg(tmp, reg);
 		i++;
 	}
 	else
-		return (ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1));
+		return (ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1, 3));
 	if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b110000) >> 4 == 1)
 	{
 		reg = mem->memory[(tmp->pc + i) % MEM_SIZE];
 		if (!reg || reg > 16)
-			return (ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1));
+			return (ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1, 3));
 		value[1] = give_reg(tmp, reg);
 		i++;
 	}
@@ -51,12 +51,12 @@ int		ft_sti(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 		i += 2;
 	}
 	else
-		return (ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1));
+		return (ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1, 3));
 	if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b1100) >> 2 == 1)
 	{
 		reg = mem->memory[(tmp->pc + i) % MEM_SIZE];
 		if (!reg || reg > 16)
-			return (ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1));
+			return (ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1, 3));
 		value[2] = give_reg(tmp, reg);
 		i++;
 	}
@@ -66,7 +66,7 @@ int		ft_sti(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 		i += 2;
 	}
 	else
-		return (ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1));
+		return (ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1, 3));
 	if (value[1] & 0x8000)
 		value[1] = value[1] % IDX_MOD - 512;
 	else

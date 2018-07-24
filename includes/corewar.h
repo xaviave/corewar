@@ -6,7 +6,7 @@
 /*   By: xamartin <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/19 13:50:45 by xamartin     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/23 19:16:27 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/24 20:58:52 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -112,7 +112,7 @@ int					mod_pc(t_champ *tmp, t_champ *list, t_mem *mem, int nu);
 int					lets_go(t_champ **l, t_mem *m, t_arg *a);
 int					lets_dump(t_champ **l, t_mem *m, t_arg *a);
 int					list_len(t_champ *list);
-int					ft_error(char code, t_champ *tmp, int ret);
+int					ft_error(char code, t_champ *tmp, int ret, int nu);
 void				check_cycle(t_champ **list, t_mem *mem, int c, t_arg *args);
 int					check_live(t_champ **list);
 

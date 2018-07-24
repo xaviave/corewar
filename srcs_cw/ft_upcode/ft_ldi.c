@@ -6,7 +6,7 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/16 21:51:14 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/23 15:00:06 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/24 21:04:35 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,7 +25,7 @@ int		ft_ldi(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	{
 		reg = mem->memory[(tmp->pc + i) % MEM_SIZE];
 		if (!reg || reg > 16)
-			return (ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 0));
+			return (ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 0, 3));
 		value[0] = give_reg(tmp, reg);
 		i++;
 	}
@@ -40,12 +40,12 @@ int		ft_ldi(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 		i += 2;
 	}
 	else
-		return (ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 0));
+		return (ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 0, 3));
 	if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b110000) >> 4 == 1)
 	{
 		reg = mem->memory[(tmp->pc + i) % MEM_SIZE];
 		if (!reg || reg > 16)
-			return (ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 0));
+			return (ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 0, 3));
 		value[1] = give_reg(tmp, reg);
 		i++;
 	}
@@ -55,7 +55,7 @@ int		ft_ldi(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 		i += 2;
 	}
 	else
-		return (ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 0));
+		return (ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 0, 3));
 	reg = mem->memory[(tmp->pc + i) % MEM_SIZE];
 	if (value[0] & 0x8000)
 		value[0] = value[0] | 0xffff0000;
@@ -70,5 +70,5 @@ int		ft_ldi(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 		return (value[2] == 0 ? 1 : 0);
 	}
 	else
-		return (ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 0));
+		return (ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 0, 3));
 }

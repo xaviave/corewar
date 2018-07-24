@@ -6,7 +6,7 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/16 21:53:51 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/19 18:25:41 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/24 21:02:44 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,12 +23,13 @@ int		ft_aff(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	{
 		reg = mem->memory[(tmp->pc + 2) % MEM_SIZE];
 		if (!reg || reg > 16)
-			return (ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1));
+			return (ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE],
+						tmp, -1, 1));
 		c = give_reg(tmp, reg) % 256;
 		ft_putchar(c);
 		tmp->pc = mod_pc(tmp, *list, mem, 3);
 	}
 	else
-		ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 101);
+		ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 101, 1);
 	return (-1);
 }
