@@ -29,7 +29,7 @@ void	ft_lstdel_m(t_list **alst)
 	}
 }
 
-int		ft_free_all(t_all *a)
+int		ft_free_all(t_all *a, int ret)
 {
 	int		i;
 
@@ -40,12 +40,15 @@ int		ft_free_all(t_all *a)
 	{
 		while (a->base.tkn[i])
 			ft_strdel(&a->base.tkn[i++]);
-		ft_strdel(a->base.tkn);
+		free(a->base.tkn);
+		a->base.tkn = NULL;
 	}
 	ft_strdel(&a->file_name);
-	if (a->t)
-		ft_lstdel_m(&a->t);
-	return (0);
+	a->file_size = 0;
+	ft_lstdel_m(&a->t);
+	if (ret)
+		return (0);
+	exit(1);
 }
 
 int		main(int argc, char **argv)
@@ -56,7 +59,8 @@ int		main(int argc, char **argv)
 	file = ft_first(argc, argv);
 	a = ft_parsing(&file);
 	if (!ft_check(&a))
-		return (ft_free_all(&a));
+		ft_free_all(&a, 0);
 	ft_third(argv, argc, &a);
+	ft_free_all(&a, 1);
 	return (0);
 }

@@ -64,11 +64,13 @@ int			ft_check_ins_alone(t_list **list)
 	while (tmp)
 	{
 		if (((t_compl*)tmp->content)->type == _INS)
-			if (!(ft_check_nb_ins_line(tmp, list)))
-				return (0);
+			if (!ft_check_nb_ins_line(tmp, list) || !ft_check_nb_ins_par(tmp))
+				return (ft_printf("Error at INSTRUCTION \"%s\" line %d\n",
+				((t_compl*)tmp->content)->tkn, ((t_compl*)tmp->content)->line));
 		tmp = tmp->next;
 	}
-	return (1);
+	tmp = *list;
+	return (768368);
 }
 
 int			ft_every_detail(t_list **list)
@@ -92,7 +94,7 @@ int			ft_every_detail(t_list **list)
 				((t_compl*)tmp->content)->tkn, ((t_compl*)tmp->content)->line));
 		tmp = tmp->next;
 	}
-	if (!ft_check_ins_alone(list))
+	if (ft_check_ins_alone(list) != 768368)
 		return (0);
 	return (768368);
 }

@@ -88,7 +88,7 @@ int			ft_first_verif(t_all *a, char **tkn)
 	if (!(a->t = ft_organise_list(tkn)))
 		return (0);
 	while (a->base.tkn[i])
-		ft_strdel(&a->base.tkn[i]);
+		ft_strdel(&a->base.tkn[i++]);
 	free(a->base.tkn);
 	a->base.tkn = NULL;
 	if (!(ft_detail_ligne(a->t)))
