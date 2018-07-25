@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/23 16:24:43 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/25 15:14:26 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/25 18:07:58 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,10 +31,8 @@ int			ft_is_ins(t_list *tmp)
 int			ft_is_par(t_list *tmp)
 {
 	char	*s;
-	int		i;
 
 	s = ((t_compl*)tmp->content)->tkn;
-	i = s[0] == '-' ? 1 : 0;
 	if (s[0] == '%')
 	{
 		((t_compl*)tmp->content)->par_type = _DIR;
@@ -50,7 +48,7 @@ int			ft_is_par(t_list *tmp)
 		((t_compl*)tmp->content)->par_type = _IND;
 		return (1);
 	}
-	if (!(ft_while_digit(s)))
+	if (!(ft_while_digit(s[0] == '-' ? s + 1 : s)))
 		return (0);
 	((t_compl*)tmp->content)->par_type = _IND;
 	return (1);

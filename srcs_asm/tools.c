@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/23 15:05:35 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/23 19:57:10 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/25 19:16:21 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,5 +31,14 @@ int			ft_increment_tkn(char **tkn, int i, int *l)
 	if (!ft_strcmp(tkn[i], "\n"))
 		(*l)++;
 	i++;
+	return (i);
+}
+
+int			ft_increment_tkn_second(char **tkn, int i, int *l)
+{
+	while (tkn[i] && ft_strcmp(tkn[i], "\n"))
+		i++;
+	if (!ft_strcmp(tkn[i], "\n"))
+		(*l)++;
 	return (i);
 }

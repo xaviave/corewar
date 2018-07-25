@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/23 14:22:31 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/25 16:35:43 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/25 19:14:53 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -68,6 +68,7 @@ int					ft_free_base(t_base *base);
 char				*ft_extract_comment(char *line);
 int					ft_check(t_all *a);
 int					ft_increment_tkn(char **tkn, int i, int *l);
+int					ft_increment_tkn_second(char **tkn, int i, int *l);
 int					ft_check_detail(t_list **list);
 int					ft_check_label_char(char *tkn, t_list *tmp);
 int					ft_check_par_alone(char *tkn, t_list *tmp, t_list **list);

@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/23 18:03:36 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/23 20:31:54 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/25 18:21:00 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -68,9 +68,15 @@ int			ft_ind_label(char *tkn, t_list **list)
 int			ft_check_par_alone(char *t, t_list *tmp, t_list **list)
 {
 	if (((t_compl*)tmp->content)->par_type == _DIR)
-		if (ft_strlen(t) < 2 || (t[1] == ':' && !(ft_dir_label(t, list)))
-				|| (t[1] != ':' && !ft_while_digit(t + 1)))
-			return (0);
+	{
+		if (!ft_strchr(((t_compl*)tmp->content)->tkn, '-'))
+			if (ft_strlen(t) < 2 || (t[1] == ':' && !(ft_dir_label(t, list)))
+					|| (t[1] != ':' && !ft_while_digit(t + 1)))
+				return (0);
+		if (ft_strchr(((t_compl*)tmp->content)->tkn, '-'))
+			if (ft_strlen(t) < 3 || (t[1] != ':' && !ft_while_digit(t + 2)))
+				return (0);
+	}
 	if (((t_compl*)tmp->content)->par_type == _IND)
 		if (t[0] == ':')
 			if (!(ft_ind_label(t, list)))
