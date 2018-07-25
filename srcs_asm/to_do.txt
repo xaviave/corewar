@@ -4,14 +4,4 @@ recuperer ladresse des label, (rapport avec les octets)
 _______________
 
 faire tout la traduction du parsing
-finir parsing a partir dutilisation de token
-
 _________________
-
-label = label_char only
-instruction must be valid
-one per line
-
-
-cest un label ? verif /
-cest une instruction ? verif, parametre ? verif, newline ? verif

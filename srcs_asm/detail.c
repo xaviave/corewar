@@ -70,6 +70,13 @@ int			ft_check_ins_alone(t_list **list)
 		tmp = tmp->next;
 	}
 	tmp = *list;
+	while (tmp)
+	{
+		if (((t_compl*)tmp->content)->type == _INS)
+			if (!ft_check_ins_type_par(tmp))
+				return (ft_printf("Error at INSTRUCTION \"%s\" line %d\n",
+				((t_compl*)tmp->content)->tkn, ((t_compl*)tmp->content)->line));
+	}
 	return (768368);
 }
 
