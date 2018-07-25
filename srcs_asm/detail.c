@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/23 16:24:43 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/23 20:31:42 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/25 15:14:26 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,10 +22,10 @@ int			ft_is_ins(t_list *tmp)
 				!ft_strcmp(s, "st") || !ft_strcmp(s, "add") ||
 				!ft_strcmp(s, "sub") || !ft_strcmp(s, "and") ||
 				!ft_strcmp(s, "or") || !ft_strcmp(s, "xor") ||
-			!ft_strcmp(s, "zjmp") || !ft_strcmp(s, "ldi") ||
-			!ft_strcmp(s, "sti") || !ft_strcmp(s, "fork") ||
-			!ft_strcmp(s, "lld") || !ft_strcmp(s, "lldi") ||
-			!ft_strcmp(s, "lfork") || !ft_strcmp(s, "aff")) ? 1 : 0);
+				!ft_strcmp(s, "zjmp") || !ft_strcmp(s, "ldi") ||
+				!ft_strcmp(s, "sti") || !ft_strcmp(s, "fork") ||
+				!ft_strcmp(s, "lld") || !ft_strcmp(s, "lldi") ||
+				!ft_strcmp(s, "lfork") || !ft_strcmp(s, "aff")) ? 1 : 0);
 }
 
 int			ft_is_par(t_list *tmp)
@@ -66,16 +66,19 @@ int			ft_check_ins_alone(t_list **list)
 		if (((t_compl*)tmp->content)->type == _INS)
 			if (!ft_check_nb_ins_line(tmp, list) || !ft_check_nb_ins_par(tmp))
 				return (ft_printf("Error at INSTRUCTION \"%s\" line %d\n",
-				((t_compl*)tmp->content)->tkn, ((t_compl*)tmp->content)->line));
-		tmp = tmp->next;
+							((t_compl*)tmp->content)->tkn,
+							((t_compl*)tmp->content)->line));
+				tmp = tmp->next;
 	}
 	tmp = *list;
 	while (tmp)
 	{
 		if (((t_compl*)tmp->content)->type == _INS)
-			if (!ft_check_ins_type_par(tmp))
+			if (!ft_check_ins_type_par(tmp, ((t_compl*)tmp->content)->tkn))
 				return (ft_printf("Error at INSTRUCTION \"%s\" line %d\n",
-				((t_compl*)tmp->content)->tkn, ((t_compl*)tmp->content)->line));
+							((t_compl*)tmp->content)->tkn,
+							((t_compl*)tmp->content)->line));
+				tmp = tmp->next;
 	}
 	return (768368);
 }
@@ -98,8 +101,9 @@ int			ft_every_detail(t_list **list)
 		if (((t_compl*)tmp->content)->type == _PAR)
 			if (!ft_check_par_alone(((t_compl*)tmp->content)->tkn, tmp, list))
 				return (ft_printf("Error at PARAMETER \"%s\" line %d\n",
-				((t_compl*)tmp->content)->tkn, ((t_compl*)tmp->content)->line));
-		tmp = tmp->next;
+							((t_compl*)tmp->content)->tkn,
+							((t_compl*)tmp->content)->line));
+				tmp = tmp->next;
 	}
 	if (ft_check_ins_alone(list) != 768368)
 		return (0);

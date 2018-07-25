@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/23 14:22:31 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/23 20:32:06 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/25 16:35:43 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -75,5 +75,15 @@ int					ft_while_digit(char *s);
 char				*ft_name_file(int argc, char **argv);
 int					ft_check_nb_ins_line(t_list *tmp, t_list **list);
 int					ft_check_nb_ins_par(t_list *tmp);
+int					ft_check_ins_type_par(t_list *tmp, char *tkn);
+int					ft_nb_par_u(t_list *tmp);
+int					ft_nb_par_ttu(t_list *tmp);
+int					ft_nb_par_uuu(t_list *tmp);
+int					ft_nb_par_tdu(t_list *tmp);
+int					ft_nb_par_du(t_list *tmp);
+int					ft_nb_par_ud(t_list *tmp);
+int					ft_nb_par_utd(t_list *tmp);
+int					ft_nb_par_aff(t_list *tmp);
+int					ft_suite_tdu(t_list *tmp);
 
 #endif
