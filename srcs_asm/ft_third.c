@@ -14,13 +14,13 @@
 #include "../includes/asm.h"
 #include <fcntl.h>
 
-static void		ft_exit_third(char **file, char **tmp)
+static char		*ft_exit_third(char **file, char **tmp)
 {
 	if (*file)
 		free(*file);
 	if (*tmp)
 		free(*tmp);
-	exit(1);
+	return (NULL);
 }
 
 char			*ft_name_file(int argc, char **argv)
@@ -36,7 +36,7 @@ char			*ft_name_file(int argc, char **argv)
 		ft_strdel(&c.buf);
 		c.fre = c.tkn;
 		if (!(c.tkn = ft_strjoin(c.tkn, ".cor")))
-			ft_exit_third(&c.tkn, &c.fre);
+			return (ft_exit_third(&c.tkn, &c.fre));
 		ft_strdel(&c.fre);
 		if ((f = open(c.tkn, O_RDWR | O_CREAT | O_TRUNC,
 						S_IRUSR | S_IWUSR) == -1))
@@ -46,7 +46,7 @@ char			*ft_name_file(int argc, char **argv)
 	{
 		if ((f = open(".cor", O_RDWR | O_CREAT | O_TRUNC,
 						S_IRUSR | S_IWUSR) == -1))
-			ft_exit_third(&c.tkn, &c.fre);
+			return (ft_exit_third(&c.tkn, &c.fre));
 	}
 	close(f);
 	return (c.tkn ? c.tkn : ft_strdup(".cor"));
@@ -71,23 +71,26 @@ int				ft_header(char **file, t_all a)
 	if ((fd = open(*file, O_RDWR) == -1))
 	{
 		free(*file);
-		exit(1);
+		return (0);
 	}
 	lseek(fd, 0, SEEK_SET);
 	ft_print_zero(fd, 1);
 	fd_printf("%c%c%c%s", fd, 0b11101010, 0b10000011, 0b11110011, a.base.name);
 	ft_print_zero(fd, 128 - ft_strlen(a.base.name));
-	/* file size */ ft_print_zero(fd, 8);
+	if (!(ft_print_size(a.file_size, fd)))
+		return (0);
 	fd_printf("%s", fd, a.base.comment);
 	ft_print_zero(fd, 2048 - ft_strlen(a.base.comment));
 	close(fd);
-	return (0);
+	return (1);
 }
 
 int				ft_third(char **argv, int argc, t_all *a)
 {
-	a->file_name = ft_name_file(argc, argv);
-	ft_header(&a->file_name, *a);
+	if (!(a->file_name = ft_name_file(argc, argv)))
+		return (0);
+	if (!(ft_header(&a->file_name, *a)))
+		return (0);
 	ft_printf("Writing output program to %s\n", a->file_name);
-	return (0);
+	return (1);
 }

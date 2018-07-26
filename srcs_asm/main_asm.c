@@ -60,7 +60,8 @@ int		main(int argc, char **argv)
 	a = ft_parsing(&file);
 	if (!ft_check(&a))
 		ft_free_all(&a, 0);
-	ft_third(argv, argc, &a);
+	if (!(ft_third(argv, argc, &a)))
+		ft_free_all(&a, 0);
 	ft_free_all(&a, 1);
 	return (0);
 }

@@ -81,8 +81,10 @@ int			ft_count_every_line(t_list **list)
 		ft_ins_ott(((t_compl*)tmp->content)->tkn, &tmp, &size);
 		ft_ins_oft(((t_compl*)tmp->content)->tkn, &tmp, &size);
 		ft_count_size_ld_st(((t_compl*)tmp->content)->tkn, &tmp, &size);
+		if (((t_compl*)tmp->content)->type == _LAB)
+			((t_compl*)tmp->content)->par_type = size;
 		if (((t_compl*)tmp->content)->type == _SEP
-				|| ((t_compl*)tmp->content)->type == _LAB)
+			|| ((t_compl*)tmp->content)->type == _LAB)
 			tmp = tmp->next;
 	}
 	return (size);
