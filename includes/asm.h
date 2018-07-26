@@ -86,5 +86,7 @@ int					ft_nb_par_ud(t_list *tmp);
 int					ft_nb_par_utd(t_list *tmp);
 int					ft_nb_par_aff(t_list *tmp);
 int					ft_suite_tdu(t_list *tmp);
+int					ft_count_size(t_list *list);
+void				ft_count_size_ld_st(char *tkn, t_list **tmp, int *size);
 
 #endif

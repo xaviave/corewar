@@ -1,10 +1,11 @@
-#live %0
 .name "zork"
-##.comment "ok"
 .comment "I'M ALIIIIVE"
+
 live %0
 sti		r10, 10, %0
+live %0
 sti		r10, %-10, %0
+live %0
 #ok
 
 l2:		sti r1, %:live, %1

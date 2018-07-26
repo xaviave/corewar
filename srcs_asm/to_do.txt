@@ -1,7 +1,87 @@
 garder 8 octets pour ecrire la taille du programme apres le .name
 
 recuperer ladresse des label, (rapport avec les octets)
-_______________
+_________________
 
 faire tout la traduction du parsing
+_________________
+
+live:
+
+5 dans tout les cas
+_________________
+
+ld:
+
+7 si p1 = T_DIR, sinon 5
+_________________
+
+st:
+
+4 si p2 = T_REG, sinon 5
+_________________
+
+add:
+
+5 dans tout les cas
+_________________
+
+sub:
+
+5 dans tout les cas
+_________________
+
+and:
+
+2 + (T_REG = 1, T_DIR = 4, T_IND = 2)
+_________________
+
+or:
+
+2 + (T_REG = 1, T_DIR = 4, T_IND = 2)
+_________________
+
+xor:
+
+2 + (T_REG = 1, T_DIR = 4, T_IND = 2)
+_________________
+
+zjmp:
+
+3 dans tout les cas
+_________________
+
+ldi:
+
+2 + (T_REG = 1, T_DIR = 2, T_IND = 2)
+_________________
+
+sti:
+
+2 + (T_REG = 1, T_DIR = 2, T_IND = 2)
+_________________
+
+fork:
+
+3 dans tout les cas
+_________________
+
+lld:
+
+2 + (T_REG = 1, T_DIR = 4, T_IND = 2)
+_________________
+
+lldi:
+
+2 + (T_REG = 1, T_DIR = 2, T_IND = 2)
+_________________
+
+lfork:
+
+3 dand tout les cas
+_________________
+
+aff:
+
+3 dans tout les cas
 _________________

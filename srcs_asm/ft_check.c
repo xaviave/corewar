@@ -97,5 +97,7 @@ int			ft_check(t_all *a)
 {
 	if (!(ft_first_verif(a, a->base.tkn)))
 		return (0);
+	if (!(a->file_size = ft_count_size(a->t)))
+		return (0);
 	return (1);
 }
