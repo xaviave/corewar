@@ -58,6 +58,8 @@ int		main(int argc, char **argv)
 
 	file = ft_first(argc, argv);
 	a = ft_parsing(&file);
+	if (!(ft_anyway(&a)))
+		ft_free_all(&a, 0);
 	if (!ft_check(&a))
 		ft_free_all(&a, 0);
 	if (!(ft_third(argv, argc, &a)))

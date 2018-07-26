@@ -1,5 +1,6 @@
 garder 8 octets pour ecrire la taille du programme apres le .name
-"gerer le ';'"
+
+"gerer le ';'" ? == # | gerer live %0; ntm -> live %0 ; ntm
 
 recuperer ladresse des label, (rapport avec les octets)
 _________________

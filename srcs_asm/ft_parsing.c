@@ -16,7 +16,7 @@
 int			ft_char(char let)
 {
 	return ((let == '.' || let == ' ' || let == '"' || let == '\n' || let == ','
-				|| let == '\t' || let == '#') ? 0 : 1);
+				|| let == '\t' || let == '#' || let == ';') ? 0 : 1);
 }
 
 int			ft_fill_buf(char **buf, char **tkn)
