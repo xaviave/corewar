@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/21 17:19:06 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/25 19:35:42 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/27 21:35:47 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -77,8 +77,8 @@ int				ft_header(char **file, t_all a)
 	ft_print_zero(fd, 1);
 	fd_printf("%c%c%c%s", fd, 0b11101010, 0b10000011, 0b11110011, a.base.name);
 	ft_print_zero(fd, 128 - ft_strlen(a.base.name));
-	if (!(ft_print_size(a.file_size, fd)))
-		return (0);
+//	if (!(ft_print_size(a.file_size, fd)))
+//		return (0);
 	fd_printf("%s", fd, a.base.comment);
 	ft_print_zero(fd, 2048 - ft_strlen(a.base.comment));
 	close(fd);
