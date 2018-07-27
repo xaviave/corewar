@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/27 21:12:40 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/27 21:38:59 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/27 21:49:05 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,7 +19,6 @@ int			ft_anyway(t_all *a)
 	int		j;
 	char	*tmp;
 
-	i = 0;
 	i = 0;
 	while (a->base.tkn[i] && (!ft_strcmp(a->base.tkn[i], "#") || !ft_strcmp(a->\
 					base.tkn[i], ".") || !ft_strcmp(a->base.tkn[i], "\n")))
