@@ -26,23 +26,25 @@ int		ft_sti(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	{
 		reg = mem->memory[(tmp->pc + i) % MEM_SIZE];
 		if (!reg || reg > 16)
-			return (ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1, 3));
+			return (ft_error2(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1, 3));
 		value[0] = give_reg(tmp, reg);
 		i++;
 	}
 	else
-		return (ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1, 3));
+		return (ft_error2(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1, 3));
 	if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b110000) >> 4 == 1)
 	{
 		reg = mem->memory[(tmp->pc + i) % MEM_SIZE];
 		if (!reg || reg > 16)
-			return (ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1, 3));
+			return (ft_error2(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1, 3));
 		value[1] = give_reg(tmp, reg);
 		i++;
 	}
 	else if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b110000) >> 4 == 2)
 	{
 		value[1] = recup_direct2(mem, tmp, i);
+		if (value[1] & 0x8000)
+			value[1] = value[1] | 0xffff0000;
 		i += 2;
 	}
 	else if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b110000) >> 4 == 3)
@@ -51,30 +53,24 @@ int		ft_sti(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 		i += 2;
 	}
 	else
-		return (ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1, 3));
+		return (ft_error2(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1, 3));
 	if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b1100) >> 2 == 1)
 	{
 		reg = mem->memory[(tmp->pc + i) % MEM_SIZE];
 		if (!reg || reg > 16)
-			return (ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1, 3));
+			return (ft_error2(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1, 3));
 		value[2] = give_reg(tmp, reg);
 		i++;
 	}
 	else if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b1100) >> 2 == 2)
 	{
 		value[2] = recup_direct2(mem, tmp, i);
+		if (value[2] & 0x8000)
+			value[2] = value[2] | 0xffff0000;
 		i += 2;
 	}
 	else
-		return (ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1, 3));
-	if (value[1] & 0x8000)
-		value[1] = value[1] % IDX_MOD - 512;
-	else
-		value[1] = value[1] % IDX_MOD;
-	if (value[2] & 0x8000)
-		value[2] = value[2] % IDX_MOD - 512;
-	else
-		value[2] = value[2] % IDX_MOD;
+		return (ft_error2(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1, 3));
 	add = (value[1] + value[2]) % IDX_MOD;
 	add = (add + tmp->pc + MEM_SIZE) % MEM_SIZE;
 	mem->memory[add] = (unsigned int)(value[0] & 0xFF000000) >> 24;

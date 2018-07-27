@@ -26,7 +26,7 @@ int		ft_lfork(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	fork->next = *list;
 	add = recup_direct2(mem, tmp, 1);
 	if (add & 0x8000)
-		add = add | 0xFFFF0000;
+		add = (add | 0xFFFF0000) % MEM_SIZE;
 	fork->pc = (fork->pc + add + MEM_SIZE) % MEM_SIZE;
 	fork->next_instru = -1;
 	fork->cycle++;

@@ -48,6 +48,6 @@ int			ft_st(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 		tmp->pc = mod_pc(tmp, *list, mem, 5);
 	}
 	else
-		ft_error(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1, 2);
+		ft_error4(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1, 2);
 	return (-1);
 }
