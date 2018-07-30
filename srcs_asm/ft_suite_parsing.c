@@ -83,8 +83,10 @@ int			ft_count_base(char **ch)
 			co++;
 		i++;
 	}
-	if (co != 2)
+	if (co > 2)
 		ft_printf("[.name] or [.comment] have a duplicate line\n");
+	else if (co < 2)
+		ft_printf("[.name] or [.comment] is missing\n");
 	else if (l != -1)
 		ft_printf("Error at line %d\n", l + 1);
 	return (co == 2 && l == -1 ? 1 : 0);

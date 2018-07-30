@@ -13,6 +13,26 @@
 
 #include "../includes/asm.h"
 
+int			ft_transform_comment(t_all *a, int i)
+{
+	char		*tmp;
+
+	while (a->base.tkn[i])
+	{
+		if (!ft_strcmp(a->base.tkn[i], " #"))
+			while (ft_strcmp(a->base.tkn[i], "\n"))
+			{
+				tmp = a->base.tkn[i];
+				if (!(a->base.tkn[i] = ft_strdup(" ")))
+					return (0);
+				ft_strdel(&tmp);
+				i++;
+			}
+		i++;
+	}
+	return (1);
+}
+
 int			ft_anyway(t_all *a)
 {
 	int		i;
@@ -39,5 +59,5 @@ int			ft_anyway(t_all *a)
 		}
 		i++;
 	}
-	return (1);
+	return (ft_transform_comment(a, j));
 }

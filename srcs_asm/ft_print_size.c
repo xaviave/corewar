@@ -19,13 +19,15 @@ int			ft_print_size(int size, int fd)
 	int					i;
 
 	i = 0;
-	tab = malloc(sizeof(unsigned char) * 4);
+	ft_print_zero(fd, 4);
+	if (!(tab = malloc(sizeof(unsigned char) * 4)))
+		return (0);
 	tab[0] = (size & 0xFF000000) >> 24;
 	tab[1] = (size & 0xFF0000) >> 16;
 	tab[2] = (size & 0xFF00) >> 8;
 	tab[3] = (size & 0xFF);
 	while (i < 4)
-		fd_printf("%x", fd, tab[i++]);
+		fd_printf("%c", fd, tab[i++]);
 	free(tab);
 	return (1);
 }
