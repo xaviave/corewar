@@ -91,5 +91,6 @@ void				ft_count_size_ld_st(char *tkn, t_list **tmp, int *size);
 int					ft_print_size(int size, int fd);
 void				ft_print_zero(int fd, int i);
 int					ft_anyway(t_all *a);
+int					ft_bad_line(t_list **list);
 
 #endif

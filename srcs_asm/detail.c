@@ -128,5 +128,7 @@ int			ft_check_detail(t_list **list)
 	}
 	if (ft_every_detail(list) != 768368)
 		return (0);
+	if (!ft_bad_line(list))
+		return (0);
 	return (1);
 }

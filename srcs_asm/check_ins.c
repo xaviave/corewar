@@ -50,20 +50,25 @@ int			ft_check_nb_ins_par(t_list *tmp)
 	int		c;
 	int		par;
 	int		sep;
+	int		bug;
 
 	c = ft_ins_type(((t_compl*)tmp->content)->tkn);
 	par = 0;
 	sep = 0;
+	bug = 0;
 	while (tmp && ft_strcmp(((t_compl*)tmp->content)->tkn, "\n"))
 	{
-		if (((t_compl*)tmp->content)->type == _PAR)
-			par++;
-		if (!ft_strcmp(((t_compl*)tmp->content)->tkn, ","))
-			sep++;
+		par += (((t_compl*)tmp->content)->type == _PAR ? 1 : 0);
+		bug += (((t_compl*)tmp->content)->type == _SEP ? 1 : 0);
+		sep += (!ft_strcmp(((t_compl*)tmp->content)->tkn, ",") ? 1 : 0);
+		bug -= (!ft_strcmp(((t_compl*)tmp->content)->tkn, "\t")
+			|| !ft_strcmp(((t_compl*)tmp->content)->tkn, ",")
+			|| !ft_strcmp(((t_compl*)tmp->content)->tkn, " ") ? 1 : 0);
 		tmp = tmp->next;
 	}
-	if ((c == 1 && par == 1 && sep == 0) || (c == 2 && par == 2 && sep == 1)
-			|| (c == 3 && par == 3 && sep == 2))
+	if ((c == 1 && par == 1 && sep == 0 && !bug)
+		|| (c == 2 && par == 2 && sep == 1 && !bug)
+		|| (c == 3 && par == 3 && sep == 2 && !bug))
 		return (1);
 	return (0);
 }

@@ -87,12 +87,14 @@ int				ft_header(char **file, t_all a)
 
 int				ft_third(char **argv, int argc, t_all *a)
 {
-t_list	*tmp;
-tmp = a->t;
-while (tmp)
-{
-ft_printf("%d -> \"%s\"\n", ((t_compl*)tmp->content)->line, ((t_compl*)tmp->content)->tkn);
-tmp = tmp->next;}
+	t_list	*tmp;
+
+/*	tmp = a->t;
+	while (tmp)
+	{
+		ft_printf("%d -> \"%s\"\n", ((t_compl*)tmp->content)->line, ((t_compl*)tmp->content)->tkn);
+		tmp = tmp->next;
+	}*/
 	if (!(a->file_name = ft_name_file(argc, argv)))
 		return (0);
 	if (!(ft_header(&a->file_name, *a)))
