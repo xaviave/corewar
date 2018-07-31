@@ -19,7 +19,6 @@ void	introduce(t_champ *list, t_arg *args)
 	int			j;
 	t_champ		*tmp;
 
-	t_champ *test;
 	tmp = list;
 	ft_printf("Introducing contestants...\n");
 	i = args->nb_players;

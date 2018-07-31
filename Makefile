@@ -21,7 +21,8 @@ LIBFT = libft/
 ASM = asm
 CW = corewar
 INC = includes/corewar.h includes/op.h includes/asm.h
-CFLAGS = -lncurses
+NCURSES_FLAG = -lncurses
+CFLAGS = -Wall
 
 
 #PATH
@@ -87,7 +88,7 @@ $(ASM): $(ASM_OBJS)
 
 $(CW): $(CW_OBJS)
 	make -C $(LIBFT)
-	$(CC) $(CFLAGS) -o $@ $(CW_OBJS) -L $(LIBFT) -lft
+	$(CC) $(CFLAGS) $(NCURSES_FLAG) -o $@ $(CW_OBJS) -L $(LIBFT) -lft
 
 
 $(CW_OBJS_PATH)%.o: $(CW_SRCS_PATH)%.c $(INC)

@@ -141,8 +141,8 @@ int		ft_lfork(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *arg);
 int		ft_aff(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *arg);
 
 /*
-**   KEY
-*/
+ * **   KEY
+ * */
 
 # define KEY_1 49
 # define KEY_2 50
@@ -159,7 +159,6 @@ int		ft_aff(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *arg);
 # define KEY_C 99
 # define KEY_D 100
 # define KEY_E 101
-# define KEY_F 102
 # define KEY_G 103
 # define KEY_H 104
 # define KEY_I 105
