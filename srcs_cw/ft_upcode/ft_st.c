@@ -35,9 +35,8 @@ int			ft_st(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 		value = give_reg(tmp, reg);
 		add = recup_direct2(mem, tmp, 3);
 		if (add & 0x8000)
-			add = add % IDX_MOD - 512;
-		else
-			add = add % IDX_MOD;
+			add = add | 0xffff0000;
+		add = add % IDX_MOD;
 		mem->memory[(tmp->pc + add + MEM_SIZE) % MEM_SIZE] = (unsigned int)(value & 0xFF000000) >> 24;
 		mem->memory[(tmp->pc + add + 1 + MEM_SIZE) % MEM_SIZE] = (unsigned int)(value & 0xFF0000) >> 16;
 		mem->memory[(tmp->pc + add + 2 + MEM_SIZE) % MEM_SIZE] = (unsigned int)(value & 0xFF00) >> 8;

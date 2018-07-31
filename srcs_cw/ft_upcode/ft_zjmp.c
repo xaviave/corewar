@@ -21,9 +21,8 @@ int		ft_zjmp(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	list = (t_champ **)list;
 	value = recup_direct2(mem, tmp, 1);
 	if (value & 0x8000)
-		value = value % IDX_MOD - 512;
-	else
-		value = value % IDX_MOD;
+		value = value | 0xffff0000;
+	value = value % IDX_MOD;
 	if (tmp->carry == 0)
 	{
 		tmp->pc = mod_pc(tmp, 3);
