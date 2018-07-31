@@ -118,6 +118,7 @@ int					ft_error2(char code, t_champ *tmp, int nu);
 int					ft_error4(char code, t_champ *tmp, int nu);
 void				check_cycle(t_champ **list, t_mem *mem, int c, t_arg *args);
 int					check_live(t_champ **list);
+void				kill_them_all(t_champ **list);
 
 /*
  * FONCTIONS UPCODE

@@ -11,12 +11,11 @@ int		lets_graph(t_champ **list, t_mem *mem, t_arg *args)
 	mem->c_todie = CYCLE_TO_DIE;
 	tmp = mem->c_todie;
 	init_window(mem, *list);
-	while (1)
+	while (*list)
 	{
 		if (mem->c_todie ==  0)
 		{
-			if (!(less = check_live(list)))
-				break;
+			less = check_live(list);
 			if (mem->call_live >= NBR_LIVE || very_less == MAX_CHECKS - 1)
 			{
 				mem->c_todie = tmp - CYCLE_DELTA;
@@ -30,7 +29,7 @@ int		lets_graph(t_champ **list, t_mem *mem, t_arg *args)
 			}
 			mem->call_live = 0;
 			if (mem->c_todie < 0)
-				break;
+				kill_them_all(list);
 		}
 		check_cycle(list, mem, mem->c, args);
 		mem->c_todie--;

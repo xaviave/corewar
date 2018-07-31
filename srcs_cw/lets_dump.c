@@ -23,12 +23,11 @@ int		lets_dump(t_champ **list, t_mem *mem, t_arg *args)
 	very_less = 0;
 	mem->c_todie = CYCLE_TO_DIE;
 	tmp = mem->c_todie;
-	while (mem->c < mem->dump)
+	while (mem->c <= mem->dump && *list)
 	{
 		if (mem->c_todie ==  0)
 		{
-			if (!(less = check_live(list)))
-				break;
+			less = check_live(list);
 			if (mem->call_live >= NBR_LIVE || very_less == MAX_CHECKS - 1)
 			{
 				mem->c_todie = tmp - CYCLE_DELTA;
@@ -42,13 +41,18 @@ int		lets_dump(t_champ **list, t_mem *mem, t_arg *args)
 			}
 			mem->call_live = 0;
 			if (mem->c_todie < 0)
-				break;
+				kill_them_all(list);
 		}
 		check_cycle(list, mem, mem->c, args);
 		mem->c_todie--;
 		mem->c++;
 	}
-	if (mem->c == mem->dump)
+	if (*list)
+	{
 		print_dump(mem, *list);
+		kill_them_all(list);
+	}
+	else
+		mem->dump = -1;
 	return (0);
 }

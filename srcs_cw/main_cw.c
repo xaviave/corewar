@@ -13,6 +13,20 @@
 
 #include "../includes/corewar.h"
 
+void	kill_them_all(t_champ **list)
+{
+	t_champ		*tmp;
+
+	tmp = *list;
+	while (*list)
+	{
+		tmp = *list;
+		*list = (*list)->next;
+		free(tmp->reg);
+		free(tmp);
+	}
+}
+
 void	introduce(t_champ *list, t_arg *args)
 {
 	int			i;
@@ -35,6 +49,12 @@ void	introduce(t_champ *list, t_arg *args)
 			tmp->number, tmp->prog_size, tmp->name, tmp->comment);
 		i--;
 	}
+}
+
+void	game_over(t_mem *mem)
+{
+	free(mem->memory);
+	free(mem->map);
 }
 
 int		main(int ac, char **av)
@@ -60,7 +80,8 @@ int		main(int ac, char **av)
 		else
 			lets_dump(&list, &mem, &args);
 	}
-	if (mem.graph == -1 && (mem.dump == -1 || mem.c != mem.dump))
+	if (mem.graph == -1 && mem.dump == -1)
 		ft_printf("Contestant %d, \"%s\", has won !\n",
 			mem.last_live, args.name[mem.last_live - 1]);
+	game_over(&mem);
 }
