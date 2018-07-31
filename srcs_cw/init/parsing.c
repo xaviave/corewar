@@ -13,11 +13,27 @@
 
 #include "../../includes/corewar.h"
 
+int		end_parse_player(t_arg *args, int champ, char *temp[MAX_PLAYERS])
+{
+	int		i;
+	int		j;
+
+	j = 0;
+	while (j < champ)
+	{
+		i = 0;
+		while (args->champ_path[i])
+			i++;
+		args->champ_path[i] = temp[j];
+		j++;;
+	}
+	return (1);
+}
+
 int		parse_player(int ac, char **av, t_arg *args, int i)
 {
 	int		champ;
 	char	*temp[MAX_PLAYERS];
-	int		j;
 
 	champ = 0;
 	ft_bzero(temp, MAX_PLAYERS * sizeof(char*));
@@ -39,16 +55,7 @@ int		parse_player(int ac, char **av, t_arg *args, int i)
 		}
 		i++;
 	}
-	j = 0;
-	while (j < champ)
-	{
-		i = 0;
-		while (args->champ_path[i])
-			i++;
-		args->champ_path[i] = temp[j];
-		j++;;
-	}
-	return (1);
+	return (end_parse_player(args, champ, temp));
 }
 
 int		parse_option(int ac, char **av, t_arg *args, int *i)
@@ -75,7 +82,7 @@ int		parse_option(int ac, char **av, t_arg *args, int *i)
 	return (1);
 }
 
-int		parse_arg(int ac, char **av, t_arg *args, t_mem *aff)
+int		parse_arg(int ac, char **av, t_arg *args)
 {
 	int		i;
 

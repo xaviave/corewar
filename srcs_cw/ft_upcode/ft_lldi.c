@@ -19,6 +19,7 @@ int		ft_lldi(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	unsigned int		value[3];
 	unsigned int		reg;
 
+	list = (t_champ **)list;
 	args = (t_arg *)args;
 	i = 2;
 	if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b11000000) >> 6 == 1)

@@ -19,6 +19,7 @@ int		ft_add(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	int					value2;
 	unsigned int		reg[3];
 
+	list = (t_champ **)list;
 	args = (t_arg *)args;
 	reg[0] = mem->memory[(tmp->pc + 2) % MEM_SIZE];
 	reg[1] = mem->memory[(tmp->pc + 3) % MEM_SIZE];

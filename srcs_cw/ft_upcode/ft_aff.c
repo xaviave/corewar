@@ -19,6 +19,7 @@ int		ft_aff(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	unsigned int	reg;
 
 	args = (void*)args;
+	list = (t_champ **)list;
 	if (mem->memory[(tmp->pc + 1) % MEM_SIZE] == 64)
 	{
 		reg = mem->memory[(tmp->pc + 2) % MEM_SIZE];

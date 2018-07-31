@@ -18,6 +18,7 @@ int		ft_zjmp(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	int		value;
 
 	args = (t_arg *)args;
+	list = (t_champ **)list;
 	value = recup_direct2(mem, tmp, 1);
 	if (value & 0x8000)
 		value = value % IDX_MOD - 512;

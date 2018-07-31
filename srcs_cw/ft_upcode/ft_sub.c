@@ -20,6 +20,7 @@ int		ft_sub(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	unsigned int		reg[3];
 
 	args = (t_arg *)args;
+	list = (t_champ **)list;
 	reg[0] = mem->memory[(tmp->pc + 2) % MEM_SIZE];
 	reg[1] = mem->memory[(tmp->pc + 3) % MEM_SIZE];
 	reg[2] = mem->memory[(tmp->pc + 4) % MEM_SIZE];

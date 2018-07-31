@@ -19,6 +19,7 @@ int			ft_st(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	unsigned int	reg;
 	int				add;
 
+	list = (t_champ **)list;
 	args = (t_arg *)args;
 	reg = mem->memory[(tmp->pc + 2) % MEM_SIZE];
 	if (mem->memory[(tmp->pc + 1) % MEM_SIZE] == 80 && reg && reg <= 16 &&

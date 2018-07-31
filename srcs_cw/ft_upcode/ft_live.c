@@ -17,6 +17,7 @@ int			ft_live(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 {
 	int		name;
 
+	list = (t_champ **)list;
 	name = -(recup_direct4(mem, tmp, 1));
 	tmp->pc = mod_pc(tmp, 5);
 	mem->call_live++;

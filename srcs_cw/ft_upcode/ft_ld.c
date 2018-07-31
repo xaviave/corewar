@@ -18,6 +18,7 @@ int		ft_ld(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	int		value;
 	int		reg;
 
+	list = (t_champ **)list;
 	args = (t_arg *)args;
 	if (mem->memory[(tmp->pc + 1) % MEM_SIZE] == 144)
 	{

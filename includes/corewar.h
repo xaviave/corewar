@@ -59,33 +59,30 @@ typedef struct		s_arg
 
 typedef struct		s_mem
 {
+	int				(*instru[16])(t_champ *tmp, t_champ **list,
+												struct s_mem *mem, t_arg *args);
+	int				times[16];
 	int				id;
 	unsigned char	*memory;
 	unsigned char	*map;
 	int				last_live;
-	t_graph			*img;
 	int				call_live;
 	int				c;
+	int				c_before_check;
 	int				c_todie;
+	t_graph			*img;
 	int				speed;
 }					t_mem;
-
-/*
- * STATIC COULEUR
- */
-
-static char			color[4][12] = {GRN, RED, BLUE, PINK};
 
 /*
  * FONCTIONS INITIALISATION
  */
 
 void				init_window(t_mem *mem, t_champ *list, t_arg *args);
-
 void				init_champ(t_champ **champ, t_arg *args);
 void				generate_memory(t_champ **list, t_mem *aff);
 int					check_cor(int ac, char **av);
-int					parse_arg(int ac, char **av, t_arg *args, t_mem *aff);
+int					parse_arg(int ac, char **av, t_arg *args);
 int					check_cor(int ac, char **av);
 
 /*
@@ -93,7 +90,7 @@ int					check_cor(int ac, char **av);
  */
 
 void				print_mem(t_mem *mem, t_champ *list, t_arg *args);
-void				print_dump(t_mem *mem, t_champ *list);
+void				print_dump(t_mem *mem);
 void				write_reg(t_champ *champ, int nb_of_reg, int nb_to_write);
 int					give_reg(t_champ *champ, int number);
 unsigned int		recup_indirect4x(t_mem *mem, t_champ *champ, int start);
@@ -112,6 +109,7 @@ int					mod_pc(t_champ *tmp, int nu);
 int					lets_go(t_champ **l, t_mem *m, t_arg *a);
 int					lets_dump(t_champ **l, t_mem *m, t_arg *a);
 int					lets_graph(t_champ **list, t_mem *mem, t_arg *args);
+void				one_cycle(t_champ **list, t_mem *mem, t_arg *args, int *v);
 int					list_len(t_champ *list);
 int					ft_error2(char code, t_champ *tmp, int nu);
 int					ft_error4(char code, t_champ *tmp, int nu);

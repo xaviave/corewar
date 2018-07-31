@@ -31,7 +31,7 @@ void print_menu(WINDOW *menu_win, int highlight)
 	x = 2;
 	y = 2;
 	box(menu_win, 0, 0);
-	while (++i < sizeof(choices) / sizeof(char *))
+	while (++i < (int)(sizeof(choices) / sizeof(char *)))
 	{
 		if (highlight == i + 1)
 		{
