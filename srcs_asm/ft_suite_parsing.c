@@ -92,7 +92,7 @@ int			ft_count_base(char **ch)
 	return (co == 2 && l == -1 ? 1 : 0);
 }
 
-int			ft_create_base(char **sp, t_base *base, char **split)
+int			ft_create_base(char **sp, t_base *base)
 {
 	int		i;
 
@@ -112,7 +112,7 @@ int			ft_create_base(char **sp, t_base *base, char **split)
 	return (1);
 }
 
-int			ft_suite_parsing(char **file, char **split, t_all *a)
+int			ft_suite_parsing(char **file, t_all *a)
 {
 	t_base	base;
 	char	**ch;
@@ -125,7 +125,7 @@ int			ft_suite_parsing(char **file, char **split, t_all *a)
 		return (ft_free_things(NULL, ch));
 	if (!(ft_check_base(ch)))
 		return (ft_free_things(NULL, ch));
-	if ((ft_create_base(ch, &base, split) != 1))
+	if ((ft_create_base(ch, &base) != 1))
 	{
 		ft_free_base(&base);
 		return (ft_free_things(NULL, ch));

@@ -24,7 +24,7 @@ int			ft_dir_label(char *tkn, t_list **list)
 	dup = ft_strdup(tkn + 2);
 	fre = dup;
 	dup = ft_strjoin(dup, ":");
-	free(fre);
+	ft_strdel(&fre);
 	c = 0;
 	while (tmp && c == 0)
 	{
@@ -35,7 +35,7 @@ int			ft_dir_label(char *tkn, t_list **list)
 		}
 		tmp = tmp->next;
 	}
-	free(dup);
+	ft_strdel(&dup);
 	return (c ? 1 : 0);
 }
 
@@ -50,7 +50,7 @@ int			ft_ind_label(char *tkn, t_list **list)
 	dup = ft_strdup(tkn + 1);
 	fre = dup;
 	dup = ft_strjoin(dup, ":");
-	free(fre);
+	ft_strdel(&fre);
 	c = 0;
 	while (tmp && c == 0)
 	{
@@ -61,7 +61,7 @@ int			ft_ind_label(char *tkn, t_list **list)
 		}
 		tmp = tmp->next;
 	}
-	free(dup);
+	ft_strdel(&dup);
 	return (c ? 1 : 0);
 }
 
@@ -108,8 +108,8 @@ int			ft_check_label_char(char *tkn, t_list *tmp)
 		i++;
 	}
 	ft_strdel(&check);
-	if (c == 0 || i < ft_strlen(tkn))
+	if (c == 0 || i < (int)ft_strlen(tkn))
 		ft_printf("Error at LABEL \"%s\" line %d\n",
 				tkn, ((t_compl*)tmp->content)->line);
-	return (c == 1 && i == ft_strlen(tkn) ? 1 : 0);
+	return (c == 1 && i == (int)ft_strlen(tkn) ? 1 : 0);
 }

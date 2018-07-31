@@ -26,20 +26,20 @@ int			ft_fill_buf(char **buf, char **tkn)
 	tmp = *buf;
 	if (!(*buf = ft_strjoin(*buf, *tkn)))
 	{
-		free(tmp);
-		free(*tkn);
+		ft_strdel(&tmp);
+		ft_strdel(tkn);
 		return (0);
 	}
-	free(tmp);
+	ft_strdel(&tmp);
 	tmp = *buf;
 	if (!(*buf = ft_strjoin(*buf, "|")))
 	{
-		free(tmp);
-		free(*tkn);
+		ft_strdel(&tmp);
+		ft_strdel(tkn);
 		return (0);
 	}
-	free(tmp);
-	free(*tkn);
+	ft_strdel(&tmp);
+	ft_strdel(tkn);
 	return (1);
 }
 
@@ -56,8 +56,8 @@ char		*ft_separator(char **file, t_contain *ctn)
 		ret = 1;
 	if (ret == 0)
 	{
-		free(ctn->buf);
-		free(ctn->fre);
+		ft_strdel(&ctn->buf);
+		ft_strdel(&ctn->fre);
 	}
 	return (ret ? ctn->tkn : NULL);
 }
@@ -75,14 +75,14 @@ char		*ft_lexer(char *file)
 			ctn.fre = ctn.tkn;
 			if (!(ctn.tkn = ft_separator(&file, &ctn)))
 				return (NULL);
-			free(ctn.fre);
+			ft_strdel(&ctn.fre);
 		}
 		if (!ft_strcmp(ctn.tkn, "|"))
 		{
 			ctn.fre = ctn.tkn;
 			if (!(ctn.tkn = ft_separator(&file, &ctn)))
 				return (NULL);
-			free(ctn.fre);
+			ft_strdel(&ctn.fre);
 		}
 		if (!(ft_fill_buf(&ctn.buf, &ctn.tkn)))
 			return (NULL);
@@ -99,22 +99,22 @@ t_all		ft_parsing(char **file)
 	split = NULL;
 	if (!(buf = ft_lexer(*file)))
 	{
-		free(*file);
+		ft_strdel(file);
 		exit(1);
 	}
 	if (!(split = ft_strsplit(buf, '|')))
 	{
-		free(*file);
-		free(buf);
+		ft_strdel(file);
+		ft_strdel(&buf);
 		exit(1);
 	}
-	free(buf);
-	if (!(ft_suite_parsing(file, split, &a)))
+	ft_strdel(&buf);
+	if (!(ft_suite_parsing(file, &a)))
 	{
 		ft_free_things(*file, split);
 		exit(1);
 	}
-	free(*file);
+	ft_strdel(file);
 	a.base.tkn = split;
 	return (a);
 }

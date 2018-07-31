@@ -17,39 +17,36 @@
 static char		*ft_exit_third(char **file, char **tmp)
 {
 	if (*file)
-		free(*file);
+		ft_strdel(file);
 	if (*tmp)
-		free(*tmp);
+		ft_strdel(tmp);
 	return (NULL);
 }
 
 char			*ft_name_file(int argc, char **argv)
 {
 	int			f;
-	t_contain	c;
+	char		*str;
 
-	c.tkn = NULL;
+	str = NULL;
 	if (!ft_strcmp((_ARG + ft_strlen(_ARG) - 2), ".s"))
 	{
-		c.buf = ft_strdup(_ARG);
-		c.tkn = ft_strndup(c.buf, ft_strlen(c.buf) - 2);
-		ft_strdel(&c.buf);
-		c.fre = c.tkn;
-		if (!(c.tkn = ft_strjoin(c.tkn, ".cor")))
-			return (ft_exit_third(&c.tkn, &c.fre));
-		ft_strdel(&c.fre);
-		if ((f = open(c.tkn, O_RDWR | O_CREAT | O_TRUNC,
+		if (!(str = ft_arg(argc, argv)))
+			return (ft_exit_third(&str, NULL));
+		if (!(str = ft_strfjoin(str, ft_strdup(".cor"))))
+			return (ft_exit_third(&str, NULL));
+		if ((f = open(str, O_RDWR | O_CREAT | O_TRUNC,
 						S_IRUSR | S_IWUSR) == -1))
-			ft_exit_third(&c.tkn, &c.fre);
+			ft_exit_third(&str, NULL);
 	}
 	else
 	{
 		if ((f = open(".cor", O_RDWR | O_CREAT | O_TRUNC,
 						S_IRUSR | S_IWUSR) == -1))
-			return (ft_exit_third(&c.tkn, &c.fre));
+			return (ft_exit_third(&str, NULL));
 	}
 	close(f);
-	return (c.tkn ? c.tkn : ft_strdup(".cor"));
+	return (str ? str : ft_strdup(".cor"));
 }
 
 void			ft_print_zero(int fd, int i)
@@ -70,7 +67,7 @@ int				ft_header(char **file, t_all a)
 
 	if ((fd = open(*file, O_RDWR) == -1))
 	{
-		free(*file);
+		ft_strdel(file);
 		return (0);
 	}
 	lseek(fd, 0, SEEK_SET);
@@ -87,7 +84,7 @@ int				ft_header(char **file, t_all a)
 
 int				ft_third(char **argv, int argc, t_all *a)
 {
-	t_list	*tmp;
+//	t_list	*tmp;
 
 /*	tmp = a->t;
 	while (tmp)

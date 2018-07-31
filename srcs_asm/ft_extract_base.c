@@ -31,6 +31,6 @@ char		*ft_extract_comment(char *line)
 	j = 0;
 	while (new[i] && new[i] != '\"')
 		tmp[j++] = new[i++];
-	free(new);
+	ft_strdel(&new);
 	return (tmp);
 }

@@ -29,5 +29,6 @@ int			ft_print_size(int size, int fd)
 	while (i < 4)
 		fd_printf("%c", fd, tab[i++]);
 	free(tab);
+	tab = NULL;
 	return (1);
 }

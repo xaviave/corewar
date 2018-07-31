@@ -38,3 +38,21 @@ int			ft_free_base(t_base *base)
 		ft_strdel(&base->comment);
 	return (0);
 }
+
+char		*ft_arg(int argc, char **argv)
+{
+	char	*arg;
+	char	*new;
+	int		i;
+
+	i = 0;
+	arg = _ARG;
+	new = ft_memalloc(ft_strlen(arg) - 1);
+	while (i < (int)ft_strlen(arg) - 2)
+	{
+		new[i] = arg[i];
+		i++;
+	}
+	new[i] = '\0';
+	return (new);
+}

@@ -61,7 +61,7 @@ typedef struct		s_compl
 
 char				*ft_first(int argc, char **argv);
 t_all				ft_parsing(char **file);
-int					ft_suite_parsing(char **file, char **split, t_all *a);
+int					ft_suite_parsing(char **file, t_all *a);
 int					ft_third(char **argv, int argc, t_all *a);
 int					ft_free_things(char *s1, char **s2);
 int					ft_free_base(t_base *base);
@@ -92,5 +92,7 @@ int					ft_print_size(int size, int fd);
 void				ft_print_zero(int fd, int i);
 int					ft_anyway(t_all *a);
 int					ft_bad_line(t_list **list);
+char				*ft_strfjoin(char *s1, char *s2);
+char				*ft_arg(int argc, char **argv);
 
 #endif

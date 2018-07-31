@@ -13,6 +13,35 @@
 
 #include "../includes/asm.h"
 
+char		*ft_strfjoin(char *s1, char *s2)
+{
+	size_t	len;
+	char	*new;
+
+	if (!s1)
+	{
+		if (!(new = ft_strdup(s2)))
+			return (NULL);
+		ft_strdel(&s2);
+		return (new);
+	}
+	if (!s2)
+	{
+		if (!(new = ft_strdup(s1)))
+			return (NULL);
+		ft_strdel(&s1);
+		return (new);
+	}
+	len = (ft_strlen(s1) + ft_strlen(s2));
+	if (!(new = ft_memalloc(len + 1)))
+		return (NULL);
+	ft_strcat(new, s1);
+	ft_strcat(new, s2);
+	ft_strdel(&s1);
+	ft_strdel(&s2);
+	return (new);
+}
+
 int			ft_transform_comment(t_all *a, int i)
 {
 	char		*tmp;
