@@ -66,7 +66,7 @@ int		ft_xor(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 			reg < 17 && !(mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b11))
 	{
 		write_reg(tmp, reg, value[0] ^ value[1]);
-		tmp->pc = mod_pc(tmp, *list, mem, i + 1);
+		tmp->pc = mod_pc(tmp, i + 1);
 		return ((value[0] ^ value[1]) == 0 ? 1 : 0);
 	}
 	else

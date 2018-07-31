@@ -18,7 +18,7 @@ int			ft_live(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	int		name;
 
 	name = -(recup_direct4(mem, tmp, 1));
-	tmp->pc = mod_pc(tmp, *list, mem, 5);
+	tmp->pc = mod_pc(tmp, 5);
 	mem->call_live++;
 	tmp->live++;
 	//tmp->pc = (5 + tmp->pc) % MEM_SIZE;

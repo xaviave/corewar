@@ -62,7 +62,7 @@ int		ft_lldi(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	{
 		value[2] = recup_direct4(mem, tmp, value[0] + value[1]);
 		write_reg(tmp, mem->memory[(tmp->pc + i) % MEM_SIZE], value[2]);
-		tmp->pc = mod_pc(tmp, *list, mem, i + 1);
+		tmp->pc = mod_pc(tmp, i + 1);
 		return (value[2] == 0 ? 1 : 0);
 	}
 	else

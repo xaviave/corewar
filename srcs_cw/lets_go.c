@@ -25,8 +25,7 @@ void	save_instru(t_mem *mem, t_champ *tmp, t_champ *list)
 {
 	if (*(mem->memory + tmp->pc) > 16 || *(mem->memory + tmp->pc) == 0)
 	{
-		tmp->pc = mod_pc(tmp, list, mem, 1);
-		//tmp->pc = (tmp->pc + 1) % MEM_SIZE;
+		tmp->pc = mod_pc(tmp, 1);
 		tmp->cycle++;
 		return ;
 	}
@@ -78,7 +77,7 @@ void	del_maillon(t_champ **list, int n)
 	free(tmp);
 }
 
-int		check_live(t_champ **list)
+void	check_live(t_champ **list)
 {
 	t_champ		*tmp;
 	int			live;
@@ -95,23 +94,15 @@ int		check_live(t_champ **list)
 			i--;
 		}
 		else
-		{
-			if (tmp->live > NBR_LIVE)
-				live = -1;
-			if (live != -1)
-				live = 1;
 			tmp->live = 0;
-		}
 		tmp = tmp->next;
 		i++;
 	}
-	return (live);
 }
 
 int		lets_go(t_champ **list, t_mem *mem, t_arg *args)
 {
 	int		tmp;
-	int		less;
 	int		very_less;
 
 	mem->c = 0;
@@ -122,7 +113,7 @@ int		lets_go(t_champ **list, t_mem *mem, t_arg *args)
 	{
 		if (mem->c_todie ==  0)
 		{
-			less = check_live(list);
+			check_live(list);
 			if (mem->call_live >= NBR_LIVE || very_less == MAX_CHECKS - 1)
 			{
 				mem->c_todie = tmp - CYCLE_DELTA;

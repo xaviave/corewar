@@ -28,6 +28,6 @@ int		ft_zjmp(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 		tmp->pc = mod_pc(tmp, 3);
 		return (-1);
 	}
-	tmp->pc = mod_pc(tmp, value);
+	tmp->pc = mod_pc(tmp, *list, mem, value);
 	return (-1);
 }

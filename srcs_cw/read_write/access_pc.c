@@ -13,11 +13,7 @@
 
 #include "../../includes/corewar.h"
 
-int		mod_pc(t_champ *tmp, t_champ *list, t_mem *mem, int nu)
+int		mod_pc(t_champ *tmp, int nu)
 {
-	int pc;
-
-	pc = (tmp->pc + nu + MEM_SIZE) % MEM_SIZE;
-	return (pc);
-	print_mem(mem, list);
+	return ((tmp->pc + nu + MEM_SIZE) % MEM_SIZE);
 }

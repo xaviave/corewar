@@ -81,6 +81,6 @@ int		ft_sti(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	mem->map[(add + 1) % MEM_SIZE] = tmp->number;
 	mem->map[(add + 2) % MEM_SIZE] = tmp->number;
 	mem->map[(add + 3) % MEM_SIZE] = tmp->number;
-	tmp->pc = mod_pc(tmp, *list, mem, i);
+	tmp->pc = mod_pc(tmp, i);
 	return (-1);
 }

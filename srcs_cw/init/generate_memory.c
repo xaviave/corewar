@@ -30,7 +30,7 @@ int					list_len(t_champ *list)
 	return (i);
 }
 
-void				put_champ_mem(t_champ *list, int player, int nb_player, unsigned char **memory)
+void				put_champ_mem(t_champ *list, int player, int nb_player, t_mem *mem)
 {
 	int				i;
 	int				j;
@@ -44,53 +44,23 @@ void				put_champ_mem(t_champ *list, int player, int nb_player, unsigned char **
 	tmp->pc = i;
 	while (j < tmp->prog_size)
 	{
-		(*memory)[i] = (unsigned char)tmp->prog[j];
+		(mem->memory)[i] = (unsigned char)tmp->prog[j];
+		(mem->map)[i] = tmp->number;
 		i++;
 		j++;
 	}
 }
 
-void				init_aff(t_mem *aff, t_champ **list, int nb_player)
-{
-	int				i;
-	int				champ;
-	t_champ			*tmp;
-
-	i = 0;
-	champ = 1;
-	aff->map = ft_memalloc(sizeof(char *) * MEM_SIZE);
-	while (i < MEM_SIZE)
-	{
-		tmp = *list;
-		while (tmp)
-		{
-			if (champ == tmp->number)
-				break ;
-			tmp = tmp->next;
-		}
-		while (i < tmp->prog_size + MEM_SIZE * (champ - 1) / nb_player && i < MEM_SIZE)
-		{
-			aff->map[i] = (unsigned char)champ;
-			i++;
-		}
-		while (i < MEM_SIZE * champ / nb_player)
-			i++;
-		champ++;
-	}
-}
-
-void				generate_memory(t_champ **list, t_mem *aff)
+void				generate_memory(t_champ **list, t_mem *mem)
 {
 	int				i;
 	int				nb_player;
-	unsigned char	*memory;
 
-	memory = ft_memalloc(sizeof(char *) * MEM_SIZE);
+	mem->memory = ft_memalloc(sizeof(char *) * MEM_SIZE);
+	mem->map = ft_memalloc(sizeof(char *) * MEM_SIZE);
+	mem->call_live = 0;
 	nb_player = list_len(*list);
 	i = 0;
 	while (++i <= nb_player)
-		put_champ_mem(*list, i, nb_player, &memory);
-	aff->memory = memory;
-	aff->call_live = 0;
-	init_aff(aff, list, nb_player);
+		put_champ_mem(*list, i, nb_player, mem);
 }

@@ -27,7 +27,7 @@ int			ft_st(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	{
 		value = give_reg(tmp, reg);
 		write_reg(tmp, mem->memory[(tmp->pc + 3) % MEM_SIZE], value);
-		tmp->pc = mod_pc(tmp, *list, mem, 4);
+		tmp->pc = mod_pc(tmp, 4);
 	}
 	else if (mem->memory[(tmp->pc + 1) % MEM_SIZE] == 112 && reg && reg <= 16)
 	{
@@ -45,7 +45,7 @@ int			ft_st(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 		mem->map[(tmp->pc + add + 1 + MEM_SIZE) % MEM_SIZE] = tmp->number;
 		mem->map[(tmp->pc + add + 2 + MEM_SIZE) % MEM_SIZE] = tmp->number;
 		mem->map[(tmp->pc + add + 3 + MEM_SIZE) % MEM_SIZE] = tmp->number;
-		tmp->pc = mod_pc(tmp, *list, mem, 5);
+		tmp->pc = mod_pc(tmp, 5);
 	}
 	else
 		ft_error4(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 2);

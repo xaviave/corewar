@@ -3,19 +3,18 @@
 int		lets_graph(t_champ **list, t_mem *mem, t_arg *args)
 {
 	int		tmp;
-	int		less;
 	int		very_less;
 
 	mem->c = 0;
 	very_less = 0;
 	mem->c_todie = CYCLE_TO_DIE;
 	tmp = mem->c_todie;
-	init_window(mem, *list);
+	init_window(mem, *list, args);
 	while (*list)
 	{
 		if (mem->c_todie ==  0)
 		{
-			less = check_live(list);
+			check_live(list);
 			if (mem->call_live >= NBR_LIVE || very_less == MAX_CHECKS - 1)
 			{
 				mem->c_todie = tmp - CYCLE_DELTA;
@@ -34,9 +33,9 @@ int		lets_graph(t_champ **list, t_mem *mem, t_arg *args)
 		check_cycle(list, mem, mem->c, args);
 		mem->c_todie--;
 		mem->c++;
-		print_mem(mem, *list);
+		print_mem(mem, *list, args);
 	}
-	print_mem(mem, *list);
+	print_mem(mem, *list, args);
 	getch();
 	endwin();
 	return (0);

@@ -52,8 +52,9 @@ typedef struct		s_arg
 {
 	char			name[MAX_PLAYERS][PROG_NAME_LENGTH + 1];
 	char			*champ_path[MAX_PLAYERS];
-	int				champ_number[MAX_PLAYERS];
 	int				nb_players;
+	int				dump;
+	int				graph;
 }					t_arg;
 
 typedef struct		s_mem
@@ -61,8 +62,6 @@ typedef struct		s_mem
 	int				id;
 	unsigned char	*memory;
 	unsigned char	*map;
-	int				dump;
-	int				graph;
 	int				last_live;
 	t_graph			*img;
 	int				call_live;
@@ -81,7 +80,7 @@ static char			color[4][12] = {GRN, RED, BLUE, PINK};
  * FONCTIONS INITIALISATION
  */
 
-void				init_window(t_mem *mem, t_champ *list);
+void				init_window(t_mem *mem, t_champ *list, t_arg *args);
 
 void				init_champ(t_champ **champ, t_arg *args);
 void				generate_memory(t_champ **list, t_mem *aff);
@@ -93,7 +92,7 @@ int					check_cor(int ac, char **av);
  * FONCTIONS LECTURE ET ECRITURE
  */
 
-void				print_mem(t_mem *mem, t_champ *list);
+void				print_mem(t_mem *mem, t_champ *list, t_arg *args);
 void				print_dump(t_mem *mem, t_champ *list);
 void				write_reg(t_champ *champ, int nb_of_reg, int nb_to_write);
 int					give_reg(t_champ *champ, int number);
@@ -104,7 +103,7 @@ unsigned int		recup_indirect2(t_mem *mem, t_champ *champ, int start);
 unsigned int		recup_direct4(t_mem *mem, t_champ *champ, int start);
 unsigned int		recup_direct2(t_mem *mem, t_champ *champ, int start);
 unsigned char		recup_octet(t_mem *mem, t_champ *champ, int n);
-int					mod_pc(t_champ *tmp, t_champ *list, t_mem *mem, int nu);
+int					mod_pc(t_champ *tmp, int nu);
 
 /*
  * FONCTIONS VRAC
@@ -117,7 +116,7 @@ int					list_len(t_champ *list);
 int					ft_error2(char code, t_champ *tmp, int nu);
 int					ft_error4(char code, t_champ *tmp, int nu);
 void				check_cycle(t_champ **list, t_mem *mem, int c, t_arg *args);
-int					check_live(t_champ **list);
+void				check_live(t_champ **list);
 void				kill_them_all(t_champ **list);
 
 /*

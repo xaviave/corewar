@@ -29,7 +29,7 @@ int		ft_sub(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 		value1 = give_reg(tmp, reg[0]);
 		value2 = give_reg(tmp, reg[1]);
 		write_reg(tmp, reg[2], value1 - value2);
-		tmp->pc = mod_pc(tmp, *list, mem, 5);
+		tmp->pc = mod_pc(tmp, 5);
 		return (value1 - value2 == 0 ? 1 : 0);
 	}
 		return (ft_error4(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 3));

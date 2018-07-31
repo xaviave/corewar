@@ -15,8 +15,8 @@
 
 int		ft_error4(char code, t_champ *tmp, int nu)
 {
-	int	i;
-	int	pc;
+	int		i;
+	int		pc;
 	char	test;
 
 	i = -1;
@@ -37,8 +37,8 @@ int		ft_error4(char code, t_champ *tmp, int nu)
 
 int		ft_error2(char code, t_champ *tmp, int nu)
 {
-	int	i;
-	int	pc;
+	int		i;
+	int		pc;
 	char	test;
 
 	i = -1;

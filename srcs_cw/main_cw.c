@@ -64,23 +64,22 @@ int		main(int ac, char **av)
 	t_mem	mem;
 
 	list = NULL;
-	ft_bzero(args.champ_number, MAX_PLAYERS * sizeof(int));
 	if (ac < 3 || (args.nb_players = check_cor(ac, av)) < 2 ||
 			args.nb_players > MAX_PLAYERS || !parse_arg(ac, av, &args, &mem))
 		return (ft_printf("./corewar [-graph] [-dump nbr_cycles] [[-n number] champion1.cor]\n"));
 	init_champ(&list, &args);
 	generate_memory(&list, &mem);
-	if (mem.graph == 1)
+	if (args.graph == 1)
 		lets_graph(&list, &mem, &args);
 	else
 	{
 		introduce(list, &args);
-		if (mem.dump == -1)
+		if (args.dump == -1)
 			lets_go(&list, &mem, &args);
 		else
 			lets_dump(&list, &mem, &args);
 	}
-	if (mem.graph == -1 && mem.dump == -1)
+	if (args.graph == -1 && args.dump == -1)
 		ft_printf("Contestant %d, \"%s\", has won !\n",
 			mem.last_live, args.name[mem.last_live - 1]);
 	game_over(&mem);
