@@ -15,17 +15,8 @@
 
 void		add_champ(t_champ **start, t_champ *to_add)
 {
-	t_champ	*tmp;
-
-	if (*start == NULL)
-	{
-		*start = to_add;
-		return ;
-	}
-	tmp = *start;
-	while (tmp->next)
-		tmp = tmp->next;
-	tmp->next = to_add;
+	to_add->next = *start;
+	*start = to_add;
 }
 
 t_champ		*create_champ(char *file, int prog_size, t_champ **list, int number)
@@ -151,13 +142,5 @@ void		init_champ(t_champ **list, t_arg *args)
 		*list = create_champ(file, prog_size, list, i + 1);
 		ft_memcpy(args->name[i],(*list)->name, PROG_NAME_LENGTH + 1);
 		ft_strdel(&file);
-	}
-	t_champ *test;
-	test = *list;
-	ft_printf("Introducing contestants...\n");
-	while (test)
-	{
-		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n", test->number, test->prog_size, test->name, test->comment);
-		test = test->next;
 	}
 }

@@ -41,13 +41,13 @@ int			ft_st(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 		mem->memory[(tmp->pc + add + 1 + MEM_SIZE) % MEM_SIZE] = (unsigned int)(value & 0xFF0000) >> 16;
 		mem->memory[(tmp->pc + add + 2 + MEM_SIZE) % MEM_SIZE] = (unsigned int)(value & 0xFF00) >> 8;
 		mem->memory[(tmp->pc + add + 3 + MEM_SIZE) % MEM_SIZE] = (unsigned int)(value & 0xFF);
-		mem->map[(tmp->pc + add + MEM_SIZE) % MEM_SIZE] = mem->map[tmp->pc];
-		mem->map[(tmp->pc + add + 1 + MEM_SIZE) % MEM_SIZE] = mem->map[tmp->pc];
-		mem->map[(tmp->pc + add + 2 + MEM_SIZE) % MEM_SIZE] = mem->map[tmp->pc];
-		mem->map[(tmp->pc + add + 3 + MEM_SIZE) % MEM_SIZE] = mem->map[tmp->pc];
+		mem->map[(tmp->pc + add + MEM_SIZE) % MEM_SIZE] = tmp->number;;
+		mem->map[(tmp->pc + add + 1 + MEM_SIZE) % MEM_SIZE] = tmp->number;
+		mem->map[(tmp->pc + add + 2 + MEM_SIZE) % MEM_SIZE] = tmp->number;
+		mem->map[(tmp->pc + add + 3 + MEM_SIZE) % MEM_SIZE] = tmp->number;
 		tmp->pc = mod_pc(tmp, *list, mem, 5);
 	}
 	else
-		ft_error4(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1, 2);
+		ft_error4(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 2);
 	return (-1);
 }

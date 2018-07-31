@@ -52,20 +52,39 @@ int		parse_player(int ac, char **av, t_arg *args, int i)
 	return (1);
 }
 
+int		parse_option(int ac, char **av, t_mem *aff, int *i)
+{
+	while (*i < ac && av[*i][0] == '-')
+	{
+		if (!ft_strcmp(av[*i], "-dump"))
+		{
+			if (*i + 1 == ac || !ft_strisdigit(av[*i + 1]))
+				return (0);
+			aff->dump = ft_atoi(av[*i + 1]);
+			*i += 2;
+		}
+		else if (!ft_strcmp(av[*i], "-graph"))
+		{
+			aff->graph = 1;
+			(*i)++;
+		}
+		else if (!ft_strcmp(av[*i], "-n"))
+			break ;
+		else
+			return (0);
+	}
+	return (1);
+}
+
 int		parse_arg(int ac, char **av, t_arg *args, t_mem *aff)
 {
 	int		i;
 
 	i = 1;
-	if (!ft_strcmp(av[1], "-dump"))
-	{
-		if (i + 1 == ac || !ft_strisdigit(av[i + 1]))
-			return (0);
-		aff->dump = ft_atoi(av[i + 1]);
-		i += 2;
-	}
-	else
-		aff->dump = -1;
+	aff->dump = -1;
+	aff->graph = -1;
+	if (!parse_option(ac, av, aff, &i))
+		return (0);
 	ft_bzero(args->champ_path, MAX_PLAYERS * sizeof(char*));
 	ft_bzero(args->champ_number, MAX_PLAYERS * sizeof(int));
 	return (parse_player(ac, av, args, i));

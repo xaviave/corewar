@@ -26,17 +26,17 @@ int		ft_sti(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	{
 		reg = mem->memory[(tmp->pc + i) % MEM_SIZE];
 		if (!reg || reg > 16)
-			return (ft_error2(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1, 3));
+			return (ft_error2(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 3));
 		value[0] = give_reg(tmp, reg);
 		i++;
 	}
 	else
-		return (ft_error2(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1, 3));
+		return (ft_error2(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 3));
 	if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b110000) >> 4 == 1)
 	{
 		reg = mem->memory[(tmp->pc + i) % MEM_SIZE];
 		if (!reg || reg > 16)
-			return (ft_error2(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1, 3));
+			return (ft_error2(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 3));
 		value[1] = give_reg(tmp, reg);
 		i++;
 	}
@@ -53,12 +53,12 @@ int		ft_sti(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 		i += 2;
 	}
 	else
-		return (ft_error2(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1, 3));
+		return (ft_error2(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 3));
 	if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b1100) >> 2 == 1)
 	{
 		reg = mem->memory[(tmp->pc + i) % MEM_SIZE];
 		if (!reg || reg > 16)
-			return (ft_error2(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1, 3));
+			return (ft_error2(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 3));
 		value[2] = give_reg(tmp, reg);
 		i++;
 	}
@@ -70,17 +70,17 @@ int		ft_sti(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 		i += 2;
 	}
 	else
-		return (ft_error2(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1, 3));
+		return (ft_error2(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 3));
 	add = (value[1] + value[2]) % IDX_MOD;
 	add = (add + tmp->pc + MEM_SIZE) % MEM_SIZE;
 	mem->memory[add] = (unsigned int)(value[0] & 0xFF000000) >> 24;
 	mem->memory[(add + 1) % MEM_SIZE] = (unsigned int)(value[0] & 0xFF0000) >> 16;
 	mem->memory[(add + 2) % MEM_SIZE] = (unsigned int)(value[0] & 0xFF00) >> 8;
 	mem->memory[(add + 3) % MEM_SIZE] = (unsigned int)(value[0] & 0xFF);
-	mem->map[add] = mem->map[tmp->pc];
-	mem->map[(add + 1) % MEM_SIZE] = mem->map[tmp->pc];
-	mem->map[(add + 2) % MEM_SIZE] = mem->map[tmp->pc];
-	mem->map[(add + 3) % MEM_SIZE] = mem->map[tmp->pc];
+	mem->map[add] = tmp->number;
+	mem->map[(add + 1) % MEM_SIZE] = tmp->number;
+	mem->map[(add + 2) % MEM_SIZE] = tmp->number;
+	mem->map[(add + 3) % MEM_SIZE] = tmp->number;
 	tmp->pc = mod_pc(tmp, *list, mem, i);
 	return (-1);
 }

@@ -25,7 +25,7 @@ int		ft_or(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	{
 		reg = mem->memory[(tmp->pc + i) % MEM_SIZE];
 		if (!reg || reg > 16)
-			return (ft_error4(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 0, 3));
+			return (ft_error4(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 3));
 		value[0] = give_reg(tmp, mem->memory[(tmp->pc + i) % MEM_SIZE]);
 		i++;
 	}
@@ -40,12 +40,12 @@ int		ft_or(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 		i += 2;
 	}
 	else
-		return (ft_error4(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 0, 3));
+		return (ft_error4(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 3));
 	if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b110000) >> 4 == 1)
 	{
 		reg = mem->memory[(tmp->pc + i) % MEM_SIZE];
 		if (!reg || reg > 16)
-			return (ft_error4(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 0, 3));
+			return (ft_error4(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 3));
 		value[1] = give_reg(tmp, reg);
 		i++;
 	}
@@ -60,7 +60,7 @@ int		ft_or(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 		i += 2;
 	}
 	else
-		return (ft_error4(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 0, 3));
+		return (ft_error4(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 3));
 	reg = mem->memory[(tmp->pc + i) % MEM_SIZE];
 	if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b1100) >> 2 == 1 && reg &&
 			reg < 17 && !(mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b11))
@@ -70,5 +70,5 @@ int		ft_or(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 		return ((value[0] | value[1]) == 0 ? 1 : 0);
 	}
 	else
-		return (ft_error4(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 0, 3));
+		return (ft_error4(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 3));
 }

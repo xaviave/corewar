@@ -48,6 +48,7 @@ int		lets_dump(t_champ **list, t_mem *mem, t_arg *args)
 		mem->c_todie--;
 		mem->c++;
 	}
-	print_dump(mem, *list);
+	if (mem->c == mem->dump)
+		print_dump(mem, *list);
 	return (0);
 }

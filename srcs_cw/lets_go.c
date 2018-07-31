@@ -118,7 +118,6 @@ int		lets_go(t_champ **list, t_mem *mem, t_arg *args)
 	very_less = 0;
 	mem->c_todie = CYCLE_TO_DIE;
 	tmp = mem->c_todie;
-	init_window(mem, *list);
 	while (1)
 	{
 		if (mem->c_todie ==  0)
@@ -143,10 +142,6 @@ int		lets_go(t_champ **list, t_mem *mem, t_arg *args)
 		check_cycle(list, mem, mem->c, args);
 		mem->c_todie--;
 		mem->c++;
-		print_mem(mem, *list);
 	}
-	print_mem(mem, *list);
-	getch();
-	endwin();
 	return (0);
 }

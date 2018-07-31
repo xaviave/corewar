@@ -25,7 +25,7 @@ int		ft_lld(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 		reg = (int)mem->memory[(tmp->pc + 6) % MEM_SIZE];
 		tmp->pc = mod_pc(tmp, *list, mem, 7);
 		if (reg <= 0 || reg > 16)
-			return (ft_error4(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 0, 2));
+			return (ft_error4(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 2));
 		write_reg(tmp, reg, value);
 		return (value == 0 ? 1 : 0);
 	}
@@ -35,9 +35,9 @@ int		ft_lld(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 		reg = (int)mem->memory[(tmp->pc + 4) % MEM_SIZE];
 		tmp->pc = mod_pc(tmp, *list, mem, 5);
 		if (reg <= 0 || reg > 16)
-			return (ft_error4(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 0, 2));
+			return (ft_error4(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 2));
 		write_reg(tmp, reg, value);
 		return (value == 0 ? 1 : 0);
 	}
-	return (ft_error4(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 0, 2));
+	return (ft_error4(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 2));
 }

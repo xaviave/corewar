@@ -13,14 +13,13 @@
 
 #include "../includes/corewar.h"
 
-int		ft_error4(char code, t_champ *tmp, int ret, int nu)
+int		ft_error4(char code, t_champ *tmp, int nu)
 {
 	int	i;
 	int	pc;
 	int ah;
 	char	test;
 
-	ret = (int)ret;
 	i = -1;
 	pc = 2;
 	while (++i < nu)
@@ -37,14 +36,13 @@ int		ft_error4(char code, t_champ *tmp, int ret, int nu)
 	return (-1);
 }
 
-int		ft_error2(char code, t_champ *tmp, int ret, int nu)
+int		ft_error2(char code, t_champ *tmp, int nu)
 {
 	int	i;
 	int	pc;
 	int ah;
 	char	test;
 
-	ret = (int)ret;
 	i = -1;
 	pc = 2;
 	while (++i < nu)
