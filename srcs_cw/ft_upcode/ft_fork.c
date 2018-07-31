@@ -26,19 +26,14 @@ int		ft_fork(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	fork->next = *list;
 	add = recup_direct2(mem, tmp, 1);
 	if (add & 0x8000)
-		add = add % IDX_MOD - 512;
-	else
-		add = add % IDX_MOD;
+		add = add | 0xffff0000;
+	add = add % IDX_MOD;
 	fork->pc = (fork->pc + add + MEM_SIZE) % MEM_SIZE;
 	fork->next_instru = -1;
 	fork->cycle++;
 	*list = fork;
-	tmp->pc = mod_pc(tmp, *list, mem, 3);
-
-
+	tmp->pc = mod_pc(tmp, 3);
 	fork->id = mem->id;
 	mem->id++;
-
-
 	return (-1);
 }

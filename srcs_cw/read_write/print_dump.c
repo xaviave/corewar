@@ -13,10 +13,10 @@
 
 #include "../../includes/corewar.h"
 
-void	print_dump(t_mem *mem, t_champ *list)
+void	print_dump(t_mem *mem)
 {
-	int	i;
-	int	enter;
+	int		i;
+	int		enter;
 
 	i = 0;
 	enter = 1;

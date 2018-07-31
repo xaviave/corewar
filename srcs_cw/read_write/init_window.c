@@ -31,7 +31,7 @@ void print_menu(WINDOW *menu_win, int highlight)
 	x = 2;
 	y = 2;
 	box(menu_win, 0, 0);
-	while (++i < sizeof(choices) / sizeof(char *))
+	while (++i < (int)(sizeof(choices) / sizeof(char *)))
 	{
 		if (highlight == i + 1)
 		{
@@ -97,15 +97,18 @@ void init_menu(t_mem *mem)
 }
 
 
-void	init_window(t_mem *mem, t_champ *list)
+void	init_window(t_mem *mem, t_champ *list, t_arg *args)
 {
 	initscr();
 	clear();
 	noecho();
 	cbreak(); 
 	start_color();
-	init_pair(1, COLOR_RED, COLOR_BLACK);
-	init_pair(2, COLOR_GREEN, COLOR_BLACK);
+	init_pair(1, COLOR_GREEN, COLOR_BLACK);
+	init_pair(2, COLOR_BLUE, COLOR_BLACK);
+	init_pair(3, COLOR_RED, COLOR_BLACK);
+	init_pair(4, COLOR_CYAN, COLOR_BLACK);
+	init_pair(5, COLOR_WHITE, COLOR_BLACK);
 	init_menu(mem);
-	print_mem(mem, list);
+	print_mem(mem, list, args);
 }

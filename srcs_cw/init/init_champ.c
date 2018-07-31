@@ -13,12 +13,6 @@
 
 #include "../../includes/corewar.h"
 
-void		add_champ(t_champ **start, t_champ *to_add)
-{
-	to_add->next = *start;
-	*start = to_add;
-}
-
 t_champ		*create_champ(char *file, int prog_size, t_champ **list, int number)
 {
 	t_champ		*champ;
@@ -34,10 +28,9 @@ t_champ		*create_champ(char *file, int prog_size, t_champ **list, int number)
 	champ->cycle = 0;
 	champ->number = number;
 	champ->next_instru = -1;
-	champ->next = NULL;
+	champ->next = *list;
 	write_reg(champ, 1, -champ->number);
-	add_champ(list, champ);
-	return (*list);
+	return (champ);
 }
 
 char		*recup_file(char *path, int i)
@@ -105,28 +98,6 @@ int			check_prog_size(char *file)
 	return (0);
 }
 
-void		error(char *file, t_champ **list)
-{
-	t_champ		*champ;
-	t_champ		*tmp;
-
-	if (!(file))
-		ft_putstr("FILE INVALID\n");
-	else if (!check_magic(file))
-		ft_putstr("MAGIC INVALID\n");
-	else if (!check_prog_size(file))
-		ft_putstr("CHAMP TO BIG\n");
-	free(file);
-	champ = *list;
-	while (champ)
-	{
-		tmp = champ;
-		champ = champ->next;
-		free(tmp->reg);
-		free(tmp);
-	}
-}
-
 void		init_champ(t_champ **list, t_arg *args)
 {
 	int		i;
@@ -138,7 +109,18 @@ void		init_champ(t_champ **list, t_arg *args)
 	{
 		file = recup_file(args->champ_path[i], 0);
 		if (!file || !check_magic(file) || !(prog_size = check_prog_size(file)))
-			return (error(file, list));
+		{
+			if (!file)
+				ft_putstr("FILE INVALID\n");
+			else if (!check_magic(file))
+				ft_putstr("MAGIC INVALID\n");
+			else if (!check_prog_size(file))
+				ft_putstr("CHAMP TOO BIG\n");
+			if (file)
+				free(file);
+			kill_them_all(list);
+			return ;
+		}
 		*list = create_champ(file, prog_size, list, i + 1);
 		ft_memcpy(args->name[i],(*list)->name, PROG_NAME_LENGTH + 1);
 		ft_strdel(&file);

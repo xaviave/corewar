@@ -21,6 +21,7 @@ int		ft_sti(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	unsigned int		reg;
 
 	args = (t_arg *)args;
+	list = (t_champ **)list;
 	i = 2;
 	if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b11000000) >> 6 == 1)
 	{
@@ -50,6 +51,8 @@ int		ft_sti(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	else if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b110000) >> 4 == 3)
 	{
 		value[1] = recup_indirect2x(mem, tmp, i);
+		if (value[1] & 0x8000)
+			value[1] = value[1] | 0xffff0000;
 		i += 2;
 	}
 	else
@@ -81,6 +84,6 @@ int		ft_sti(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	mem->map[(add + 1) % MEM_SIZE] = tmp->number;
 	mem->map[(add + 2) % MEM_SIZE] = tmp->number;
 	mem->map[(add + 3) % MEM_SIZE] = tmp->number;
-	tmp->pc = mod_pc(tmp, *list, mem, i);
+	tmp->pc = mod_pc(tmp, i);
 	return (-1);
 }

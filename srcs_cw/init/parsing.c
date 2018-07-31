@@ -13,33 +13,11 @@
 
 #include "../../includes/corewar.h"
 
-int		parse_player(int ac, char **av, t_arg *args, int i)
+int		end_parse_player(t_arg *args, int champ, char *temp[MAX_PLAYERS])
 {
-	int		champ;
-	char	*temp[MAX_PLAYERS];
+	int		i;
 	int		j;
 
-	champ = 0;
-	ft_bzero(temp, MAX_PLAYERS * sizeof(char*));
-	while (i < ac)
-	{
-		if (!ft_strcmp(av[i], "-n"))
-		{
-			if (i + 2 >= ac || !ft_strisdigit(av[i + 1])
-					|| ft_atoi(av[i + 1]) > args->nb_players
-					|| args->champ_number[ft_atoi(av[i + 1]) - 1] == 1)
-				return (0);
-			args->champ_number[ft_atoi(av[i + 1]) - 1] = 1;
-			args->champ_path[ft_atoi(av[i + 1]) - 1] = av[i + 2];
-			i += 2;
-		}
-		else
-		{
-			temp[champ] = av[i];
-			champ++;
-		}
-		i++;
-	}
 	j = 0;
 	while (j < champ)
 	{
@@ -52,7 +30,35 @@ int		parse_player(int ac, char **av, t_arg *args, int i)
 	return (1);
 }
 
-int		parse_option(int ac, char **av, t_mem *aff, int *i)
+int		parse_player(int ac, char **av, t_arg *args, int i)
+{
+	int		champ;
+	char	*temp[MAX_PLAYERS];
+
+	champ = 0;
+	ft_bzero(temp, MAX_PLAYERS * sizeof(char*));
+	while (i < ac)
+	{
+		if (!ft_strcmp(av[i], "-n"))
+		{
+			if (i + 2 >= ac || !ft_strisdigit(av[i + 1])
+					|| ft_atoi(av[i + 1]) > args->nb_players
+					|| args->champ_path[ft_atoi(av[i + 1]) - 1])
+				return (0);
+			args->champ_path[ft_atoi(av[i + 1]) - 1] = av[i + 2];
+			i += 2;
+		}
+		else
+		{
+			temp[champ] = av[i];
+			champ++;
+		}
+		i++;
+	}
+	return (end_parse_player(args, champ, temp));
+}
+
+int		parse_option(int ac, char **av, t_arg *args, int *i)
 {
 	while (*i < ac && av[*i][0] == '-')
 	{
@@ -60,12 +66,12 @@ int		parse_option(int ac, char **av, t_mem *aff, int *i)
 		{
 			if (*i + 1 == ac || !ft_strisdigit(av[*i + 1]))
 				return (0);
-			aff->dump = ft_atoi(av[*i + 1]);
+			args->dump = ft_atoi(av[*i + 1]);
 			*i += 2;
 		}
 		else if (!ft_strcmp(av[*i], "-graph"))
 		{
-			aff->graph = 1;
+			args->graph = 1;
 			(*i)++;
 		}
 		else if (!ft_strcmp(av[*i], "-n"))
@@ -76,17 +82,16 @@ int		parse_option(int ac, char **av, t_mem *aff, int *i)
 	return (1);
 }
 
-int		parse_arg(int ac, char **av, t_arg *args, t_mem *aff)
+int		parse_arg(int ac, char **av, t_arg *args)
 {
 	int		i;
 
 	i = 1;
-	aff->dump = -1;
-	aff->graph = -1;
-	if (!parse_option(ac, av, aff, &i))
+	args->dump = -1;
+	args->graph = -1;
+	if (!parse_option(ac, av, args, &i))
 		return (0);
 	ft_bzero(args->champ_path, MAX_PLAYERS * sizeof(char*));
-	ft_bzero(args->champ_number, MAX_PLAYERS * sizeof(int));
 	return (parse_player(ac, av, args, i));
 }
 

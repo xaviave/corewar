@@ -22,7 +22,7 @@ ASM = asm
 CW = corewar
 INC = includes/corewar.h includes/op.h includes/asm.h
 NCURSES_FLAG = -lncurses
-CFLAGS = -Wall
+CFLAGS = -Wall -Wextra -Werror
 
 
 #PATH
@@ -44,6 +44,7 @@ CW_FILES = main_cw.c\
 		   lets_go.c\
 		   lets_graph.c\
 		   lets_dump.c\
+		   tools.c\
 		   ft_error.c\
 		   init/parsing.c\
 		   init/init_champ.c\

@@ -13,12 +13,11 @@
 
 #include "../../includes/corewar.h"
 
-void	print_mem(t_mem *mem, t_champ *list)
+int			without_process(t_mem *mem)
 {
-	//return ;
-	int	i;
-	int	line;
-	int	col;
+	int		i;
+	int		line;
+	int		col;
 
 	i = -1;
 	line = 0;
@@ -27,48 +26,49 @@ void	print_mem(t_mem *mem, t_champ *list)
 	refresh();
 	while (++i < MEM_SIZE)
 	{
-		if (i)
+		if (i && i % 64 == 0)
 		{
-			if (i % 64 == 0)
-			{
-				line++;
-				col = 0;
-				move(line, col);
-			}
+			line++;
+			col = 0;
+			move(line, col);
 		}
-		if (mem->map[i] == 1)
-			attron(COLOR_PAIR(1));
-		else if (mem->map[i] == 2)
-			attron(COLOR_PAIR(2));
+		attron(COLOR_PAIR(mem->map[i] == 0 ? 5 : mem->map[i]));
 		printw("%02x ", mem->memory[i]);
-		attroff(COLOR_PAIR(1));
-		attroff(COLOR_PAIR(2));
 		col += 3;
 		move(line, col);
 	}
-	t_champ *tmp;
+	return (line);
+}
+
+void		draw_process(t_mem *mem, t_champ *list)
+{
+	t_champ		*tmp;
 
 	tmp = list;
 	while (tmp)
 	{
 		move(tmp->pc / 64, (tmp->pc % 64) * 3);
-		if (mem->map[tmp->pc] == 1)
-			attron(COLOR_PAIR(1));
-		else if (mem->map[tmp->pc] == 2)
-			attron(COLOR_PAIR(2));
+		attron(COLOR_PAIR(mem->map[tmp->pc]));
 		attron(A_STANDOUT);
 		printw("%02x", mem->memory[tmp->pc]);
-		attroff(A_STANDOUT);
-		attroff(COLOR_PAIR(1));
-		attroff(COLOR_PAIR(2));
+		attroff(COLOR_PAIR(mem->map[tmp->pc]));
 		tmp = tmp->next;
 	}
+	attroff(A_STANDOUT);
+}
+
+void		print_mem(t_mem *mem, t_champ *list, t_arg *args)
+{
+	int			line;
+
+	line = without_process(mem);
+	draw_process(mem, list);
 	attron(COLOR_PAIR(2));
 	move(line + 1, 0);
-	printw("cycle : %d | cycle to die : %d | processus : %d			", mem->c, mem->c_todie, list_len(list));
-	attroff(COLOR_PAIR(2));
+	printw("cycle : %d | cycle to die : %d | processus : %d			",
+		mem->c, mem->c_todie, list_len(list));
 	refresh();
-	if (mem->dump != -1 && mem->c < mem->dump)
+	if (args->dump != -1 && mem->c < args->dump)
 		return ;
 	if (mem->speed == 30000)
 		getch();

@@ -19,6 +19,7 @@ int			ft_st(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	unsigned int	reg;
 	int				add;
 
+	list = (t_champ **)list;
 	args = (t_arg *)args;
 	reg = mem->memory[(tmp->pc + 2) % MEM_SIZE];
 	if (mem->memory[(tmp->pc + 1) % MEM_SIZE] == 80 && reg && reg <= 16 &&
@@ -27,16 +28,15 @@ int			ft_st(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	{
 		value = give_reg(tmp, reg);
 		write_reg(tmp, mem->memory[(tmp->pc + 3) % MEM_SIZE], value);
-		tmp->pc = mod_pc(tmp, *list, mem, 4);
+		tmp->pc = mod_pc(tmp, 4);
 	}
 	else if (mem->memory[(tmp->pc + 1) % MEM_SIZE] == 112 && reg && reg <= 16)
 	{
 		value = give_reg(tmp, reg);
 		add = recup_direct2(mem, tmp, 3);
 		if (add & 0x8000)
-			add = add % IDX_MOD - 512;
-		else
-			add = add % IDX_MOD;
+			add = add | 0xffff0000;
+		add = add % IDX_MOD;
 		mem->memory[(tmp->pc + add + MEM_SIZE) % MEM_SIZE] = (unsigned int)(value & 0xFF000000) >> 24;
 		mem->memory[(tmp->pc + add + 1 + MEM_SIZE) % MEM_SIZE] = (unsigned int)(value & 0xFF0000) >> 16;
 		mem->memory[(tmp->pc + add + 2 + MEM_SIZE) % MEM_SIZE] = (unsigned int)(value & 0xFF00) >> 8;
@@ -45,7 +45,7 @@ int			ft_st(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 		mem->map[(tmp->pc + add + 1 + MEM_SIZE) % MEM_SIZE] = tmp->number;
 		mem->map[(tmp->pc + add + 2 + MEM_SIZE) % MEM_SIZE] = tmp->number;
 		mem->map[(tmp->pc + add + 3 + MEM_SIZE) % MEM_SIZE] = tmp->number;
-		tmp->pc = mod_pc(tmp, *list, mem, 5);
+		tmp->pc = mod_pc(tmp, 5);
 	}
 	else
 		ft_error4(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 2);

@@ -19,6 +19,7 @@ int		ft_lldi(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	unsigned int		value[3];
 	unsigned int		reg;
 
+	list = (t_champ **)list;
 	args = (t_arg *)args;
 	i = 2;
 	if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b11000000) >> 6 == 1)
@@ -62,7 +63,7 @@ int		ft_lldi(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	{
 		value[2] = recup_direct4(mem, tmp, value[0] + value[1]);
 		write_reg(tmp, mem->memory[(tmp->pc + i) % MEM_SIZE], value[2]);
-		tmp->pc = mod_pc(tmp, *list, mem, i + 1);
+		tmp->pc = mod_pc(tmp, i + 1);
 		return (value[2] == 0 ? 1 : 0);
 	}
 	else
