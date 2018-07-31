@@ -33,11 +33,15 @@ int		ft_ldi(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	else if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b11000000) >> 6 == 2)
 	{
 		value[0] = recup_direct2(mem, tmp, i);
+		if (value[0] & 0x8000)
+			value[0] = value[0] | 0xffff0000;
 		i += 2;
 	}
 	else if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b11000000) >> 6 == 3)
 	{
 		value[0] = recup_indirect2x(mem, tmp, i);
+		if (value[0] & 0x8000)
+			value[0] = value[0] | 0xffff0000;
 		i += 2;
 	}
 	else
@@ -53,15 +57,13 @@ int		ft_ldi(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	else if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b110000) >> 4 == 2)
 	{
 		value[1] = recup_direct2(mem, tmp, i);;
+		if (value[1] & 0x8000)
+			value[1] = value[1] | 0xffff0000;
 		i += 2;
 	}
 	else
 		return (ft_error2(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 3));
 	reg = mem->memory[(tmp->pc + i) % MEM_SIZE];
-	if (value[0] & 0x8000)
-		value[0] = value[0] | 0xffff0000;
-	if (value[1] & 0x8000)
-		value[1] = value[1] | 0xffff0000;
 	if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b1100) >> 2 == 1 && reg &&
 			reg < 17 && !(mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b11))
 	{

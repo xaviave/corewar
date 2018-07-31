@@ -51,6 +51,8 @@ int		ft_sti(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	else if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b110000) >> 4 == 3)
 	{
 		value[1] = recup_indirect2x(mem, tmp, i);
+		if (value[1] & 0x8000)
+			value[1] = value[1] | 0xffff0000;
 		i += 2;
 	}
 	else

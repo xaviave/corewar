@@ -22,19 +22,8 @@ int			ft_live(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	tmp->pc = mod_pc(tmp, 5);
 	mem->call_live++;
 	tmp->live++;
-	//tmp->pc = (5 + tmp->pc) % MEM_SIZE;
 	if (name > args->nb_players || name <= 0)
-	{
-	//	ft_putstr("------------------------------------------------------------ LIVE !!!\n");
 		return (-1);
-	}
 	mem->last_live = name;
-	/*
-	ft_putstr(YEL"un processus dit que le joueur ");
-	ft_putnbr(name);
-	ft_putchar('(');
-	ft_putstr(args->name[name - 1]);
-	ft_putstr(") est en vie\n"RESET);
-	*/
 	return (-1);
 }

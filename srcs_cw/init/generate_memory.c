@@ -30,7 +30,8 @@ int					list_len(t_champ *list)
 	return (i);
 }
 
-void				put_champ_mem(t_champ *list, int player, int nb_player, t_mem *mem)
+void				put_champ_mem(t_champ *list, int player, int nb_player,
+																	t_mem *mem)
 {
 	int				i;
 	int				j;

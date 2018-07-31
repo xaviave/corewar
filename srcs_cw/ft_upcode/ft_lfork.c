@@ -32,11 +32,7 @@ int		ft_lfork(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	fork->cycle++;
 	*list = fork;
 	tmp->pc = mod_pc(tmp, 3);
-
-
 	fork->id = mem->id;
 	mem->id++;
-
-
 	return (-1);
 }
