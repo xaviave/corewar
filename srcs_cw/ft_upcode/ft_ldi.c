@@ -25,7 +25,7 @@ int		ft_ldi(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	{
 		reg = mem->memory[(tmp->pc + i) % MEM_SIZE];
 		if (!reg || reg > 16)
-			return (ft_error2(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 0, 3));
+			return (ft_error2(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1, 3));
 		value[0] = give_reg(tmp, reg);
 		i++;
 	}
@@ -40,12 +40,12 @@ int		ft_ldi(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 		i += 2;
 	}
 	else
-		return (ft_error2(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 0, 3));
+		return (ft_error2(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1, 3));
 	if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b110000) >> 4 == 1)
 	{
 		reg = mem->memory[(tmp->pc + i) % MEM_SIZE];
 		if (!reg || reg > 16)
-			return (ft_error2(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 0, 3));
+			return (ft_error2(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1, 3));
 		value[1] = give_reg(tmp, reg);
 		i++;
 	}
@@ -55,7 +55,7 @@ int		ft_ldi(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 		i += 2;
 	}
 	else
-		return (ft_error2(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 0, 3));
+		return (ft_error2(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1, 3));
 	reg = mem->memory[(tmp->pc + i) % MEM_SIZE];
 	if (value[0] & 0x8000)
 		value[0] = value[0] | 0xffff0000;
@@ -67,8 +67,8 @@ int		ft_ldi(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 		value[2] = recup_direct4(mem, tmp, (value[0] + value[1]) % IDX_MOD);
 		write_reg(tmp, mem->memory[(tmp->pc + i) % MEM_SIZE], value[2]);
 		tmp->pc = mod_pc(tmp, *list, mem, i + 1);
-		return (value[2] == 0 ? 1 : 0);
+		return (-1);
 	}
 	else
-		return (ft_error2(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 0, 3));
+		return (ft_error2(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, -1, 3));
 }

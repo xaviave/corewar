@@ -68,10 +68,8 @@ void	print_mem(t_mem *mem, t_champ *list)
 	printw("cycle : %d | cycle to die : %d | processus : %d			", mem->c, mem->c_todie, list_len(list));
 	attroff(COLOR_PAIR(2));
 	refresh();
-	/*
-	if (mem->c < 10540)
+	if (mem->c < 12000)
 		return ;
-		*/
 	if (mem->speed == 30000)
 		getch();
 	else if (mem->speed)

@@ -23,7 +23,7 @@ int		ft_zjmp(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 		value = value % IDX_MOD - 512;
 	else
 		value = value % IDX_MOD;
-	if (tmp->carry == 0 || value == 0)
+	if (tmp->carry == 0)
 	{
 		tmp->pc = mod_pc(tmp, *list, mem, 3);
 		return (-1);

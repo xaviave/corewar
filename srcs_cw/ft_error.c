@@ -13,13 +13,14 @@
 
 #include "../includes/corewar.h"
 
-int		ft_error(char code, t_champ *tmp, int ret, int nu)
+int		ft_error4(char code, t_champ *tmp, int ret, int nu)
 {
 	int	i;
 	int	pc;
 	int ah;
 	char	test;
 
+	ret = (int)ret;
 	i = -1;
 	pc = 2;
 	while (++i < nu)
@@ -33,5 +34,29 @@ int		ft_error(char code, t_champ *tmp, int ret, int nu)
 			pc += 2;
 	}
 	tmp->pc = (tmp->pc + pc) % MEM_SIZE;
-	return (ret);
+	return (-1);
+}
+
+int		ft_error2(char code, t_champ *tmp, int ret, int nu)
+{
+	int	i;
+	int	pc;
+	int ah;
+	char	test;
+
+	ret = (int)ret;
+	i = -1;
+	pc = 2;
+	while (++i < nu)
+	{
+		test = (code >> (6 - i * 2)) & 0b00000011;
+		if (test == REG_CODE)
+			pc += 1;
+		else if (test == DIR_CODE)
+			pc += 2;
+		else if (test == IND_CODE)
+			pc += 2;
+	}
+	tmp->pc = (tmp->pc + pc) % MEM_SIZE;
+	return (-1);
 }

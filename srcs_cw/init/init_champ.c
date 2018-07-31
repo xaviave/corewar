@@ -38,7 +38,7 @@ t_champ		*create_champ(char *file, int prog_size, t_champ **list, int number)
 	ft_memcpy(champ->prog, file + 2192, prog_size);
 	champ->reg = ft_memalloc(REG_SIZE * REG_NUMBER);
 	champ->prog_size = prog_size;
-	champ->carry = 1;
+	champ->carry = 0;
 	champ->live = 0;
 	champ->cycle = 0;
 	champ->number = number;
