@@ -21,7 +21,7 @@ int		lets_dump(t_champ **list, t_mem *mem, t_arg *args)
 	very_less = 0;
 	mem->c_todie = CYCLE_TO_DIE;
 	mem->c_before_check = mem->c_todie;
-	while (mem->c <= args->dump && *list)
+	while (mem->c < args->dump && *list)
 		one_cycle(list, mem, args, &very_less);
 	if (*list)
 	{
