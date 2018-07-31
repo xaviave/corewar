@@ -41,6 +41,7 @@ CW_OBJS_PATH = ./srcs_cw/
 
 CW_FILES = main_cw.c\
 		   lets_go.c\
+		   lets_graph.c\
 		   lets_dump.c\
 		   ft_error.c\
 		   init/parsing.c\
