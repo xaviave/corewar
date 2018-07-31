@@ -79,8 +79,8 @@ typedef struct		s_mem
  */
 
 void				init_window(t_mem *mem, t_champ *list, t_arg *args);
-void				init_champ(t_champ **champ, t_arg *args);
-void				generate_memory(t_champ **list, t_mem *aff);
+int					init_champ(t_champ **champ, t_arg *args);
+void				generate_memory(t_champ **list, t_mem *aff, t_arg *args);
 int					check_cor(int ac, char **av);
 int					parse_arg(int ac, char **av, t_arg *args);
 int					check_cor(int ac, char **av);

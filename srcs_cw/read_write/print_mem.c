@@ -37,7 +37,7 @@ int			without_process(t_mem *mem)
 		col += 3;
 		move(line, col);
 	}
-	return (line);
+	return (col);
 }
 
 void		draw_process(t_mem *mem, t_champ *list)
@@ -57,16 +57,44 @@ void		draw_process(t_mem *mem, t_champ *list)
 	attroff(A_STANDOUT);
 }
 
+void		legend(t_champ *list, t_mem *mem, t_arg *args, int col)
+{
+	int		i;
+
+	i = 0;
+	while (i <args->nb_players)
+	{
+		move(2 * (i + 1), col + 3);
+		attron(COLOR_PAIR(i + 1));
+		printw("Player %d : %s", i + 1, args->name[i]);
+		i++;
+	}
+	attron(COLOR_PAIR(6));
+	attron(A_BOLD);
+	move(4 + 2 * (i + 1), col + 3);
+	printw("cycle :        %5d", mem->c);
+	move(6 + 2 * (i + 1), col + 3);
+	printw("cycle to die : %5d", mem->c_todie);
+	move(8 + 2 * (i + 1), col + 3);
+	printw("processus :    %5d", list_len(list));
+	move(10 + 2 * (i + 1), col + 3);
+	if (list_len(list))
+		printw("LAST LIVE : ");
+	else
+		printw("The winner is : ");
+	attron(COLOR_PAIR(mem->last_live));
+	clrtoeol();
+	printw("%s", args->name[mem->last_live - 1]);
+	attroff(A_BOLD);
+}
+
 void		print_mem(t_mem *mem, t_champ *list, t_arg *args)
 {
-	int			line;
+	int			col;
 
-	line = without_process(mem);
+	col = without_process(mem);
 	draw_process(mem, list);
-	attron(COLOR_PAIR(2));
-	move(line + 1, 0);
-	printw("cycle : %d | cycle to die : %d | processus : %d			",
-		mem->c, mem->c_todie, list_len(list));
+	legend(list, mem, args, col);
 	refresh();
 	if (args->dump != -1 && mem->c < args->dump)
 		return ;

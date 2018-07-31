@@ -67,8 +67,9 @@ int		main(int ac, char **av)
 	if (ac < 3 || (args.nb_players = check_cor(ac, av)) < 2 ||
 			args.nb_players > MAX_PLAYERS || !parse_arg(ac, av, &args))
 		return (ft_printf("./corewar [-graph] [-dump nbr_cycles] [[-n number] champion1.cor]\n"));
-	init_champ(&list, &args);
-	generate_memory(&list, &mem);
+	if (!init_champ(&list, &args))
+		return (0);
+	generate_memory(&list, &mem, &args);
 	if (args.graph == 1)
 		lets_graph(&list, &mem, &args);
 	else

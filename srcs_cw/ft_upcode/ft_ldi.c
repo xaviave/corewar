@@ -65,7 +65,7 @@ int		ft_ldi(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 		return (ft_error2(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 3));
 	reg = mem->memory[(tmp->pc + i) % MEM_SIZE];
 	if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b1100) >> 2 == 1 && reg &&
-			reg < 17 && !(mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b11))
+			reg < 17)
 	{
 		value[2] = recup_direct4(mem, tmp, (value[0] + value[1]) % IDX_MOD);
 		write_reg(tmp, mem->memory[(tmp->pc + i) % MEM_SIZE], value[2]);
