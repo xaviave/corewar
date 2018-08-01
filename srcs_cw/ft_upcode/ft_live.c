@@ -25,5 +25,7 @@ int			ft_live(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	if (name > args->nb_players || name <= 0)
 		return (-1);
 	mem->last_live = name;
+	(mem->player_live[name - 1])++;
+	mem->player_last[name - 1] = mem->c;
 	return (-1);
 }

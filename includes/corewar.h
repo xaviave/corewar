@@ -65,6 +65,8 @@ typedef struct		s_mem
 	int				id;
 	unsigned char	*memory;
 	unsigned char	*map;
+	int				player_live[MAX_PLAYERS];
+	int				player_last[MAX_PLAYERS];
 	int				last_live;
 	int				call_live;
 	int				c;
@@ -79,8 +81,8 @@ typedef struct		s_mem
  */
 
 void				init_window(t_mem *mem, t_champ *list, t_arg *args);
-void				init_champ(t_champ **champ, t_arg *args);
-void				generate_memory(t_champ **list, t_mem *aff);
+int					init_champ(t_champ **champ, t_arg *args);
+void				generate_memory(t_champ **list, t_mem *aff, t_arg *args);
 int					check_cor(int ac, char **av);
 int					parse_arg(int ac, char **av, t_arg *args);
 int					check_cor(int ac, char **av);
@@ -89,8 +91,6 @@ int					check_cor(int ac, char **av);
  * FONCTIONS LECTURE ET ECRITURE
  */
 
-void				print_mem(t_mem *mem, t_champ *list, t_arg *args);
-void				print_dump(t_mem *mem);
 void				write_reg(t_champ *champ, int nb_of_reg, int nb_to_write);
 int					give_reg(t_champ *champ, int number);
 unsigned int		recup_indirect4x(t_mem *mem, t_champ *champ, int start);
@@ -137,6 +137,14 @@ int		ft_lld(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *arg);
 int		ft_lldi(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *arg);
 int		ft_lfork(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *arg);
 int		ft_aff(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *arg);
+
+/*
+ * FONCTIONS GRAPHIQUES
+ */
+
+void				print_mem(t_mem *mem, t_champ *list, t_arg *args);
+void				print_dump(t_mem *mem);
+void				legend(t_champ *list, t_mem *mem, t_arg *args, int col);
 
 /*
  * **   KEY

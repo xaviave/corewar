@@ -37,7 +37,7 @@ int			without_process(t_mem *mem)
 		col += 3;
 		move(line, col);
 	}
-	return (line);
+	return (col);
 }
 
 void		draw_process(t_mem *mem, t_champ *list)
@@ -57,21 +57,55 @@ void		draw_process(t_mem *mem, t_champ *list)
 	attroff(A_STANDOUT);
 }
 
+int			control(t_mem *mem, int key)
+{
+	if (key == KEY_SPACE)
+		return (0);
+	else if (key == KEY_R && mem->speed > 10000)
+		mem->speed -= 10000;
+	else if (key == KEY_R)
+		mem->speed = 0;
+	else if (key == KEY_E && mem->speed > 1000)
+		mem->speed -= 1000;
+	else if (key == KEY_E)
+		mem->speed = 0;
+	else if (key == KEY_W && mem->speed < 999000)
+		mem->speed += 1000;
+	else if (key == KEY_W)
+		mem->speed = 999000;
+	else if (key == KEY_Q && mem->speed < 990000)
+		mem->speed += 10000;
+	else if (key == KEY_Q)
+		mem->speed = 999000;
+	move(2, 195);
+	attron(COLOR_PAIR(6));
+	attron(A_BOLD);
+	printw("Speed :                       %5d", 1000 - mem->speed / 1000);
+	attroff(COLOR_PAIR(6));
+	attroff(A_BOLD);
+	return (1);
+}
+
 void		print_mem(t_mem *mem, t_champ *list, t_arg *args)
 {
-	int			line;
+	int			col;
+	int			key;
 
-	line = without_process(mem);
+	col = without_process(mem);
 	draw_process(mem, list);
-	attron(COLOR_PAIR(2));
-	move(line + 1, 0);
-	printw("cycle : %d | cycle to die : %d | processus : %d			",
-		mem->c, mem->c_todie, list_len(list));
+	legend(list, mem, args, col);
 	refresh();
 	if (args->dump != -1 && mem->c < args->dump)
 		return ;
-	if (mem->speed == 30000)
-		getch();
-	else if (mem->speed)
-		usleep(mem->speed);
+	key = getch();
+	col = 1;
+	if (key == KEY_SPACE)
+		while (col || control(mem, key))
+		{
+			key = getch();
+			col = 0;
+		}
+	else
+		control(mem, key);
+	usleep(mem->speed);
 }

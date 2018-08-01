@@ -9,12 +9,14 @@ int		lets_graph(t_champ **list, t_mem *mem, t_arg *args)
 	mem->c_todie = CYCLE_TO_DIE;
 	mem->c_before_check = mem->c_todie;
 	init_window(mem, *list, args);
+	nodelay(stdscr, 1);
 	while (*list)
 	{
 		one_cycle(list, mem, args, &very_less);
 		print_mem(mem, *list, args);
 	}
 	print_mem(mem, *list, args);
+	nodelay(stdscr, 0);
 	getch();
 	endwin();
 	return (0);

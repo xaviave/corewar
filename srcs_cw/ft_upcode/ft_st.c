@@ -22,7 +22,7 @@ int			ft_st(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	list = (t_champ **)list;
 	args = (t_arg *)args;
 	reg = mem->memory[(tmp->pc + 2) % MEM_SIZE];
-	if (mem->memory[(tmp->pc + 1) % MEM_SIZE] == 80 && reg && reg <= 16 &&
+	if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0xf0) == 80 && reg && reg <= 16 &&
 				mem->memory[(tmp->pc + 3) % MEM_SIZE] &&
 				mem->memory[(tmp->pc + 3) % MEM_SIZE] <= 16)
 	{
@@ -30,7 +30,7 @@ int			ft_st(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 		write_reg(tmp, mem->memory[(tmp->pc + 3) % MEM_SIZE], value);
 		tmp->pc = mod_pc(tmp, 4);
 	}
-	else if (mem->memory[(tmp->pc + 1) % MEM_SIZE] == 112 && reg && reg <= 16)
+	else if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0xf0) == 112 && reg && reg <= 16)
 	{
 		value = give_reg(tmp, reg);
 		add = recup_direct2(mem, tmp, 3);

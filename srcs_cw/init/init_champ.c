@@ -98,7 +98,7 @@ int			check_prog_size(char *file)
 	return (0);
 }
 
-void		init_champ(t_champ **list, t_arg *args)
+int			init_champ(t_champ **list, t_arg *args)
 {
 	int		i;
 	char	*file;
@@ -110,19 +110,15 @@ void		init_champ(t_champ **list, t_arg *args)
 		file = recup_file(args->champ_path[i], 0);
 		if (!file || !check_magic(file) || !(prog_size = check_prog_size(file)))
 		{
-			if (!file)
-				ft_putstr("FILE INVALID\n");
-			else if (!check_magic(file))
-				ft_putstr("MAGIC INVALID\n");
-			else if (!check_prog_size(file))
-				ft_putstr("CHAMP TOO BIG\n");
+			ft_putstr("FILE INVALID\n");
 			if (file)
 				free(file);
 			kill_them_all(list);
-			return ;
+			return (0);
 		}
 		*list = create_champ(file, prog_size, list, i + 1);
 		ft_memcpy(args->name[i],(*list)->name, PROG_NAME_LENGTH + 1);
 		ft_strdel(&file);
 	}
+	return (1);
 }

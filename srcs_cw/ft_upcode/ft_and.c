@@ -64,7 +64,7 @@ int		ft_and(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 		return (ft_error4(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 3));
 	reg = mem->memory[(tmp->pc + i) % MEM_SIZE];
 	if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b1100) >> 2 == 1 && reg &&
-			reg < 17 && !(mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b11))
+			reg < 17)
 	{
 		write_reg(tmp, reg, value[0] & value[1]);
 		tmp->pc = mod_pc(tmp, i + 1);

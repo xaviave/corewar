@@ -44,7 +44,7 @@ CW_FILES = main_cw.c\
 		   lets_go.c\
 		   lets_graph.c\
 		   lets_dump.c\
-		   tools.c\
+		   one_cycle.c\
 		   ft_error.c\
 		   init/parsing.c\
 		   init/init_champ.c\
@@ -52,9 +52,10 @@ CW_FILES = main_cw.c\
 		   read_write/access_reg.c\
 		   read_write/access_pc.c\
 		   read_write/recup_args.c\
-		   read_write/print_mem.c\
-		   read_write/print_dump.c\
-		   read_write/init_window.c\
+		   graph/init_window.c\
+		   graph/print_mem.c\
+		   graph/print_dump.c\
+		   graph/legend.c\
 		   ft_upcode/ft_live.c\
 		   ft_upcode/ft_ld.c\
 		   ft_upcode/ft_st.c\
