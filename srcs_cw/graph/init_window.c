@@ -98,7 +98,7 @@ void init_menu(t_mem *mem)
 }
 
 
-void	init_window(t_mem *mem, t_champ *list, t_arg *args)
+void	init_window(t_mem *mem, t_champ *list, t_arg *args, int *stop)
 {
 	initscr();
 	clear();
@@ -113,5 +113,5 @@ void	init_window(t_mem *mem, t_champ *list, t_arg *args)
 	init_pair(6, COLOR_YELLOW, COLOR_BLACK);
 	init_menu(mem);
 	nodelay(stdscr, 1);
-	print_mem(mem, list, args, 1);
+	*stop = print_mem(mem, list, args, 1);
 }

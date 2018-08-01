@@ -80,7 +80,7 @@ typedef struct		s_mem
  * FONCTIONS INITIALISATION
  */
 
-void				init_window(t_mem *mem, t_champ *list, t_arg *args);
+void				init_window(t_mem *mem, t_champ *list, t_arg *args, int *s);
 int					init_champ(t_champ **champ, t_arg *args);
 void				generate_memory(t_champ **list, t_mem *aff, t_arg *args);
 int					check_cor(int ac, char **av);
@@ -142,7 +142,7 @@ int		ft_aff(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *arg);
  * FONCTIONS GRAPHIQUES
  */
 
-void				print_mem(t_mem *mem, t_champ *list, t_arg *args, int stop);
+int					print_mem(t_mem *mem, t_champ *list, t_arg *args, int stop);
 void				print_dump(t_mem *mem);
 void				legend(t_champ *list, t_mem *mem, t_arg *args, int col);
 
