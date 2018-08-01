@@ -91,8 +91,6 @@ int					check_cor(int ac, char **av);
  * FONCTIONS LECTURE ET ECRITURE
  */
 
-void				print_mem(t_mem *mem, t_champ *list, t_arg *args);
-void				print_dump(t_mem *mem);
 void				write_reg(t_champ *champ, int nb_of_reg, int nb_to_write);
 int					give_reg(t_champ *champ, int number);
 unsigned int		recup_indirect4x(t_mem *mem, t_champ *champ, int start);
@@ -139,6 +137,14 @@ int		ft_lld(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *arg);
 int		ft_lldi(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *arg);
 int		ft_lfork(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *arg);
 int		ft_aff(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *arg);
+
+/*
+ * FONCTIONS GRAPHIQUES
+ */
+
+void				print_mem(t_mem *mem, t_champ *list, t_arg *args);
+void				print_dump(t_mem *mem);
+void				legend(t_champ *list, t_mem *mem, t_arg *args, int col);
 
 /*
  * **   KEY
