@@ -91,13 +91,14 @@ void init_menu(t_mem *mem)
 		if(choice != 0)
 			break;
 	}
-	mem->speed = (choice - 1) * 333000;
+	mem->speed = (117 * ft_pow(choice, 3) - 652 * ft_pow(choice, 2) +
+													137 * choice + 2398) / 2;
 	refresh();
 	free(menu_win);
 }
 
 
-void	init_window(t_mem *mem, t_champ *list, t_arg *args)
+void	init_window(t_mem *mem, t_champ *list, t_arg *args, int *stop)
 {
 	initscr();
 	clear();
@@ -111,5 +112,6 @@ void	init_window(t_mem *mem, t_champ *list, t_arg *args)
 	init_pair(5, COLOR_WHITE, COLOR_BLACK);
 	init_pair(6, COLOR_YELLOW, COLOR_BLACK);
 	init_menu(mem);
-	print_mem(mem, list, args);
+	nodelay(stdscr, 1);
+	*stop = print_mem(mem, list, args, 1);
 }
