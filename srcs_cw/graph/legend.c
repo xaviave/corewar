@@ -1,52 +1,24 @@
 #include "../../includes/corewar.h"
 
-void		draw_breakdown(t_mem *mem, int col, int line)
+void		info_cycle(t_champ *list, t_mem *mem, int col)
 {
-	int		i;
-	int		j;
-	int		limit[4];
-
-	i = -1;
-	j = 0;
-	while (++i < 4)
-		j += mem->player_live[i];
-	limit[0] = j == 0 ? 0 : 35 * mem->player_live[0] / j;
-	limit[1] = j == 0 ? 0 : 35 * mem->player_live[1] / j + limit[0];
-	limit[2] = j == 0 ? 0 : 35 * mem->player_live[2] / j + limit[1];
-	limit[3] = j == 0 ? 0 : 35 * mem->player_live[3] / j + limit[2];
-	i = -1;
-	j = 0;
-	move(line, col + 3);
-	while (++i < 35)
-	{
-		if (j < limit[0])
-			attron(COLOR_PAIR(1));
-		else if (j < limit[1])
-			attron(COLOR_PAIR(2));
-		else if (j < limit[2])
-			attron(COLOR_PAIR(3));
-		else if (j < limit[3])
-			attron(COLOR_PAIR(4));
-		printw("-");
-		j++;
-	}
-}
-
-void		legend(t_champ *list, t_mem *mem, t_arg *args, int col)
-{
-	int		i;
-
-	i = 0;
-	attron(A_BOLD);
-	attron(COLOR_PAIR(6));
 	move(1, col + 3);
 	printw("Cycle :                       %5d", mem->c);
 	move(4, col + 3);
-	printw("Cycle Before Check :          %5d", mem->c_before_check);
+	printw("Cycles Before Check :         %5d", mem->c_before_check);
 	move(6, col + 3);
 	printw("Cycle To Die :                %5d", mem->c_todie);
 	move(8, col + 3);
 	printw("Processus :                   %5d", list_len(list));
+	move(2, 195);
+	printw("Speed :                       %5d", 1000 - mem->speed / 1000);
+}
+
+int			info_players(t_champ *list, t_mem *mem, t_arg *args, int col)
+{
+	int		i;
+
+	i = 0;
 	while (i <args->nb_players)
 	{
 		move(4 * i + 11, col + 3);
@@ -67,16 +39,67 @@ void		legend(t_champ *list, t_mem *mem, t_arg *args, int col)
 	attron(COLOR_PAIR(mem->last_live));
 	clrtoeol();
 	printw("%s !", args->name[mem->last_live - 1]);
+	return (i);
+}
+
+void		draw_breakdown(int col, int line, int *limit)
+{
+	int		i;
+	int		j;
+
+	i = -1;
+	j = 0;
+	move(line, col + 3);
+	while (++i < 35)
+	{
+		if (j < limit[0])
+			attron(COLOR_PAIR(1));
+		else if (j < limit[1])
+			attron(COLOR_PAIR(2));
+		else if (j < limit[2])
+			attron(COLOR_PAIR(3));
+		else if (j < limit[3])
+			attron(COLOR_PAIR(4));
+		printw("-");
+		j++;
+	}
+}
+
+void		info_breakdown(t_mem *mem, int col, int i)
+{
+	int			a;
+	int			nb_live;
+	int			limit[4];
+
+	a = -1;
+	nb_live = 0;
+	while (++a < 4)
+		nb_live += mem->player_live[a];
+	limit[0] = nb_live == 0 ? 0 : 35 * mem->player_live[0] / nb_live;
+	limit[1] = nb_live == 0 ? 0 : 35 * mem->player_live[1] / nb_live + limit[0];
+	limit[2] = nb_live == 0 ? 0 : 35 * mem->player_live[2] / nb_live + limit[1];
+	limit[3] = nb_live == 0 ? 0 : 35 * mem->player_live[3] / nb_live + limit[2];
 	move(4 * i + 15, col + 3);
 	attron(COLOR_PAIR(5));
 	printw("Live breakdown for current period :");
-	draw_breakdown(mem, col, 4 * i + 16);
+	draw_breakdown(col, 4 * i + 16, limit);
 	if (mem->c_before_check == 0)
 	{
 		attron(COLOR_PAIR(5));
 		move(4 * i + 18, col + 3);
 		printw("Live breakdown for last period :");
-		draw_breakdown(mem, col, 4 * i + 19);
+		draw_breakdown(col, 4 * i + 19, limit);
 	}
+}
+
+void		legend(t_champ *list, t_mem *mem, t_arg *args, int col)
+{
+	int		i;
+
+	attron(A_BOLD);
+	attron(COLOR_PAIR(6));
+	info_cycle(list, mem, col);
+	i = info_players(list, mem, args, col);
+	info_breakdown(mem, col, i);
 	attroff(A_BOLD);
 }

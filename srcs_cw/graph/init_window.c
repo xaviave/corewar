@@ -91,7 +91,7 @@ void init_menu(t_mem *mem)
 		if(choice != 0)
 			break;
 	}
-	mem->speed = -(1 - choice) * 10000;
+	mem->speed = (choice - 1) * 333000;
 	refresh();
 	free(menu_win);
 }
