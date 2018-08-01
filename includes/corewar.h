@@ -145,6 +145,7 @@ int		ft_aff(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *arg);
 int					print_mem(t_mem *mem, t_champ *list, t_arg *args, int stop);
 void				print_dump(t_mem *mem);
 void				legend(t_champ *list, t_mem *mem, t_arg *args, int col);
+void				info_cycle(t_champ *list, t_mem *mem);
 
 /*
  * **   KEY
