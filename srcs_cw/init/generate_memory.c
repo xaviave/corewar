@@ -99,6 +99,8 @@ void				generate_memory(t_champ **list, t_mem *mem, t_arg *args)
 
 	mem->memory = ft_memalloc(sizeof(char *) * MEM_SIZE);
 	mem->map = ft_memalloc(sizeof(char *) * MEM_SIZE);
+	ft_bzero(mem->player_last, MAX_PLAYERS * sizeof(int));
+	ft_bzero(mem->player_live, MAX_PLAYERS * sizeof(int));
 	mem->call_live = 0;
 	mem->last_live = args->nb_players;
 	init_time(mem);

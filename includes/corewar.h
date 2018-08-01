@@ -65,6 +65,8 @@ typedef struct		s_mem
 	int				id;
 	unsigned char	*memory;
 	unsigned char	*map;
+	int				player_live[MAX_PLAYERS];
+	int				player_last[MAX_PLAYERS];
 	int				last_live;
 	int				call_live;
 	int				c;

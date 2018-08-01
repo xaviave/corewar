@@ -95,6 +95,7 @@ void		one_cycle(t_champ **list, t_mem *mem, t_arg *args, int *very_less)
 		if (mem->c_todie < 0)
 			kill_them_all(list);
 		mem->c_before_check = mem->c_todie;
+		ft_bzero(mem->player_live, MAX_PLAYERS * sizeof(int));
 	}
 	check_cycle(list, mem, mem->c, args);
 	mem->c_before_check--;

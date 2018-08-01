@@ -44,7 +44,7 @@ CW_FILES = main_cw.c\
 		   lets_go.c\
 		   lets_graph.c\
 		   lets_dump.c\
-		   tools.c\
+		   one_cycle.c\
 		   ft_error.c\
 		   init/parsing.c\
 		   init/init_champ.c\
