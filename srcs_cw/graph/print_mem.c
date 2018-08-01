@@ -61,26 +61,26 @@ int			control(t_mem *mem, int key)
 {
 	if (key == KEY_SPACE)
 		return (0);
-	else if (key == KEY_R && mem->speed > 3000)
-		mem->speed -= 3000;
+	else if (key == KEY_R && mem->speed < 990)
+		mem->speed += 10;
 	else if (key == KEY_R)
-		mem->speed = 0;
-	else if (key == KEY_E && mem->speed > 300)
-		mem->speed -= 300;
+		mem->speed = 1000;
+	else if (key == KEY_E && mem->speed < 999)
+		mem->speed += 1;
 	else if (key == KEY_E)
-		mem->speed = 0;
-	else if (key == KEY_W && mem->speed < 299400)
-		mem->speed += 300;
+		mem->speed = 1000;
+	else if (key == KEY_W && mem->speed > 1)
+		mem->speed -= 1;
 	else if (key == KEY_W)
-		mem->speed = 299700;
-	else if (key == KEY_Q && mem->speed < 296700)
-		mem->speed += 3000;
+		mem->speed = 1;
+	else if (key == KEY_Q && mem->speed > 10)
+		mem->speed -= 10;
 	else if (key == KEY_Q)
-		mem->speed = 299700;
+		mem->speed = 1;
 	move(2, 195);
 	attron(COLOR_PAIR(6));
 	attron(A_BOLD);
-	printw("Speed :                       %5d", 1000 - mem->speed / 300);
+	printw("Speed :                       %5d", mem->speed);
 	attroff(COLOR_PAIR(6));
 	attroff(A_BOLD);
 	return (1);
@@ -107,5 +107,5 @@ void		print_mem(t_mem *mem, t_champ *list, t_arg *args, int stop)
 		}
 	else
 		control(mem, key);
-	usleep(mem->speed);
+	usleep(1000000 / mem->speed);
 }

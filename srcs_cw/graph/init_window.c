@@ -91,7 +91,8 @@ void init_menu(t_mem *mem)
 		if(choice != 0)
 			break;
 	}
-	mem->speed = (choice - 1) * 99900;
+	mem->speed = (117 * ft_pow(choice, 3) - 652 * ft_pow(choice, 2) +
+													137 * choice + 2398) / 2;
 	refresh();
 	free(menu_win);
 }
