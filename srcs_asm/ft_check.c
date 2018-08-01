@@ -105,5 +105,7 @@ int			ft_check(t_all *a)
 		ft_printf("Code missing\n");
 		return (0);
 	}
+	if (!(ft_reform(a)))
+		return (0);
 	return (1);
 }
