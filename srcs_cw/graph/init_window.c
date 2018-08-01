@@ -15,10 +15,10 @@
 
 char *choices[] =
 {
-	"Speed Max",
-	"Speed x2",
+	"Speed x1000",
+	"Speed x500",
+	"Speed x50",
 	"Speed x1",
-	"Step by step",
 };
 
 void print_menu(WINDOW *menu_win, int highlight)
@@ -97,6 +97,32 @@ void init_menu(t_mem *mem)
 	free(menu_win);
 }
 
+void		print_command()
+{
+	attron(COLOR_PAIR(5));
+	move(52, 195);
+	printw("/************ COMMAND ************\\");
+	move(53, 195);
+	printw("|                                 |");
+	move(54, 195);
+	printw("| Q :     -10 speed               |");
+	move(55, 195);
+	printw("| W :      -1 speed               |");
+	move(56, 195);
+	printw("| E :      +1 speed               |");
+	move(57, 195);
+	printw("| R :     +10 speed               |");
+	move(58, 195);
+	printw("|                                 |");
+	move(59, 195);
+	printw("| Space : Start and Stop          |");
+	move(60, 195);
+	printw("| S :     Next step               |");
+	move(61, 195);
+	printw("|                                 |");
+	move(62, 195);
+	printw("\\*********************************/");
+}
 
 void	init_window(t_mem *mem, t_champ *list, t_arg *args, int *stop)
 {
@@ -113,5 +139,6 @@ void	init_window(t_mem *mem, t_champ *list, t_arg *args, int *stop)
 	init_pair(6, COLOR_YELLOW, COLOR_BLACK);
 	init_menu(mem);
 	nodelay(stdscr, 1);
+	print_command();
 	*stop = print_mem(mem, list, args, 1);
 }

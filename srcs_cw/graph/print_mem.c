@@ -57,7 +57,7 @@ void		draw_process(t_mem *mem, t_champ *list)
 	attroff(A_STANDOUT);
 }
 
-int			control(t_mem *mem, int key)
+int			control(t_mem *mem, t_champ *list, int key)
 {
 	if (key == KEY_SPACE)
 		return (1);
@@ -79,45 +79,18 @@ int			control(t_mem *mem, int key)
 		mem->speed -= 10;
 	else if (key == KEY_Q)
 		mem->speed = 1;
-	move(3, 195);
-	attron(COLOR_PAIR(6));
-	attron(A_BOLD);
-	printw("Cycles/second limit :         %5d", mem->speed);
-	attroff(COLOR_PAIR(6));
-	attroff(A_BOLD);
+	info_cycle(list, mem);
 	return (0);
 }
 
-void		print_command(int stop)
+void		print_pause(int pause)
 {
 	attron(COLOR_PAIR(5));
 	move(50, 195);
-	if (stop)
-		printw("\\***** PAUSED *****//");
+	if (pause)
+		printw("       \\***** PAUSED *****/     ");
 	else
-		printw("                      ");
-	move(52, 195);
-	printw("/*************Command*************\\");
-	move(53, 195);
-	printw("|                                 |");
-	move(54, 195);
-	printw("| Q :     -10 speed               |");
-	move(55, 195);
-	printw("| W :      -1 speed               |");
-	move(56, 195);
-	printw("| E :      +1 speed               |");
-	move(57, 195);
-	printw("| R :     +10 speed               |");
-	move(58, 195);
-	printw("|                                 |");
-	move(59, 195);
-	printw("| Space : Start and Stop          |");
-	move(60, 195);
-	printw("| S :     Next step               |");
-	move(61, 195);
-	printw("|                                 |");
-	move(62, 195);
-	printw("\\*********************************/");
+		printw("                                  ");
 }
 
 int			print_mem(t_mem *mem, t_champ *list, t_arg *args, int stop)
@@ -135,16 +108,16 @@ int			print_mem(t_mem *mem, t_champ *list, t_arg *args, int stop)
 	col = 1;
 	if (key == KEY_SPACE || stop)
 	{
-		print_command(1);
-		while (col || !(stop = control(mem, key)))
+		print_pause(1);
+		while (col || !(stop = control(mem, list, key)))
 		{
 			col = 0;
 			key = getch();
 		}
-		print_command(0);
+		print_pause(0);
 	}
 	else
-		control(mem, key);
+		control(mem, list, key);
 	usleep(1000000 / mem->speed);
 	return (stop == 2 ? 1 : 0);
 }

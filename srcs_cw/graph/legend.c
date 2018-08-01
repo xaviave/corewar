@@ -1,17 +1,21 @@
 #include "../../includes/corewar.h"
 
-void		info_cycle(t_champ *list, t_mem *mem, int col)
+void		info_cycle(t_champ *list, t_mem *mem)
 {
-	move(1, col + 3);
+	attron(A_BOLD);
+	attron(COLOR_PAIR(6));
+	move(1, 195);
 	printw("Cycle :                       %5d", mem->c);
 	move(3, 195);
 	printw("Cycles/second limit :         %5d", mem->speed);
-	move(7, col + 3);
+	move(7, 195);
 	printw("Cycles Before Check :         %5d", mem->c_before_check);
-	move(9, col + 3);
+	move(9, 195);
 	printw("Cycle To Die :                %5d", mem->c_todie);
-	move(11, col + 3);
+	move(11, 195);
 	printw("Processus :                   %5d", list_len(list));
+	attroff(A_BOLD);
+	attroff(COLOR_PAIR(6));
 }
 
 int			info_players(t_champ *list, t_mem *mem, t_arg *args, int col)
@@ -98,7 +102,7 @@ void		legend(t_champ *list, t_mem *mem, t_arg *args, int col)
 
 	attron(A_BOLD);
 	attron(COLOR_PAIR(6));
-	info_cycle(list, mem, col);
+	info_cycle(list, mem);
 	i = info_players(list, mem, args, col);
 	info_breakdown(mem, col, i);
 	attroff(A_BOLD);
