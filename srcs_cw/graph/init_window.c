@@ -91,7 +91,7 @@ void init_menu(t_mem *mem)
 		if(choice != 0)
 			break;
 	}
-	mem->speed = (choice - 1) * 333000;
+	mem->speed = (choice - 1) * 99900;
 	refresh();
 	free(menu_win);
 }
@@ -111,5 +111,6 @@ void	init_window(t_mem *mem, t_champ *list, t_arg *args)
 	init_pair(5, COLOR_WHITE, COLOR_BLACK);
 	init_pair(6, COLOR_YELLOW, COLOR_BLACK);
 	init_menu(mem);
-	print_mem(mem, list, args);
+	nodelay(stdscr, 1);
+	print_mem(mem, list, args, 1);
 }

@@ -11,7 +11,7 @@ void		info_cycle(t_champ *list, t_mem *mem, int col)
 	move(8, col + 3);
 	printw("Processus :                   %5d", list_len(list));
 	move(2, 195);
-	printw("Speed :                       %5d", 1000 - mem->speed / 1000);
+	printw("Speed :                       %5d", 1000 - mem->speed / 300);
 }
 
 int			info_players(t_champ *list, t_mem *mem, t_arg *args, int col)
