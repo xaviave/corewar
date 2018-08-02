@@ -127,6 +127,7 @@ void		print_command()
 void	init_window(t_mem *mem, t_champ *list, t_arg *args, int *stop)
 {
 	initscr();
+	signal(SIGWINCH, NULL);
 	clear();
 	noecho();
 	cbreak(); 
