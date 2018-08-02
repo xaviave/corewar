@@ -45,17 +45,22 @@ CW_FILES = main_cw.c\
 		   lets_graph.c\
 		   lets_dump.c\
 		   one_cycle.c\
-		   ft_error.c\
-		   init/parsing.c\
-		   init/init_champ.c\
+		   init/all_init_is_love.c\
 		   init/generate_memory.c\
-		   read_write/access_reg.c\
-		   read_write/access_pc.c\
-		   read_write/recup_args.c\
+		   init/init_champ.c\
+		   init/parsing.c\
+		   tools/access_pc.c\
+		   tools/access_reg.c\
+		   tools/check_cor.c\
+		   tools/ft_error.c\
+		   tools/kill_them_all.c\
+		   tools/list_len.c\
+		   tools/recup_direct.c\
+		   tools/recup_indirect.c\
 		   graph/init_window.c\
-		   graph/print_mem.c\
-		   graph/print_dump.c\
 		   graph/legend.c\
+		   graph/print_dump.c\
+		   graph/print_mem.c\
 		   ft_upcode/ft_live.c\
 		   ft_upcode/ft_ld.c\
 		   ft_upcode/ft_st.c\
