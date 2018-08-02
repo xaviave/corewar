@@ -77,43 +77,22 @@ typedef struct		s_mem
 }					t_mem;
 
 /*
- * FONCTIONS INITIALISATION
+ * INITIALISATION
  */
 
 int					all_init_is_love(t_champ **l, t_arg *ar, int ac, char **av);
-void				init_window(t_mem *mem, t_champ *list, t_arg *args, int *s);
 int					init_champ(t_champ **champ, t_arg *args);
 void				generate_memory(t_champ **list, t_mem *aff, t_arg *args);
-int					check_cor(int ac, char **av);
 int					parse_arg(int ac, char **av, t_arg *args);
 
 /*
- * FONCTIONS LECTURE ET ECRITURE
- */
-
-void				write_reg(t_champ *champ, int nb_of_reg, int nb_to_write);
-int					give_reg(t_champ *champ, int number);
-unsigned int		recup_indirect4x(t_mem *mem, t_champ *champ, int start);
-unsigned int		recup_indirect2x(t_mem *mem, t_champ *champ, int start);
-unsigned int		recup_indirect4(t_mem *mem, t_champ *champ, int start);
-unsigned int		recup_indirect2(t_mem *mem, t_champ *champ, int start);
-unsigned int		recup_direct4(t_mem *mem, t_champ *champ, int start);
-unsigned int		recup_direct2(t_mem *mem, t_champ *champ, int start);
-unsigned char		recup_octet(t_mem *mem, t_champ *champ, int n);
-int					mod_pc(t_champ *tmp, int nu);
-
-/*
- * FONCTIONS VRAC
+ * FONCTIONS PRINCIPALES
  */
 
 int					lets_go(t_champ **l, t_mem *m, t_arg *a);
 int					lets_dump(t_champ **l, t_mem *m, t_arg *a);
 int					lets_graph(t_champ **list, t_mem *mem, t_arg *args);
 void				one_cycle(t_champ **list, t_mem *mem, t_arg *args, int *v);
-int					list_len(t_champ *list);
-int					ft_error2(char code, t_champ *tmp, int nu);
-int					ft_error4(char code, t_champ *tmp, int nu);
-void				kill_them_all(t_champ **list);
 
 /*
  * FONCTIONS UPCODE
@@ -140,10 +119,35 @@ int		ft_aff(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *arg);
  * FONCTIONS GRAPHIQUES
  */
 
+void				init_window(t_mem *mem, t_champ *list, t_arg *args, int *s);
 int					print_mem(t_mem *mem, t_champ *list, t_arg *args, int stop);
 void				print_dump(t_mem *mem);
 void				legend(t_champ *list, t_mem *mem, t_arg *args, int col);
 void				info_cycle(t_champ *list, t_mem *mem);
+
+/*
+ * OUTILS DIVERS
+ */
+
+/*  Lecture et ecriture des registres */
+void				write_reg(t_champ *champ, int nb_of_reg, int nb_to_write);
+int					give_reg(t_champ *champ, int number);
+/*  Recuperation des donnees */
+unsigned char		recup_octet(t_mem *mem, t_champ *champ, int n);
+unsigned int		recup_direct2(t_mem *mem, t_champ *champ, int start);
+unsigned int		recup_direct4(t_mem *mem, t_champ *champ, int start);
+unsigned int		recup_indirect2(t_mem *mem, t_champ *champ, int start);
+unsigned int		recup_indirect4(t_mem *mem, t_champ *champ, int start);
+unsigned int		recup_indirect2x(t_mem *mem, t_champ *champ, int start);
+unsigned int		recup_indirect4x(t_mem *mem, t_champ *champ, int start);
+/*  Mouvements du pc, y compris en cas d'erreurs */
+int					mod_pc(t_champ *tmp, int nu);
+int					ft_error2(char code, t_champ *tmp, int nu);
+int					ft_error4(char code, t_champ *tmp, int nu);
+/*  Divers */
+int					list_len(t_champ *list);
+int					check_cor(int ac, char **av);
+void				kill_them_all(t_champ **list);
 
 /*
  * **   KEY
