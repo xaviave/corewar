@@ -30,7 +30,7 @@ static t_champ	*create_champ(char *file, int size, t_champ **list, int number)
 	return (champ);
 }
 
-static char		*recup_file(char *path, int i)
+static char		*recup_file(char *path, int *i)
 {
 	int		fd;
 	char	line[50];
@@ -43,11 +43,11 @@ static char		*recup_file(char *path, int i)
 	while ((ret = read(fd, &line, 50)) > 0)
 	{
 		tmp = file;
-		file = ft_memalloc(i + ret);
+		file = ft_memalloc((*i) + ret);
 		if (tmp)
-			ft_memcpy(file, tmp, i);
-		ft_memcpy(file + i, line, ret);
-		i += ret;
+			ft_memcpy(file, tmp, (*i));
+		ft_memcpy(file + (*i), line, ret);
+		(*i) += ret;
 		if (tmp)
 			free(tmp);
 	}
@@ -74,7 +74,7 @@ static int		check_magic(char *file)
 	return (0);
 }
 
-static int		check_prog_size(char *file)
+static int		check_prog_size(char *file, int j)
 {
 	long	prog_size;
 	long	real_prog_size;
@@ -90,7 +90,7 @@ static int		check_prog_size(char *file)
 			<< ((3 - i) * 8);
 		i++;
 	}
-	if (real_prog_size <= CHAMP_MAX_SIZE)
+	if (real_prog_size <= CHAMP_MAX_SIZE && real_prog_size + 2192 == j)
 		return (real_prog_size);
 	return (0);
 }
@@ -98,14 +98,17 @@ static int		check_prog_size(char *file)
 int			init_champ(t_champ **list, t_arg *args)
 {
 	int		i;
+	int		j;
 	char	*file;
 	int		prog_size;
 
 	i = -1;
 	while (++i < args->nb_players)
 	{
-		file = recup_file(args->champ_path[i], 0);
-		if (!file || !check_magic(file) || !(prog_size = check_prog_size(file)))
+		j = 0;
+		file = recup_file(args->champ_path[i], &j);
+		if (!file || !check_magic(file) ||
+				!(prog_size = check_prog_size(file, j)))
 			return (-i - 1);
 		*list = create_champ(file, prog_size, list, i + 1);
 		ft_memcpy(args->name[i],(*list)->name, PROG_NAME_LENGTH + 1);
