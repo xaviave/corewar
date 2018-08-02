@@ -87,10 +87,20 @@ static void		print_pause(int pause)
 {
 	attron(COLOR_PAIR(5));
 	move(50, 195);
+	attron(A_BOLD);
 	if (pause)
-		printw("       \\***** PAUSED *****/     ");
+	{
+		attron(COLOR_PAIR(3));
+		printw("       \\***** PAUSED  *****/     ");
+		attroff(COLOR_PAIR(3));
+	}
 	else
-		printw("                                  ");
+	{
+		attron(COLOR_PAIR(1));
+		printw("       \\***** RUNNING *****/");
+		attroff(COLOR_PAIR(1));
+	}
+	attroff(A_BOLD);
 }
 
 int			print_mem(t_mem *mem, t_champ *list, t_arg *args, int stop)
