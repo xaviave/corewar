@@ -20,13 +20,13 @@ int		ft_aff(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 
 	args = (void*)args;
 	list = (t_champ **)list;
-	if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0x0c) == 64)
+	if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0xc0) == 64)
 	{
 		reg = mem->memory[(tmp->pc + 2) % MEM_SIZE];
 		if (!reg || reg > 16)
 			return (ft_error4(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 1));
 		c = give_reg(tmp, reg) % 256;
-		ft_putchar(c);
+		ft_printf("Aff: %c\n", c);;
 		tmp->pc = mod_pc(tmp, 3);
 	}
 	else
