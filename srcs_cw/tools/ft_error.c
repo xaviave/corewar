@@ -11,7 +11,7 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../includes/corewar.h"
+#include "../../includes/corewar.h"
 
 int		ft_error4(char code, t_champ *tmp, int nu)
 {

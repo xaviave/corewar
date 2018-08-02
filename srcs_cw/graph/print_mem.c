@@ -13,7 +13,7 @@
 
 #include "../../includes/corewar.h"
 
-int			without_process(t_mem *mem)
+static int		without_process(t_mem *mem)
 {
 	int		i;
 	int		line;
@@ -40,7 +40,7 @@ int			without_process(t_mem *mem)
 	return (col);
 }
 
-void		draw_process(t_mem *mem, t_champ *list)
+static void		draw_process(t_mem *mem, t_champ *list)
 {
 	t_champ		*tmp;
 
@@ -57,7 +57,7 @@ void		draw_process(t_mem *mem, t_champ *list)
 	attroff(A_STANDOUT);
 }
 
-int			control(t_mem *mem, t_champ *list, int key)
+static int		control(t_mem *mem, t_champ *list, int key)
 {
 	if (key == KEY_SPACE)
 		return (1);
@@ -83,7 +83,7 @@ int			control(t_mem *mem, t_champ *list, int key)
 	return (0);
 }
 
-void		print_pause(int pause)
+static void		print_pause(int pause)
 {
 	attron(COLOR_PAIR(5));
 	move(50, 195);

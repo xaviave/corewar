@@ -18,7 +18,7 @@ void		info_cycle(t_champ *list, t_mem *mem)
 	attroff(COLOR_PAIR(6));
 }
 
-int			info_players(t_champ *list, t_mem *mem, t_arg *args, int col)
+static int		info_players(t_champ *list, t_mem *mem, t_arg *args, int col)
 {
 	int		i;
 
@@ -46,7 +46,7 @@ int			info_players(t_champ *list, t_mem *mem, t_arg *args, int col)
 	return (i);
 }
 
-void		draw_breakdown(int col, int line, int *limit)
+static void		draw_breakdown(int col, int line, int *limit)
 {
 	int		i;
 	int		j;
@@ -69,7 +69,7 @@ void		draw_breakdown(int col, int line, int *limit)
 	}
 }
 
-void		info_breakdown(t_mem *mem, int col, int i)
+static void		info_breakdown(t_mem *mem, int col, int i)
 {
 	int			a;
 	int			nb_live;
@@ -96,7 +96,7 @@ void		info_breakdown(t_mem *mem, int col, int i)
 	}
 }
 
-void		legend(t_champ *list, t_mem *mem, t_arg *args, int col)
+void			legend(t_champ *list, t_mem *mem, t_arg *args, int col)
 {
 	int		i;
 

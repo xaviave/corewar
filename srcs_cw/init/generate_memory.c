@@ -13,25 +13,7 @@
 
 #include "../../includes/corewar.h"
 
-int					list_len(t_champ *list)
-{
-	int				i;
-	t_champ			*tmp;
-
-	if (!list)
-		return (0);
-	i = 0;
-	tmp = list;
-	while (tmp)
-	{
-		i++;
-		tmp = tmp->next;
-	}
-	return (i);
-}
-
-void				put_champ_mem(t_champ *list, int player, int nb_player,
-																	t_mem *mem)
+static void	put_champ_mem(t_champ *list, int player, int nb_player, t_mem *mem)
 {
 	int				i;
 	int				j;
@@ -52,7 +34,7 @@ void				put_champ_mem(t_champ *list, int player, int nb_player,
 	}
 }
 
-void				init_instru(t_mem *mem)
+static void	init_instru(t_mem *mem)
 {
 	mem->instru[0] = &ft_live;
 	mem->instru[1] = &ft_ld;
@@ -72,7 +54,7 @@ void				init_instru(t_mem *mem)
 	mem->instru[15] = &ft_aff;
 }
 
-void				init_time(t_mem *mem)
+static void	init_time(t_mem *mem)
 {
 	mem->times[0] = 10;
 	mem->times[1] = 5;
@@ -92,7 +74,7 @@ void				init_time(t_mem *mem)
 	mem->times[15] = 2;
 }
 
-void				generate_memory(t_champ **list, t_mem *mem, t_arg *args)
+void		generate_memory(t_champ **list, t_mem *mem, t_arg *args)
 {
 	int				i;
 	int				nb_player;

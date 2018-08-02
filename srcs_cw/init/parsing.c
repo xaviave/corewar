@@ -13,7 +13,7 @@
 
 #include "../../includes/corewar.h"
 
-int		end_parse_player(t_arg *args, int champ, char *temp[MAX_PLAYERS])
+static int	end_parse_player(t_arg *args, int champ, char *temp[MAX_PLAYERS])
 {
 	int		i;
 	int		j;
@@ -27,10 +27,10 @@ int		end_parse_player(t_arg *args, int champ, char *temp[MAX_PLAYERS])
 		args->champ_path[i] = temp[j];
 		j++;;
 	}
-	return (1);
+	return (0);
 }
 
-int		parse_player(int ac, char **av, t_arg *args, int i)
+static int	parse_player(int ac, char **av, t_arg *args, int i)
 {
 	int		champ;
 	char	*temp[MAX_PLAYERS];
@@ -44,7 +44,7 @@ int		parse_player(int ac, char **av, t_arg *args, int i)
 			if (i + 2 >= ac || !ft_strisdigit(av[i + 1])
 					|| ft_atoi(av[i + 1]) > args->nb_players
 					|| args->champ_path[ft_atoi(av[i + 1]) - 1])
-				return (0);
+				return (6);
 			args->champ_path[ft_atoi(av[i + 1]) - 1] = av[i + 2];
 			i += 2;
 		}
@@ -58,14 +58,14 @@ int		parse_player(int ac, char **av, t_arg *args, int i)
 	return (end_parse_player(args, champ, temp));
 }
 
-int		parse_option(int ac, char **av, t_arg *args, int *i)
+static int	parse_option(int ac, char **av, t_arg *args, int *i)
 {
 	while (*i < ac && av[*i][0] == '-')
 	{
 		if (!ft_strcmp(av[*i], "-dump"))
 		{
 			if (*i + 1 == ac || !ft_strisdigit(av[*i + 1]))
-				return (0);
+				return (4);
 			args->dump = ft_atoi(av[*i + 1]);
 			*i += 2;
 		}
@@ -77,38 +77,21 @@ int		parse_option(int ac, char **av, t_arg *args, int *i)
 		else if (!ft_strcmp(av[*i], "-n"))
 			break ;
 		else
-			return (0);
+			return (5);
 	}
-	return (1);
+	return (0);
 }
 
 int		parse_arg(int ac, char **av, t_arg *args)
 {
 	int		i;
+	int		error;
 
 	i = 1;
 	args->dump = -1;
 	args->graph = -1;
-	if (!parse_option(ac, av, args, &i))
-		return (0);
+	if ((error = parse_option(ac, av, args, &i)))
+		return (error);
 	ft_bzero(args->champ_path, MAX_PLAYERS * sizeof(char*));
 	return (parse_player(ac, av, args, i));
-}
-
-int		check_cor(int ac, char **av)
-{
-	int	i;
-	int	j;
-	int	cor;
-
-	cor = 0;
-	i = 0;
-	while (++i < ac)
-	{
-		j = ft_strlen(av[i]) - 1;
-		if (j >= 3 && av[i][j] == 'r' && av[i][j - 1] == 'o'
-				&& av[i][j - 2] == 'c' && av[i][j - 3]== '.')
-			cor++;
-	}
-	return (cor);
 }

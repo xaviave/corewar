@@ -1,6 +1,6 @@
 #include "../includes/corewar.h"
 
-void	save_instru(t_mem *mem, t_champ *tmp)
+static void		save_instru(t_mem *mem, t_champ *tmp)
 {
 	if (*(mem->memory + tmp->pc) > 16 || *(mem->memory + tmp->pc) == 0)
 	{
@@ -12,7 +12,7 @@ void	save_instru(t_mem *mem, t_champ *tmp)
 	tmp->cycle += mem->times[tmp->next_instru - 1] - 1;
 }
 
-void	check_cycle(t_champ **list, t_mem *mem, int c, t_arg *args)
+static void		check_cycle(t_champ **list, t_mem *mem, int c, t_arg *args)
 {
 	t_champ		*tmp;
 	int			carry;
@@ -34,7 +34,7 @@ void	check_cycle(t_champ **list, t_mem *mem, int c, t_arg *args)
 	}
 }
 
-void	del_maillon(t_champ **list, int n)
+static void		del_maillon(t_champ **list, int n)
 {
 	t_champ		*tmp;
 	t_champ		*before;
@@ -56,7 +56,7 @@ void	del_maillon(t_champ **list, int n)
 	free(tmp);
 }
 
-void	check_live(t_champ **list)
+static void		check_live(t_champ **list)
 {
 	t_champ		*tmp;
 	int			live;
@@ -79,18 +79,18 @@ void	check_live(t_champ **list)
 	}
 }
 
-void		one_cycle(t_champ **list, t_mem *mem, t_arg *args, int *very_less)
+void			one_cycle(t_champ **list, t_mem *mem, t_arg *args, int *less)
 {
 	if (mem->c_before_check ==  0)
 	{
 		check_live(list);
-		if (mem->call_live >= NBR_LIVE || *very_less == MAX_CHECKS - 1)
+		if (mem->call_live >= NBR_LIVE || *less == MAX_CHECKS - 1)
 		{
 			mem->c_todie -= CYCLE_DELTA;
-			*very_less = 0;
+			*less = 0;
 		}
 		else
-			(*very_less)++;
+			(*less)++;
 		mem->call_live = 0;
 		if (mem->c_todie < 0)
 			kill_them_all(list);

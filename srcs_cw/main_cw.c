@@ -13,21 +13,14 @@
 
 #include "../includes/corewar.h"
 
-void	kill_them_all(t_champ **list)
+static void		you_are_null(t_champ **list, t_mem *mem)
 {
-	t_champ		*tmp;
-
-	tmp = *list;
-	while (*list)
-	{
-		tmp = *list;
-		*list = (*list)->next;
-		free(tmp->reg);
-		free(tmp);
-	}
+	*list = NULL;
+	mem->memory = NULL;
+	mem->map = NULL;
 }
 
-void	introduce(t_champ *list, t_arg *args)
+static int		introduce(t_champ *list, t_arg *args)
 {
 	int			i;
 	int			j;
@@ -46,15 +39,20 @@ void	introduce(t_champ *list, t_arg *args)
 			j--;
 		}
 		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n",
-			tmp->number, tmp->prog_size, tmp->name, tmp->comment);
+				tmp->number, tmp->prog_size, tmp->name, tmp->comment);
 		i--;
 	}
+	return (1);
 }
 
-void	game_over(t_mem *mem)
+static int		game_over(t_champ **list, t_mem *mem)
 {
-	free(mem->memory);
-	free(mem->map);
+	if (mem->memory)
+		free(mem->memory);
+	if (mem->map)
+		free(mem->map);
+	kill_them_all(list);
+	return (0);
 }
 
 int		main(int ac, char **av)
@@ -63,25 +61,18 @@ int		main(int ac, char **av)
 	t_arg	args;
 	t_mem	mem;
 
-	list = NULL;
-	if (ac < 3 || (args.nb_players = check_cor(ac, av)) < 2 ||
-			args.nb_players > MAX_PLAYERS || !parse_arg(ac, av, &args))
-		return (ft_printf("./corewar [-graph] [-dump nbr_cycles] [[-n number] champion1.cor]\n"));
-	if (!init_champ(&list, &args))
-		return (0);
+	you_are_null(&list, &mem);
+	if (all_init_is_love(&list, &args, ac, av))
+		return (game_over(&list, &mem));
 	generate_memory(&list, &mem, &args);
 	if (args.graph == 1)
 		lets_graph(&list, &mem, &args);
+	else if (introduce(list, &args) && args.dump == -1)
+		lets_go(&list, &mem, &args);
 	else
-	{
-		introduce(list, &args);
-		if (args.dump == -1)
-			lets_go(&list, &mem, &args);
-		else
-			lets_dump(&list, &mem, &args);
-	}
+		lets_dump(&list, &mem, &args);
 	if (args.graph == -1 && args.dump == -1)
 		ft_printf("Contestant %d, \"%s\", has won !\n",
-			mem.last_live, args.name[mem.last_live - 1]);
-	game_over(&mem);
+				mem.last_live, args.name[mem.last_live - 1]);
+	return (game_over(&list, &mem));
 }
