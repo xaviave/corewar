@@ -113,7 +113,7 @@ int			print_mem(t_mem *mem, t_champ *list, t_arg *args, int stop)
 	legend(list, mem, args, col);
 	refresh();
 	if (args->dump != -1 && mem->c < args->dump)
-		return (0);
+		return (1);
 	key = getch();
 	col = 1;
 	if (key == KEY_SPACE || stop)
