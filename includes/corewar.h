@@ -55,6 +55,7 @@ typedef struct		s_arg
 	int				nb_players;
 	int				dump;
 	int				graph;
+	int				aff;
 }					t_arg;
 
 typedef struct		s_mem

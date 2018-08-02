@@ -67,17 +67,17 @@ static int	parse_option(int ac, char **av, t_arg *args, int *i)
 			if (*i + 1 == ac || !ft_strisdigit(av[*i + 1]))
 				return (4);
 			args->dump = ft_atoi(av[*i + 1]);
-			*i += 2;
-		}
-		else if (!ft_strcmp(av[*i], "-graph"))
-		{
-			args->graph = 1;
 			(*i)++;
 		}
+		else if (!ft_strcmp(av[*i], "-graph"))
+			args->graph = 1;
+		else if (!ft_strcmp(av[*i], "-aff"))
+			args->aff = 1;
 		else if (!ft_strcmp(av[*i], "-n"))
 			break ;
-		else
+		else if (ft_strcmp(av[*i], "-help"))
 			return (5);
+		(*i)++;
 	}
 	return (0);
 }
@@ -90,6 +90,7 @@ int		parse_arg(int ac, char **av, t_arg *args)
 	i = 1;
 	args->dump = -1;
 	args->graph = -1;
+	args->aff = -1;
 	if ((error = parse_option(ac, av, args, &i)))
 		return (error);
 	ft_bzero(args->champ_path, MAX_PLAYERS * sizeof(char*));

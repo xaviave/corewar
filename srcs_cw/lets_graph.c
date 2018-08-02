@@ -15,8 +15,8 @@ int		lets_graph(t_champ **list, t_mem *mem, t_arg *args)
 		one_cycle(list, mem, args, &very_less);
 		stop = print_mem(mem, *list, args, stop);
 	}
-	nodelay(stdscr, 0);
 	print_mem(mem, *list, args, 0);
+	nodelay(stdscr, 0);
 	getch();
 	endwin();
 	return (0);

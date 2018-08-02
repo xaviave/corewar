@@ -24,6 +24,9 @@ int			ft_live(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	tmp->live++;
 	if (name > args->nb_players || name <= 0)
 		return (-1);
+	if (args->aff == 1 && args->graph == -1)
+		ft_printf("un processus dit que le joueur %d(%s) est en vie\n", name,
+				args->name[name - 1]);
 	mem->last_live = name;
 	(mem->player_live[name - 1])++;
 	mem->player_last[name - 1] = mem->c;

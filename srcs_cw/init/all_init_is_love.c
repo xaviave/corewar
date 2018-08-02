@@ -2,8 +2,8 @@
 
 static int		put_usage(t_arg *args, int error)
 {
-	ft_printf("./corewar [-graph] [-dump nbr_cycles] [[-n number]");
-	ft_printf(" champion1.cor]\n");
+	ft_printf("Usage: /corewar [-aff] [-graph] [-dump nbr_cycles] ");
+	ft_printf("[[-n number] champion1.cor]\n");
 	if (error == 1 || error == 2)
 		ft_printf("\t>>> We need at least two champions to make a fight...");
 	else if (error == 3)
@@ -18,6 +18,7 @@ static int		put_usage(t_arg *args, int error)
 		ft_printf("\t>>> I don't think \"%s\" is a valid file.",
 												args->champ_path[-(error + 1)]);
 	ft_printf("\n");
+	ft_printf("For more information you can use : \"./corewar -help\"\n");
 	return (1);
 }
 

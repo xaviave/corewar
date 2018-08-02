@@ -55,12 +55,42 @@ static int		game_over(t_champ **list, t_mem *mem)
 	return (0);
 }
 
-int		main(int ac, char **av)
+static int		put_help(void)
+{
+	ft_printf("Usage: /corewar [-aff] [-graph] [-dump nbr_cycles] ");
+	ft_printf("[[-n number] champion1.cor]\n\n");
+	ft_printf("#### CLASSIC MODE ############################################");
+	ft_printf("#####################################\n");
+	ft_printf("\n\tEnter between 2 and 4 champions (file .cor) create by the asm\n");
+	ft_printf("\n\t\t-aff   \t\t: ");
+	ft_printf("use this option to see live and print output from \"aff\"\n");
+	ft_printf("\n\t\t-n    N\t\t: ");
+	ft_printf("Use this option to select the position of the next champion\n");
+	ft_printf("\t\t       \t\t  " );
+	ft_printf("Be careful, 2 champions can't have the same position\n");
+	ft_printf("\t\t       \t\t  " );
+	ft_printf("and N have to be between 1 and the number of champions\n\n");
+	ft_printf("#### DUMP MODE ###############################################");
+	ft_printf("#####################################\n");
+	ft_printf("\n\t\t-dump N\t\t: ");
+	ft_printf("Use this option to print memory after N cycles then exists\n");
+	ft_printf("\t\t       \t\t  This is compatible with -graph\n\n" );
+	ft_printf("#### GRAPH MODE ##############################################");
+	ft_printf("#####################################\n");
+	ft_printf("\n\t\t-graph\t\t: ");
+	ft_printf("Use this option to enter in the wonderful world of graphism\n");
+	ft_printf("\t\t       \t\t  This option disable -aff\n\n");
+	return (0);
+}
+
+int				main(int ac, char **av)
 {
 	t_champ	*list;
 	t_arg	args;
 	t_mem	mem;
 
+	if (ac == 1 || (ac == 2 && !ft_strcmp("-help", av[1])))
+		return (put_help());
 	you_are_null(&list, &mem);
 	if (all_init_is_love(&list, &args, ac, av))
 		return (game_over(&list, &mem));
