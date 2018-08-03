@@ -2,7 +2,7 @@
 
 unsigned int		recup_indirect2(t_mem *mem, t_champ *champ, int start)
 {
-	unsigned int	add;
+	int		add;
 
 	add = recup_direct2(mem, champ, start);
 	if (add & 0x8000)
@@ -22,7 +22,7 @@ unsigned int		recup_indirect4(t_mem *mem, t_champ *champ, int start)
 
 unsigned int		recup_indirect2x(t_mem *mem, t_champ *champ, int start)
 {
-	unsigned int	add;
+	int		add;
 
 	add = recup_direct2(mem, champ, start);
 	if (add & 0x8000)
@@ -33,7 +33,7 @@ unsigned int		recup_indirect2x(t_mem *mem, t_champ *champ, int start)
 
 unsigned int		recup_indirect4x(t_mem *mem, t_champ *champ, int start)
 {
-	unsigned int	add;
+	int		add;
 
 	add = recup_direct2(mem, champ, start);
 	if (add & 0x8000)
