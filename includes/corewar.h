@@ -23,14 +23,6 @@
  * STRUCTURES
  */
 
-typedef struct		s_graph
-{
-	void			*win_ptr;
-	void			*mlx_ptr;
-	int				width;
-	int				heigth;
-}					t_graph;
-
 typedef struct		s_champ
 {
 	int				id;
@@ -61,7 +53,7 @@ typedef struct		s_arg
 typedef struct		s_mem
 {
 	int				(*instru[16])(t_champ *tmp, t_champ **list,
-												struct s_mem *mem, t_arg *args);
+			struct s_mem *mem, t_arg *args);
 	int				times[16];
 	int				id;
 	unsigned char	*memory;
@@ -73,7 +65,6 @@ typedef struct		s_mem
 	int				c;
 	int				c_before_check;
 	int				c_todie;
-	t_graph			*img;
 	int				speed;
 }					t_mem;
 
@@ -131,9 +122,12 @@ void				info_cycle(t_champ *list, t_mem *mem);
  */
 
 /*  Lecture et ecriture des registres */
+
 void				write_reg(t_champ *champ, int nb_of_reg, int nb_to_write);
 int					give_reg(t_champ *champ, int number);
+
 /*  Recuperation des donnees */
+
 unsigned char		recup_octet(t_mem *mem, t_champ *champ, int n);
 unsigned int		recup_direct2(t_mem *mem, t_champ *champ, int start);
 unsigned int		recup_direct4(t_mem *mem, t_champ *champ, int start);
@@ -141,13 +135,19 @@ unsigned int		recup_indirect2(t_mem *mem, t_champ *champ, int start);
 unsigned int		recup_indirect4(t_mem *mem, t_champ *champ, int start);
 unsigned int		recup_indirect2x(t_mem *mem, t_champ *champ, int start);
 unsigned int		recup_indirect4x(t_mem *mem, t_champ *champ, int start);
+
 /*  Mouvements du pc, y compris en cas d'erreurs */
+
 int					mod_pc(t_champ *tmp, int nu);
 int					ft_error2(char code, t_champ *tmp, int nu);
 int					ft_error4(char code, t_champ *tmp, int nu);
+
 /*  Divers */
+
 int					list_len(t_champ *list);
 int					check_cor(int ac, char **av);
+int					check_cor_file(char *str);
+int					check_cor_nb(int ac, char **av);
 void				kill_them_all(t_champ **list);
 
 /*

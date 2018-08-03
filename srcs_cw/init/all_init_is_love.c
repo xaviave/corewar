@@ -32,7 +32,11 @@ static int		global_check(int ac, char **av)
 
 	i = 1;
 	while (i < ac && av[i][0] == '-' && av[i][1] != 'n')
+	{
+		if (!ft_strcmp(av[i], "-dump"))
+			i++;
 		i++;
+	}
 	while (i < ac)
 	{
 		if (!ft_strcmp(av[i], "-n") && i + 2 < ac && check_cor_file(av[i + 2]))
