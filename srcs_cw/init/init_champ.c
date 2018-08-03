@@ -22,7 +22,7 @@ static t_champ	*create_champ(char *file, int size, t_champ **list, int number)
 	champ = ft_memalloc(sizeof(t_champ));
 	ft_memcpy(champ->name, &tmp->prog_name, PROG_NAME_LENGTH + 1);
 	ft_memcpy(champ->comment, &tmp->comment, COMMENT_LENGTH + 1);
-	ft_memcpy(champ->prog, file + sizeof(tmp), size);
+	ft_memcpy(champ->prog, file + sizeof(*tmp), size);
 	champ->reg = ft_memalloc(REG_SIZE * REG_NUMBER);
 	champ->prog_size = size;
 	champ->number = number;
