@@ -13,7 +13,7 @@
 
 #include "../../includes/corewar.h"
 
-static int	first_arg(t_champ *tmp, t_mem *mem, unsigned int *value, int *i)
+static int	first_arg(t_champ *tmp, t_mem *mem, int *value, int *i)
 {
 	unsigned int		reg;
 
@@ -40,7 +40,7 @@ static int	first_arg(t_champ *tmp, t_mem *mem, unsigned int *value, int *i)
 	return (1);
 }
 
-static int	second_arg(t_champ *tmp, t_mem *mem, unsigned int *value, int *i)
+static int	second_arg(t_champ *tmp, t_mem *mem, int *value, int *i)
 {
 	unsigned int		reg;
 
@@ -65,7 +65,7 @@ static int	second_arg(t_champ *tmp, t_mem *mem, unsigned int *value, int *i)
 int		ft_lldi(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 {
 	int					i;
-	unsigned int		value[3];
+	int					value[3];
 	unsigned int		reg;
 
 	list = (t_champ **)list;

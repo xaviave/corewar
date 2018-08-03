@@ -2,7 +2,7 @@
 
 unsigned char		recup_octet(t_mem *mem, t_champ *champ, int n)
 {
-	return (mem->memory[(champ->pc + n + MEM_SIZE) % MEM_SIZE]);
+	return (mem->memory[((champ->pc + n) % MEM_SIZE + MEM_SIZE) % MEM_SIZE]);
 }
 
 unsigned int		recup_direct2(t_mem *mem, t_champ *champ, int start)
