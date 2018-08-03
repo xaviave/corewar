@@ -25,7 +25,8 @@ int		ft_add(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	reg[1] = mem->memory[(tmp->pc + 3) % MEM_SIZE];
 	reg[2] = mem->memory[(tmp->pc + 4) % MEM_SIZE];
 	if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0xfc) == 84 && reg[0] && reg[1]
-			&& reg[2] && reg[0] < 17 && reg[1] < 17 && reg[2] < 17)
+			&& reg[2] && reg[0] <= REG_NUMBER && reg[1] <= REG_NUMBER
+			&& reg[2] <= REG_NUMBER)
 	{
 		value1 = give_reg(tmp, reg[0]);
 		value2 = give_reg(tmp, reg[1]);

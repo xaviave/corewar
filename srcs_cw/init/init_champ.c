@@ -16,11 +16,13 @@
 static t_champ	*create_champ(char *file, int size, t_champ **list, int number)
 {
 	t_champ		*champ;
+	header_t	*tmp;
 
+	tmp = (header_t*)file;
 	champ = ft_memalloc(sizeof(t_champ));
-	ft_memcpy(champ->name, file + 4, PROG_NAME_LENGTH + 1);
-	ft_memcpy(champ->comment, file + 140, COMMENT_LENGTH + 1);
-	ft_memcpy(champ->prog, file + 2192, size);
+	ft_memcpy(champ->name, &tmp->prog_name, PROG_NAME_LENGTH + 1);
+	ft_memcpy(champ->comment, &tmp->comment, COMMENT_LENGTH + 1);
+	ft_memcpy(champ->prog, file + sizeof(tmp), size);
 	champ->reg = ft_memalloc(REG_SIZE * REG_NUMBER);
 	champ->prog_size = size;
 	champ->number = number;
@@ -90,7 +92,8 @@ static int		check_prog_size(char *file, int file_size)
 			<< ((3 - i) * 8);
 		i++;
 	}
-	if (real_prog_size <= CHAMP_MAX_SIZE && real_prog_size + 2192 == file_size)
+	if (real_prog_size <= CHAMP_MAX_SIZE
+		&& real_prog_size + (int)sizeof(header_t) == file_size)
 		return (real_prog_size);
 	return (0);
 }
@@ -107,8 +110,8 @@ int			init_champ(t_champ **list, t_arg *args)
 	{
 		file_size = 0;
 		file = recup_file(args->champ_path[i], &file_size);
-		if (!file || file_size < 2192 || !check_magic(file) ||
-				!(prog_size = check_prog_size(file, j)))
+		if (!file || file_size < (int)sizeof(header_t) || !check_magic(file) ||
+				!(prog_size = check_prog_size(file, file_size)))
 			{
 				if (file)
 					ft_strdel(&file);

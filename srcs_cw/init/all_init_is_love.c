@@ -7,7 +7,8 @@ static int		put_usage(t_arg *args, int error)
 	if (error == 1 || error == 2)
 		ft_printf("\t>>> We need at least two champions to make a fight...");
 	else if (error == 3)
-		ft_printf("\t>>> We are not wild, not more than 4 in a fight.");
+		ft_printf("\t>>> We are not wild, not more than %d in a fight.",
+				MAX_PLAYERS);
 	else if (error == 4)
 		ft_printf("\t>>> Stupid, \"-dump\" has to be followed by a number.");
 	else if (error == 5)
@@ -16,7 +17,7 @@ static int		put_usage(t_arg *args, int error)
 		ft_printf("\t>>> \"-n\" has to be followed by a number AND a champion");
 	else if (error < 0)
 		ft_printf("\t>>> I don't think \"%s\" is a valid file.",
-												args->champ_path[-(error + 1)]);
+				args->champ_path[-(error + 1)]);
 	ft_printf("\n");
 	ft_printf("For more information you can use : \"./corewar -help\"\n");
 	return (1);

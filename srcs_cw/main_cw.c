@@ -61,8 +61,8 @@ static int		put_help(void)
 	ft_printf("[[-n number] champion1.cor]\n\n");
 	ft_printf("#### CLASSIC MODE ############################################");
 	ft_printf("#####################################\n");
-	ft_printf("\n\tEnter between 2 and 4 champions (file .cor) create by the asm\n");
-	ft_printf("\n\t\t-aff   \t\t: ");
+	ft_printf("\n\tEnter between 2 and %d champions (file .cor)", MAX_PLAYERS);
+	ft_printf(" create by the asm\n\n\t\t-aff   \t\t: ");
 	ft_printf("use this option to see live and print output from \"aff\"\n");
 	ft_printf("\n\t\t-n    N\t\t: ");
 	ft_printf("Use this option to select the position of the next champion\n");

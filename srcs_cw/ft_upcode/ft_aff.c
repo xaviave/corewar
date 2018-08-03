@@ -23,7 +23,7 @@ int		ft_aff(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0xc0) == 64)
 	{
 		reg = mem->memory[(tmp->pc + 2) % MEM_SIZE];
-		if (!reg || reg > 16)
+		if (!reg || reg > REG_NUMBER)
 			return (ft_error4(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 1));
 		c = give_reg(tmp, reg) % 256;
 		if (args->graph == -1 && args->aff == 1)

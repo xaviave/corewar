@@ -42,6 +42,7 @@ static int	parse_player(int ac, char **av, t_arg *args, int i)
 		if (!ft_strcmp(av[i], "-n"))
 		{
 			if (i + 2 >= ac || !ft_strisdigit(av[i + 1])
+					|| ft_strlen(av[i + 1]) > 9
 					|| ft_atoi(av[i + 1]) > args->nb_players
 					|| args->champ_path[ft_atoi(av[i + 1]) - 1])
 				return (6);
@@ -64,7 +65,8 @@ static int	parse_option(int ac, char **av, t_arg *args, int *i)
 	{
 		if (!ft_strcmp(av[*i], "-dump"))
 		{
-			if (*i + 1 == ac || !ft_strisdigit(av[*i + 1]))
+			if (*i + 1 == ac || !ft_strisdigit(av[*i + 1])
+					|| ft_strlen(av[*i + 1]) > 9)
 				return (4);
 			args->dump = ft_atoi(av[*i + 1]);
 			(*i)++;
