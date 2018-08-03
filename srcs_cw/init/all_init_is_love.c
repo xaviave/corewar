@@ -5,7 +5,7 @@ static int		put_usage(t_arg *args, int error, char **av)
 	ft_printf("Usage: /corewar [-aff] [-graph] [-dump nbr_cycles] ");
 	ft_printf("[[-n number] champion1.cor]\n");
 	if (error == 1 || error == 2)
-		ft_printf("\t>>> We need at least two champions to make a fight...");
+		ft_printf("\t>>> We need at least one champion to make a fight...");
 	else if (error == 3)
 		ft_printf("\t>>> We are not wild, not more than %d in a fight.",
 				MAX_PLAYERS);
@@ -53,11 +53,11 @@ int			all_init_is_love(t_champ **list, t_arg *args, int ac, char **av)
 {
 	int		error;
 
-	if (ac < 3)
+	if (ac < 2)
 		return (put_usage(args, 1, av));
 	else if ((error = global_check(ac, av)))
 		return (put_usage(args, error, av));
-	else if ((args->nb_players = check_cor_nb(ac, av)) < 2)
+	else if ((args->nb_players = check_cor_nb(ac, av)) < 1)
 		return (put_usage(args, 2, av));
 	else if (args->nb_players > MAX_PLAYERS)
 		return (put_usage(args, 3, av));
