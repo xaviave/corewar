@@ -69,9 +69,9 @@ static int		put_help(void)
 	ft_printf("\t\t       \t\t  " );
 	ft_printf("Be careful, 2 champions can't have the same position\n");
 	ft_printf("\t\t       \t\t  " );
-	ft_printf("and N have to be between 1 and the number of champions\n\n");
-	ft_printf("#### DUMP MODE ###############################################");
-	ft_printf("#####################################\n");
+	ft_printf("and N have to be between 1 and the number total of champions");
+	ft_printf("\n\n#### DUMP MODE ###########################################");
+	ft_printf("#########################################\n");
 	ft_printf("\n\t\t-dump N\t\t: ");
 	ft_printf("Use this option to print memory after N cycles then exists\n");
 	ft_printf("\t\t       \t\t  This is compatible with -graph\n\n" );

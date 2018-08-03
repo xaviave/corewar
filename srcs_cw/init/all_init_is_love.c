@@ -14,7 +14,8 @@ static int		put_usage(t_arg *args, int error)
 	else if (error == 5)
 		ft_printf("\t>>> Don't use illegal option, terrorist !");
 	else if (error == 6)
-		ft_printf("\t>>> \"-n\" has to be followed by a number AND a champion");
+		ft_printf("\t>>> \"-n\" has to be followed by%s",
+		" a valid number AND a champion");
 	else if (error < 0)
 		ft_printf("\t>>> I don't think \"%s\" is a valid file.",
 				args->champ_path[-(error + 1)]);
