@@ -46,11 +46,13 @@ static int	second_arg(t_champ *tmp, t_mem *mem, int *value, int *i)
 	else
 	{
 		if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b110000) >> 4 == 2)
+		{
 			value[1] = recup_direct2(mem, tmp, *i);
+			if (value[1] & 0x8000)
+				value[1] = value[1] | 0xffff0000;
+		}
 		else
-			value[1] = recup_indirect2x(mem, tmp, *i);
-		if (value[1] & 0x8000)
-			value[1] = value[1] | 0xffff0000;
+			value[1] = recup_indirect4x(mem, tmp, *i);
 		(*i) += 2;
 	}
 	return (1);
@@ -92,7 +94,7 @@ int		ft_sti(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	list = (t_champ **)list;
 	i = 2;
 	if (!first_arg(tmp, mem, value, &i) || !second_arg(tmp, mem, value, &i) ||
-		!third_arg(tmp, mem, value, &i))
+			!third_arg(tmp, mem, value, &i))
 		return (ft_error2(mem->memory[(tmp->pc + 1) % MEM_SIZE], tmp, 3));
 	add = (value[1] + value[2]) % IDX_MOD;
 	add = (add + tmp->pc + MEM_SIZE) % MEM_SIZE;
