@@ -9,6 +9,8 @@ int		lets_graph(t_champ **list, t_mem *mem, t_arg *args)
 	very_less = 0;
 	mem->c_todie = CYCLE_TO_DIE;
 	mem->c_before_check = mem->c_todie;
+	while (args->dump != -1 && mem->c < args->dump && *list)
+		one_cycle(list, mem, args, &very_less);
 	init_window(mem, *list, args, &stop);
 	while (*list)
 	{
