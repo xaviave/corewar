@@ -46,13 +46,11 @@ static int	second_arg(t_champ *tmp, t_mem *mem, int *value, int *i)
 	else
 	{
 		if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b110000) >> 4 == 2)
-		{
 			value[1] = recup_direct2(mem, tmp, *i);
-			if (value[1] & 0x8000)
-				value[1] = value[1] | 0xffff0000;
-		}
 		else
 			value[1] = recup_indirect4x(mem, tmp, *i);
+		if (value[1] & 0x8000)
+			value[1] = value[1] | 0xffff0000;
 		(*i) += 2;
 	}
 	return (1);
