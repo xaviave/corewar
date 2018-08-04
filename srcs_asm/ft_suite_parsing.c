@@ -43,10 +43,9 @@ int			ft_check_base(char **ch)
 
 	i = -1;
 	ft_bzero(g, sizeof(g));
-	while (ch[++i] && g[0] != 13 && g[1] != 13)
+	while (ch[++i] && g[0] != 13 && g[1] != 13 && !(j = 0))
 	{
 		g[2] = 0;
-		j = 0;
 		if (ch[i][0] != '#' &&
 				(ft_strstr(ch[i], ".name") || ft_strstr(ch[i], ".comment")))
 		{
@@ -61,6 +60,7 @@ int			ft_check_base(char **ch)
 				return (0);
 		}
 	}
+	ft_printf(g[0] == 1 && g[1] == 1 ? "" : "Error at name or comment line\n");
 	return (g[0] == 1 && g[1] == 1 ? 1 : 0);
 }
 

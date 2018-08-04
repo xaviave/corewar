@@ -62,18 +62,21 @@ int		main(int argc, char **argv)
 		ft_free_all(&a, 0);
 	if (!ft_check(&a))
 		ft_free_all(&a, 0);
+	if (!(ft_third(argv, argc, &a)))
+		ft_free_all(&a, 0);
 
 	t_list	*tmp;
 	tmp = a.t;
 	while (tmp)
 	{
-		ft_printf("%d -> [%s]\n", ((t_compl*)tmp->content)->line,
-				((t_compl*)tmp->content)->tkn);
+		ft_printf("%3d -> [%-8s][%d][%3d]\n", ((t_compl*)tmp->content)->line,
+				((t_compl*)tmp->content)->tkn,
+				((t_compl*)tmp->content)->type,
+				((t_compl*)tmp->content)->par_type);
 		tmp = tmp->next;
 	}
 
-	if (!(ft_third(argv, argc, &a)))
-		ft_free_all(&a, 0);
+
 	ft_free_all(&a, 1);
 	return (0);
 }
