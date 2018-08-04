@@ -59,6 +59,7 @@ static void		del_maillon(t_champ **list, int n)
 static void		check_live(t_champ **list)
 {
 	t_champ		*tmp;
+	t_champ		*tmp2;
 	int			live;
 	int			i;
 
@@ -67,15 +68,15 @@ static void		check_live(t_champ **list)
 	i = 0;
 	while (tmp)
 	{
+		tmp2 = tmp->next;
 		if (!tmp->live)
-		{
 			del_maillon(list, i);
-			i--;
-		}
 		else
+		{
 			tmp->live = 0;
-		tmp = tmp->next;
-		i++;
+			i++;
+		}
+		tmp = tmp2;;
 	}
 }
 
