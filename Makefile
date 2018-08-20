@@ -32,6 +32,24 @@ ASM_OBJS_PATH = ./srcs_asm/
 
 
 ASM_FILES = main_asm.c\
+		   check_ins.c\
+		   detail.c\
+		   ft_anyway.c\
+		   ft_check.c\
+		   ft_count_size.c\
+		   ft_count_size_ld_st.c\
+		   ft_extend_check.c\
+		   ft_extract_base.c\
+		   ft_first.c\
+		   ft_free.c\
+		   ft_nb_par_one.c\
+		   ft_nb_par_two.c\
+		   ft_parsing.c\
+		   ft_print_size.c\
+		   ft_reform.c\
+		   ft_suite_parsing.c\
+		   ft_third.c\
+		   tools.c
 
 ASM_SRCS = $(addprefix $(ASM_SRCS_PATH), $(ASM_FILES))
 ASM_OBJS = $(addprefix $(ASM_OBJS_PATH), $(ASM_FILES:.c=.o))
