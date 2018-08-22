@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   one_cycle.c                                      .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2018/08/22 16:25:53 by tduverge     #+#   ##    ##    #+#       */
+/*   Updated: 2018/08/22 16:57:30 by tduverge    ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
+
 #include "../includes/corewar.h"
 
 static void		save_instru(t_mem *mem, t_champ *tmp)
@@ -8,7 +21,7 @@ static void		save_instru(t_mem *mem, t_champ *tmp)
 		tmp->cycle++;
 		return ;
 	}
-	tmp->next_instru =  mem->memory[tmp->pc];
+	tmp->next_instru = mem->memory[tmp->pc];
 	tmp->cycle += mem->times[tmp->next_instru - 1] - 1;
 }
 
@@ -76,13 +89,13 @@ static void		check_live(t_champ **list)
 			tmp->live = 0;
 			i++;
 		}
-		tmp = tmp2;;
+		tmp = tmp2;
 	}
 }
 
 void			one_cycle(t_champ **list, t_mem *mem, t_arg *args, int *less)
 {
-	if (mem->c_before_check ==  0)
+	if (mem->c_before_check == 0)
 	{
 		check_live(list);
 		if (mem->call_live >= NBR_LIVE || *less == MAX_CHECKS - 1)
@@ -96,7 +109,7 @@ void			one_cycle(t_champ **list, t_mem *mem, t_arg *args, int *less)
 		if (mem->c_todie < 0)
 			kill_them_all(list);
 		mem->c_before_check = mem->c_todie;
-		ft_bzero(mem->player_live, MAX_PLAYERS * sizeof(int));
+		ft_bzero(mem->player_live, sizeof(int) * MAX_PLAYERS);
 	}
 	check_cycle(list, mem, mem->c, args);
 	mem->c_before_check--;
