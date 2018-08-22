@@ -6,7 +6,7 @@
 /*   By: xamartin <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/19 14:58:22 by xamartin     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/23 19:11:19 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/22 14:22:47 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -66,15 +66,15 @@ static int		put_help(void)
 	ft_printf("use this option to see live and print output from \"aff\"\n");
 	ft_printf("\n\t\t-n    N\t\t: ");
 	ft_printf("Use this option to select the position of the next champion\n");
-	ft_printf("\t\t       \t\t  " );
+	ft_printf("\t\t       \t\t  ");
 	ft_printf("Be careful, 2 champions can't have the same position\n");
-	ft_printf("\t\t       \t\t  " );
+	ft_printf("\t\t       \t\t  ");
 	ft_printf("and N have to be between 1 and the number total of champions");
 	ft_printf("\n\n#### DUMP MODE ###########################################");
 	ft_printf("#########################################\n");
 	ft_printf("\n\t\t-dump N\t\t: ");
 	ft_printf("Use this option to print memory after N cycles then exists\n");
-	ft_printf("\t\t       \t\t  This is compatible with -graph\n\n" );
+	ft_printf("\t\t       \t\t  This is compatible with -graph\n\n");
 	ft_printf("#### GRAPH MODE ##############################################");
 	ft_printf("#####################################\n");
 	ft_printf("\n\t\t-graph\t\t: ");
