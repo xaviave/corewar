@@ -6,7 +6,7 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/20 17:30:33 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/23 18:07:34 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/22 14:21:51 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -93,12 +93,12 @@ static int		check_prog_size(char *file, int file_size)
 		i++;
 	}
 	if (real_prog_size <= CHAMP_MAX_SIZE
-		&& real_prog_size + (int)sizeof(header_t) == file_size)
+			&& real_prog_size + (int)sizeof(header_t) == file_size)
 		return (real_prog_size);
 	return (0);
 }
 
-int			init_champ(t_champ **list, t_arg *args)
+int				init_champ(t_champ **list, t_arg *args)
 {
 	int		i;
 	int		file_size;
@@ -112,13 +112,13 @@ int			init_champ(t_champ **list, t_arg *args)
 		file = recup_file(args->champ_path[i], &file_size);
 		if (!file || file_size < (int)sizeof(header_t) || !check_magic(file) ||
 				!(prog_size = check_prog_size(file, file_size)))
-			{
-				if (file)
-					ft_strdel(&file);
-				return (-i - 1);
-			}
+		{
+			if (file)
+				ft_strdel(&file);
+			return (-i - 1);
+		}
 		*list = create_champ(file, prog_size, list, i + 1);
-		ft_memcpy(args->name[i],(*list)->name, PROG_NAME_LENGTH + 1);
+		ft_memcpy(args->name[i], (*list)->name, PROG_NAME_LENGTH + 1);
 		ft_strdel(&file);
 	}
 	return (0);

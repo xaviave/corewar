@@ -6,7 +6,7 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/16 17:10:29 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/24 21:07:20 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/22 14:13:56 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -47,7 +47,7 @@ static int		second_case(t_champ *tmp, t_mem *mem, unsigned int reg_src)
 		(unsigned int)(value & 0xFF00) >> 8;
 	mem->memory[(tmp->pc + add + 3 + MEM_SIZE) % MEM_SIZE] =
 		(unsigned int)(value & 0xFF);
-	mem->map[(tmp->pc + add + MEM_SIZE) % MEM_SIZE] = tmp->number;;
+	mem->map[(tmp->pc + add + MEM_SIZE) % MEM_SIZE] = tmp->number;
 	mem->map[(tmp->pc + add + 1 + MEM_SIZE) % MEM_SIZE] = tmp->number;
 	mem->map[(tmp->pc + add + 2 + MEM_SIZE) % MEM_SIZE] = tmp->number;
 	mem->map[(tmp->pc + add + 3 + MEM_SIZE) % MEM_SIZE] = tmp->number;
@@ -55,7 +55,7 @@ static int		second_case(t_champ *tmp, t_mem *mem, unsigned int reg_src)
 	return (1);
 }
 
-int			ft_st(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
+int				ft_st(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 {
 	list = (t_champ **)list;
 	args = (t_arg *)args;

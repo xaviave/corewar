@@ -6,7 +6,7 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/16 21:51:14 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/24 21:04:35 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/22 14:11:43 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -66,7 +66,7 @@ static int	second_arg(t_champ *tmp, t_mem *mem, int *value, int *i)
 	return (1);
 }
 
-int		ft_ldi(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
+int			ft_ldi(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 {
 	int					i;
 	int					value[3];

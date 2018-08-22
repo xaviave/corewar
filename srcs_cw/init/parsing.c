@@ -6,7 +6,7 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/13 15:58:46 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/13 16:15:53 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/22 14:24:00 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,7 +25,7 @@ static int	end_parse_player(t_arg *args, int champ, char *temp[MAX_PLAYERS])
 		while (args->champ_path[i])
 			i++;
 		args->champ_path[i] = temp[j];
-		j++;;
+		j++;
 	}
 	return (0);
 }
@@ -84,7 +84,7 @@ static int	parse_option(int ac, char **av, t_arg *args, int *i)
 	return (0);
 }
 
-int		parse_arg(int ac, char **av, t_arg *args)
+int			parse_arg(int ac, char **av, t_arg *args)
 {
 	int		i;
 	int		error;

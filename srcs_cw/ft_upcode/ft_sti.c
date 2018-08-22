@@ -6,7 +6,7 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/16 19:39:03 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/24 21:07:45 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/22 14:16:28 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -82,7 +82,7 @@ static int	third_arg(t_champ *tmp, t_mem *mem, int *value, int *i)
 	return (1);
 }
 
-int		ft_sti(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
+int			ft_sti(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 {
 	int					i;
 	int					value[3];
@@ -97,7 +97,8 @@ int		ft_sti(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 	add = (value[1] + value[2]) % IDX_MOD;
 	add = (add + tmp->pc + MEM_SIZE) % MEM_SIZE;
 	mem->memory[add] = (unsigned int)(value[0] & 0xFF000000) >> 24;
-	mem->memory[(add + 1) % MEM_SIZE] = (unsigned int)(value[0] & 0xFF0000) >> 16;
+	mem->memory[(add + 1) % MEM_SIZE] =
+		(unsigned int)(value[0] & 0xFF0000) >> 16;
 	mem->memory[(add + 2) % MEM_SIZE] = (unsigned int)(value[0] & 0xFF00) >> 8;
 	mem->memory[(add + 3) % MEM_SIZE] = (unsigned int)(value[0] & 0xFF);
 	mem->map[add] = tmp->number;

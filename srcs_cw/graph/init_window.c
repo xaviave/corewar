@@ -6,14 +6,14 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/18 13:27:40 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/23 11:36:59 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/22 14:14:53 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/corewar.h"
 
-static void			print_command()
+static void		print_command(void)
 {
 	attron(COLOR_PAIR(5));
 	move(52, 195);
@@ -40,13 +40,13 @@ static void			print_command()
 	printw("\\*********************************/");
 }
 
-void	init_window(t_mem *mem, t_champ *list, t_arg *args, int *stop)
+void			init_window(t_mem *mem, t_champ *list, t_arg *args, int *stop)
 {
 	initscr();
 	signal(SIGWINCH, NULL);
 	clear();
 	noecho();
-	cbreak(); 
+	cbreak();
 	start_color();
 	mem->speed = 50;
 	init_pair(1, COLOR_GREEN, COLOR_BLACK);

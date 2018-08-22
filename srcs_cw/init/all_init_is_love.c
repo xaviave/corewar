@@ -1,8 +1,21 @@
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   all_init_is_love.c                               .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2018/08/22 14:18:16 by tduverge     #+#   ##    ##    #+#       */
+/*   Updated: 2018/08/22 14:58:30 by tduverge    ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
+
 #include "../../includes/corewar.h"
 
 static int		put_usage(t_arg *args, int error, char **av)
 {
-	ft_printf("Usage: /corewar [-aff] [-graph] [-dump nbr_cycles] ");
+	ft_printf("Usage: ./corewar [-aff] [-graph] [-dump nbr_cycles] ");
 	ft_printf("[[-n number] champion1.cor]\n");
 	if (error == 1 || error == 2)
 		ft_printf("\t>>> We need at least one champion to make a fight...");
@@ -40,7 +53,7 @@ static int		global_check(int ac, char **av)
 	while (i < ac)
 	{
 		if (!ft_strcmp(av[i], "-n") && i + 2 < ac && check_cor_file(av[i + 2]))
-			i+= 3;
+			i += 3;
 		else if (check_cor_file(av[i]))
 			i++;
 		else
@@ -49,7 +62,7 @@ static int		global_check(int ac, char **av)
 	return (0);
 }
 
-int			all_init_is_love(t_champ **list, t_arg *args, int ac, char **av)
+int				all_init_is_love(t_champ **list, t_arg *args, int ac, char **av)
 {
 	int		error;
 

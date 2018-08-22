@@ -6,7 +6,7 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/13 16:24:08 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/24 21:12:35 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/22 14:17:23 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -103,7 +103,7 @@ static void		print_pause(int pause)
 	attroff(A_BOLD);
 }
 
-int			print_mem(t_mem *mem, t_champ *list, t_arg *args, int stop)
+int				print_mem(t_mem *mem, t_champ *list, t_arg *args, int stop)
 {
 	int			col;
 	int			key;

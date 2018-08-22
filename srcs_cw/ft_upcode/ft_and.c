@@ -6,7 +6,7 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/16 18:37:15 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/24 21:03:13 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/22 14:11:09 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -27,7 +27,7 @@ static int		first_arg(t_champ *tmp, t_mem *mem, unsigned int *value, int *i)
 	}
 	else if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b11000000) >> 6 == 2)
 	{
-		value[0] = recup_direct4(mem, tmp, *i);;
+		value[0] = recup_direct4(mem, tmp, *i);
 		(*i) += 4;
 	}
 	else if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b11000000) >> 6 == 3)
@@ -54,7 +54,7 @@ static int		sec_arg(t_champ *tmp, t_mem *mem, unsigned int *value, int *i)
 	}
 	else if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b110000) >> 4 == 2)
 	{
-		value[1] = recup_direct4(mem, tmp, *i);;
+		value[1] = recup_direct4(mem, tmp, *i);
 		(*i) += 4;
 	}
 	else if ((mem->memory[(tmp->pc + 1) % MEM_SIZE] & 0b110000) >> 4 == 3)
@@ -67,7 +67,7 @@ static int		sec_arg(t_champ *tmp, t_mem *mem, unsigned int *value, int *i)
 	return (1);
 }
 
-int		ft_and(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
+int				ft_and(t_champ *tmp, t_champ **list, t_mem *mem, t_arg *args)
 {
 	int					i;
 	unsigned int		value[2];

@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   legend.c                                         .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2018/08/22 14:18:57 by tduverge     #+#   ##    ##    #+#       */
+/*   Updated: 2018/08/22 14:20:20 by tduverge    ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
+
 #include "../../includes/corewar.h"
 
-void		info_cycle(t_champ *list, t_mem *mem)
+void			info_cycle(t_champ *list, t_mem *mem)
 {
 	attron(A_BOLD);
 	attron(COLOR_PAIR(6));
@@ -23,7 +36,7 @@ static int		info_players(t_champ *list, t_mem *mem, t_arg *args, int col)
 	int		i;
 
 	i = 0;
-	while (i <args->nb_players)
+	while (i < args->nb_players)
 	{
 		move(4 * i + 14, col + 3);
 		attron(COLOR_PAIR(i + 1));
