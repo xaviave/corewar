@@ -68,34 +68,33 @@ int				ft_header(char **file, t_all a)
 	if ((fd = open(*file, O_RDWR) == -1))
 	{
 		ft_strdel(file);
-		return (0);
+		return (-999);
 	}
 	lseek(fd, 0, SEEK_SET);
 	ft_print_zero(fd, 1);
 	fd_printf("%c%c%c%s", fd, 0b11101010, 0b10000011, 0b11110011, a.base.name);
 	ft_print_zero(fd, 128 - ft_strlen(a.base.name));
 	if (!(ft_print_size(a.file_size, fd)))
-		return (0);
+		return (-999);
 	fd_printf("%s", fd, a.base.comment);
 	ft_print_zero(fd, 2048 - ft_strlen(a.base.comment));
-	close(fd);
-	return (1);
+	return (fd);
 }
 
 int				ft_third(char **argv, int argc, t_all *a)
 {
-//	t_list	*tmp;
+	int		fd;
 
-/*	tmp = a->t;
-	while (tmp)
-	{
-		ft_printf("%d -> \"%s\"\n", ((t_compl*)tmp->content)->line, ((t_compl*)tmp->content)->tkn);
-		tmp = tmp->next;
-	}*/
 	if (!(a->file_name = ft_name_file(argc, argv)))
 		return (0);
-	if (!(ft_header(&a->file_name, *a)))
+	if ((fd = ft_header(&a->file_name, *a)) == -999)
 		return (0);
+	if (!(ft_bytecode(fd, a)))
+	{
+		close(fd);
+		return (0);
+	}
 	ft_printf("Writing output program to %s\n", a->file_name);
+	close(fd);
 	return (1);
 }

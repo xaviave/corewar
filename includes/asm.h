@@ -95,5 +95,6 @@ int					ft_bad_line(t_list **list);
 char				*ft_strfjoin(char *s1, char *s2);
 char				*ft_arg(int argc, char **argv);
 int					ft_reform(t_all *a);
+int					ft_bytecode(int fd, t_all *a);
 
 #endif

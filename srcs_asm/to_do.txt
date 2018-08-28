@@ -1,4 +1,28 @@
 faire tout la traduction du parsing
+
+***********************************
+
+code de l'instruction -> description du type des parametres -> parametres
+(exception [x] [desc tp par] -> live, zjmp, fork, lfork)
+
+exemple:
+
+sti r42, %10, %39 ->
+
+0b ->						(sti)
+	68 ->					(01 10 10 00)
+		2a ->				(r42)
+			00 0a ->		(%10)
+				00 27 ->	(%39)
+
+live %14890		-> 0100 003a 2a
+
+zjmp %11		-> 0900 0b
+
+fork %88		-> 0c00 58
+lfork %53		-> 0f00 35
+
+_________________
 _________________
 
 live:
