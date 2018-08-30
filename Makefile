@@ -49,7 +49,8 @@ ASM_FILES = main_asm.c\
 		   ft_reform.c\
 		   ft_suite_parsing.c\
 		   ft_third.c\
-		   tools.c
+		   tools.c\
+		   ft_bytecode.c
 
 ASM_SRCS = $(addprefix $(ASM_SRCS_PATH), $(ASM_FILES))
 ASM_OBJS = $(addprefix $(ASM_OBJS_PATH), $(ASM_FILES:.c=.o))
