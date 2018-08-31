@@ -1,7 +1,8 @@
 .name "zork"
 .comment "I'M ALIIIIVE"
 
-live %14890
+fork %88
+lfork %:live
 l2:		sti r1, %:live, %1
 		and r1, %0, r1
 

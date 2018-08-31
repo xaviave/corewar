@@ -92,11 +92,8 @@ int			ft_bc(int fd, t_list **list)
 					ft_strcmp(((t_compl*)tmp->content)->tkn, "fork") &&
 					ft_strcmp(((t_compl*)tmp->content)->tkn, "lfork"))
 				tmp = ft_byte_read_par(fd, tmp, list);
-			//if (tmp && ((t_compl*)tmp->content)->type == 2)
-			//	tmp = tmp->next;
-			//while (tmp && ((t_compl*)tmp->content)->type != 2)
-			//	tmp = tmp->next;
-			/* different si une des exception. */
+			else
+				tmp = ft_exception(fd, tmp);
 		}
 		else
 			tmp = tmp->next;

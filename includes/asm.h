@@ -100,5 +100,6 @@ int					ft_bytecode(int fd, t_all *a);
 int					ft_binary_to_hexa(int fd, char *tp);
 t_list				*ft_byte_read_par(int fd, t_list *tmp, t_list **list);
 int					ft_brut_label(t_all *a);
+t_list				*ft_exception(int fd, t_list *tmp);
 
 #endif
