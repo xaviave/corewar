@@ -77,14 +77,26 @@ int			ft_bc(int fd, t_list **list)
 	tmp = *list;
 	while (tmp)
 	{
-		ft_printf("%s\n", ((t_compl*)tmp->content)->tkn);
 		if (((t_compl*)tmp->content)->type == 2)
 		{
 			if (!(ft_byte_read_ins(fd, tmp)))
 				return (0);
-			if (!(ft_byte_read_type_par(fd, tmp)))
-				return (0);
-			tmp = ft_byte_read_par(fd, tmp, list);
+			if (ft_strcmp(((t_compl*)tmp->content)->tkn, "live") &&
+					ft_strcmp(((t_compl*)tmp->content)->tkn, "zjmp") &&
+					ft_strcmp(((t_compl*)tmp->content)->tkn, "fork") &&
+					ft_strcmp(((t_compl*)tmp->content)->tkn, "lfork"))
+				if (!(ft_byte_read_type_par(fd, tmp)))
+					return (0);
+			if (ft_strcmp(((t_compl*)tmp->content)->tkn, "live") &&
+					ft_strcmp(((t_compl*)tmp->content)->tkn, "zjmp") &&
+					ft_strcmp(((t_compl*)tmp->content)->tkn, "fork") &&
+					ft_strcmp(((t_compl*)tmp->content)->tkn, "lfork"))
+				tmp = ft_byte_read_par(fd, tmp, list);
+			//if (tmp && ((t_compl*)tmp->content)->type == 2)
+			//	tmp = tmp->next;
+			//while (tmp && ((t_compl*)tmp->content)->type != 2)
+			//	tmp = tmp->next;
+			/* different si une des exception. */
 		}
 		else
 			tmp = tmp->next;

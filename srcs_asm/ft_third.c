@@ -89,6 +89,11 @@ int				ft_third(char **argv, int argc, t_all *a)
 		return (0);
 	if ((fd = ft_header(&a->file_name, *a)) == -999)
 		return (0);
+	if (!(ft_brut_label(a)))
+	{
+		close(fd);
+		return (0);
+	}
 	if (!(ft_bytecode(fd, a)))
 	{
 		close(fd);

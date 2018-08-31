@@ -21,6 +21,7 @@ void	ft_lstdel_m(t_list **alst)
 		((t_compl*)((t_list*)*alst)->content)->type = 0;
 		((t_compl*)((t_list*)*alst)->content)->par_type = 0;
 		((t_compl*)((t_list*)*alst)->content)->line = 0;
+		((t_compl*)((t_list*)*alst)->content)->lab = 0;
 		free(((t_compl*)((t_list*)*alst)->content));
 		if ((*alst)->next)
 			ft_lstdel_m(&((*alst)->next));
@@ -69,10 +70,11 @@ int		main(int argc, char **argv)
 	tmp = a.t;
 	while (tmp)
 	{
-		ft_printf("%3d -> [%-8s][%d][%3d]\n", ((t_compl*)tmp->content)->line,
+		ft_printf("%3d -> [%-8s][%d][%3d][%d]\n", ((t_compl*)tmp->content)->line,
 				((t_compl*)tmp->content)->tkn,
 				((t_compl*)tmp->content)->type,
-				((t_compl*)tmp->content)->par_type);
+				((t_compl*)tmp->content)->par_type,
+				((t_compl*)tmp->content)->lab);
 		tmp = tmp->next;
 	}
 

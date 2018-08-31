@@ -42,3 +42,44 @@ int			ft_increment_tkn_second(char **tkn, int i, int *l)
 		(*l)++;
 	return (i);
 }
+
+int			ft_associate_label(t_list *tmp, t_list *list)
+{
+	char	*dup;
+
+	if (!(dup = ft_strfjoin(ft_strdup(((t_compl*)tmp->content)->tkn + 2),
+					ft_strdup(":"))))
+		return (0);
+	while (list)
+	{
+		if (((t_compl*)list->content)->type == _LAB && !ft_strcmp(dup,
+					((t_compl*)list->content)->tkn))
+		{
+			((t_compl*)tmp->content)->lab = ((t_compl*)list->content)->par_type;
+			ft_strdel(&dup);
+			return (1);
+		}
+		list = list->next;
+	}
+	ft_strdel(&dup);
+	return (1);
+}
+
+int			ft_brut_label(t_all *a)
+{
+	t_list		*tmp;
+	t_list		*list;
+
+	tmp = a->t;
+	while (tmp)
+	{
+		list = a->t;
+		if (((t_compl*)tmp->content)->type == _PAR &&
+				((t_compl*)tmp->content)->par_type == _DIR &&
+				((t_compl*)tmp->content)->tkn[1] == ':')
+			if (!(ft_associate_label(tmp, list)))
+				return (0);
+		tmp = tmp->next;
+	}
+	return (1);
+}

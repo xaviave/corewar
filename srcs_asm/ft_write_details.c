@@ -1,20 +1,23 @@
 #include "../includes/asm.h"
 
-int			ft_binary_to_hexa(int fd, char *tp)
+int		ft_binary_to_hexa(int fd, char *s)
 {
-	char	*a;
-	int		num;
-	int		b;
+	char	c;
+	int		i;
+	char	temp;
 
-	a = tp;
-	num = 0;
-	while (*a)
+	c = 0;
+	i = 0;
+	temp = 0;
+	while (i < 8)
 	{
-		b = (*a == '1' ? 1 : 0);
-		num = (num << 1) | b;
-		a++;
+		if (s[i] == '1')
+			temp = 1;
+		temp = temp << (7 - i);
+		c = c | temp;
+		i++;
 	}
-	return (fd_printf("%c\n", fd, num));
+	return (ft_printf("%c", fd, c));
 }
 
 t_list		*ft_byte_read_par(int fd, t_list *tmp, t_list **list)
@@ -25,8 +28,12 @@ t_list		*ft_byte_read_par(int fd, t_list *tmp, t_list **list)
 		if (((t_compl*)tmp->content)->par_type == _REG)
 			fd_printf("%c", fd, ft_atoi(((t_compl*)tmp->content)->tkn + 1));
 		else if (((t_compl*)tmp->content)->par_type == _DIR)
-			tmp = tmp;
-			/* gerer les labels, transformer les _DIR en valeur puis en %c qui boucle pour 2 octets  */
+		{
+			if (ft_strlen(pf_litoa_base(((t_compl*)tmp->content)->lab,
+							"0123456789")) < 4)
+				fd_printf("%c", fd, 0);
+			fd_printf("%c", fd, ((t_compl*)tmp->content)->lab);
+		}
 		else if (((t_compl*)tmp->content)->par_type == _IND)
 		{
 			if (ft_strlen(((t_compl*)tmp->content)->tkn) < 4)

@@ -57,6 +57,7 @@ typedef struct		s_compl
 	int				type;
 	int				par_type;
 	int				line;
+	int				lab;
 }					t_compl;
 
 char				*ft_first(int argc, char **argv);
@@ -98,5 +99,6 @@ int					ft_reform(t_all *a);
 int					ft_bytecode(int fd, t_all *a);
 int					ft_binary_to_hexa(int fd, char *tp);
 t_list				*ft_byte_read_par(int fd, t_list *tmp, t_list **list);
+int					ft_brut_label(t_all *a);
 
 #endif
