@@ -42,28 +42,31 @@ int			ft_byte_read_ins(int fd, t_list *tmp)
 	return (ft_byte_read_ins_second(fd, tmp));
 }
 
-int			ft_byte_read_type_par(int fd, t_list **list)
+int			ft_byte_read_type_par(int fd, t_list *list)
 {
-	char	*tp;
 	int		i;
+	char	*tp;
 
-	/* tout faux, faire traduction -> sommes type par = binaire -> hexa */
-	*list = (*list)->next;
 	i = 0;
-	while (((t_compl*)((t_list*)list)->content)->type != 2)
+	list = list->next;
+	tp = ft_memalloc(0);
+	while (list && ((t_compl*)((t_list*)list)->content)->type == 3)
 	{
-		if (!(tp = ft_memalloc(4)))
-			return (0);
-		if (((t_compl*)((t_list*)list)->content)->par_type == _REG)
-			tp[i] = 1;
-		else if (((t_compl*)((t_list*)list)->content)->par_type == _DIR)
-			tp[i] = 10;
-		else if (((t_compl*)((t_list*)list)->content)->par_type == _IND)
-			tp[i] = 11;
-		*list = (*list)->next;
-		i++;
+		if (((t_compl*)list->content)->par_type == _REG)
+			tp = ft_strfjoin(ft_strdup(tp), ft_strdup("01"));
+		else if (((t_compl*)list->content)->par_type == _DIR)
+			tp = ft_strfjoin(ft_strdup(tp), ft_strdup("10"));
+		else if (((t_compl*)list->content)->par_type == _IND)
+			if (!(tp = ft_strfjoin(ft_strdup(tp), ft_strdup("11"))))
+				return (0);
+		list = list->next;
 	}
-	fd_printf("%s", fd, tp);
+	while (ft_strlen(tp) < 8)
+		if (!(tp = ft_strfjoin(ft_strdup(tp), ft_strdup("00"))))
+			return (0);
+	if (!(ft_binary_to_hexa(fd, tp)))
+		return (0);
+	ft_strdel(&tp);
 	return (1);
 }
 
@@ -79,8 +82,9 @@ int			ft_bc(int fd, t_list **list)
 		{
 			if (!(ft_byte_read_ins(fd, tmp)))
 				return (0);
-			if (!(ft_byte_read_type_par(fd, &tmp)))
+			if (!(ft_byte_read_type_par(fd, tmp)))
 				return (0);
+			tmp = ft_byte_read_par(fd, tmp, list);
 		}
 		else
 			tmp = tmp->next;

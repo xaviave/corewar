@@ -77,7 +77,7 @@ int				ft_header(char **file, t_all a)
 	if (!(ft_print_size(a.file_size, fd)))
 		return (-999);
 	fd_printf("%s", fd, a.base.comment);
-	ft_print_zero(fd, 2048 - ft_strlen(a.base.comment));
+	ft_print_zero(fd, 2052 - ft_strlen(a.base.comment));
 	return (fd);
 }
 

@@ -96,5 +96,7 @@ char				*ft_strfjoin(char *s1, char *s2);
 char				*ft_arg(int argc, char **argv);
 int					ft_reform(t_all *a);
 int					ft_bytecode(int fd, t_all *a);
+int					ft_binary_to_hexa(int fd, char *tp);
+t_list				*ft_byte_read_par(int fd, t_list *tmp, t_list **list);
 
 #endif
