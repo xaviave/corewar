@@ -48,9 +48,8 @@ int			ft_byte_read_type_par(int fd, t_list *list)
 	char	*tp;
 
 	i = 0;
-	list = list->next;
-	tp = ft_memalloc(0);
-	while (list && ((t_compl*)((t_list*)list)->content)->type == 3)
+	tp = ft_strdup(">");
+	while ((list = list->next) && ((t_compl*)list->content)->type == 3)
 	{
 		if (((t_compl*)list->content)->par_type == _REG)
 			tp = ft_strfjoin(ft_strdup(tp), ft_strdup("01"));
@@ -59,12 +58,11 @@ int			ft_byte_read_type_par(int fd, t_list *list)
 		else if (((t_compl*)list->content)->par_type == _IND)
 			if (!(tp = ft_strfjoin(ft_strdup(tp), ft_strdup("11"))))
 				return (0);
-		list = list->next;
 	}
 	while (ft_strlen(tp) < 8)
 		if (!(tp = ft_strfjoin(ft_strdup(tp), ft_strdup("00"))))
 			return (0);
-	if (!(ft_binary_to_hexa(fd, tp)))
+	if (!(ft_binary_to_hexa(fd, tp + 1)))
 		return (0);
 	ft_strdel(&tp);
 	return (1);
