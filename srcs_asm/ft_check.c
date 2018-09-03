@@ -36,6 +36,7 @@ int			ft_add_elem(t_list **list, char *tkn, int l)
 	cpl.type = 0;
 	cpl.par_type = 0;
 	cpl.lab = 0;
+	cpl.size = 0;
 	if (!(new = ft_lstnew(&cpl, sizeof(cpl))))
 		return (0);
 	ft_lstpush(list, new);

@@ -58,6 +58,7 @@ typedef struct		s_compl
 	int				par_type;
 	int				line;
 	int				lab;
+	int				size;
 }					t_compl;
 
 char				*ft_first(int argc, char **argv);

@@ -70,11 +70,12 @@ int		main(int argc, char **argv)
 	tmp = a.t;
 	while (tmp)
 	{
-		ft_printf("%3d -> [%-8s][%d][%3d][%d]\n", ((t_compl*)tmp->content)->line,
+		ft_printf("%3d -> [%-8s][%d][%3d][%2d][%d]\n", ((t_compl*)tmp->content)->line,
 				((t_compl*)tmp->content)->tkn,
 				((t_compl*)tmp->content)->type,
 				((t_compl*)tmp->content)->par_type,
-				((t_compl*)tmp->content)->lab);
+				((t_compl*)tmp->content)->lab,
+				((t_compl*)tmp->content)->size);
 		tmp = tmp->next;
 	}
 
