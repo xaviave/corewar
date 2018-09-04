@@ -1,4 +1,4 @@
-faire tout la traduction du parsing
+parametres a 2 ou 4 octets
 
 ***********************************
 

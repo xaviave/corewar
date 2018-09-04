@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   ft_bytecode.c                                    .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2018/09/04 16:37:26 by lotoussa     #+#   ##    ##    #+#       */
+/*   Updated: 2018/09/04 20:35:08 by lotoussa    ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
+
 #include "../includes/asm.h"
 
 int			ft_byte_read_ins_second(int fd, t_list *tmp)
@@ -74,7 +87,6 @@ int			ft_bc(int fd, t_list **list)
 
 	tmp = *list;
 	while (tmp)
-	{
 		if (((t_compl*)tmp->content)->type == 2)
 		{
 			if (!(ft_byte_read_ins(fd, tmp)))
@@ -95,7 +107,6 @@ int			ft_bc(int fd, t_list **list)
 		}
 		else
 			tmp = tmp->next;
-	}
 	return (1);
 }
 
@@ -104,6 +115,8 @@ int			ft_bytecode(int fd, t_all *a)
 	t_list		*tmp;
 
 	tmp = a->t;
+	if (!(ft_create_size_tab(&tmp)))
+		return (0);
 	if (!(ft_bc(fd, &tmp)))
 		return (0);
 	return (1);

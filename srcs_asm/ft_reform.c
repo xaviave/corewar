@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   ft_reform.c                                      .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2018/09/04 16:35:52 by lotoussa     #+#   ##    ##    #+#       */
+/*   Updated: 2018/09/04 16:36:40 by lotoussa    ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
+
 #include "../includes/asm.h"
 
 int			ft_del_sep(t_list **list, int i, char *tkn)
@@ -17,6 +30,8 @@ int			ft_del_sep(t_list **list, int i, char *tkn)
 	((t_compl*)buf->content)->type = 0;
 	((t_compl*)buf->content)->par_type = 0;
 	((t_compl*)buf->content)->line = 0;
+	((t_compl*)buf->content)->lab = 0;
+	((t_compl*)buf->content)->size = 0;
 	free(((t_compl*)buf->content));
 	free(buf);
 	buf = NULL;

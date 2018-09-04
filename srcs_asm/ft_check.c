@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/22 17:18:49 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/25 19:34:24 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/04 16:48:35 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,9 +21,8 @@ int			ft_add_elem(t_list **list, char *tkn, int l)
 	int			c;
 
 	i = 0;
-	c = 0;
 	new = NULL;
-	if (tkn[i] == '\t')
+	if (!(c = 0) && tkn[i] == '\t')
 	{
 		while (tkn[i])
 			c = (tkn[i++] != '\t') ? 1 : c;

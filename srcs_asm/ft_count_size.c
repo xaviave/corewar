@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/27 21:03:53 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/27 21:03:54 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/04 20:21:14 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,6 +25,9 @@ void		ft_ins_dont_move(char *tkn, t_list **tmp, int *size)
 			inc = inc->next;
 		*tmp = (inc->next ? inc->next : inc);
 		*size += 3;
+		if (((t_compl*)((t_list*)*tmp)->content)->size)
+			*tmp = (*tmp)->next;
+		((t_compl*)((t_list*)*tmp)->content)->size = *size;
 	}
 	else if (!ft_strcmp(tkn, "live") || !ft_strcmp(tkn, "add")
 			|| !ft_strcmp(tkn, "sub"))
@@ -33,6 +36,9 @@ void		ft_ins_dont_move(char *tkn, t_list **tmp, int *size)
 			inc = inc->next;
 		*tmp = (inc->next ? inc->next : inc);
 		*size += 5;
+		if (((t_compl*)((t_list*)*tmp)->content)->size)
+			*tmp = (*tmp)->next;
+		((t_compl*)((t_list*)*tmp)->content)->size = *size;
 	}
 }
 
@@ -54,6 +60,9 @@ void		ft_ins_ott(char *tkn, t_list **tmp, int *size)
 				*size += 2;
 			inc = inc->next;
 		}
+		if (((t_compl*)((t_list*)*tmp)->content)->size)
+			*tmp = (*tmp)->next;
+		((t_compl*)((t_list*)*tmp)->content)->size = *size;
 		*tmp = (inc->next ? inc->next : inc);
 	}
 }
@@ -77,6 +86,9 @@ void		ft_ins_oft(char *tkn, t_list **tmp, int *size)
 				*size += 2;
 			inc = inc->next;
 		}
+		if (((t_compl*)((t_list*)*tmp)->content)->size)
+			*tmp = (*tmp)->next;
+		((t_compl*)((t_list*)*tmp)->content)->size = *size;
 		*tmp = (inc->next ? inc->next : inc);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/27 21:12:55 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/27 21:12:56 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/04 20:32:57 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -29,6 +29,9 @@ void		ft_count_size_ld_st(char *tkn, t_list **tmp, int *size)
 		}
 		*tmp = (inc->next ? inc->next : inc);
 		*size += (par ? 7 : 5);
+		if (((t_compl*)((t_list*)*tmp)->content)->size)
+			*tmp = (*tmp)->next;
+		((t_compl*)((t_list*)*tmp)->content)->size = *size;
 	}
 	else if (!ft_strcmp(tkn, "st"))
 	{
@@ -39,5 +42,64 @@ void		ft_count_size_ld_st(char *tkn, t_list **tmp, int *size)
 		}
 		*tmp = (inc->next ? inc->next : inc);
 		*size += (par ? 5 : 4);
+		if (((t_compl*)((t_list*)*tmp)->content)->size)
+			*tmp = (*tmp)->next;
+		((t_compl*)((t_list*)*tmp)->content)->size = *size;
 	}
+}
+
+int			ft_attribute_size(int len, int *tab, t_list **list)
+{
+	t_list		*tmp;
+	int			line;
+	int			i;
+
+	i = 0;
+	tmp = *list;
+	line = ((t_compl*)tmp->content)->line;
+	while (tmp && i < len - 1)
+	{
+		while (line == ((t_compl*)tmp->content)->line)
+		{
+			((t_compl*)tmp->content)->size = tab[i];
+			tmp = tmp->next;
+		}
+		line = ((t_compl*)tmp->content)->line;
+		i++;
+	}
+	while (tmp)
+	{
+		((t_compl*)tmp->content)->size = tab[i];
+		tmp = tmp->next;
+	}
+	return (1);
+}
+
+int			ft_create_size_tab(t_list **list)
+{
+	t_list		*tmp;
+	int			*tab;
+	int			i;
+	int			size;
+	int			len;
+
+	tmp = *list;
+	len = 1;
+	while ((tmp = tmp->next))
+		len += (((t_compl*)tmp->content)->size ? 1 : 0);
+	if (!(tab = (int*)malloc(sizeof(int) * len)))
+		return (0);
+	i = 0;
+	tab[i++] = 0;
+	tmp = *list;
+	while ((tmp = tmp->next))
+		if (((t_compl*)tmp->content)->size)
+			tab[i++] = ((t_compl*)tmp->content)->size;
+	tmp = *list;
+	while ((tmp = tmp->next))
+		((t_compl*)tmp->content)->size = 0;
+	ft_attribute_size(len, tab, list);
+	free(tab);
+	tab = NULL;
+	return (1);
 }

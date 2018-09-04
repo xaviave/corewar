@@ -6,22 +6,13 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/21 17:18:55 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/21 17:18:56 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/04 16:42:22 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 #include <fcntl.h>
-
-/*static void		ft_exit_error_local(char **file, char **tmp)
-{
-	if (*file)
-		ft_strdel(file);
-	if (*tmp)
-		ft_strdel(tmp);
-	exit(1);
-}*/
 
 char			*ft_read_file(int argc, char **argv)
 {
@@ -39,10 +30,8 @@ char			*ft_read_file(int argc, char **argv)
 	{
 		if (!(file = ft_strfjoin(file, tmp)))
 			exit(1);
-			//ft_exit_error_local(&file, &tmp);
 		if (!(file = ft_strfjoin(file, ft_strdup("\n"))))
 			exit(1);
-			//ft_exit_error_local(&file, &tmp);
 	}
 	close(fd);
 	return (file);

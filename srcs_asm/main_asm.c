@@ -6,7 +6,7 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/25 12:04:14 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/27 21:37:34 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/04 17:15:13 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,6 +22,7 @@ void	ft_lstdel_m(t_list **alst)
 		((t_compl*)((t_list*)*alst)->content)->par_type = 0;
 		((t_compl*)((t_list*)*alst)->content)->line = 0;
 		((t_compl*)((t_list*)*alst)->content)->lab = 0;
+		((t_compl*)((t_list*)*alst)->content)->size = 0;
 		free(((t_compl*)((t_list*)*alst)->content));
 		if ((*alst)->next)
 			ft_lstdel_m(&((*alst)->next));
