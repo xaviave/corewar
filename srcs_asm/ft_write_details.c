@@ -6,42 +6,37 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/04 16:33:32 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/04 20:27:52 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/05 16:38:54 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
+void		ft_memrev(char *ptr, size_t n)
+{
+	char	tmp;
+
+	tmp = *ptr;
+	*ptr = ptr[n - 1];
+	ptr[n - 1] = tmp;
+	if (n > 3)
+		ft_memrev(ptr + 1, n - 2);
+}
+
 int			ft_arrange_live(int fd, t_list *tmp)
 {
-	char	*dup;
-	int		i;
+	int		d;
 
-	dup = pf_litoa_base(ft_atoi(((t_compl*)tmp->content)->tkn + 1),
-			"0123456789abcdef");
-	dup = (ft_strlen(dup) % 2 ? ft_strfjoin(ft_strdup("0"), dup) : dup);
-	if (ft_strlen(dup) == 2)
-		i = 3;
-	else if (ft_strlen(dup) == 4)
-		i = 2;
-	else if (ft_strlen(dup) == 6)
-		i = 1;
-	else
-		i = 0;
-	while (i)
-	{
-		fd_printf("%c", fd, 0);
-		i--;
-	}
-	fd_printf("%c", fd, ft_atoi(((t_compl*)tmp->content)->tkn + 1));
-	ft_strdel(&dup);
+	d = ft_atoi(((t_compl*)tmp->content)->tkn + 1);
+	ft_memrev((char*)&d, 4);
+	write(fd, &d, 4);
 	return (1);
 }
 
 t_list		*ft_live_exception(int fd, t_list *tmp)
 {
-	char	*dup;
+	int		d;
 
 	if (((t_compl*)tmp->content)->tkn[1] != ':')
 	{
@@ -50,40 +45,31 @@ t_list		*ft_live_exception(int fd, t_list *tmp)
 	}
 	else
 	{
-		dup = pf_litoa_base(((t_compl*)tmp->content)->lab, "0123456789abcdef");
-		if (ft_strlen(dup) < 4)
-			fd_printf("%c", fd, 0);
-		fd_printf("%c", fd, (((t_compl*)tmp->content)->lab -
-					((t_compl*)tmp->content)->size));
-		ft_strdel(&dup);
+		d = ((t_compl*)tmp->content)->lab - ((t_compl*)tmp->content)->size;
+		ft_memrev((char*)&d, 4);
+		write(fd, &d, 4);
 	}
 	return (tmp->next);
 }
 
 t_list		*ft_exception(int fd, t_list *tmp)
 {
-	char	*dup;
+	int		d;
 
 	if (!ft_strcmp(((t_compl*)tmp->content)->tkn, "live"))
 		return (ft_live_exception(fd, tmp->next));
 	tmp = tmp->next;
 	if (((t_compl*)tmp->content)->tkn[1] != ':')
 	{
-		dup = pf_litoa_base(ft_atoi(((t_compl*)tmp->content)->tkn + 1),
-				"0123456789abcdef");
-		if (ft_strlen(dup) < 4)
-			fd_printf("%c", fd, 0);
-		fd_printf("%c", fd, ft_atoi(((t_compl*)tmp->content)->tkn + 1));
-		ft_strdel(&dup);
+		d = ft_atoi(((t_compl*)tmp->content)->tkn + 1);
+		ft_memrev((char*)&d, 2);
+		write(fd, &d, 2);
 	}
 	else
 	{
-		dup = pf_litoa_base(((t_compl*)tmp->content)->lab, "0123456789abcdef");
-		if (ft_strlen(dup) < 4)
-			fd_printf("%c", fd, 0);
-		fd_printf("%c", fd, ((t_compl*)tmp->content)->lab -
-				((t_compl*)tmp->content)->size);
-		ft_strdel(&dup);
+		d = ((t_compl*)tmp->content)->lab - ((t_compl*)tmp->content)->size;
+		ft_memrev((char*)&d, 2);
+		write(fd, &d, 2);
 	}
 	return (tmp->next);
 }
@@ -110,34 +96,26 @@ int			ft_binary_to_hexa(int fd, char *s)
 
 t_list		*ft_byte_read_par(int fd, t_list *tmp, t_list **list)
 {
-	while ((tmp = tmp->next) && ((t_compl*)tmp->content)->type == 3)
+	int		oct;
+	int		d;
+
+	oct = (!ft_strcmp(((t_compl*)tmp->content)->tkn, "and")
+			|| !ft_strcmp(((t_compl*)tmp->content)->tkn, "or")
+			|| !ft_strcmp(((t_compl*)tmp->content)->tkn, "xor")
+			|| !ft_strcmp(((t_compl*)tmp->content)->tkn, "ld")
+			|| !ft_strcmp(((t_compl*)tmp->content)->tkn, "st")
+			|| !ft_strcmp(((t_compl*)tmp->content)->tkn, "lld") ? 4 : 2);
+	while ((tmp = tmp->next) && ((t_compl*)tmp->content)->type == _PAR)
 	{
 		if (((t_compl*)tmp->content)->par_type == _REG)
 			fd_printf("%c", fd, ft_atoi(((t_compl*)tmp->content)->tkn + 1));
 		else if (((t_compl*)tmp->content)->par_type == _DIR)
-		{
-			if (((t_compl*)tmp->content)->tkn[1] == ':')
-			{
-				if (ft_strlen(pf_litoa_base(((t_compl*)tmp->content)->lab,
-								"0123456789abcdef")) < 4)
-								/* depend selon l'instruction */
-					fd_printf("%c", fd, 0);
-				fd_printf("%c", fd, ((t_compl*)tmp->content)->lab - ((t_compl*)tmp->content)->size);
-			}
-			else
-			{
-				((t_compl*)tmp->content)->lab =
-					ft_atoi(((t_compl*)tmp->content)->tkn + 1);
-				if (ft_strlen(((t_compl*)tmp->content)->tkn) - 1 < 4)
-					fd_printf("%c", fd, 0);
-				fd_printf("%c", fd, ((t_compl*)tmp->content)->lab);
-			}
-		}
+			ft_size_par_exception(fd, oct, tmp);
 		else if (((t_compl*)tmp->content)->par_type == _IND)
 		{
-			if (ft_strlen(((t_compl*)tmp->content)->tkn) < 4)
-				fd_printf("%c", fd, 0);
-			fd_printf("%c", fd, ft_atoi(((t_compl*)tmp->content)->tkn));
+			d = ft_atoi(((t_compl*)tmp->content)->tkn);
+			ft_memrev((char*)&d, 2);
+			write(fd, &d, 2);
 		}
 	}
 	return (tmp);

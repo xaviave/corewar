@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/04 16:37:26 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/04 20:35:08 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/05 17:10:50 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -65,15 +65,15 @@ int			ft_byte_read_type_par(int fd, t_list *list)
 	while ((list = list->next) && ((t_compl*)list->content)->type == 3)
 	{
 		if (((t_compl*)list->content)->par_type == _REG)
-			tp = ft_strfjoin(ft_strdup(tp), ft_strdup("01"));
+			tp = ft_strfjoin(tp, ft_strdup("01"));
 		else if (((t_compl*)list->content)->par_type == _DIR)
-			tp = ft_strfjoin(ft_strdup(tp), ft_strdup("10"));
+			tp = ft_strfjoin(tp, ft_strdup("10"));
 		else if (((t_compl*)list->content)->par_type == _IND)
-			if (!(tp = ft_strfjoin(ft_strdup(tp), ft_strdup("11"))))
+			if (!(tp = ft_strfjoin(tp, ft_strdup("11"))))
 				return (0);
 	}
 	while (ft_strlen(tp) < 8)
-		if (!(tp = ft_strfjoin(ft_strdup(tp), ft_strdup("00"))))
+		if (!(tp = ft_strfjoin(tp, ft_strdup("00"))))
 			return (0);
 	if (!(ft_binary_to_hexa(fd, tp + 1)))
 		return (0);
@@ -87,7 +87,7 @@ int			ft_bc(int fd, t_list **list)
 
 	tmp = *list;
 	while (tmp)
-		if (((t_compl*)tmp->content)->type == 2)
+		if (((t_compl*)tmp->content)->type == _INS)
 		{
 			if (!(ft_byte_read_ins(fd, tmp)))
 				return (0);
@@ -115,6 +115,7 @@ int			ft_bytecode(int fd, t_all *a)
 	t_list		*tmp;
 
 	tmp = a->t;
+	/* attribuer a ((t_compl*)tmp->content)->size la valeur attendu */
 	if (!(ft_create_size_tab(&tmp)))
 		return (0);
 	if (!(ft_bc(fd, &tmp)))

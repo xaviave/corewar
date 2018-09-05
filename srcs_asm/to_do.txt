@@ -1,4 +1,5 @@
 parametres a 2 ou 4 octets
+quand par size () ecrire la totalite
 
 ***********************************
 
