@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/04 16:37:26 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/05 17:10:50 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/05 18:28:26 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -115,7 +115,6 @@ int			ft_bytecode(int fd, t_all *a)
 	t_list		*tmp;
 
 	tmp = a->t;
-	/* attribuer a ((t_compl*)tmp->content)->size la valeur attendu */
 	if (!(ft_create_size_tab(&tmp)))
 		return (0);
 	if (!(ft_bc(fd, &tmp)))
