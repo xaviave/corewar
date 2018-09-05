@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/27 21:03:53 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/05 18:28:32 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/05 19:20:08 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,10 +18,10 @@ void		ft_ins_dont_move(char *tkn, t_list **tmp, int *size)
 	t_list		*inc;
 
 	inc = *tmp;
-	if (!ft_strcmp(tkn, "aff") || !ft_strcmp(tkn, "lfork")
-			|| !ft_strcmp(tkn, "fork") || !ft_strcmp(tkn, "zjmp"))
+	if (!CMP(tkn, "aff") || !CMP(tkn, "lfork")
+			|| !CMP(tkn, "fork") || !CMP(tkn, "zjmp"))
 	{
-		while (inc && ft_strcmp(((t_compl*)inc->content)->tkn, "\n"))
+		while (inc && CMP(((t_compl*)inc->content)->tkn, "\n"))
 			inc = inc->next;
 		*tmp = (inc->next ? inc->next : inc);
 		*size += 3;
@@ -29,10 +29,10 @@ void		ft_ins_dont_move(char *tkn, t_list **tmp, int *size)
 			*tmp = (*tmp)->next;
 		((t_compl*)((t_list*)*tmp)->content)->size = *size;
 	}
-	else if (!ft_strcmp(tkn, "live") || !ft_strcmp(tkn, "add")
-			|| !ft_strcmp(tkn, "sub"))
+	else if (!CMP(tkn, "live") || !CMP(tkn, "add")
+			|| !CMP(tkn, "sub"))
 	{
-		while (inc && ft_strcmp(((t_compl*)inc->content)->tkn, "\n"))
+		while (inc && CMP(((t_compl*)inc->content)->tkn, "\n"))
 			inc = inc->next;
 		*tmp = (inc->next ? inc->next : inc);
 		*size += 5;
@@ -47,11 +47,11 @@ void		ft_ins_ott(char *tkn, t_list **tmp, int *size)
 	t_list		*inc;
 
 	inc = *tmp;
-	if (!ft_strcmp(tkn, "ldi") || !ft_strcmp(tkn, "sti")
-			|| !ft_strcmp(tkn, "lldi"))
+	if (!CMP(tkn, "ldi") || !CMP(tkn, "sti")
+			|| !CMP(tkn, "lldi"))
 	{
 		*size += 2;
-		while (inc && ft_strcmp(((t_compl*)inc->content)->tkn, "\n"))
+		while (inc && CMP(((t_compl*)inc->content)->tkn, "\n"))
 		{
 			if (((t_compl*)inc->content)->par_type == _REG)
 				*size += 1;
@@ -72,11 +72,11 @@ void		ft_ins_oft(char *tkn, t_list **tmp, int *size)
 	t_list		*inc;
 
 	inc = *tmp;
-	if (!ft_strcmp(tkn, "and") || !ft_strcmp(tkn, "or")
-			|| !ft_strcmp(tkn, "xor") || !ft_strcmp(tkn, "lld"))
+	if (!CMP(tkn, "and") || !CMP(tkn, "or")
+			|| !CMP(tkn, "xor") || !CMP(tkn, "lld"))
 	{
 		*size += 2;
-		while (inc && ft_strcmp(((t_compl*)inc->content)->tkn, "\n"))
+		while (inc && CMP(((t_compl*)inc->content)->tkn, "\n"))
 		{
 			if (((t_compl*)inc->content)->par_type == _REG)
 				*size += 1;

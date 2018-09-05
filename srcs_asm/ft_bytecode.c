@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/04 16:37:26 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/05 18:28:26 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/05 19:20:08 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,42 +15,42 @@
 
 int			ft_byte_read_ins_second(int fd, t_list *tmp)
 {
-	if (!(ft_strcmp(((t_compl*)tmp->content)->tkn, "sti")))
+	if (!(CMP(((t_compl*)tmp->content)->tkn, "sti")))
 		return (fd_printf("%c", fd, 11));
-	else if (!(ft_strcmp(((t_compl*)tmp->content)->tkn, "fork")))
+	else if (!(CMP(((t_compl*)tmp->content)->tkn, "fork")))
 		return (fd_printf("%c", fd, 12));
-	else if (!(ft_strcmp(((t_compl*)tmp->content)->tkn, "lld")))
+	else if (!(CMP(((t_compl*)tmp->content)->tkn, "lld")))
 		return (fd_printf("%c", fd, 13));
-	else if (!(ft_strcmp(((t_compl*)tmp->content)->tkn, "lldi")))
+	else if (!(CMP(((t_compl*)tmp->content)->tkn, "lldi")))
 		return (fd_printf("%c", fd, 14));
-	else if (!(ft_strcmp(((t_compl*)tmp->content)->tkn, "lfork")))
+	else if (!(CMP(((t_compl*)tmp->content)->tkn, "lfork")))
 		return (fd_printf("%c", fd, 15));
-	else if (!(ft_strcmp(((t_compl*)tmp->content)->tkn, "aff")))
+	else if (!(CMP(((t_compl*)tmp->content)->tkn, "aff")))
 		return (fd_printf("%c", fd, 16));
 	return (1);
 }
 
 int			ft_byte_read_ins(int fd, t_list *tmp)
 {
-	if (!(ft_strcmp(((t_compl*)tmp->content)->tkn, "live")))
+	if (!(CMP(((t_compl*)tmp->content)->tkn, "live")))
 		return (fd_printf("%c", fd, 1));
-	else if (!(ft_strcmp(((t_compl*)tmp->content)->tkn, "ld")))
+	else if (!(CMP(((t_compl*)tmp->content)->tkn, "ld")))
 		return (fd_printf("%c", fd, 2));
-	else if (!(ft_strcmp(((t_compl*)tmp->content)->tkn, "st")))
+	else if (!(CMP(((t_compl*)tmp->content)->tkn, "st")))
 		return (fd_printf("%c", fd, 3));
-	else if (!(ft_strcmp(((t_compl*)tmp->content)->tkn, "add")))
+	else if (!(CMP(((t_compl*)tmp->content)->tkn, "add")))
 		return (fd_printf("%c", fd, 4));
-	else if (!(ft_strcmp(((t_compl*)tmp->content)->tkn, "sub")))
+	else if (!(CMP(((t_compl*)tmp->content)->tkn, "sub")))
 		return (fd_printf("%c", fd, 5));
-	else if (!(ft_strcmp(((t_compl*)tmp->content)->tkn, "and")))
+	else if (!(CMP(((t_compl*)tmp->content)->tkn, "and")))
 		return (fd_printf("%c", fd, 6));
-	else if (!(ft_strcmp(((t_compl*)tmp->content)->tkn, "or")))
+	else if (!(CMP(((t_compl*)tmp->content)->tkn, "or")))
 		return (fd_printf("%c", fd, 7));
-	else if (!(ft_strcmp(((t_compl*)tmp->content)->tkn, "xor")))
+	else if (!(CMP(((t_compl*)tmp->content)->tkn, "xor")))
 		return (fd_printf("%c", fd, 8));
-	else if (!(ft_strcmp(((t_compl*)tmp->content)->tkn, "zjmp")))
+	else if (!(CMP(((t_compl*)tmp->content)->tkn, "zjmp")))
 		return (fd_printf("%c", fd, 9));
-	else if (!(ft_strcmp(((t_compl*)tmp->content)->tkn, "ldi")))
+	else if (!(CMP(((t_compl*)tmp->content)->tkn, "ldi")))
 		return (fd_printf("%c", fd, 10));
 	return (ft_byte_read_ins_second(fd, tmp));
 }
@@ -91,16 +91,16 @@ int			ft_bc(int fd, t_list **list)
 		{
 			if (!(ft_byte_read_ins(fd, tmp)))
 				return (0);
-			if (ft_strcmp(((t_compl*)tmp->content)->tkn, "live") &&
-					ft_strcmp(((t_compl*)tmp->content)->tkn, "zjmp") &&
-					ft_strcmp(((t_compl*)tmp->content)->tkn, "fork") &&
-					ft_strcmp(((t_compl*)tmp->content)->tkn, "lfork"))
+			if (CMP(((t_compl*)tmp->content)->tkn, "live") &&
+					CMP(((t_compl*)tmp->content)->tkn, "zjmp") &&
+					CMP(((t_compl*)tmp->content)->tkn, "fork") &&
+					CMP(((t_compl*)tmp->content)->tkn, "lfork"))
 				if (!(ft_byte_read_type_par(fd, tmp)))
 					return (0);
-			if (ft_strcmp(((t_compl*)tmp->content)->tkn, "live") &&
-					ft_strcmp(((t_compl*)tmp->content)->tkn, "zjmp") &&
-					ft_strcmp(((t_compl*)tmp->content)->tkn, "fork") &&
-					ft_strcmp(((t_compl*)tmp->content)->tkn, "lfork"))
+			if (CMP(((t_compl*)tmp->content)->tkn, "live") &&
+					CMP(((t_compl*)tmp->content)->tkn, "zjmp") &&
+					CMP(((t_compl*)tmp->content)->tkn, "fork") &&
+					CMP(((t_compl*)tmp->content)->tkn, "lfork"))
 				tmp = ft_byte_read_par(fd, tmp, list);
 			else
 				tmp = ft_exception(fd, tmp);

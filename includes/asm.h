@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/23 14:22:31 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/05 18:28:35 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/05 19:32:35 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,6 +28,7 @@ output\n"
 # define _DIR 301
 # define _IND 302
 # define _REG 303
+# define CMP ft_strcmp
 
 typedef struct		s_contain
 {
@@ -105,5 +106,10 @@ t_list				*ft_exception(int fd, t_list *tmp);
 int					ft_create_size_tab(t_list **tmp);
 void				ft_size_par_exception(int fd, int oct, t_list *tmp);
 void				ft_memrev(char *ptr, size_t n);
+int					ft_ins_one(t_list *tmp);
+int					ft_ins_two(t_list *tmp);
+int					ft_ins_three(t_list *tmp);
+int					ft_ins_four(t_list *tmp);
+int					ft_ins_five(t_list *tmp);
 
 #endif

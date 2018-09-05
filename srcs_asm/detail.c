@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/23 16:24:43 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/25 18:07:58 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/05 19:20:08 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,14 +18,14 @@ int			ft_is_ins(t_list *tmp)
 	char	*s;
 
 	s = ((t_compl*)tmp->content)->tkn;
-	return ((!ft_strcmp(s, "live") || !ft_strcmp(s, "ld") ||
-				!ft_strcmp(s, "st") || !ft_strcmp(s, "add") ||
-				!ft_strcmp(s, "sub") || !ft_strcmp(s, "and") ||
-				!ft_strcmp(s, "or") || !ft_strcmp(s, "xor") ||
-				!ft_strcmp(s, "zjmp") || !ft_strcmp(s, "ldi") ||
-				!ft_strcmp(s, "sti") || !ft_strcmp(s, "fork") ||
-				!ft_strcmp(s, "lld") || !ft_strcmp(s, "lldi") ||
-				!ft_strcmp(s, "lfork") || !ft_strcmp(s, "aff")) ? 1 : 0);
+	return ((!CMP(s, "live") || !CMP(s, "ld") ||
+				!CMP(s, "st") || !CMP(s, "add") ||
+				!CMP(s, "sub") || !CMP(s, "and") ||
+				!CMP(s, "or") || !CMP(s, "xor") ||
+				!CMP(s, "zjmp") || !CMP(s, "ldi") ||
+				!CMP(s, "sti") || !CMP(s, "fork") ||
+				!CMP(s, "lld") || !CMP(s, "lldi") ||
+				!CMP(s, "lfork") || !CMP(s, "aff")) ? 1 : 0);
 }
 
 int			ft_is_par(t_list *tmp)

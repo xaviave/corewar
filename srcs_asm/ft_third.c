@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/21 17:19:06 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/05 15:44:42 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/05 19:20:46 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -29,7 +29,7 @@ char			*ft_name_file(int argc, char **argv)
 	char		*str;
 
 	str = NULL;
-	if (!ft_strcmp((_ARG + ft_strlen(_ARG) - 2), ".s"))
+	if (!CMP((_ARG + ft_strlen(_ARG) - 2), ".s"))
 	{
 		if (!(str = ft_arg(argc, argv)))
 			return (ft_exit_third(&str, NULL));

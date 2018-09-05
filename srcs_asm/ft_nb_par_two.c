@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/25 16:36:53 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/25 16:49:40 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/05 19:20:32 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,7 +18,7 @@ int			ft_suite_tdu(t_list *tmp)
 	int		par;
 
 	par = 0;
-	while (ft_strcmp(((t_compl*)tmp->content)->tkn, "\n"))
+	while (CMP(((t_compl*)tmp->content)->tkn, "\n"))
 	{
 		if (((t_compl*)tmp->content)->par_type == _REG)
 			par++;
@@ -32,7 +32,7 @@ int			ft_suite_utd(t_list *tmp)
 	int		par;
 
 	par = 0;
-	while (ft_strcmp(((t_compl*)tmp->content)->tkn, "\n"))
+	while (CMP(((t_compl*)tmp->content)->tkn, "\n"))
 	{
 		if (((t_compl*)tmp->content)->par_type == _REG
 				|| ((t_compl*)tmp->content)->par_type == _DIR)
@@ -47,7 +47,7 @@ int			ft_nb_par_ud(t_list *tmp)
 	int		par;
 
 	par = 0;
-	while (ft_strcmp(((t_compl*)tmp->content)->tkn, "\n") && par != 1)
+	while (CMP(((t_compl*)tmp->content)->tkn, "\n") && par != 1)
 	{
 		if (((t_compl*)tmp->content)->par_type == _REG)
 			par++;
@@ -56,7 +56,7 @@ int			ft_nb_par_ud(t_list *tmp)
 	if (par != 1)
 		return (0);
 	par = 0;
-	while (ft_strcmp(((t_compl*)tmp->content)->tkn, "\n") && par != 1)
+	while (CMP(((t_compl*)tmp->content)->tkn, "\n") && par != 1)
 	{
 		if (((t_compl*)tmp->content)->par_type == _REG
 				|| ((t_compl*)tmp->content)->par_type == _IND)
@@ -71,7 +71,7 @@ int			ft_nb_par_utd(t_list *tmp)
 	int		par;
 
 	par = 0;
-	while (ft_strcmp(((t_compl*)tmp->content)->tkn, "\n") && par != 1)
+	while (CMP(((t_compl*)tmp->content)->tkn, "\n") && par != 1)
 	{
 		if (((t_compl*)tmp->content)->par_type == _REG)
 			par++;
@@ -80,7 +80,7 @@ int			ft_nb_par_utd(t_list *tmp)
 	if (par != 1)
 		return (0);
 	par = 0;
-	while (ft_strcmp(((t_compl*)tmp->content)->tkn, "\n") && par != 1)
+	while (CMP(((t_compl*)tmp->content)->tkn, "\n") && par != 1)
 	{
 		if (((t_compl*)tmp->content)->par_type == _REG
 				|| ((t_compl*)tmp->content)->par_type == _DIR
@@ -98,7 +98,7 @@ int			ft_nb_par_aff(t_list *tmp)
 	int		par;
 
 	par = 0;
-	while (ft_strcmp(((t_compl*)tmp->content)->tkn, "\n"))
+	while (CMP(((t_compl*)tmp->content)->tkn, "\n"))
 	{
 		if (((t_compl*)tmp->content)->par_type == _REG)
 			par++;

@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/04 16:33:32 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/05 16:38:54 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/05 19:20:46 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -56,7 +56,7 @@ t_list		*ft_exception(int fd, t_list *tmp)
 {
 	int		d;
 
-	if (!ft_strcmp(((t_compl*)tmp->content)->tkn, "live"))
+	if (!CMP(((t_compl*)tmp->content)->tkn, "live"))
 		return (ft_live_exception(fd, tmp->next));
 	tmp = tmp->next;
 	if (((t_compl*)tmp->content)->tkn[1] != ':')
@@ -99,12 +99,12 @@ t_list		*ft_byte_read_par(int fd, t_list *tmp, t_list **list)
 	int		oct;
 	int		d;
 
-	oct = (!ft_strcmp(((t_compl*)tmp->content)->tkn, "and")
-			|| !ft_strcmp(((t_compl*)tmp->content)->tkn, "or")
-			|| !ft_strcmp(((t_compl*)tmp->content)->tkn, "xor")
-			|| !ft_strcmp(((t_compl*)tmp->content)->tkn, "ld")
-			|| !ft_strcmp(((t_compl*)tmp->content)->tkn, "st")
-			|| !ft_strcmp(((t_compl*)tmp->content)->tkn, "lld") ? 4 : 2);
+	oct = (!CMP(((t_compl*)tmp->content)->tkn, "and")
+			|| !CMP(((t_compl*)tmp->content)->tkn, "or")
+			|| !CMP(((t_compl*)tmp->content)->tkn, "xor")
+			|| !CMP(((t_compl*)tmp->content)->tkn, "ld")
+			|| !CMP(((t_compl*)tmp->content)->tkn, "st")
+			|| !CMP(((t_compl*)tmp->content)->tkn, "lld") ? 4 : 2);
 	while ((tmp = tmp->next) && ((t_compl*)tmp->content)->type == _PAR)
 	{
 		if (((t_compl*)tmp->content)->par_type == _REG)

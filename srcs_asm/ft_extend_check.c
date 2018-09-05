@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/23 18:03:36 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/25 18:21:00 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/05 19:20:09 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,7 +30,7 @@ int			ft_dir_label(char *tkn, t_list **list)
 	{
 		if (((t_compl*)tmp->content)->type == _LAB)
 		{
-			if (!ft_strcmp(dup, ((t_compl*)tmp->content)->tkn))
+			if (!CMP(dup, ((t_compl*)tmp->content)->tkn))
 				c = 1;
 		}
 		tmp = tmp->next;
@@ -56,7 +56,7 @@ int			ft_ind_label(char *tkn, t_list **list)
 	{
 		if (((t_compl*)tmp->content)->type == _LAB)
 		{
-			if (!ft_strcmp(dup, ((t_compl*)tmp->content)->tkn))
+			if (!CMP(dup, ((t_compl*)tmp->content)->tkn))
 				c = 1;
 		}
 		tmp = tmp->next;

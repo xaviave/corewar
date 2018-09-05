@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/04 16:35:52 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/04 16:36:40 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/05 19:20:37 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,7 +19,7 @@ int			ft_del_sep(t_list **list, int i, char *tkn)
 	t_list		*buf;
 
 	tmp = *list;
-	while (tmp && i && ft_strcmp(((t_compl*)tmp->next->content)->tkn, tkn))
+	while (tmp && i && CMP(((t_compl*)tmp->next->content)->tkn, tkn))
 	{
 		tmp = tmp->next;
 		i--;

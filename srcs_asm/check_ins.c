@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/25 15:11:04 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/25 16:41:27 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/05 19:20:01 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,9 +23,9 @@ int			ft_check_nb_ins_line(t_list *tmp, t_list **list)
 	while (((t_compl*)l->content)->line != ((t_compl*)tmp->content)->line)
 		l = l->next;
 	tmp = l;
-	if (!ft_strcmp(((t_compl*)tmp->content)->tkn, "\n"))
+	if (!CMP(((t_compl*)tmp->content)->tkn, "\n"))
 		tmp = tmp->next;
-	while (tmp && ft_strcmp(((t_compl*)tmp->content)->tkn, "\n"))
+	while (tmp && CMP(((t_compl*)tmp->content)->tkn, "\n"))
 	{
 		if (((t_compl*)tmp->content)->type == _INS)
 			c++;
@@ -36,11 +36,11 @@ int			ft_check_nb_ins_line(t_list *tmp, t_list **list)
 
 int			ft_ins_type(char *tkn)
 {
-	if (!ft_strcmp(tkn, "live") || !ft_strcmp(tkn, "zjmp") || !ft_strcmp(tkn, \
-				"fork") || !ft_strcmp(tkn, "lfork") || !ft_strcmp(tkn, "aff"))
+	if (!CMP(tkn, "live") || !CMP(tkn, "zjmp") || !CMP(tkn, \
+				"fork") || !CMP(tkn, "lfork") || !CMP(tkn, "aff"))
 		return (1);
-	if (!ft_strcmp(tkn, "ld") || !ft_strcmp(tkn, "st") ||
-			!ft_strcmp(tkn, "lld"))
+	if (!CMP(tkn, "ld") || !CMP(tkn, "st") ||
+			!CMP(tkn, "lld"))
 		return (2);
 	return (3);
 }
@@ -56,14 +56,14 @@ int			ft_check_nb_ins_par(t_list *tmp)
 	par = 0;
 	sep = 0;
 	bug = 0;
-	while (tmp && ft_strcmp(((t_compl*)tmp->content)->tkn, "\n"))
+	while (tmp && CMP(((t_compl*)tmp->content)->tkn, "\n"))
 	{
 		par += (((t_compl*)tmp->content)->type == _PAR ? 1 : 0);
 		bug += (((t_compl*)tmp->content)->type == _SEP ? 1 : 0);
-		sep += (!ft_strcmp(((t_compl*)tmp->content)->tkn, ",") ? 1 : 0);
-		bug -= (!ft_strcmp(((t_compl*)tmp->content)->tkn, "\t")
-			|| !ft_strcmp(((t_compl*)tmp->content)->tkn, ",")
-			|| !ft_strcmp(((t_compl*)tmp->content)->tkn, " ") ? 1 : 0);
+		sep += (!CMP(((t_compl*)tmp->content)->tkn, ",") ? 1 : 0);
+		bug -= (!CMP(((t_compl*)tmp->content)->tkn, "\t")
+			|| !CMP(((t_compl*)tmp->content)->tkn, ",")
+			|| !CMP(((t_compl*)tmp->content)->tkn, " ") ? 1 : 0);
 		tmp = tmp->next;
 	}
 	if ((c == 1 && par == 1 && sep == 0 && !bug)
@@ -78,23 +78,23 @@ int			ft_check_ins_type_par(t_list *tmp, char *t)
 	int		ret;
 
 	ret = 0;
-	if (!ft_strcmp(t, "live") || !ft_strcmp(t, "zjmp")
-			|| !ft_strcmp(t, "fork") || !ft_strcmp(t, "lfork"))
+	if (!CMP(t, "live") || !CMP(t, "zjmp")
+			|| !CMP(t, "fork") || !CMP(t, "lfork"))
 		ret = (!ft_nb_par_u(tmp)) ? 0 : 1;
-	else if (!ft_strcmp(t, "and") || !ft_strcmp(t, "or")
-			|| !ft_strcmp(t, "xor"))
+	else if (!CMP(t, "and") || !CMP(t, "or")
+			|| !CMP(t, "xor"))
 		ret = (!ft_nb_par_ttu(tmp)) ? 0 : 1;
-	else if (!ft_strcmp(t, "add") || !ft_strcmp(t, "sub"))
+	else if (!CMP(t, "add") || !CMP(t, "sub"))
 		ret = (!ft_nb_par_uuu(tmp)) ? 0 : 1;
-	else if (!ft_strcmp(t, "ldi") || !ft_strcmp(t, "lldi"))
+	else if (!CMP(t, "ldi") || !CMP(t, "lldi"))
 		ret = (!ft_nb_par_tdu(tmp)) ? 0 : 1;
-	else if (!ft_strcmp(t, "ld") || !ft_strcmp(t, "lld"))
+	else if (!CMP(t, "ld") || !CMP(t, "lld"))
 		ret = (!ft_nb_par_du(tmp)) ? 0 : 1;
-	else if (!ft_strcmp(t, "st"))
+	else if (!CMP(t, "st"))
 		ret = (!ft_nb_par_ud(tmp)) ? 0 : 1;
-	else if (!ft_strcmp(t, "sti"))
+	else if (!CMP(t, "sti"))
 		ret = (!ft_nb_par_utd(tmp)) ? 0 : 1;
-	else if (!ft_strcmp(t, "aff"))
+	else if (!CMP(t, "aff"))
 		ret = (!ft_nb_par_aff(tmp)) ? 0 : 1;
 	return (ret ? 1 : 0);
 }

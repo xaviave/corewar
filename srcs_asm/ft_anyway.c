@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/27 21:12:40 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/04 16:43:36 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/05 19:20:08 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -48,8 +48,8 @@ int			ft_transform_comment(t_all *a, int i)
 
 	while (a->base.tkn[i])
 	{
-		if (!ft_strcmp(a->base.tkn[i], " #"))
-			while (ft_strcmp(a->base.tkn[i], "\n"))
+		if (!CMP(a->base.tkn[i], " #"))
+			while (CMP(a->base.tkn[i], "\n"))
 			{
 				tmp = a->base.tkn[i];
 				if (!(a->base.tkn[i] = ft_strdup(" ")))
@@ -69,17 +69,17 @@ int			ft_anyway(t_all *a)
 	char	*tmp;
 
 	i = 0;
-	while (a->base.tkn[i] && (!ft_strcmp(a->base.tkn[i], "#") || !ft_strcmp(a->\
-					base.tkn[i], ".") || !ft_strcmp(a->base.tkn[i], "\n")))
+	while (a->base.tkn[i] && (!CMP(a->base.tkn[i], "#") || !CMP(a->\
+					base.tkn[i], ".") || !CMP(a->base.tkn[i], "\n")))
 	{
-		while (a->base.tkn[i] && ft_strcmp(a->base.tkn[i], "\n"))
+		while (a->base.tkn[i] && CMP(a->base.tkn[i], "\n"))
 			i++;
 		i++;
 	}
 	j = i;
 	while (a->base.tkn[i])
 	{
-		if (!ft_strcmp(a->base.tkn[i], ";") || !ft_strcmp(a->base.tkn[i], "#"))
+		if (!CMP(a->base.tkn[i], ";") || !CMP(a->base.tkn[i], "#"))
 		{
 			tmp = a->base.tkn[i];
 			if (!(a->base.tkn[i] = ft_strdup(" #")))
@@ -100,7 +100,7 @@ int			ft_only_sep(t_list **list)
 	while (tmp)
 	{
 		ft_bzero(&ch, sizeof(ch));
-		while (ft_strcmp(((t_compl*)tmp->content)->tkn, "\n"))
+		while (CMP(((t_compl*)tmp->content)->tkn, "\n"))
 		{
 			ch[0] += (((t_compl*)tmp->content)->type == _PAR ? 1 : 0);
 			ch[1] += (((t_compl*)tmp->content)->type == _LAB ? 1 : 0);

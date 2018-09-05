@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/23 15:05:35 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/05 15:42:47 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/05 19:21:04 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,9 +26,9 @@ int			ft_while_digit(char *s)
 
 int			ft_increment_tkn(char **tkn, int i, int *l)
 {
-	while (tkn[i] && ft_strcmp(tkn[i], "\n"))
+	while (tkn[i] && CMP(tkn[i], "\n"))
 		i++;
-	if (!ft_strcmp(tkn[i], "\n"))
+	if (!CMP(tkn[i], "\n"))
 		(*l)++;
 	i++;
 	return (i);
@@ -36,9 +36,9 @@ int			ft_increment_tkn(char **tkn, int i, int *l)
 
 int			ft_increment_tkn_second(char **tkn, int i, int *l)
 {
-	while (tkn[i] && ft_strcmp(tkn[i], "\n"))
+	while (tkn[i] && CMP(tkn[i], "\n"))
 		i++;
-	if (!ft_strcmp(tkn[i], "\n"))
+	if (!CMP(tkn[i], "\n"))
 		(*l)++;
 	return (i);
 }
@@ -52,7 +52,7 @@ int			ft_associate_label(t_list *tmp, t_list *list)
 		return (0);
 	while (list)
 	{
-		if (((t_compl*)list->content)->type == _LAB && !ft_strcmp(dup,
+		if (((t_compl*)list->content)->type == _LAB && !CMP(dup,
 					((t_compl*)list->content)->tkn))
 		{
 			((t_compl*)tmp->content)->lab = ((t_compl*)list->content)->par_type;

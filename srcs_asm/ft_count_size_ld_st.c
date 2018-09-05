@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/27 21:12:55 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/05 18:28:30 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/05 19:32:39 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,9 +20,9 @@ void		ft_count_size_ld_st(char *tkn, t_list **tmp, int *size)
 
 	inc = *tmp;
 	par = 0;
-	if (!ft_strcmp(tkn, "ld"))
+	if (!CMP(tkn, "ld"))
 	{
-		while (inc && ft_strcmp(((t_compl*)inc->content)->tkn, "\n"))
+		while (inc && CMP(((t_compl*)inc->content)->tkn, "\n"))
 		{
 			par = (((t_compl*)inc->content)->par_type == _DIR ? 1 : par);
 			inc = inc->next;
@@ -33,9 +33,9 @@ void		ft_count_size_ld_st(char *tkn, t_list **tmp, int *size)
 			*tmp = (*tmp)->next;
 		((t_compl*)((t_list*)*tmp)->content)->size = *size;
 	}
-	else if (!ft_strcmp(tkn, "st"))
+	else if (!CMP(tkn, "st"))
 	{
-		while (inc && ft_strcmp(((t_compl*)inc->content)->tkn, "\n"))
+		while (inc && CMP(((t_compl*)inc->content)->tkn, "\n"))
 		{
 			par = (((t_compl*)inc->content)->par_type == _IND ? 1 : par);
 			inc = inc->next;
@@ -48,11 +48,22 @@ void		ft_count_size_ld_st(char *tkn, t_list **tmp, int *size)
 	}
 }
 
-static int	ft_calcul_size_line(t_list *tmp)
+static int	ft_calcul_size_line(t_list *tmp, char *i)
 {
 	int		size;
 
 	size = 0;
+	if (!CMP(i, "and") || !CMP(i, "or") || !CMP(i, "xor") || !CMP(i, "lld"))
+		size = ft_ins_one(tmp);
+	else if (!CMP(i, "aff") || !CMP(i, "lfork")
+			|| !CMP(i, "fork") || !CMP(i, "zjmp"))
+		size = ft_ins_two(tmp);
+	else if (!CMP(i, "ldi") || !CMP(i, "sti") || !CMP(i, "lldi"))
+		size = ft_ins_three(tmp);
+	else if (!CMP(i, "live") || !CMP(i, "add") || !CMP(i, "sub"))
+		size = ft_ins_four(tmp);
+	else if (!CMP(i, "ld") || !CMP(i, "st"))
+		size = ft_ins_five(tmp);
 	return (size);
 }
 
@@ -75,8 +86,11 @@ int			*ft_create_tab_size(t_list **list)
 	while (tmp)
 	{
 		tmp = (((t_compl*)tmp->content)->type == _LAB ? tmp->next : tmp);
-		tab[i++] = ft_calcul_size_line(tmp);
-		while (((t_compl*)tmp->content)->type != _INS)
+		tab[i] = ft_calcul_size_line(tmp,
+				((t_compl*)tmp->content)->tkn) + tab[i - 1];
+		i++;
+		tmp = tmp->next;
+		while (tmp && ((t_compl*)tmp->content)->type != _INS)
 			tmp = tmp->next;
 	}
 	return (tab);
@@ -90,7 +104,8 @@ int			ft_create_size_tab(t_list **list)
 	int			i;
 
 	tmp = *list;
-	tab = ft_create_tab_size(list);
+	if (!(tab = ft_create_tab_size(list)))
+		return (0);
 	i = 0;
 	while (tmp)
 	{

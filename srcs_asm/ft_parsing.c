@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/21 16:42:25 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/05 13:16:21 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/05 19:20:32 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -77,7 +77,7 @@ char		*ft_lexer(char *file)
 				return (NULL);
 			ft_strdel(&ctn.fre);
 		}
-		if (!ft_strcmp(ctn.tkn, "|"))
+		if (!CMP(ctn.tkn, "|"))
 		{
 			ctn.fre = ctn.tkn;
 			if (!(ctn.tkn = ft_separator(&file, &ctn)))

@@ -1,36 +1,54 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_extract_base.c                                .::    .:/ .      .::   */
+/*   new_size_tab.c                                   .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/07/21 17:18:49 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/05 19:20:20 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/09/05 19:10:07 by lotoussa     #+#   ##    ##    #+#       */
+/*   Updated: 2018/09/05 19:32:33 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
-char		*ft_extract_comment(char *line)
+int			ft_ins_one(t_list *tmp)
 {
-	char	*new;
-	char	*tmp;
-	int		i;
-	int		j;
+	int		size;
 
-	i = 0;
-	while (line[i] && line[i] != '\"')
-		i++;
-	i++;
-	if (!(new = ft_strdup(ft_strchr(line, '\"'))))
-		return (0);
-	tmp = ft_memalloc(ft_strlen(new) - 2);
-	i = 1;
-	j = 0;
-	while (new[i] && new[i] != '\"')
-		tmp[j++] = new[i++];
-	ft_strdel(&new);
-	return (tmp);
+	size = 0;
+	return (size);
+}
+
+int			ft_ins_two(t_list *tmp)
+{
+	int		size;
+
+	size = 0;
+	return (size);
+}
+
+int			ft_ins_three(t_list *tmp)
+{
+	int		size;
+
+	size = 0;
+	return (size);
+}
+
+int			ft_ins_four(t_list *tmp)
+{
+	int		size;
+
+	size = 0;
+	return (size);
+}
+
+int			ft_ins_five(t_list *tmp)
+{
+	int		size;
+
+	size = 0;
+	return (size);
 }

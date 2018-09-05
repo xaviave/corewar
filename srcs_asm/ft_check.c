@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/22 17:18:49 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/04 16:48:35 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/05 19:20:08 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,7 +31,7 @@ int			ft_add_elem(t_list **list, char *tkn, int l)
 	}
 	if (!(cpl.tkn = ft_strdup(tkn)))
 		return (0);
-	cpl.line = (ft_strcmp(tkn, "\n") ? l : l - 1);
+	cpl.line = (CMP(tkn, "\n") ? l : l - 1);
 	cpl.type = 0;
 	cpl.par_type = 0;
 	cpl.lab = 0;
@@ -51,20 +51,20 @@ t_list		*ft_organise_list(char **tkn)
 	i = 0;
 	l = 1;
 	list = NULL;
-	while (tkn[i] && (!ft_strcmp(tkn[i], "#") || !ft_strcmp(tkn[i], ".")
-				|| !ft_strcmp(tkn[i], "\n")))
+	while (tkn[i] && (!CMP(tkn[i], "#") || !CMP(tkn[i], ".")
+				|| !CMP(tkn[i], "\n")))
 	{
-		l += ((!ft_strcmp(tkn[i], "\n") && i > 0
-					&& ft_strcmp(tkn[i - 1], "\n")) ? 1 : 0);
+		l += ((!CMP(tkn[i], "\n") && i > 0
+					&& CMP(tkn[i - 1], "\n")) ? 1 : 0);
 		i = ft_increment_tkn(tkn, i, &l);
 	}
 	while (tkn[i])
 	{
-		i = (!ft_strcmp(tkn[i], "#")) ? ft_increment_tkn(tkn, i, &l) : i;
-		while ((!ft_strcmp(tkn[i], " ") || !ft_strcmp(tkn[i], "\t")))
+		i = (!CMP(tkn[i], "#")) ? ft_increment_tkn(tkn, i, &l) : i;
+		while ((!CMP(tkn[i], " ") || !CMP(tkn[i], "\t")))
 			i++;
-		l += ((!ft_strcmp(tkn[i], "\n")) ? 1 : 0);
-		i = (!ft_strcmp(tkn[i], "#")) ? ft_increment_tkn_second(tkn, i, &l) : i;
+		l += ((!CMP(tkn[i], "\n")) ? 1 : 0);
+		i = (!CMP(tkn[i], "#")) ? ft_increment_tkn_second(tkn, i, &l) : i;
 		if (!(ft_add_elem(&list, tkn[i++], l)))
 			return (NULL);
 	}
