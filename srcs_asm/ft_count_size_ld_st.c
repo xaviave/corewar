@@ -67,18 +67,17 @@ static int	ft_calcul_size_line(t_list *tmp, char *i)
 	return (size);
 }
 
-int			*ft_create_tab_size(t_list **list)
+int			*ft_create_tab_size(t_list **list, int *size)
 {
 	t_list	*tmp;
 	int		*tab;
-	int		size;
 	int		i;
 
 	tmp = *list;
-	size = ((t_compl*)tmp->content)->type == _LAB ? 0 : 1;
+	*size = ((t_compl*)tmp->content)->type == _LAB ? 0 : 1;
 	while ((tmp = tmp->next))
-		size += (((t_compl*)tmp->content)->type == _INS ? 1 : 0);
-	if (!(tab = (int*)malloc(sizeof(int) * size)))
+		*size += (((t_compl*)tmp->content)->type == _INS ? 1 : 0);
+	if (!(tab = (int*)malloc(sizeof(int) * *size)))
 		return (0);
 	tmp = *list;
 	i = 0;
@@ -101,16 +100,19 @@ int			ft_create_size_tab(t_list **list)
 	t_list		*tmp;
 	int			*tab;
 	int			line;
+	int			size;
 	int			i;
 
 	tmp = *list;
-	if (!(tab = ft_create_tab_size(list)))
+	if (!(tab = ft_create_tab_size(list, &size)))
 		return (0);
 	i = 0;
-	while (tmp)
+	while (tmp && (i < size))
 	{
+		if (i == size - 1 && !CMP(((t_compl*)tmp->content)->tkn, "\n"))
+			break ;
 		line = ((t_compl*)tmp->content)->line;
-		while (line == ((t_compl*)tmp->content)->line)
+		while (tmp && line == ((t_compl*)tmp->content)->line && i < size)
 		{
 			((t_compl*)tmp->content)->size = tab[i];
 			tmp = tmp->next;

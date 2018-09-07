@@ -1,6 +1,3 @@
-quand par size () ecrire la totalite
-jsais plus pourquoi jai ecris ca
-
 ***********************************
 
 code de l'instruction -> description du type des parametres -> parametres
