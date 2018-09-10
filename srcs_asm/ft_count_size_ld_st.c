@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/27 21:12:55 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/05 19:32:39 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/10 21:44:27 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,37 +15,9 @@
 
 void		ft_count_size_ld_st(char *tkn, t_list **tmp, int *size)
 {
-	t_list		*inc;
-	int			par;
-
-	inc = *tmp;
-	par = 0;
-	if (!CMP(tkn, "ld"))
-	{
-		while (inc && CMP(((t_compl*)inc->content)->tkn, "\n"))
-		{
-			par = (((t_compl*)inc->content)->par_type == _DIR ? 1 : par);
-			inc = inc->next;
-		}
-		*tmp = (inc->next ? inc->next : inc);
-		*size += (par ? 7 : 5);
-		if (((t_compl*)((t_list*)*tmp)->content)->size)
-			*tmp = (*tmp)->next;
-		((t_compl*)((t_list*)*tmp)->content)->size = *size;
-	}
-	else if (!CMP(tkn, "st"))
-	{
-		while (inc && CMP(((t_compl*)inc->content)->tkn, "\n"))
-		{
-			par = (((t_compl*)inc->content)->par_type == _IND ? 1 : par);
-			inc = inc->next;
-		}
-		*tmp = (inc->next ? inc->next : inc);
-		*size += (par ? 5 : 4);
-		if (((t_compl*)((t_list*)*tmp)->content)->size)
-			*tmp = (*tmp)->next;
-		((t_compl*)((t_list*)*tmp)->content)->size = *size;
-	}
+	(void)tkn;
+	(void)tmp;
+	(void)size;
 }
 
 static int	ft_calcul_size_line(t_list *tmp, char *i)
@@ -106,9 +78,11 @@ int			ft_create_size_tab(t_list **list)
 	tmp = *list;
 	if (!(tab = ft_create_tab_size(list, &size)))
 		return (0);
-	i = 0;
-	while (tmp && (i < size))
+	i = -1;
+	while (tmp && ++i < size)
 	{
+		while (tmp && ((t_compl*)tmp->content)->type == _LAB)
+			tmp = tmp->next;
 		if (i == size - 1 && !CMP(((t_compl*)tmp->content)->tkn, "\n"))
 			break ;
 		line = ((t_compl*)tmp->content)->line;
@@ -117,9 +91,7 @@ int			ft_create_size_tab(t_list **list)
 			((t_compl*)tmp->content)->size = tab[i];
 			tmp = tmp->next;
 		}
-		i++;
 	}
 	free(tab);
-	tab = NULL;
 	return (1);
 }

@@ -6,14 +6,14 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/27 21:03:53 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/05 19:20:08 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/10 21:36:06 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
-void		ft_ins_dont_move(char *tkn, t_list **tmp, int *size)
+void			ft_ins_dont_move(char *tkn, t_list **tmp, int *size)
 {
 	t_list		*inc;
 
@@ -42,7 +42,7 @@ void		ft_ins_dont_move(char *tkn, t_list **tmp, int *size)
 	}
 }
 
-void		ft_ins_ott(char *tkn, t_list **tmp, int *size)
+void			ft_ins_ott(char *tkn, t_list **tmp, int *size)
 {
 	t_list		*inc;
 
@@ -67,7 +67,7 @@ void		ft_ins_ott(char *tkn, t_list **tmp, int *size)
 	}
 }
 
-void		ft_ins_oft(char *tkn, t_list **tmp, int *size)
+void			ft_ins_oft(char *tkn, t_list **tmp, int *size)
 {
 	t_list		*inc;
 
@@ -93,7 +93,7 @@ void		ft_ins_oft(char *tkn, t_list **tmp, int *size)
 	}
 }
 
-int			ft_count_every_line(t_list **list)
+int				ft_count_every_line(t_list **list)
 {
 	t_list		*tmp;
 	int			size;
@@ -109,13 +109,13 @@ int			ft_count_every_line(t_list **list)
 		if (((t_compl*)tmp->content)->type == _LAB)
 			((t_compl*)tmp->content)->par_type = size;
 		if (((t_compl*)tmp->content)->type == _SEP
-			|| ((t_compl*)tmp->content)->type == _LAB)
+				|| ((t_compl*)tmp->content)->type == _LAB)
 			tmp = tmp->next;
 	}
 	return (size);
 }
 
-int			ft_count_size(t_list *list)
+int				ft_count_size(t_list *list)
 {
 	int		size;
 

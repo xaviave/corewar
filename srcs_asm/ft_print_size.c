@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/27 21:03:58 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/27 21:50:31 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/10 16:04:06 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -27,7 +27,7 @@ int			ft_print_size(int size, int fd)
 	tab[2] = (size & 0xFF00) >> 8;
 	tab[3] = (size & 0xFF);
 	while (i < 4)
-		fd_printf("%c", fd, tab[i++]);
+		ft_putchar_fd(tab[i++], fd);
 	free(tab);
 	tab = NULL;
 	return (1);

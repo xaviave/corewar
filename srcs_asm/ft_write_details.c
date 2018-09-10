@@ -6,23 +6,12 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/04 16:33:32 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/05 19:20:46 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/10 21:46:19 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
-
-void		ft_memrev(char *ptr, size_t n)
-{
-	char	tmp;
-
-	tmp = *ptr;
-	*ptr = ptr[n - 1];
-	ptr[n - 1] = tmp;
-	if (n > 3)
-		ft_memrev(ptr + 1, n - 2);
-}
 
 int			ft_arrange_live(int fd, t_list *tmp)
 {
@@ -91,32 +80,35 @@ int			ft_binary_to_hexa(int fd, char *s)
 		num = num / 10;
 		base = base * 2;
 	}
-	return (fd_printf("%c", fd, decimal_val));
+	write(fd, &decimal_val, 1);
+	return (1);
 }
 
-t_list		*ft_byte_read_par(int fd, t_list *tmp, t_list **list)
+t_list		*ft_byte_read_par(int fd, t_list *tmp)
 {
+	char	*tkn;
 	int		oct;
 	int		d;
 
-	oct = (!CMP(((t_compl*)tmp->content)->tkn, "and")
-			|| !CMP(((t_compl*)tmp->content)->tkn, "or")
-			|| !CMP(((t_compl*)tmp->content)->tkn, "xor")
-			|| !CMP(((t_compl*)tmp->content)->tkn, "ld")
-			|| !CMP(((t_compl*)tmp->content)->tkn, "st")
-			|| !CMP(((t_compl*)tmp->content)->tkn, "lld") ? 4 : 2);
+	tkn = ((t_compl*)tmp->content)->tkn;
+	oct = (!CMP(tkn, "and") || !CMP(tkn, "or") || !CMP(tkn, "xor")
+			|| !CMP(tkn, "ld") || !CMP(tkn, "st") || !CMP(tkn, "lld") ? 4 : 2);
 	while ((tmp = tmp->next) && ((t_compl*)tmp->content)->type == _PAR)
-	{
 		if (((t_compl*)tmp->content)->par_type == _REG)
 			fd_printf("%c", fd, ft_atoi(((t_compl*)tmp->content)->tkn + 1));
 		else if (((t_compl*)tmp->content)->par_type == _DIR)
 			ft_size_par_exception(fd, oct, tmp);
-		else if (((t_compl*)tmp->content)->par_type == _IND)
+		else if (((t_compl*)tmp->content)->par_type == _IND && tkn[0] != ':')
 		{
 			d = ft_atoi(((t_compl*)tmp->content)->tkn);
 			ft_memrev((char*)&d, 2);
 			write(fd, &d, 2);
 		}
-	}
+		else
+		{
+			d = ((t_compl*)tmp->content)->lab;
+			ft_memrev((char*)&d, 2);
+			write(fd, &d, 2);
+		}
 	return (tmp);
 }

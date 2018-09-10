@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/04 16:37:26 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/05 19:20:08 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/10 21:43:12 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -101,7 +101,7 @@ int			ft_bc(int fd, t_list **list)
 					CMP(((t_compl*)tmp->content)->tkn, "zjmp") &&
 					CMP(((t_compl*)tmp->content)->tkn, "fork") &&
 					CMP(((t_compl*)tmp->content)->tkn, "lfork"))
-				tmp = ft_byte_read_par(fd, tmp, list);
+				tmp = ft_byte_read_par(fd, tmp);
 			else
 				tmp = ft_exception(fd, tmp);
 		}
@@ -116,6 +116,8 @@ int			ft_bytecode(int fd, t_all *a)
 
 	tmp = a->t;
 	if (!(ft_create_size_tab(&tmp)))
+		return (0);
+	if (!(ft_attribute_last_lab(&tmp)))
 		return (0);
 	if (!(ft_bc(fd, &tmp)))
 		return (0);

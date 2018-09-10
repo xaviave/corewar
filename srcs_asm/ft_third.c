@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/21 17:19:06 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/05 19:20:46 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/10 17:09:05 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -56,7 +56,7 @@ void			ft_print_zero(int fd, int i)
 	j = 0;
 	while (j < i)
 	{
-		fd_printf("%c", fd, 0);
+		ft_putchar_fd(0, fd);
 		j++;
 	}
 }
@@ -76,7 +76,7 @@ int				ft_header(char **file, t_all a)
 	ft_print_zero(fd, 128 - ft_strlen(a.base.name));
 	if (!(ft_print_size(a.file_size, fd)))
 		return (-999);
-	fd_printf("%s", fd, a.base.comment);
+	ft_putstr_fd(a.base.comment, fd);
 	ft_print_zero(fd, 2052 - ft_strlen(a.base.comment));
 	return (fd);
 }
@@ -99,7 +99,8 @@ int				ft_third(char **argv, int argc, t_all *a)
 		close(fd);
 		return (0);
 	}
-	ft_printf("Writing output program to %s\n", a->file_name);
+	ft_putstr("Writing output program to ");
+	ft_putendl(a->file_name);
 	close(fd);
 	return (1);
 }

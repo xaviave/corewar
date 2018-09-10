@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/23 14:22:31 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/05 19:32:35 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/10 21:43:15 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -100,7 +100,7 @@ char				*ft_arg(int argc, char **argv);
 int					ft_reform(t_all *a);
 int					ft_bytecode(int fd, t_all *a);
 int					ft_binary_to_hexa(int fd, char *tp);
-t_list				*ft_byte_read_par(int fd, t_list *tmp, t_list **list);
+t_list				*ft_byte_read_par(int fd, t_list *tmp);
 int					ft_brut_label(t_all *a);
 t_list				*ft_exception(int fd, t_list *tmp);
 int					ft_create_size_tab(t_list **tmp);
@@ -111,5 +111,6 @@ int					ft_ins_two(t_list *tmp);
 int					ft_ins_three(t_list *tmp);
 int					ft_ins_four(t_list *tmp);
 int					ft_ins_five(t_list *tmp);
+int					ft_attribute_last_lab(t_list **tmp);
 
 #endif

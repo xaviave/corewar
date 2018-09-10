@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/21 17:18:19 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/22 20:24:23 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/10 21:24:05 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -42,17 +42,46 @@ int			ft_free_base(t_base *base)
 char		*ft_arg(int argc, char **argv)
 {
 	char	*arg;
-	char	*new;
+	int		len;
 	int		i;
 
 	i = 0;
-	arg = _ARG;
-	new = ft_memalloc(ft_strlen(arg) - 1);
-	while (i < (int)ft_strlen(arg) - 2)
+	len = ft_strlen(_ARG) - 2;
+	arg = ft_strnew(len);
+	while (i < len)
 	{
-		new[i] = arg[i];
+		arg[i] = _ARG[i];
 		i++;
 	}
-	new[i] = '\0';
-	return (new);
+	return (arg);
+}
+
+int			ft_attribute_create(t_list *tmp, t_list **list)
+{
+	t_list		*t;
+	char		*dup;
+
+	t = *list;
+	dup = ft_strfjoin(ft_strdup(((t_compl*)tmp->content)->tkn + 1),
+			ft_strdup(":"));
+	while (t && CMP(((t_compl*)t->content)->tkn, dup))
+		t = t->next;
+	ft_strdel(&dup);
+	return (((t_compl*)t->content)->par_type);
+}
+
+int			ft_attribute_last_lab(t_list **list)
+{
+	t_list		*t;
+
+	t = *list;
+	while (t)
+	{
+		if (((t_compl*)t->content)->par_type == _IND &&
+				((t_compl*)t->content)->tkn[0] == ':')
+			((t_compl*)t->content)->lab = ft_attribute_create(t, list) -
+				((t_compl*)t->content)->size;
+		t = t->next;
+	}
+	return (1);
 }

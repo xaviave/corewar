@@ -6,7 +6,7 @@
 #    By: xamartin <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/06/19 13:41:44 by xamartin     #+#   ##    ##    #+#        #
-#    Updated: 2018/07/23 17:19:25 by tduverge    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/09/10 21:36:18 by lotoussa    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -50,7 +50,10 @@ ASM_FILES = main_asm.c\
 		   ft_suite_parsing.c\
 		   ft_third.c\
 		   tools.c\
-		   ft_bytecode.c
+		   ft_bytecode.c\
+		   ft_size_par_exception.c\
+		   ft_write_details.c\
+		   new_size_tab.c
 
 ASM_SRCS = $(addprefix $(ASM_SRCS_PATH), $(ASM_FILES))
 ASM_OBJS = $(addprefix $(ASM_OBJS_PATH), $(ASM_FILES:.c=.o))

@@ -6,7 +6,7 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/25 12:04:14 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/05 12:55:53 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/10 21:16:29 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -66,21 +66,6 @@ int		main(int argc, char **argv)
 		ft_free_all(&a, 0);
 	if (!(ft_third(argv, argc, &a)))
 		ft_free_all(&a, 0);
-
-	t_list	*tmp;
-	tmp = a.t;
-	while (tmp)
-	{
-		ft_printf("%3d -> [%-8s][%d][%3d][%2d][%d]\n", ((t_compl*)tmp->content)->line,
-				((t_compl*)tmp->content)->tkn,
-				((t_compl*)tmp->content)->type,
-				((t_compl*)tmp->content)->par_type,
-				((t_compl*)tmp->content)->lab,
-				((t_compl*)tmp->content)->size);
-		tmp = tmp->next;
-	}
-
-
 	ft_free_all(&a, 1);
 	return (0);
 }
