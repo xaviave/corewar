@@ -13,11 +13,33 @@
 
 #include "../includes/asm.h"
 
-void		ft_count_size_ld_st(char *tkn, t_list **tmp, int *size)
+void		ft_count_size_ld_st(char *tkn, t_list **t, int *size)
 {
-	(void)tkn;
-	(void)tmp;
-	(void)size;
+	t_list		*inc;
+	int			par;
+
+	inc = *t;
+	if (!(par = 0) && !CMP(tkn, "ld"))
+	{
+		while (inc && CMP(((t_compl*)inc->content)->tkn, "\n"))
+		{
+			par = (((t_compl*)inc->content)->par_type == _DIR ? 1 : par);
+			inc = inc->next;
+		}
+		*t = (inc->next ? inc->next : inc);
+		*size += (par ? 7 : 5);
+		*t = (((t_compl*)((t_list*)*t)->content)->size) ? (*t)->next : *t;
+		((t_compl*)((t_list*)*t)->content)->size = *size;
+	}
+	else if (!(par = 0) && !CMP(tkn, "st"))
+	{
+		while ((inc = inc->next) && CMP(((t_compl*)inc->content)->tkn, "\n"))
+			par = (((t_compl*)inc->content)->par_type == _IND ? 1 : par);
+		*t = (inc->next ? inc->next : inc);
+		*size += (par ? 5 : 4);
+		*t = (((t_compl*)((t_list*)*t)->content)->size) ? (*t)->next : *t;
+		((t_compl*)((t_list*)*t)->content)->size = *size;
+	}
 }
 
 static int	ft_calcul_size_line(t_list *tmp, char *i)
