@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/23 18:03:36 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/05 19:20:09 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/12 20:10:55 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -109,7 +109,12 @@ int			ft_check_label_char(char *tkn, t_list *tmp)
 	}
 	ft_strdel(&check);
 	if (c == 0 || i < (int)ft_strlen(tkn))
-		ft_printf("Error at LABEL \"%s\" line %d\n",
-				tkn, ((t_compl*)tmp->content)->line);
+	{
+		ft_putstr("Error at LABEL \"");
+		ft_putstr(tkn);
+		ft_putstr("\" line ");
+		ft_putnbr(((t_compl*)tmp->content)->line);
+		ft_putchar('\n');
+	}
 	return (c == 1 && i == (int)ft_strlen(tkn) ? 1 : 0);
 }

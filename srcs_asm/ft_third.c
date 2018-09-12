@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/21 17:19:06 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/12 17:46:19 by xamartin    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/12 19:59:22 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -72,7 +72,10 @@ int				ft_header(char **file, t_all a)
 	}
 	lseek(fd, 0, SEEK_SET);
 	ft_print_zero(fd, 1);
-	fd_printf("%c%c%c%s", fd, 0b11101010, 0b10000011, 0b11110011, a.base.name);
+	ft_putchar_fd(0b11101010, fd);
+	ft_putchar_fd(0b10000011, fd);
+	ft_putchar_fd(0b11110011, fd);
+	ft_putstr_fd(a.base.name, fd);
 	ft_print_zero(fd, 128 - ft_strlen(a.base.name));
 	if (!(ft_print_size(a.file_size, fd)))
 		return (-999);

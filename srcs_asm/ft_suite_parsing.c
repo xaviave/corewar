@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/21 17:19:03 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/12 19:26:31 by xamartin    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/12 20:07:32 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -88,7 +88,11 @@ int			ft_count_base(char **ch)
 	else if (co < 2)
 		ft_putstr("[.name] or [.comment] is missing\n");
 	else if (l != -1)
-		ft_printf("Error at line %d\n", l + 1);
+	{
+		ft_putstr("Error at line ");
+		ft_putnbr(l + 1);
+		ft_putchar('\n');
+	}
 	return (co == 2 && l == -1 ? 1 : 0);
 }
 
@@ -102,13 +106,19 @@ int			ft_create_base(char **sp, t_base *base)
 	if (!(base->name = ft_extract_comment(sp[i])))
 		return (0);
 	if (ft_strlen(base->name) > 128)
-		return (ft_printf("Champion name too long (Max length 128)\n"));
+	{
+		ft_putendl("Champion name too long (Max length 128)");
+		return (0);
+	}
 	while (!ft_strstr(sp[i], ".comment") || sp[i][0] != '.')
 		i++;
 	if (!(base->comment = ft_extract_comment(sp[i])))
 		return (0);
 	if (ft_strlen(base->comment) > 2048)
-		return (ft_printf("Champion comment too long (Max length 2048)\n"));
+	{
+		ft_putendl("Champion comment too long (Max length 2048)");
+		return (0);
+	}
 	return (1);
 }
 

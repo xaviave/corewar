@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/27 21:12:40 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/05 19:20:08 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/12 20:14:05 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -109,9 +109,13 @@ int			ft_only_sep(t_list **list)
 			tmp = tmp->next;
 		}
 		if ((ch[2] && !ch[1] && ch[0] && !ch[3]) || (ch[1] && ch[0] && !ch[3]))
-			return (ft_printf("Lexical error at line %d\n",
-						((t_compl*)tmp->content)->line));
-			tmp = tmp->next;
+		{
+			ft_putstr("Lexical error at line ");
+			ft_putnbr(((t_compl*)tmp->content)->line);
+			ft_putchar('\n');
+			return (1);
+		}
+		tmp = tmp->next;
 	}
 	return (0);
 }

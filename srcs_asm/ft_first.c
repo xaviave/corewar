@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/21 17:18:55 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/12 19:19:10 by xamartin    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/12 20:01:57 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,15 +23,14 @@ char			*ft_read_file(int argc, char **argv)
 	file = NULL;
 	if ((fd = open(_ARG, O_RDONLY)) == -1)
 	{
-		ft_printf("Can't read source file %s\n", _ARG);
+		ft_putstr("Can't read source file ");
+		ft_putendl(_ARG);
 		return (NULL);
 	}
 	while (get_next_line(fd, &tmp))
 	{
 		if (!(file = ft_strfjoin(file, tmp)))
 		{
-			if (tmp)
-				ft_strdel(&tmp);
 			if (file)
 				ft_strdel(&file);
 			exit(1);

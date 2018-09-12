@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/04 16:33:32 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/12 17:33:52 by xamartin    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/12 20:04:37 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -96,7 +96,7 @@ t_list		*ft_byte_read_par(int fd, t_list *tmp)
 	while ((tmp = tmp->next) && ((t_compl*)tmp->content)->type == _PAR)
 	{
 		if (((t_compl*)tmp->content)->par_type == _REG)
-			fd_printf("%c", fd, ft_atoi(((t_compl*)tmp->content)->tkn + 1));
+			ft_putchar_fd(ft_atoi(((t_compl*)tmp->content)->tkn + 1), fd);
 		else if (((t_compl*)tmp->content)->par_type == _DIR)
 			ft_size_par_exception(fd, oct, tmp);
 		else if (((t_compl*)tmp->content)->par_type == _IND)
