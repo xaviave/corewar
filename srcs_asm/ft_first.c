@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/21 17:18:55 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/05 13:18:25 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/12 19:19:10 by xamartin    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -29,7 +29,13 @@ char			*ft_read_file(int argc, char **argv)
 	while (get_next_line(fd, &tmp))
 	{
 		if (!(file = ft_strfjoin(file, tmp)))
+		{
+			if (tmp)
+				ft_strdel(&tmp);
+			if (file)
+				ft_strdel(&file);
 			exit(1);
+		}
 		if (!(file = ft_strfjoin(file, ft_strdup("\n"))))
 			exit(1);
 	}
@@ -44,7 +50,10 @@ char			*ft_first(int argc, char **argv)
 	file = NULL;
 	if (argc < 2)
 	{
-		ft_printf("Usage: %s %s", argv[0], _USAGE);
+		ft_putstr("Usage: ");
+		ft_putstr(argv[0]);
+		ft_putchar(' ');
+		ft_putstr(_USAGE);
 		exit(1);
 	}
 	if (!(file = ft_read_file(argc, argv)))

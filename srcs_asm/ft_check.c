@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/22 17:18:49 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/05 19:20:08 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/12 19:17:43 by xamartin    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -85,7 +85,7 @@ int			ft_first_verif(t_all *a, char **tkn)
 	i = 0;
 	if (!(a->t = ft_organise_list(tkn)))
 	{
-		ft_printf("Code missing\n");
+		ft_putendl("Code missing");
 		return (0);
 	}
 	while (a->base.tkn[i])
@@ -103,7 +103,7 @@ int			ft_check(t_all *a)
 		return (0);
 	if (!(a->file_size = ft_count_size(a->t)))
 	{
-		ft_printf("Code missing\n");
+		ft_putendl("Code missing");
 		return (0);
 	}
 	if (!(ft_reform(a)))

@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/21 17:18:19 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/10 21:24:05 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/12 17:24:17 by xamartin    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -81,6 +81,8 @@ int			ft_attribute_last_lab(t_list **list)
 				((t_compl*)t->content)->tkn[0] == ':')
 			((t_compl*)t->content)->lab = ft_attribute_create(t, list) -
 				((t_compl*)t->content)->size;
+		if (((t_compl*)t->content)->lab < 0)
+			((t_compl*)t->content)->lab = 65536 + ((t_compl*)t->content)->lab;
 		t = t->next;
 	}
 	return (1);

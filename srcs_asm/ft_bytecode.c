@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/04 16:37:26 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/10 21:43:12 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/12 19:16:23 by xamartin    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,42 +16,42 @@
 int			ft_byte_read_ins_second(int fd, t_list *tmp)
 {
 	if (!(CMP(((t_compl*)tmp->content)->tkn, "sti")))
-		return (fd_printf("%c", fd, 11));
+		ft_putchar_fd(11, fd);
 	else if (!(CMP(((t_compl*)tmp->content)->tkn, "fork")))
-		return (fd_printf("%c", fd, 12));
+		ft_putchar_fd(12, fd);
 	else if (!(CMP(((t_compl*)tmp->content)->tkn, "lld")))
-		return (fd_printf("%c", fd, 13));
+		ft_putchar_fd(13, fd);
 	else if (!(CMP(((t_compl*)tmp->content)->tkn, "lldi")))
-		return (fd_printf("%c", fd, 14));
+		ft_putchar_fd(14, fd);
 	else if (!(CMP(((t_compl*)tmp->content)->tkn, "lfork")))
-		return (fd_printf("%c", fd, 15));
+		ft_putchar_fd(15, fd);
 	else if (!(CMP(((t_compl*)tmp->content)->tkn, "aff")))
-		return (fd_printf("%c", fd, 16));
+		ft_putchar_fd(16, fd);
 	return (1);
 }
 
 int			ft_byte_read_ins(int fd, t_list *tmp)
 {
 	if (!(CMP(((t_compl*)tmp->content)->tkn, "live")))
-		return (fd_printf("%c", fd, 1));
+		ft_putchar_fd(1, fd);
 	else if (!(CMP(((t_compl*)tmp->content)->tkn, "ld")))
-		return (fd_printf("%c", fd, 2));
+		ft_putchar_fd(2, fd);
 	else if (!(CMP(((t_compl*)tmp->content)->tkn, "st")))
-		return (fd_printf("%c", fd, 3));
+		ft_putchar_fd(3, fd);
 	else if (!(CMP(((t_compl*)tmp->content)->tkn, "add")))
-		return (fd_printf("%c", fd, 4));
+		ft_putchar_fd(4, fd);
 	else if (!(CMP(((t_compl*)tmp->content)->tkn, "sub")))
-		return (fd_printf("%c", fd, 5));
+		ft_putchar_fd(5, fd);
 	else if (!(CMP(((t_compl*)tmp->content)->tkn, "and")))
-		return (fd_printf("%c", fd, 6));
+		ft_putchar_fd(6, fd);
 	else if (!(CMP(((t_compl*)tmp->content)->tkn, "or")))
-		return (fd_printf("%c", fd, 7));
+		ft_putchar_fd(7, fd);
 	else if (!(CMP(((t_compl*)tmp->content)->tkn, "xor")))
-		return (fd_printf("%c", fd, 8));
+		ft_putchar_fd(8, fd);
 	else if (!(CMP(((t_compl*)tmp->content)->tkn, "zjmp")))
-		return (fd_printf("%c", fd, 9));
+		ft_putchar_fd(9, fd);
 	else if (!(CMP(((t_compl*)tmp->content)->tkn, "ldi")))
-		return (fd_printf("%c", fd, 10));
+		ft_putchar_fd(10, fd);
 	return (ft_byte_read_ins_second(fd, tmp));
 }
 

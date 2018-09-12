@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/04 16:33:32 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/10 21:46:19 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/12 17:33:52 by xamartin    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -94,21 +94,18 @@ t_list		*ft_byte_read_par(int fd, t_list *tmp)
 	oct = (!CMP(tkn, "and") || !CMP(tkn, "or") || !CMP(tkn, "xor")
 			|| !CMP(tkn, "ld") || !CMP(tkn, "st") || !CMP(tkn, "lld") ? 4 : 2);
 	while ((tmp = tmp->next) && ((t_compl*)tmp->content)->type == _PAR)
+	{
 		if (((t_compl*)tmp->content)->par_type == _REG)
 			fd_printf("%c", fd, ft_atoi(((t_compl*)tmp->content)->tkn + 1));
 		else if (((t_compl*)tmp->content)->par_type == _DIR)
 			ft_size_par_exception(fd, oct, tmp);
-		else if (((t_compl*)tmp->content)->par_type == _IND && tkn[0] != ':')
+		else if (((t_compl*)tmp->content)->par_type == _IND)
 		{
-			d = ft_atoi(((t_compl*)tmp->content)->tkn);
+			d = (((t_compl*)tmp->content)->tkn[0] == ':' ? ((t_compl*)tmp->\
+						content)->lab : ft_atoi(((t_compl*)tmp->content)->tkn));
 			ft_memrev((char*)&d, 2);
 			write(fd, &d, 2);
 		}
-		else
-		{
-			d = ((t_compl*)tmp->content)->lab;
-			ft_memrev((char*)&d, 2);
-			write(fd, &d, 2);
-		}
+	}
 	return (tmp);
 }

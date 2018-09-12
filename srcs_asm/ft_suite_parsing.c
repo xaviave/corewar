@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/21 17:19:03 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/27 21:40:26 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/12 19:26:31 by xamartin    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,7 +28,7 @@ int			ft_is_valid_line_base(char *line)
 	}
 	if (line[i] != '\0')
 	{
-		ft_printf(ft_strstr(line, ".name") ?
+		ft_putstr(ft_strstr(line, ".name") ?
 				"Error at [.name] line\n" : "Error at [.comment] line\n");
 		return (0);
 	}
@@ -60,7 +60,7 @@ int			ft_check_base(char **ch)
 				return (0);
 		}
 	}
-	ft_printf(g[0] == 1 && g[1] == 1 ? "" : "Error at name or comment line\n");
+	ft_putstr(g[0] == 1 && g[1] == 1 ? "" : "Error at name or comment line\n");
 	return (g[0] == 1 && g[1] == 1 ? 1 : 0);
 }
 
@@ -84,9 +84,9 @@ int			ft_count_base(char **ch)
 		i++;
 	}
 	if (co > 2)
-		ft_printf("[.name] or [.comment] have a duplicate line\n");
+		ft_putstr("[.name] or [.comment] have a duplicate line\n");
 	else if (co < 2)
-		ft_printf("[.name] or [.comment] is missing\n");
+		ft_putstr("[.name] or [.comment] is missing\n");
 	else if (l != -1)
 		ft_printf("Error at line %d\n", l + 1);
 	return (co == 2 && l == -1 ? 1 : 0);
