@@ -24,6 +24,7 @@ arriere_live:	live %42
 		zjmp	%:arriere2
 		and	r6, %0, r6
 		zjmp	%:arriere_live
+		live	%0
 
 fork_arriere:	live	%42
 		fork	%:arriere

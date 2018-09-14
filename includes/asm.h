@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/23 14:22:31 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/10 21:43:15 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/14 17:47:31 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -112,5 +112,7 @@ int					ft_ins_three(t_list *tmp);
 int					ft_ins_four(t_list *tmp);
 int					ft_ins_five(t_list *tmp);
 int					ft_attribute_last_lab(t_list **tmp);
+int					ft_putnorm(char *tkn, int line);
+int					ft_putnorm_second(char *tkn, int line);
 
 #endif

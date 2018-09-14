@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/23 18:03:36 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/12 20:10:55 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/14 18:05:16 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -99,8 +99,8 @@ int			ft_check_label_char(char *tkn, t_list *tmp)
 	check = ft_strdup(":abcdefghijklmnopqrstuvwxyz_0123456789");
 	while (tkn[i])
 	{
-		c = 0;
 		j = 0;
+		c = 0;
 		while (check[j] && c == 0)
 			c = ((tkn[i] == check[j++]) ? 1 : 0);
 		if (c == 0)
@@ -109,12 +109,8 @@ int			ft_check_label_char(char *tkn, t_list *tmp)
 	}
 	ft_strdel(&check);
 	if (c == 0 || i < (int)ft_strlen(tkn))
-	{
-		ft_putstr("Error at LABEL \"");
-		ft_putstr(tkn);
-		ft_putstr("\" line ");
-		ft_putnbr(((t_compl*)tmp->content)->line);
-		ft_putchar('\n');
-	}
+		ft_printf("Error at LABEL \"%s\" line %d\n",
+				((t_compl*)tmp->content)->tkn,
+				((t_compl*)tmp->content)->line);
 	return (c == 1 && i == (int)ft_strlen(tkn) ? 1 : 0);
 }

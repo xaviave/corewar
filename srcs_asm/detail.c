@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/23 16:24:43 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/12 20:20:26 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/14 17:48:39 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -63,30 +63,18 @@ int			ft_check_ins_alone(t_list **list)
 	{
 		if (((t_compl*)tmp->content)->type == _INS)
 			if (!ft_check_nb_ins_line(tmp, list) || !ft_check_nb_ins_par(tmp))
-			{
-				ft_putstr("Error at INSTRUCTION \"");
-				ft_putstr(((t_compl*)tmp->content)->tkn);
-				ft_putstr("\" line ");
-				ft_putnbr(((t_compl*)tmp->content)->line);
-				ft_putchar('\n');
-				return (1);
-			}
-		tmp = tmp->next;
+				return (ft_putnorm(((t_compl*)tmp->content)->tkn,
+							((t_compl*)tmp->content)->line));
+				tmp = tmp->next;
 	}
 	tmp = *list;
 	while (tmp)
 	{
 		if (((t_compl*)tmp->content)->type == _INS)
 			if (!ft_check_ins_type_par(tmp, ((t_compl*)tmp->content)->tkn))
-			{
-				ft_putstr("Error at INSTRUCTION \"");
-				ft_putstr(((t_compl*)tmp->content)->tkn);
-				ft_putstr("\" line ");
-				ft_putnbr(((t_compl*)tmp->content)->line);
-				ft_putchar('\n');
-				return (1);
-			}
-		tmp = tmp->next;
+				return (ft_putnorm(((t_compl*)tmp->content)->tkn,
+							((t_compl*)tmp->content)->line));
+				tmp = tmp->next;
 	}
 	return (768368);
 }
@@ -108,15 +96,9 @@ int			ft_every_detail(t_list **list)
 	{
 		if (((t_compl*)tmp->content)->type == _PAR)
 			if (!ft_check_par_alone(((t_compl*)tmp->content)->tkn, tmp, list))
-			{
-				ft_putstr("Error at PARAMETER \"");
-				ft_putstr(((t_compl*)tmp->content)->tkn);
-				ft_putstr("\" line ");
-				ft_putnbr(((t_compl*)tmp->content)->line);
-				ft_putchar('\n');
-				return (1);
-			}
-		tmp = tmp->next;
+				return (ft_putnorm_second(((t_compl*)tmp->content)->tkn,
+							((t_compl*)tmp->content)->line));
+				tmp = tmp->next;
 	}
 	if (ft_check_ins_alone(list) != 768368)
 		return (0);
