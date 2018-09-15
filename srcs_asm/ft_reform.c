@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/04 16:35:52 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/14 17:47:55 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/12 16:54:55 by xamartin    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -74,25 +74,5 @@ int			ft_reform(t_all *a)
 		tmp = tmp->next;
 		i++;
 	}
-	return (1);
-}
-
-int			ft_putnorm(char *tkn, int line)
-{
-	ft_putstr("Error at INSTRUCTION \"");
-	ft_putstr(tkn);
-	ft_putstr("\" line ");
-	ft_putnbr(line);
-	ft_putchar('\n');
-	return (1);
-}
-
-int			ft_putnorm_second(char *tkn, int line)
-{
-	ft_putstr("Error at PARAMETER \"");
-	ft_putstr(tkn);
-	ft_putstr("\" line ");
-	ft_putnbr(line);
-	ft_putchar('\n');
 	return (1);
 }

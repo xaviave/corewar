@@ -6,7 +6,7 @@
 /*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/21 17:19:03 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/14 17:36:54 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/09/12 20:07:32 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -88,7 +88,11 @@ int			ft_count_base(char **ch)
 	else if (co < 2)
 		ft_putstr("[.name] or [.comment] is missing\n");
 	else if (l != -1)
-		ft_printf("Error at line %d\n", l + 1);
+	{
+		ft_putstr("Error at line ");
+		ft_putnbr(l + 1);
+		ft_putchar('\n');
+	}
 	return (co == 2 && l == -1 ? 1 : 0);
 }
 
