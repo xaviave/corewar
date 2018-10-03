@@ -6,7 +6,7 @@
 /*   By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/27 14:32:33 by xmoreau      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/03 09:23:47 by xmoreau     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/03 14:23:35 by xmoreau     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -52,7 +52,7 @@ static int		check_args(int ac, char **av, char *option, char **path)
 	return (!ft_strcmp(av[ac - 1] + ft_strlen(av[ac - 1]) - 2, ".s") ? 1 : 0);
 }
 
-static int	usage(void)
+static int		usage(void)
 {
 	ft_printf("Usage: ./exe_asm [-a] <sourcefile.s>\n");
 	ft_printf("\t-a : Instead of creating a .cor file, outputs a stripped ");
@@ -121,21 +121,14 @@ int				main(int ac, char **av)
 	cmd = NULL;
 	if ((infos.file = recup_file(infos.path, 0)) == NULL)
 		return (0);
-	ft_printf("passe recup file\n");// a suppr
 	if ((infos.file = make_clean(infos.file)) == NULL)
 		return (free_all(NULL, &infos, NULL));
-	ft_printf("passe make clean\n");// a suppr
 	check_pre_parsing(&infos.file);
-	ft_printf("Passe check pre parsing\n");// a suppr
 	collect_header_and_labels(&label, &header, infos);
-	ft_printf("passe collect_header_and_labels\n");
 	collect_instructions(&label, &cmd, &infos);
-	ft_printf("passe collect instru\n");// a suppr
 	re_calculate_label_add(&label, cmd);
 	fill_header(&header, &cmd, &label, &infos);
-	ft_printf("passe fill header\n");// a suppr
 	convert_param(&cmd, &label);
-	ft_printf("passe convert_param\n");// a suppr
 	if (!infos.option)
 		write_cor(cmd, &header, &infos);
 	else
