@@ -1,53 +1,61 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_strsplit.c                                    .::    .:/ .      .::   */
+/*   ft_strsplit_modif.c                              .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+     */
+/*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/04/26 11:28:47 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/29 14:59:06 by xmoreau     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/10/01 16:47:48 by lotoussa     #+#   ##    ##    #+#       */
+/*   Updated: 2018/10/02 12:53:40 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../header/libft.h"
+#include "../../includes/asm.h"
 
 static int	count_words(char const *s, char c)
 {
 	int		x;
 	int		ret;
 
-	x = -1;
-	ret = s[0] == c ? 0 : 1;
-	while (s[++x])
-		if (s[x + 1] != '\0' && s[x] == c && s[x + 1] != c)
-			ret++;
+	x = 0;
+	ret = 0;
+	while (s[x])
+		ret += (s[x++] == c ? 1 : 0);
 	return (ret);
 }
 
-char		**ft_strsplit(char const *s, char c)
+static void	init_for_norm(int *i, int *nb_words)
 {
-	char	**ret;
-	int		nb_words;
-	int		start;
-	int		end;
+	*i = -1;
+	*nb_words = 0;
+}
+
+char		**ft_strsplit_modif(char const *s, char c)
+{
+	char		**ret;
+	int			nb_words;
+	int			i;
+	int			start;
 
 	nb_words = count_words(s, c);
 	if (!(ret = (char**)ft_memalloc(sizeof(char*) * (nb_words + 1))))
 		return (NULL);
-	end = ft_strlen(s) - 1;
 	ret[nb_words] = NULL;
-	while (nb_words)
-	{
-		while (s[end] == c && end >= 0)
-			end--;
-		start = end;
-		while (s[start] != c && start >= 0)
-			start--;
-		ret[nb_words - 1] = ft_strsub(s, start + 1, end - start);
-		end = start;
-		nb_words--;
-	}
+	init_for_norm(&i, &nb_words);
+	while (s[++i])
+		if (s[i] == '\n')
+		{
+			if (!(ret[nb_words++] = ft_strdup("\n")))
+				return (NULL);
+		}
+		else
+		{
+			start = i;
+			while (s[i] != '\n')
+				i++;
+			if (!(ret[nb_words++] = ft_strsub(s, start, i - start)))
+				return (NULL);
+		}
 	return (ret);
 }

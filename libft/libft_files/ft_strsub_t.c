@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   ft_strsub.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+     */
+/*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/11/23 15:08:38 by xmoreau      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/03 14:07:34 by xmoreau     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/04/26 11:28:49 by tduverge     #+#   ##    ##    #+#       */
+/*   Updated: 2018/04/26 11:28:49 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,22 +15,23 @@
 
 char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	char			*troncon;
-	unsigned int	i;
-	unsigned int	y;
+	size_t	i;
+	char	*sub;
+	char	*cur;
 
-	i = start;
-	y = 0;
-	if (s == NULL)
-		return (NULL);
-	if ((troncon = ft_strnew(len)) == NULL)
-		return (NULL);
-	while (i < (start + len))
+	if (s)
 	{
-		troncon[y] = s[i];
-		i++;
-		y++;
+		if (!(sub = (char *)malloc((len + 1) * sizeof(char))))
+			return (NULL);
+		cur = (char *)s + start;
+		i = 0;
+		while (cur[i] && (i < len))
+		{
+			sub[i] = cur[i];
+			i++;
+		}
+		sub[i] = '\0';
+		return (sub);
 	}
-	troncon[y] = '\0';
-	return (troncon);
+	return (NULL);
 }

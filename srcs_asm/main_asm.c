@@ -3,83 +3,142 @@
 /*                                                              /             */
 /*   main_asm.c                                       .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*   By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/06/25 12:04:14 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/12 20:23:56 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/09/27 14:32:33 by xmoreau      #+#   ##    ##    #+#       */
+/*   Updated: 2018/10/03 09:23:47 by xmoreau     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
-void	ft_lstdel_m(t_list **alst)
+t_op			g_op_tab[16] =
 {
-	if (*alst)
-	{
-		ft_strdel(&((t_compl*)((t_list*)*alst)->content)->tkn);
-		((t_compl*)((t_list*)*alst)->content)->type = 0;
-		((t_compl*)((t_list*)*alst)->content)->par_type = 0;
-		((t_compl*)((t_list*)*alst)->content)->line = 0;
-		((t_compl*)((t_list*)*alst)->content)->lab = 0;
-		((t_compl*)((t_list*)*alst)->content)->size = 0;
-		free(((t_compl*)((t_list*)*alst)->content));
-		if ((*alst)->next)
-			ft_lstdel_m(&((*alst)->next));
-		free(*alst);
-		*alst = (NULL);
-	}
-}
+	{"live", 1, {T_DIR}, 1, 10, 0, 0},
+	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, 1, 0},
+	{"st", 2, {T_REG, T_IND | T_REG}, 3, 5, 1, 0},
+	{"add", 3, {T_REG, T_REG, T_REG}, 4, 10, 1, 0},
+	{"sub", 3, {T_REG, T_REG, T_REG}, 5, 10, 1, 0},
+	{"and", 3, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG},
+		6, 6, 1, 0},
+	{"or", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG},
+		7, 6, 1, 0},
+	{"xor", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG},
+		8, 6, 1, 0},
+	{"zjmp", 1, {T_DIR}, 9, 20, 0, 1},
+	{"ldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 10, 25, 1, 1},
+	{"sti", 3, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, 11, 25, 1, 1},
+	{"fork", 1, {T_DIR}, 12, 800, 0, 1},
+	{"lld", 2, {T_DIR | T_IND, T_REG}, 13, 10, 1, 0},
+	{"lldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 14, 50, 1, 1},
+	{"lfork", 1, {T_DIR}, 15, 1000, 0, 1},
+	{"aff", 1, {T_REG}, 16, 2, 1, 0},
+};
 
-int		ft_free_all(t_all *a, int ret)
+static int		check_args(int ac, char **av, char *option, char **path)
 {
-	int		i;
-
-	i = 0;
-	ft_strdel(&a->base.name);
-	ft_strdel(&a->base.comment);
-	if (a->base.tkn)
-	{
-		while (a->base.tkn[i])
-			ft_strdel(&a->base.tkn[i++]);
-		free(a->base.tkn);
-		a->base.tkn = NULL;
-	}
-	ft_strdel(&a->file_name);
-	a->file_size = 0;
-	ft_lstdel_m(&a->t);
-	if (ret)
+	if (ac < 2)
 		return (0);
-	exit(1);
+	if (!ft_strcmp(av[1], "-a"))
+	{
+		*option = 1;
+		*path = av[ac - 1];
+		return (!ft_strcmp(av[ac - 1] + ft_strlen(av[ac - 1]) - 2, ".s") ?
+				1 : 0);
+	}
+	*option = 0;
+	*path = av[ac - 1];
+	return (!ft_strcmp(av[ac - 1] + ft_strlen(av[ac - 1]) - 2, ".s") ? 1 : 0);
 }
 
-int		main(int argc, char **argv)
+static int	usage(void)
 {
-	char	*file;
-	t_all	a;
+	ft_printf("Usage: ./exe_asm [-a] <sourcefile.s>\n");
+	ft_printf("\t-a : Instead of creating a .cor file, outputs a stripped ");
+	ft_printf("and annotated version of the code to the standard output\n");
+	return (0);
+}
 
-	file = ft_first(argc, argv);
-	a = ft_parsing(&file);
-	if (!(ft_anyway(&a)))
-		ft_free_all(&a, 0);
-	if (!ft_check(&a))
-		ft_free_all(&a, 0);
-	if (!(ft_third(argv, argc, &a)))
-		ft_free_all(&a, 0);
-/*
-	t_list*tmp;
-	tmp = a.t;
+static char		*recup_file(char *path, int i)
+{
+	int			fd;
+	char		line[50];
+	char		*file;
+	int			ret;
+	char		*tmp;
+
+	if ((fd = open(path, O_RDONLY)) < 0)
+	{
+		ft_printf("Can't read source file %s\n", path);
+		return (NULL);
+	}
+	file = NULL;
+	while ((ret = read(fd, &line, 50)) > 0)
+	{
+		tmp = file;
+		if (!(file = ft_memalloc(i + ret + 1)))
+			return (NULL);
+		tmp ? ft_memcpy(file, tmp, i) : 0;
+		if (!(ft_memcpy(file + i, line, ret)))
+			return (NULL);
+		i += ret;
+		tmp ? free(tmp) : 0;
+	}
+	close(fd);
+	return (file);
+}
+
+static	void	fill_header(header_t *header, t_cmd **cmd,
+				t_label **label, t_infos *infos)
+{
+	t_cmd		*tmp;
+
+	tmp = *cmd;
 	while (tmp)
 	{
-		ft_printf("%3d -> [%-10s] [%3d] [%3d] [%3d] [%3d]\n", ((t_compl*)tmp->content)->line,
-				((t_compl*)tmp->content)->tkn,
-				((t_compl*)tmp->content)->type,
-				((t_compl*)tmp->content)->par_type,
-				((t_compl*)tmp->content)->lab,
-				((t_compl*)tmp->content)->size);
+		header->prog_size += (unsigned int)(tmp->size);
 		tmp = tmp->next;
 	}
-*/
-	ft_free_all(&a, 1);
-	return (0);
+	if (header->prog_size == 0)
+	{
+		ft_printf("The program is empty\n");
+		free_all(*label, infos, cmd);
+		exit(1);
+	}
+}
+
+int				main(int ac, char **av)
+{
+	t_label		*label;
+	t_cmd		*cmd;
+	header_t	header;
+	t_infos		infos;
+
+	if (!check_args(ac, av, &(infos.option), &(infos.path)))
+		return (usage());
+	label = NULL;
+	cmd = NULL;
+	if ((infos.file = recup_file(infos.path, 0)) == NULL)
+		return (0);
+	ft_printf("passe recup file\n");// a suppr
+	if ((infos.file = make_clean(infos.file)) == NULL)
+		return (free_all(NULL, &infos, NULL));
+	ft_printf("passe make clean\n");// a suppr
+	check_pre_parsing(&infos.file);
+	ft_printf("Passe check pre parsing\n");// a suppr
+	collect_header_and_labels(&label, &header, infos);
+	ft_printf("passe collect_header_and_labels\n");
+	collect_instructions(&label, &cmd, &infos);
+	ft_printf("passe collect instru\n");// a suppr
+	re_calculate_label_add(&label, cmd);
+	fill_header(&header, &cmd, &label, &infos);
+	ft_printf("passe fill header\n");// a suppr
+	convert_param(&cmd, &label);
+	ft_printf("passe convert_param\n");// a suppr
+	if (!infos.option)
+		write_cor(cmd, &header, &infos);
+	else
+		write_output(cmd, label, &header);
+	return (free_all(label, &infos, &cmd));
 }

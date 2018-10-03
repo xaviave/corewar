@@ -1,36 +1,30 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_extract_base.c                                .::    .:/ .      .::   */
+/*   start_by.c                                       .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*   By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/07/21 17:18:49 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/05 19:20:20 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/08/23 17:20:58 by tduverge     #+#   ##    ##    #+#       */
+/*   Updated: 2018/10/02 12:43:04 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "../../includes/asm.h"
 
-char		*ft_extract_comment(char *line)
+int			start_by(char *str, char *name)
 {
-	char	*new;
-	char	*tmp;
 	int		i;
-	int		j;
 
-	i = 0;
-	while (line[i] && line[i] != '\"')
-		i++;
-	i++;
-	if (!(new = ft_strdup(ft_strchr(line, '\"'))))
+	if (ft_strlen(str) < ft_strlen(name))
 		return (0);
-	tmp = ft_memalloc(ft_strlen(new) - 2);
-	i = 1;
-	j = 0;
-	while (new[i] && new[i] != '\"')
-		tmp[j++] = new[i++];
-	ft_strdel(&new);
-	return (tmp);
+	i = 0;
+	while (i < (int)ft_strlen(name))
+	{
+		if (name[i] != str[i])
+			return (0);
+		i++;
+	}
+	return (1);
 }

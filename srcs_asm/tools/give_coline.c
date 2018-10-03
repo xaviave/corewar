@@ -1,36 +1,35 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_strsub.c                                      .::    .:/ .      .::   */
+/*   give_coline.c                                    .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/11/23 15:08:38 by xmoreau      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/03 14:07:34 by xmoreau     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/08/23 17:28:06 by tduverge     #+#   ##    ##    #+#       */
+/*   Updated: 2018/10/02 12:42:30 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../header/libft.h"
+#include "../../includes/asm.h"
 
-char	*ft_strsub(char const *s, unsigned int start, size_t len)
+void			give_coline(char *str, int i, int *tab)
 {
-	char			*troncon;
-	unsigned int	i;
-	unsigned int	y;
+	int		j;
 
-	i = start;
-	y = 0;
-	if (s == NULL)
-		return (NULL);
-	if ((troncon = ft_strnew(len)) == NULL)
-		return (NULL);
-	while (i < (start + len))
+	j = 0;
+	tab[1] = 1;
+	while (j < i)
 	{
-		troncon[y] = s[i];
-		i++;
-		y++;
+		tab[0] = 1;
+		while (j < i && str[j] != '\n')
+		{
+			tab[0]++;
+			j++;
+		}
+		if (j == i)
+			break ;
+		j++;
+		tab[1]++;
 	}
-	troncon[y] = '\0';
-	return (troncon);
 }

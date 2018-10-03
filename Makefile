@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                           LE - /             #
 #                                                               /              #
-#    test                                             .::    .:/ .      .::    #
+#    Makefile                                         .::    .:/ .      .::    #
 #                                                  +:+:+   +:    +:  +:+:+     #
-#    By: xamartin <marvin@le-101.fr>                +:+   +:    +:    +:+      #
+#    By: xamartin <xamartin@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/06/19 13:41:44 by xamartin     #+#   ##    ##    #+#        #
-#    Updated: 2018/09/10 21:36:18 by lotoussa    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/10/03 11:59:36 by xamartin    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -31,29 +31,36 @@ ASM_SCRS_PATH = ./srcs_asm/
 ASM_OBJS_PATH = ./srcs_asm/
 
 
-ASM_FILES = main_asm.c\
-		   check_ins.c\
-		   detail.c\
-		   ft_anyway.c\
-		   ft_check.c\
-		   ft_count_size.c\
-		   ft_count_size_ld_st.c\
-		   ft_extend_check.c\
-		   ft_extract_base.c\
-		   ft_first.c\
-		   ft_free.c\
-		   ft_nb_par_one.c\
-		   ft_nb_par_two.c\
-		   ft_parsing.c\
-		   ft_print_size.c\
-		   ft_reform.c\
-		   ft_suite_parsing.c\
-		   ft_third.c\
-		   tools.c\
-		   ft_bytecode.c\
-		   ft_size_par_exception.c\
-		   ft_write_details.c\
-		   new_size_tab.c
+ASM_FILES =	main_asm.c\
+			collect_header_and_label.c\
+			collect_comment.c\
+			collect_name.c\
+			collect_label.c\
+			tools/to_the_next.c\
+			tools/give_coline.c\
+			tools/start_by.c\
+			tools/multi_split.c\
+			tools/ft_long_atoi.c\
+			free_all.c\
+			collect_instructions.c\
+			new_cmd.c\
+			get_bytecode.c\
+			record_arg.c\
+			get_size_and_adress.c\
+			error_instru.c\
+			convert_cmd.c \
+			writing_output.c \
+			write_cor.c \
+			calcul_size.c \
+			errase_comment.c \
+			recalcul_label.c \
+			checker/check_name_comment.c \
+			checker/check_pre_parsing.c \
+			checker/check_arg.c \
+			tools/ft_strsplit_modif.c \
+			checker/check_line_composition.c \
+			checker/analyse_line.c
+
 
 ASM_SRCS = $(addprefix $(ASM_SRCS_PATH), $(ASM_FILES))
 ASM_OBJS = $(addprefix $(ASM_OBJS_PATH), $(ASM_FILES:.c=.o))

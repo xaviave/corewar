@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   asm.h                                            .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: lotoussa <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*   By: xamartin <xamartin@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/23 14:22:31 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/10 21:43:15 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/03 11:46:19 by xamartin    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,101 +16,149 @@
 
 # include "../libft/header/libft.h"
 # include "op.h"
+# include <fcntl.h>
 
-# define _ARG argv[argc - 1]
-# define _USAGE "[-a] <sourcefile.s>\n    -a : Instead of creating a .cor \
-file, outputs a stripped and annotated version of the code to the standard \
-output\n"
-# define _LAB 1
-# define _INS 2
-# define _PAR 3
-# define _SEP 4
-# define _DIR 301
-# define _IND 302
-# define _REG 303
-# define CMP ft_strcmp
+/*
+ ** STRUCTURES
+ */
 
-typedef struct		s_contain
+typedef	struct		s_control
 {
-	char			*tkn;
-	char			*fre;
-	char			*buf;
-}					t_contain;
+	int				name;
+	int				comment;
+	int				label;
+	int				nb_param;
+	int				coma;
+	char			opcode;
+}					t_control;
 
-typedef struct		s_base
+typedef struct		s_label
 {
 	char			*name;
-	char			*comment;
-	char			**tkn;
-}					t_base;
+	int				add;
+	struct s_label	*next;
+}					t_label;
 
-typedef struct		s_all
+typedef struct		s_cmd
 {
-	t_base			base;
-	int				file_size;
-	char			*file_name;
-	t_list			*t;
-}					t_all;
+	unsigned char	opcode;
+	unsigned char	bytecode;
+	int				add;
+	char			size;
+	char			*param[3];
+	unsigned char	*byte_param[3];
+	int				size_param[3];
+	long			value_param[3];
+	struct s_cmd	*next;
+}					t_cmd;
 
-typedef struct		s_compl
+typedef struct		s_op
 {
-	char			*tkn;
-	int				type;
-	int				par_type;
-	int				line;
-	int				lab;
-	int				size;
-}					t_compl;
+	char			*name;
+	int				nb_arg;
+	int				arg[3];
+	char			opcode;
+	int				time;
+	char			codage;
+	char			dir_size;
+}					t_op;
 
-char				*ft_first(int argc, char **argv);
-t_all				ft_parsing(char **file);
-int					ft_suite_parsing(char **file, t_all *a);
-int					ft_third(char **argv, int argc, t_all *a);
-int					ft_free_things(char *s1, char **s2);
-int					ft_free_base(t_base *base);
-char				*ft_extract_comment(char *line);
-int					ft_check(t_all *a);
-int					ft_increment_tkn(char **tkn, int i, int *l);
-int					ft_increment_tkn_second(char **tkn, int i, int *l);
-int					ft_check_detail(t_list **list);
-int					ft_check_label_char(char *tkn, t_list *tmp);
-int					ft_check_par_alone(char *tkn, t_list *tmp, t_list **list);
-int					ft_while_digit(char *s);
-char				*ft_name_file(int argc, char **argv);
-int					ft_check_nb_ins_line(t_list *tmp, t_list **list);
-int					ft_check_nb_ins_par(t_list *tmp);
-int					ft_check_ins_type_par(t_list *tmp, char *tkn);
-int					ft_nb_par_u(t_list *tmp);
-int					ft_nb_par_ttu(t_list *tmp);
-int					ft_nb_par_uuu(t_list *tmp);
-int					ft_nb_par_tdu(t_list *tmp);
-int					ft_nb_par_du(t_list *tmp);
-int					ft_nb_par_ud(t_list *tmp);
-int					ft_nb_par_utd(t_list *tmp);
-int					ft_nb_par_aff(t_list *tmp);
-int					ft_suite_tdu(t_list *tmp);
-int					ft_count_size(t_list *list);
-void				ft_count_size_ld_st(char *tkn, t_list **tmp, int *size);
-int					ft_print_size(int size, int fd);
-void				ft_print_zero(int fd, int i);
-int					ft_anyway(t_all *a);
-int					ft_bad_line(t_list **list);
-char				*ft_strfjoin(char *s1, char *s2);
-char				*ft_arg(int argc, char **argv);
-int					ft_reform(t_all *a);
-int					ft_bytecode(int fd, t_all *a);
-int					ft_binary_to_hexa(int fd, char *tp);
-t_list				*ft_byte_read_par(int fd, t_list *tmp);
-int					ft_brut_label(t_all *a);
-t_list				*ft_exception(int fd, t_list *tmp);
-int					ft_create_size_tab(t_list **tmp);
-void				ft_size_par_exception(int fd, int oct, t_list *tmp);
-void				ft_memrev(char *ptr, size_t n);
-int					ft_ins_one(t_list *tmp);
-int					ft_ins_two(t_list *tmp);
-int					ft_ins_three(t_list *tmp);
-int					ft_ins_four(t_list *tmp);
-int					ft_ins_five(t_list *tmp);
-int					ft_attribute_last_lab(t_list **tmp);
+typedef struct		s_infos
+{
+	char			*path;
+	char			*file;
+	char			option;
+}					t_infos;
+
+typedef struct		s_stock
+{
+	t_label			*lab;
+	t_label			**label;
+	t_infos			*inf;
+}					t_stock;
+
+t_op	g_op_tab[16];
+
+# define STOP_SIGN " \t\n"
+# define SPLIT " \t,"
+
+/*
+ ** CHECK_PRE_PARSING
+ */
+
+void				check_pre_parsing(char **file);
+void				error_check(int err);
+int					check_name_comment(char **tab, t_control *control);
+int					check_for_quote(char *file);
+void				init_control(t_control *control);
+char				get_opcode(char *s);
+int					check_line_composition(char *file, t_control *control);
+int					analyse_line(char *line, t_control *control, char **tab);
+
+
+/*
+ ** COLLECT
+ */
+
+void				collect_header_and_labels(t_label **label,
+		header_t *header, t_infos infos);
+int					collect_name(header_t *header, char *file, int i);
+int					collect_comment(header_t *header, char *file, int i);
+int					collect_label(t_label **label, char *file, int i);
+void				collect_instructions(t_label **label, t_cmd **cmd,
+		t_infos *infos);
+int					new_cmd(t_cmd **cmd, char **tab, int j, t_stock *stock);
+char				get_bytecode(char **tab, int j, t_cmd *new);
+int					record_arg(char *s, int pnb, t_stock *stock, t_cmd **new);
+void				get_size_and_adress(t_cmd **cmd, t_cmd **created,
+		t_stock *stock);
+void				error_instru(t_cmd **cmd, int err, t_stock *stock,
+		char **instru);
+char				*make_clean(char *file);
+void				calcul_size(t_cmd **created);
+/*
+** CONVERT
+*/
+void				re_calculate_label_add(t_label **label, t_cmd *cmd);
+void				convert_param(t_cmd **cmd, t_label **label);
+
+/*
+ ** WRITE
+ */
+
+void				write_output(t_cmd *cmd, t_label *label, header_t *header);
+int					write_cor(t_cmd *cmd, header_t *header, t_infos *infos);
+
+/*
+ ** OUTILS DIVERS
+ */
+
+int					start_by(char *str, char *name);
+int					to_the_next_char(char *str, int i);
+int					to_the_next_line(char *str, int i);
+void				give_coline(char *str, int i, int *tab);
+char				*get_next_word(char *file, int i, char separator);
+char				**multi_split(const char *str, char *c);
+long				ft_long_atoi(const char *str);
+
+
+
+
+/*
+ ** FREE ALL
+ */
+
+int					free_all(t_label *label, t_infos *infos, t_cmd **cmd);
+t_label				*free_label(t_label *label);
+void				free_tab(char **tab);
+t_cmd				*free_cmd(t_cmd *cmd);
+
+/*
+ ** CHECK_TOOLS
+ */
+
+int					check_arg(char *arg, int type);
+int					while_digit(char *s);
+char				**ft_strsplit_modif(char const *s, char c);
 
 #endif

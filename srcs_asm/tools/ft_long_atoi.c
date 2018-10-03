@@ -1,36 +1,38 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_strsub.c                                      .::    .:/ .      .::   */
+/*   ft_long_atoi.c                                   .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/11/23 15:08:38 by xmoreau      #+#   ##    ##    #+#       */
-/*   Updated: 2018/09/03 14:07:34 by xmoreau     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/09/26 13:33:03 by xmoreau      #+#   ##    ##    #+#       */
+/*   Updated: 2018/10/02 12:41:46 by lotoussa    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../header/libft.h"
+#include "../../includes/asm.h"
 
-char	*ft_strsub(char const *s, unsigned int start, size_t len)
+long		ft_long_atoi(const char *str)
 {
-	char			*troncon;
-	unsigned int	i;
-	unsigned int	y;
+	long	result;
+	long	neg;
 
-	i = start;
-	y = 0;
-	if (s == NULL)
-		return (NULL);
-	if ((troncon = ft_strnew(len)) == NULL)
-		return (NULL);
-	while (i < (start + len))
+	result = 0;
+	neg = 1;
+	str = (char *)str;
+	while (((*str >= 9) && (*str <= 13)) || (*str == ' '))
+		str++;
+	if (*str == '-' || *str == '+')
 	{
-		troncon[y] = s[i];
-		i++;
-		y++;
+		if (*str == '-')
+			neg = -1;
+		str++;
 	}
-	troncon[y] = '\0';
-	return (troncon);
+	while (*str >= '0' && *str <= '9')
+	{
+		result = 10 * result + (*str - '0');
+		str++;
+	}
+	return (result * neg);
 }
