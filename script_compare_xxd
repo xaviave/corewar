@@ -6,8 +6,8 @@ VAR="$VAR.cor"
 echo $VAR
 echo $1
 
-./asm $1;
+valgrind ./asm $1;
 xxd $VAR > test;
-./exe_asm $1 > exe_test;
+./exe_asm $1;
 xxd $VAR > exe_test;
 diff test exe_test;
