@@ -6,12 +6,12 @@
 /*   By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/05 13:41:53 by xmoreau      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/02 11:50:48 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/04 15:56:50 by xmoreau     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "../../includes/asm.h"
 
 static int			get_label_adress(char *str, t_label **label, int instru_add)
 {

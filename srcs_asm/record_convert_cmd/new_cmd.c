@@ -6,12 +6,12 @@
 /*   By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/29 17:23:43 by xmoreau      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/03 09:24:53 by xmoreau     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/04 15:56:52 by xmoreau     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "../../includes/asm.h"
 
 char			get_opcode(char *s)
 {

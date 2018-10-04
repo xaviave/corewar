@@ -6,12 +6,12 @@
 /*   By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/24 18:29:00 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/04 14:43:51 by xmoreau     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/04 15:56:39 by xmoreau     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "../../includes/asm.h"
 
 static char				*join_split_file(char **s, int i)
 {

@@ -6,12 +6,12 @@
 /*   By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/23 14:45:16 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/04 14:57:34 by xmoreau     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/04 15:56:41 by xmoreau     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "../../includes/asm.h"
 
 void			collect_header_and_labels(t_label **label,
 				t_header *header, t_infos infos)

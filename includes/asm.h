@@ -6,7 +6,7 @@
 /*   By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/23 14:22:31 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/04 14:54:27 by xmoreau     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/04 15:58:02 by xmoreau     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -83,7 +83,7 @@ t_op	g_op_tab[16];
 # define SPLIT " \t,"
 
 /*
-** CHECK_PRE_PARSING
+** CHECKER
 */
 
 void				check_pre_parsing(char **file);
@@ -94,6 +94,9 @@ void				init_control(t_control *control);
 char				get_opcode(char *s);
 int					check_line_composition(char *file, t_control *control);
 int					analyse_line(char *line, t_control *control, char **tab);
+int					check_arg(char *arg, int type);
+int					while_digit(char *s);
+char				**ft_strsplit_modif(char const *s, char c);
 
 /*
 ** BAD_USAGE
@@ -115,6 +118,11 @@ int					collect_comment(t_header *header, char *file, int i);
 int					collect_label(t_label **label, char *file, int i);
 void				collect_instructions(t_label **label, t_cmd **cmd,
 		t_infos *infos);
+
+/*
+** RECORD_CONVERT_CMD
+*/
+
 int					new_cmd(t_cmd **cmd, char **tab, int j, t_stock *stock);
 char				get_bytecode(char **tab, int j, t_cmd *new);
 int					record_arg(char *s, int pnb, t_stock *stock, t_cmd **new);
@@ -124,11 +132,6 @@ void				error_instru(t_cmd **cmd, int err, t_stock *stock,
 		char **instru);
 char				*make_clean(char *file);
 void				calcul_size(t_cmd **created);
-
-/*
-** CONVERT
-*/
-
 void				re_calculate_label_add(t_label **label, t_cmd *cmd);
 void				convert_param(t_cmd **cmd, t_label **label);
 
@@ -140,7 +143,7 @@ void				write_output(t_cmd *cmd, t_label *label, t_header *header);
 int					write_cor(t_cmd *cmd, t_header *header, t_infos *infos);
 
 /*
-** OUTILS DIVERS
+** TOOLS
 */
 
 int					start_by(char *str, char *name);
@@ -152,20 +155,12 @@ char				**multi_split(const char *str, char *c);
 long				ft_long_atoi(const char *str);
 
 /*
-** FREE ALL
+** TOOLS/FREE ALL
 */
 
 int					free_all(t_label *label, t_infos *infos, t_cmd **cmd);
 t_label				*free_label(t_label *label);
 void				free_tab(char **tab);
 t_cmd				*free_cmd(t_cmd *cmd);
-
-/*
-** CHECK_TOOLS
-*/
-
-int					check_arg(char *arg, int type);
-int					while_digit(char *s);
-char				**ft_strsplit_modif(char const *s, char c);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/06/19 13:41:44 by xamartin     #+#   ##    ##    #+#        #
-#    Updated: 2018/10/04 10:41:08 by xmoreau     ###    #+. /#+    ###.fr      #
+#    Updated: 2018/10/04 15:55:35 by xmoreau     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -32,28 +32,28 @@ ASM_OBJS_PATH = ./srcs_asm/
 
 
 ASM_FILES =	main_asm.c\
-			collect_header_and_label.c\
-			collect_comment.c\
-			collect_name.c\
-			collect_label.c\
+			collect/collect_header_and_label.c\
+			collect/collect_comment.c\
+			collect/collect_name.c\
+			collect/collect_label.c\
 			tools/to_the_next.c\
 			tools/give_coline.c\
 			tools/start_by.c\
 			tools/multi_split.c\
 			tools/ft_long_atoi.c\
-			free_all.c\
-			collect_instructions.c\
-			new_cmd.c\
-			get_bytecode.c\
-			record_arg.c\
-			get_size_and_adress.c\
-			error_instru.c\
-			convert_cmd.c \
-			writing_output.c \
-			write_cor.c \
-			calcul_size.c \
-			errase_comment.c \
-			recalcul_label.c \
+			tools/free_all.c\
+			collect/collect_instructions.c\
+			record_convert_cmd/new_cmd.c\
+			record_convert_cmd/get_bytecode.c\
+			record_convert_cmd/record_arg.c\
+			record_convert_cmd/get_size_and_adress.c\
+			tools/error_instru.c\
+			record_convert_cmd/convert_cmd.c \
+			write/writing_output.c \
+			write/write_cor.c \
+			record_convert_cmd/calcul_size.c \
+			checker/errase_comment.c \
+			record_convert_cmd/recalcul_label.c \
 			checker/check_name_comment.c \
 			checker/check_pre_parsing.c \
 			checker/check_arg.c \

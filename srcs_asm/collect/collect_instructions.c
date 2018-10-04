@@ -6,12 +6,12 @@
 /*   By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/28 14:31:58 by xmoreau      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/02 17:08:35 by xmoreau     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/04 15:56:41 by xmoreau     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "../../includes/asm.h"
 
 static char		**get_tab_of_instruction(t_infos *infos)
 {

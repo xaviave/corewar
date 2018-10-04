@@ -6,7 +6,7 @@
 /*   By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/27 14:32:33 by xmoreau      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/04 14:54:57 by xmoreau     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/04 15:50:09 by xmoreau     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -36,7 +36,7 @@ t_op			g_op_tab[16] =
 	{"aff", 1, {T_REG}, 16, 2, 1, 0},
 };
 
-static int		check_args(int ac, char **av, char *option, char **path)
+static int		check_argv(int ac, char **av, char *option, char **path)
 {
 	if (ac < 2)
 		return (0);
@@ -108,7 +108,7 @@ int				main(int ac, char **av)
 	t_header	header;
 	t_infos		infos;
 
-	if (!check_args(ac, av, &(infos.option), &(infos.path)))
+	if (!check_argv(ac, av, &(infos.option), &(infos.path)))
 		return (usage());
 	label = NULL;
 	cmd = NULL;

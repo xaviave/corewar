@@ -6,12 +6,12 @@
 /*   By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/06 14:55:13 by xmoreau      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/02 12:39:30 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/04 15:56:53 by xmoreau     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "../../includes/asm.h"
 
 static char		good_param(char *s, int nb, t_cmd *new)
 {
