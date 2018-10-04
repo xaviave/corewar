@@ -6,7 +6,7 @@
 #    By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/06/19 13:41:44 by xamartin     #+#   ##    ##    #+#        #
-#    Updated: 2018/10/04 15:55:35 by xmoreau     ###    #+. /#+    ###.fr      #
+#    Updated: 2018/10/04 16:10:41 by xmoreau     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -52,7 +52,7 @@ ASM_FILES =	main_asm.c\
 			write/writing_output.c \
 			write/write_cor.c \
 			record_convert_cmd/calcul_size.c \
-			checker/errase_comment.c \
+			checker/make_clean.c \
 			record_convert_cmd/recalcul_label.c \
 			checker/check_name_comment.c \
 			checker/check_pre_parsing.c \

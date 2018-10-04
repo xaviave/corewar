@@ -6,7 +6,7 @@
 /*   By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/01 13:14:21 by xmoreau      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/02 10:33:12 by xmoreau     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/04 16:48:59 by xmoreau     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -32,7 +32,7 @@ static	int	count_quote_end(char *start)
 			return (0);
 		i++;
 	}
-	if (quote > 2)
+	if (quote != 2)
 		return (0);
 	return (1);
 }
@@ -52,7 +52,7 @@ static	int	count_quote_len(int len, char *start)
 			return (0);
 		i++;
 	}
-	if (quote > 2)
+	if (quote != 2)
 		return (0);
 	return (1);
 }
