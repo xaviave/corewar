@@ -6,7 +6,7 @@
 /*   By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/01 13:09:23 by xmoreau      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/02 19:06:03 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/04 13:26:58 by xmoreau     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,6 +25,8 @@ void			init_control(t_control *control)
 
 void			error_check(int err)
 {
+	if (err == -1)
+		ft_printf("Your file lacks some element in the header\n");
 	if (err == 1)
 		ft_printf("Problem with memory allocation\n");
 	if (err == 2)
