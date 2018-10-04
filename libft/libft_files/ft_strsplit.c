@@ -6,7 +6,7 @@
 /*   By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/26 11:28:47 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/08/29 14:59:06 by xmoreau     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/04 12:53:40 by xmoreau     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -40,10 +40,10 @@ char		**ft_strsplit(char const *s, char c)
 	ret[nb_words] = NULL;
 	while (nb_words)
 	{
-		while (s[end] == c && end >= 0)
+		while (end >= 0 && s[end] == c)
 			end--;
 		start = end;
-		while (s[start] != c && start >= 0)
+		while (start >= 0 && s[start] != c)
 			start--;
 		ret[nb_words - 1] = ft_strsub(s, start + 1, end - start);
 		end = start;

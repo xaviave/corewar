@@ -6,7 +6,7 @@
 /*   By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/26 20:39:08 by xmoreau      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/02 12:40:40 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/04 11:05:27 by xmoreau     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -45,6 +45,10 @@ static void			print_int(unsigned int nb, int fd)
 	int				i;
 
 	i = 0;
+	rev[3] = 0;
+	rev[2] = 0;
+	rev[1] = 0;
+	rev[0] = 0;
 	rev[3] = nb & 0xff;
 	rev[2] = (nb & 0xff00) >> 8;
 	rev[1] = (nb & 0xff0000) >> 16;
@@ -56,12 +60,23 @@ static void			print_int(unsigned int nb, int fd)
 	}
 }
 
+static void			write_foor(int fd)
+{
+	char *four;
+
+	four = ft_memalloc(sizeof(char) * 4);
+	write(fd, four, 4);
+	ft_strdel(&four);
+}
+
 static void			write_header(int fd, header_t *header)
 {
 	print_int(header->magic, fd);
-	write(fd, header->prog_name, PROG_NAME_LENGTH + 4);
+	write(fd, header->prog_name, PROG_NAME_LENGTH);
+	write_foor(fd);
 	print_int(header->prog_size, fd);
-	write(fd, header->comment, COMMENT_LENGTH + 4);
+	write(fd, header->comment, COMMENT_LENGTH);
+	write_foor(fd);
 }
 
 int					write_cor(t_cmd *cmd, header_t *header, t_infos *infos)

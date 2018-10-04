@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   asm.h                                            .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: xamartin <xamartin@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/23 14:22:31 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/03 11:46:19 by xamartin    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/04 12:07:49 by xmoreau     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,6 +17,7 @@
 # include "../libft/header/libft.h"
 # include "op.h"
 # include <fcntl.h>
+# include <stdio.h> // a suppr
 
 /*
  ** STRUCTURES
@@ -95,7 +96,14 @@ char				get_opcode(char *s);
 int					check_line_composition(char *file, t_control *control);
 int					analyse_line(char *line, t_control *control, char **tab);
 
+/*
+ ** BAD_USAGE
+ */
 
+int					usage(void);
+int					empty_file(char *path);
+int					finish_with_newline(char *file);
+int					has_instruction(char *file);
 /*
  ** COLLECT
  */

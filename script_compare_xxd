@@ -1,0 +1,9 @@
+#!/bin/bash
+
+./asm $1;
+./asm -a $1 > res_test/mine_output;
+xxd $2 > res_test/mine;
+./exe_asm $1;
+./exe_asm -a $1 > res_test/their_output;
+xxd $2 > res_test/their;
+diff res_test/mine res_test/their;

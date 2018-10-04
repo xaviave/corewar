@@ -6,7 +6,7 @@
 /*   By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/28 12:19:07 by xmoreau      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/02 12:34:34 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/04 11:27:22 by xmoreau     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -59,12 +59,15 @@ void		free_infos(t_infos *infos)
 
 int			free_all(t_label *label, t_infos *infos, t_cmd **cmd)
 {
-	if (infos)
+	if (infos != NULL)
 		free_infos(infos);
-	if (label)
+	printf("passe free infos\n");
+	if (label != NULL)
 		free_label(label);
-	if (*cmd)
+	printf("passe free label\n");
+	if (*cmd != NULL)
 		free_cmd(*cmd);
+	printf("passe free cmd\n");
 	return (0);
 }
 

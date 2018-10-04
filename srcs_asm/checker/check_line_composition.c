@@ -6,7 +6,7 @@
 /*   By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/01 18:12:23 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/02 18:35:54 by xmoreau     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/04 12:54:29 by xmoreau     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -77,6 +77,8 @@ int				check_line_composition(char *file, t_control *control)
 	int			i;
 	int			ret;
 
+	if (has_instruction(file) < 0)
+		return (-2);
 	if (!(split = create_tab(file)))
 		return (-1);
 	i = 0;

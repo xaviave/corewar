@@ -6,32 +6,12 @@
 /*   By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/23 14:45:16 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/02 11:43:20 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/04 11:26:04 by xmoreau     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
-
-static void		finish_with_newline(char *file)
-{
-	int			i;
-	int			j;
-
-	i = 0;
-	j = -1;
-	while (file[i])
-	{
-		i++;
-		j++;
-	}
-	if (file[j] != '\n')
-	{
-		ft_printf("Syntax error - unexpected end of input ");
-		ft_printf("Perhaps you forgot to end with a newline ?)\n");
-		exit(1);
-	}
-}
 
 void			collect_header_and_labels(t_label **label,
 				header_t *header, t_infos infos)
@@ -41,7 +21,7 @@ void			collect_header_and_labels(t_label **label,
 
 	i = 0;
 	step = 0;
-	finish_with_newline(infos.file);
+
 	while (infos.file[i])
 	{
 		i = to_the_next_char(infos.file, i);

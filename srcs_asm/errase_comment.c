@@ -6,7 +6,7 @@
 /*   By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/24 18:29:00 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/02 18:41:49 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/04 11:25:25 by xmoreau     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -124,6 +124,11 @@ char					*make_clean(char *file)
 	char	*tmp;
 
 	tmp = file;
+	if (finish_with_newline(file) == 0)
+	{	
+		ft_strdel(&file);
+		return (NULL);
+	}
 	if ((file = errase_comment(file)) == NULL)
 	{
 		ft_strdel(&tmp);

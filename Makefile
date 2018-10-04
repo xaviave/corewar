@@ -3,10 +3,10 @@
 #                                                               /              #
 #    Makefile                                         .::    .:/ .      .::    #
 #                                                  +:+:+   +:    +:  +:+:+     #
-#    By: xamartin <xamartin@student.le-101.fr>      +:+   +:    +:    +:+      #
+#    By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/06/19 13:41:44 by xamartin     #+#   ##    ##    #+#        #
-#    Updated: 2018/10/03 11:59:36 by xamartin    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/10/04 10:41:08 by xmoreau     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -59,7 +59,8 @@ ASM_FILES =	main_asm.c\
 			checker/check_arg.c \
 			tools/ft_strsplit_modif.c \
 			checker/check_line_composition.c \
-			checker/analyse_line.c
+			checker/analyse_line.c\
+			bad_usage/bad_usage.c
 
 
 ASM_SRCS = $(addprefix $(ASM_SRCS_PATH), $(ASM_FILES))
