@@ -6,7 +6,7 @@
 /*   By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/23 15:31:41 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/02 11:50:35 by lotoussa    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/04 14:55:54 by xmoreau     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -29,7 +29,7 @@ static int		error(char *file, int i, int err_nb)
 	return (0);
 }
 
-static int		record_the_name(char *file, int i, header_t *header)
+static int		record_the_name(char *file, int i, t_header *header)
 {
 	int		j;
 
@@ -54,7 +54,7 @@ static int		record_the_name(char *file, int i, header_t *header)
 	return (i);
 }
 
-int				collect_name(header_t *header, char *file, int i)
+int				collect_name(t_header *header, char *file, int i)
 {
 	if (!start_by(file + i, NAME_CMD_STRING))
 		return (error(file, i, 1));

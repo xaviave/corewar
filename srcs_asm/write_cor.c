@@ -6,7 +6,7 @@
 /*   By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/26 20:39:08 by xmoreau      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/04 11:05:27 by xmoreau     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/04 14:55:13 by xmoreau     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -69,7 +69,7 @@ static void			write_foor(int fd)
 	ft_strdel(&four);
 }
 
-static void			write_header(int fd, header_t *header)
+static void			write_header(int fd, t_header *header)
 {
 	print_int(header->magic, fd);
 	write(fd, header->prog_name, PROG_NAME_LENGTH);
@@ -79,7 +79,7 @@ static void			write_header(int fd, header_t *header)
 	write_foor(fd);
 }
 
-int					write_cor(t_cmd *cmd, header_t *header, t_infos *infos)
+int					write_cor(t_cmd *cmd, t_header *header, t_infos *infos)
 {
 	int				fd;
 	char			*path;

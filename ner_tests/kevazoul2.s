@@ -7,6 +7,9 @@ begin:
 	st	r2, 101 # OK 03 70 02 00 2a (delete instr value on map and do nothing else)
 	ld	35, r3 # OK 02 d0 00 23 03
 	add r3, r4, r10 # OK
+
+
+
 	add r5, r4, r11 # 
 	st  r10, 142 # OK
 	st  r11, 142 # OK
@@ -24,4 +27,3 @@ begin:
 	st  r10, 42 # OK
 	st  r11, 42 # OK
 	#st 	r3, 28
-	

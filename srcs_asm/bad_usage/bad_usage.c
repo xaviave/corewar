@@ -6,7 +6,7 @@
 /*   By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/04 10:36:47 by xmoreau      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/04 14:00:39 by xmoreau     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/04 14:40:13 by xmoreau     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,24 +26,6 @@ int				empty_file(char *path)
 	if (path != NULL)
 		ft_printf("Your file %s is empty.\n", path);
 	return (0);
-}
-
-int				finish_with_newline(char *file)
-{
-	int len;
-
-	len = ft_strlen(file) - 1;
-	while (len && file[len] != '\n')
-	{
-		if (ft_isalnum(file[len]))
-		{
-			ft_printf("Syntax error - unexpected end of input ");
-			ft_printf("Perhaps you forgot to end with a newline ?)\n");
-			return (0);
-		}
-		len--;
-	}
-	return (1);
 }
 
 int				has_instruction(char *file)

@@ -6,7 +6,7 @@
 /*   By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/23 14:22:31 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/04 12:07:49 by xmoreau     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/04 14:54:27 by xmoreau     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,11 +17,10 @@
 # include "../libft/header/libft.h"
 # include "op.h"
 # include <fcntl.h>
-# include <stdio.h> // a suppr
 
 /*
- ** STRUCTURES
- */
+** STRUCTURES
+*/
 
 typedef	struct		s_control
 {
@@ -84,8 +83,8 @@ t_op	g_op_tab[16];
 # define SPLIT " \t,"
 
 /*
- ** CHECK_PRE_PARSING
- */
+** CHECK_PRE_PARSING
+*/
 
 void				check_pre_parsing(char **file);
 void				error_check(int err);
@@ -97,21 +96,22 @@ int					check_line_composition(char *file, t_control *control);
 int					analyse_line(char *line, t_control *control, char **tab);
 
 /*
- ** BAD_USAGE
- */
+** BAD_USAGE
+*/
 
 int					usage(void);
 int					empty_file(char *path);
 int					finish_with_newline(char *file);
 int					has_instruction(char *file);
+
 /*
- ** COLLECT
- */
+** COLLECT
+*/
 
 void				collect_header_and_labels(t_label **label,
-		header_t *header, t_infos infos);
-int					collect_name(header_t *header, char *file, int i);
-int					collect_comment(header_t *header, char *file, int i);
+		t_header *header, t_infos infos);
+int					collect_name(t_header *header, char *file, int i);
+int					collect_comment(t_header *header, char *file, int i);
 int					collect_label(t_label **label, char *file, int i);
 void				collect_instructions(t_label **label, t_cmd **cmd,
 		t_infos *infos);
@@ -124,22 +124,24 @@ void				error_instru(t_cmd **cmd, int err, t_stock *stock,
 		char **instru);
 char				*make_clean(char *file);
 void				calcul_size(t_cmd **created);
+
 /*
 ** CONVERT
 */
+
 void				re_calculate_label_add(t_label **label, t_cmd *cmd);
 void				convert_param(t_cmd **cmd, t_label **label);
 
 /*
- ** WRITE
- */
+** WRITE
+*/
 
-void				write_output(t_cmd *cmd, t_label *label, header_t *header);
-int					write_cor(t_cmd *cmd, header_t *header, t_infos *infos);
+void				write_output(t_cmd *cmd, t_label *label, t_header *header);
+int					write_cor(t_cmd *cmd, t_header *header, t_infos *infos);
 
 /*
- ** OUTILS DIVERS
- */
+** OUTILS DIVERS
+*/
 
 int					start_by(char *str, char *name);
 int					to_the_next_char(char *str, int i);
@@ -149,12 +151,9 @@ char				*get_next_word(char *file, int i, char separator);
 char				**multi_split(const char *str, char *c);
 long				ft_long_atoi(const char *str);
 
-
-
-
 /*
- ** FREE ALL
- */
+** FREE ALL
+*/
 
 int					free_all(t_label *label, t_infos *infos, t_cmd **cmd);
 t_label				*free_label(t_label *label);
@@ -162,8 +161,8 @@ void				free_tab(char **tab);
 t_cmd				*free_cmd(t_cmd *cmd);
 
 /*
- ** CHECK_TOOLS
- */
+** CHECK_TOOLS
+*/
 
 int					check_arg(char *arg, int type);
 int					while_digit(char *s);

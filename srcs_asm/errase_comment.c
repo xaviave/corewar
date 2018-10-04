@@ -6,7 +6,7 @@
 /*   By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/24 18:29:00 by lotoussa     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/04 14:15:16 by xmoreau     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/04 14:43:51 by xmoreau     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -103,7 +103,6 @@ static char				*errase_comment(char *file)
 
 	if (!(split = ft_strsplit_modif(file, '\n')))
 		return (NULL);
-	printf("passe strsplit modif\n");
 	i = -1;
 	while (split[++i])
 	{
@@ -123,21 +122,18 @@ static char				*errase_comment(char *file)
 char					*make_clean(char *file)
 {
 	char	*tmp;
+	char	*new_file;
 
+	new_file = ft_strjoin(file, "\n");
+	ft_strdel(&file);
+	file = new_file;
 	tmp = file;
-	if (finish_with_newline(file) == 0)
-	{
-		ft_strdel(&file);
-		return (NULL);
-	}
-	printf("passe new line\n");
 	if ((file = errase_comment(file)) == NULL)
 	{
 		ft_strdel(&tmp);
 		ft_printf("Can't work on source file\n");
 		return (NULL);
 	}
-	
 	ft_strdel(&tmp);
 	return (file);
 }

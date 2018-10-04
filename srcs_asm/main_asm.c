@@ -6,7 +6,7 @@
 /*   By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/27 14:32:33 by xmoreau      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/04 11:23:00 by xmoreau     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/04 14:54:57 by xmoreau     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -81,7 +81,7 @@ static char		*recup_file(char *path, int i)
 	return (file);
 }
 
-static	void	fill_header(header_t *header, t_cmd **cmd,
+static	void	fill_header(t_header *header, t_cmd **cmd,
 				t_label **label, t_infos *infos)
 {
 	t_cmd		*tmp;
@@ -105,32 +105,23 @@ int				main(int ac, char **av)
 {
 	t_label		*label;
 	t_cmd		*cmd;
-	header_t	header;
+	t_header	header;
 	t_infos		infos;
 
 	if (!check_args(ac, av, &(infos.option), &(infos.path)))
 		return (usage());
-	printf("passe check arg\n");
 	label = NULL;
 	cmd = NULL;
 	if ((infos.file = recup_file(infos.path, 0)) == NULL)
 		return (empty_file(infos.path));
-	printf("passe recup file\n");
 	if ((infos.file = make_clean(infos.file)) == NULL)
 		return (free_all(label, &infos, &cmd));
-	printf("passe make clean\n");
 	check_pre_parsing(&infos.file);
-	printf("passe check_pre parsing\n");
 	collect_header_and_labels(&label, &header, infos);
-	printf("passe collect header and labels\n");
 	collect_instructions(&label, &cmd, &infos);
-	printf("passe collec instructions\n");
 	re_calculate_label_add(&label, cmd);
-	printf("passe re calculate label\n");
 	fill_header(&header, &cmd, &label, &infos);
-	printf("passe fill header\n");
 	convert_param(&cmd, &label);
-	printf("passe convert param\n");
 	if (!infos.option)
 		write_cor(cmd, &header, &infos);
 	else
