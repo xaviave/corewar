@@ -23,5 +23,4 @@ begin:
 	add r5, r4, r11 # 
 	st  r10, 42 # OK
 	st  r11, 42 # OK
-
 	#st 	r3, 28
