@@ -6,7 +6,7 @@
 /*   By: xmoreau <xmoreau@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/08/29 17:23:43 by xmoreau      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/04 15:56:52 by xmoreau     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/05 12:01:19 by xmoreau     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,7 +18,7 @@ char			get_opcode(char *s)
 	int			i;
 
 	i = 0;
-	while (i < 15)
+	while (i < 16)
 	{
 		if (ft_strequ(s, g_op_tab[i].name) == 1)
 			return (g_op_tab[i].opcode);
